@@ -11,8 +11,8 @@ PORT = 8000
 DUMMY_GET = """<html><body>RaspberryPi<br><p>Hai acceso il led</p><form method='POST'><input type='submit' value='Spegni'></form></body></html>"""
 DUMMY_POST = """<html><body>RaspberryPi<br><p>Hai spento il led</p></body></html>"""
 DUMMY_JSON = json.dumps([{'id' : '1', 'nome': 'Led', 'descrizione': 'Accendi e spegni il led', 'url': 'img/ionic.png'},{'id' : '2', 'nome': 'Apriporta', 'descrizione': 'Apri la porta del tuo ufficio', 'url': 'img/ionic.png'}])
-DUMMY_LED = json.dumps({'id' : '1', 'nome': 'Led', 'descrizione': 'Accendi e spegni il led', 'url': 'img/ionic.png'})
-DUMMY_APRIPORTA = json.dumps({'id' : '2', 'nome': 'Apriporta', 'descrizione': 'Apri la porta del tuo ufficio', 'url': 'img/ionic.png'})
+DUMMY_LED = json.dumps({'id' : '1', 'nome': 'Led', 'descrizione': 'Accendi e spegni il led', 'url': 'img/ionic.png', 'stato': 'true', 'azioni': [{'nome': 'Accendi', 'url': 'accendi'}, {'nome': 'Spegni', 'url': 'spegni'}]})
+DUMMY_APRIPORTA = json.dumps({'id' : '2', 'nome': 'Apriporta', 'descrizione': 'Apri la porta del tuo ufficio', 'url': 'img/ionic.png', 'stato': 'true', 'azioni': [{'nome': 'Apri', 'url': 'accendi'}]})
 DUMMY_STATO = json.dumps({'stato' : 'ok'})
 
 led = 24
@@ -82,7 +82,7 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
                         self.send_header("Content-length", len(DUMMY_GET))
                         self.end_headers()
                         self.wfile.write(DUMMY_GET)
-			accendi_LED(led)
+			
 
 	def do_POST(self):
 		self.send_response(404)
