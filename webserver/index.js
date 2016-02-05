@@ -15,8 +15,6 @@ var SERVERPORT = 8000;
 
 app.post('/login', function (req, res) {
   console.log('login request');
-  console.log(req.body.username);
-  console.log(req.body.password);
   fs.readFile(USERS_FILE, function(err, data) {
     if (err) {
       console.error(err);
@@ -41,6 +39,19 @@ app.post('/login', function (req, res) {
       res.status(500).send("Errore nel login");
     }
   })
+
+});
+
+app.get('/utenti', function (req, res) {
+  console.log('users request');
+  fs.readFile(USERS_FILE, function(err, data) {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+    var users = JSON.parse(data);
+    res.status(200).send(users);
+  });
 
 });
 

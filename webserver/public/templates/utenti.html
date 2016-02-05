@@ -1,3 +1,13 @@
 <div>
   <h1>Utenti</h1>
+  <p>In questa pagina hai la possibilità di
+  modificare e bloccare gli utenti</p>
+  <input type="button" value="Aggiorna" ng-click="aggiorna()">
+  <div data-ng-repeat="utente in utenti">
+    <h3>{{utente.username}}</h3>
+    <p>Nome: {{utente.nome}}</p>
+    <p>Cognome: {{utente.cognome}}</p>
+    <p>Permessi: {{utente.permessi}}</p>
+    <a href="">Blocca</a> - <a href="">Modifica</a>
+  </div>
 </div>
