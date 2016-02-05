@@ -1,3 +1,15 @@
 <div>
-  <h1>Dispositivi</h1>
+  <h1>Utenti</h1>
+  <p>In questa pagina hai la possibilità aggiungere nuovi dispositi,
+  sia di ingresso che di uscita, e registrarne di nuovi</p>
+  <input type="button" value="Aggiorna" ng-click="aggiorna()">
+  <h2>Elenco iBeacons non registrati</h2>
+  <div data-ng-repeat="beacon in beacons">
+    <h3>{{beacon.id}}</h3>
+    <p>uuid: {{beacon.uuid}}</p>
+    <p>major: {{beacon.major}}</p>
+    <p>minor: {{beacon.minor}}</p>
+    <a href="">Elimina</a> - <a href="">Registra</a>
+  </div>
+  <hr/>
 </div>

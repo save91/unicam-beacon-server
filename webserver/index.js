@@ -10,6 +10,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
 
 var USERS_FILE = ("json/users.json");
+var BEACONS_FILE = ("json/beacons.json");
 var SERVERPORT = 8000;
 
 
@@ -52,7 +53,18 @@ app.get('/utenti', function (req, res) {
     var users = JSON.parse(data);
     res.status(200).send(users);
   });
+});
 
+app.get('/beacons', function (req, res) {
+  console.log('beacons request');
+  fs.readFile(BEACONS_FILE, function(err, data) {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+    var beacons = JSON.parse(data);
+    res.status(200).send(beacons);
+  });
 });
 
 // Express route for any other unrecognised incoming requests
