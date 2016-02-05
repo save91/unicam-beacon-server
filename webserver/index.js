@@ -11,6 +11,7 @@ app.use(cors());
 
 var USERS_FILE = ("json/users.json");
 var BEACONS_FILE = ("json/beacons.json");
+var DISPOSITIVI_FILE = ("json/dispositivi.json");
 var SERVERPORT = 8000;
 
 
@@ -64,6 +65,18 @@ app.get('/beacons', function (req, res) {
     }
     var beacons = JSON.parse(data);
     res.status(200).send(beacons);
+  });
+});
+
+app.get('/dispositivi', function (req, res) {
+  console.log('dispositivi request');
+  fs.readFile(DISPOSITIVI_FILE, function(err, data) {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+    var dispositivi = JSON.parse(data);
+    res.status(200).send(dispositivi);
   });
 });
 

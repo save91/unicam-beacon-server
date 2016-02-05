@@ -1,8 +1,8 @@
 <div>
-  <h1>Utenti</h1>
+  <h1>Gestione dispositivi</h1>
   <p>In questa pagina hai la possibilità aggiungere nuovi dispositi,
   sia di ingresso che di uscita, e registrarne di nuovi</p>
-  <input type="button" value="Aggiorna" ng-click="aggiorna()">
+  <input type="button" value="Aggiorna iBeacons" ng-click="aggiornaiBeacons()">
   <h2>Elenco iBeacons non registrati</h2>
   <div data-ng-repeat="beacon in beacons">
     <h3>{{beacon.id}}</h3>
@@ -10,6 +10,14 @@
     <p>major: {{beacon.major}}</p>
     <p>minor: {{beacon.minor}}</p>
     <a href="">Elimina</a> - <a href="">Registra</a>
+  </div>
+  <hr/>
+  <input type="button" value="Aggiorna dispositivi" ng-click="aggiornaDispositivi()">
+  <h2>Elenco dispositivi</h2>
+  <div data-ng-repeat="dispositivo in dispositivi">
+    <h3>{{dispositivo.nome}}</h3>
+    <p>descrizione: {{dispositivo.descrizione}}</p>
+    <a href="">Elimina</a> - <a href="">Modifica</a>
   </div>
   <hr/>
 </div>

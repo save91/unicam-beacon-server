@@ -1,0 +1,26 @@
+[
+    {
+        "id": "1",
+        "type": "iBeacon",
+        "io": "null",
+        "nome": "iBeacons ingresso",
+        "descrizione": "iBeacons posizionato all'ingresso dell'edificio",
+        "caratteristiche": {
+            "uuid": "ACFD065E-C3C0-11E3-9BBE-1A514932AC0",
+            "major": "0",
+            "minor": "0"
+        }
+    },
+    {
+        "id": "2",
+        "type": "iBeacon",
+        "io": "null",
+        "nome": "iBeacons scrivania",
+        "descrizione": "iBeacons posizionato nella mia scrivania",
+        "caratteristiche": {
+            "uuid": "ACFD065E-C3C0-11E3-9BBE-1A514932AC0",
+            "major": "0",
+            "minor": "1"
+        }
+    }
+]

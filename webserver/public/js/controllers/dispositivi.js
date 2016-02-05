@@ -1,9 +1,9 @@
 
 angular.module('beaconApp.controllers.dispositivi', [])
 
-.controller('DispositiviCtrl', function($scope, Beacons) {
+.controller('DispositiviCtrl', function($scope, Beacons, Dispositivi) {
   $scope.bloccato = true;
-  var callbackUpdate = function(risposta) {
+  var callbackUpdateiBeacons = function(risposta) {
       $scope.bloccato = false;
       if(risposta.status === 0) {
         $scope.beacons = [];
@@ -12,10 +12,27 @@ angular.module('beaconApp.controllers.dispositivi', [])
         $scope.beacons = risposta.beacons;
       }
   };
-  $scope.beacons = Beacons.getAll(callbackUpdate);
 
-  $scope.aggiorna = function() {
+  var callbackUpdateDispositivi = function(risposta) {
+      $scope.bloccato = false;
+      if(risposta.status === 0) {
+        $scope.dispositivi = [];
+        alert("Impossibile scaricare l'elenco dei dispositivi");
+      } else {
+        $scope.dispositivi = risposta.dispositivi;
+      }
+  };
+
+  $scope.beacons = Beacons.getAll(callbackUpdateiBeacons);
+  $scope.dispositivi = Dispositivi.getAll(callbackUpdateDispositivi);
+
+  $scope.aggiornaiBeacons = function() {
     $scope.bloccato = true;
-    Beacons.getAll(callbackUpdate);
+    Beacons.getAll(callbackUpdateiBeacons);
+  };
+
+  $scope.aggiornaDispositivi = function() {
+    $scope.bloccato = true;
+    Dispositivi.getAll(callbackUpdateDispositivi);
   };
 })

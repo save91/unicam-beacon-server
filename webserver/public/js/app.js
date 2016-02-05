@@ -14,5 +14,6 @@ var beaconApp = angular.module('beaconApp', [
   'beaconApp.services.login',
   'beaconApp.services.home',
   'beaconApp.services.utenti',
-  'beaconApp.services.beacons'
+  'beaconApp.services.beacons',
+  'beaconApp.services.dispositivi'
 ]);
