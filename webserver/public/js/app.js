@@ -4,7 +4,8 @@
 
 var beaconApp = angular.module('beaconApp', [
   'ngRoute',
+  'beaconApp.controllers.home',
   'beaconApp.controllers.login',
-  'beaconApp.controllers.registrati'
-
+  'beaconApp.controllers.registrati',
+  'beaconApp.services.login'
 ]);

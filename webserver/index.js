@@ -1,11 +1,48 @@
-var http = require('http');
+var fs = require('fs');
 var express = require('express');
 var cors = require('cors');
+var bodyParser = require('body-parser');
 var app = express();
+
 app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
 
+var USERS_FILE = ("json/users.json");
 var SERVERPORT = 8000;
+
+
+app.post('/login', function (req, res) {
+  console.log('login request');
+  console.log(req.body.username);
+  console.log(req.body.password);
+  fs.readFile(USERS_FILE, function(err, data) {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+    var users = JSON.parse(data);
+    var pos = -1;
+    for(var i = 0;i<users.length;i++) {
+      if(users[i].username === req.body.username && users[i].psw === req.body.password) {
+        pos = i;
+        i = users.length;
+      }
+    }
+    if(pos>=0) {
+      res.status(200).send({
+        nome: users[pos].nome,
+        cognome: users[pos].cognome,
+        permessi: users[pos].permessi,
+        username: users[pos].username
+      });
+    }else {
+      res.status(500).send("Errore nel login");
+    }
+  })
+
+});
 
 // Express route for any other unrecognised incoming requests
 app.get('*', function (req, res) {

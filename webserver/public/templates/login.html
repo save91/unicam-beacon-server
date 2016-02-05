@@ -1,9 +1,9 @@
 <div>
   <h2>Login</h2>
-  <form>
-    Username:<input type="text" name="username" placeholder="username"/><br/>
-    Password:<input type="password" name="psw" placeholder="password"/>
-    <input type="submit" value="Log in">
+  <form ng-submit="login()">
+    Username:<input type="text" ng-model="username"  name="username" placeholder="username"/><br/>
+    Password:<input type="password" ng-model="psw" name="psw" placeholder="password"/><br/>
+    <input type="reset" value="Reset"><input type="submit" value="Log in" ng-disabled="bloccato">
   </form>
   <a href="#/registrati">Non sei registrato?</a>
 </div>
