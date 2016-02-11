@@ -128,6 +128,36 @@ app.get('/beacons', function (req, res) {
   });
 });
 
+app.post('/elimina_beacon', function (req, res) {
+  var beacons = [];
+  var trovato = -1;
+  var i = 0;
+  console.log('delete beacon request');
+  fs.readFile(BEACONS_FILE, function(err, data) {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+    beacons = JSON.parse(data);
+    while(trovato===-1 && i<beacons.length) {
+      if(beacons[i].id===req.body.id) {
+        trovato = i;
+      }
+      i++;
+    }
+    if(trovato>=0) {
+      beacons.splice(trovato,1);
+    }
+    fs.writeFile(BEACONS_FILE, JSON.stringify(beacons, null), function(err) {
+      if (err) {
+        console.error(err);
+        process.exit(1);
+      }
+      res.status(200).send({"status":"1","beacons":beacons});
+    });
+  });
+});
+
 app.get('/dispositivi', function (req, res) {
   console.log('dispositivi request');
   fs.readFile(DISPOSITIVI_FILE, function(err, data) {

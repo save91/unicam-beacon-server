@@ -4,20 +4,31 @@
   sia di ingresso che di uscita, e registrarne di nuovi</p>
   <input type="button" value="Aggiorna iBeacons" ng-click="aggiornaiBeacons()">
   <h2>Elenco iBeacons non registrati</h2>
-  <div data-ng-repeat="beacon in beacons">
-    <h3>{{beacon.id}}</h3>
-    <p>uuid: {{beacon.uuid}}</p>
-    <p>major: {{beacon.major}}</p>
-    <p>minor: {{beacon.minor}}</p>
-    <a href="">Elimina</a> - <a href="">Registra</a>
-  </div>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Uuid</th>
+      <th>Major</th>
+      <th>Minor</th>
+      <th>Azioni</th>
+    </tr>
+    <tr data-ng-repeat="beacon in beacons">
+      <td>{{beacon.id}}</td>
+      <td>{{beacon.uuid}}</td>
+      <td>{{beacon.major}}</td>
+      <td>{{beacon.minor}}</td>
+      <td><button data-ng-click="eliminaBeacon(beacon.id)">Elimina</button> - <a href="">Registra</a></td>
+    </tr>
+  </table>
   <hr/>
   <input type="button" value="Aggiorna dispositivi" ng-click="aggiornaDispositivi()">
   <h2>Elenco dispositivi</h2>
   <div data-ng-repeat="dispositivo in dispositivi">
     <h3>{{dispositivo.nome}}</h3>
+    <p>ID: {{dispositivo.id}}</p>
+    <p>IO: {{dispositivo.io}}</p>
     <p>descrizione: {{dispositivo.descrizione}}</p>
-    <a href="">Elimina</a> - <a href="">Modifica</a>
+    <a href="">Blocca</a> - <a href="">Modifica</a>
   </div>
   <hr/>
 </div>

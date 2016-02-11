@@ -35,4 +35,8 @@ angular.module('beaconApp.controllers.dispositivi', [])
     $scope.bloccato = true;
     Dispositivi.getAll().then(callbackUpdateDispositivi);
   };
+
+  $scope.eliminaBeacon = function(id) {
+    Beacons.eliminaBeacon(id).then(callbackUpdateiBeacons);
+  };
 })
