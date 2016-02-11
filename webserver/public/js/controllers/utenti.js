@@ -3,11 +3,12 @@ angular.module('beaconApp.controllers.utenti', [])
 
 .controller('UtentiCtrl', function($scope, Utenti) {
   $scope.bloccato = true;
+  $scope.utenti = [];
   var callbackUpdate = function(risposta) {
       $scope.bloccato = false;
       if(risposta.status === 0) {
-        $scope.utenti = [];
-        alert("Impossibile scaricare l'elenco degli utenti");
+        //$scope.utenti = [];
+        //alert(messaggio);
       } else {
         $scope.utenti = risposta.utenti;
       }
@@ -18,4 +19,23 @@ angular.module('beaconApp.controllers.utenti', [])
     $scope.bloccato = true;
     Utenti.getAll(callbackUpdate);
   };
+
+  $scope.blocca = function(nome) {
+    $scope.bloccato = true;
+    Utenti.blocca(nome, callbackUpdate);
+  };
+
+  $scope.sblocca = function(nome) {
+    $scope.bloccato = true;
+    Utenti.sblocca(nome, callbackUpdate);
+  };
+
+  $scope.modifica = function(nome) {
+    alert('Modifica: ' + nome + ' funzione da implementare!!!');
+  };
+
+  $scope.controllaAttivita = function(nome) {
+    alert('Controlla attività: ' + nome + ' funzione da implementare!!!');
+  };
+
 })

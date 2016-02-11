@@ -80,8 +80,60 @@ app.get('/dispositivi', function (req, res) {
   });
 });
 
-// Express route for any other unrecognised incoming requests
+app.post('/blocca_utente', function (req, res) {
+  console.log('block user request');
+  fs.readFile(USERS_FILE, function(err, data) {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+    var utenti = JSON.parse(data);
+    //Mettere ciclo while
+    for(var i = 0; i < utenti.length; i++) {
+      if(utenti[i].username===req.body.username) {
+        utenti[i].bloccato = true;
+      }
+    }
+    fs.writeFile(USERS_FILE, JSON.stringify(utenti, null), function(err) {
+      if (err) {
+        console.error(err);
+        process.exit(1);
+      }
+    res.status(200).send(utenti);
+    });
+  });
+});
+
+app.post('/sblocca_utente', function (req, res) {
+  console.log('block user request');
+  fs.readFile(USERS_FILE, function(err, data) {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+    var utenti = JSON.parse(data);
+    //Mettere ciclo while
+    for(var i = 0; i < utenti.length; i++) {
+      if(utenti[i].username===req.body.username) {
+        utenti[i].bloccato = false;
+      }
+    }
+    fs.writeFile(USERS_FILE, JSON.stringify(utenti, null), function(err) {
+      if (err) {
+        console.error(err);
+        process.exit(1);
+      }
+    res.status(200).send(utenti);
+    });
+  });
+});
+
+// Express routes for any other unrecognised incoming requests
 app.get('*', function (req, res) {
+  res.status(404).send('Unrecognised API call.');
+});
+
+app.post('*', function (req, res) {
   res.status(404).send('Unrecognised API call.');
 });
 

@@ -2,12 +2,27 @@
   <h1>Utenti</h1>
   <p>In questa pagina hai la possibilità di
   modificare e bloccare gli utenti</p>
-  <input type="button" value="Aggiorna" ng-click="aggiorna()">
-  <div data-ng-repeat="utente in utenti">
-    <h3>{{utente.username}}</h3>
-    <p>Nome: {{utente.nome}}</p>
-    <p>Cognome: {{utente.cognome}}</p>
-    <p>Permessi: {{utente.permessi}}</p>
-    <a href="">Blocca</a> - <a href="">Modifica</a>
-  </div>
+  <input data-ng-disabled="bloccato" type="button" value="Aggiorna" data-ng-click="aggiorna()">
+  <!--Fare css tabella -->
+  <table>
+    <tr>
+      <th>Username</th>
+      <th>Nome</th>
+      <th>Cognome</th>
+      <th>Permessi</th>
+      <th>Azioni</th>
+    </tr>
+    <tr data-ng-repeat="utente in utenti">
+      <td>{{utente.username}}</td>
+      <td>{{utente.nome}}</td>
+      <td>{{utente.cognome}}</td>
+      <td>{{utente.permessi}}</td>
+      <td>
+        <button data-ng-disabled="bloccato" data-ng-if="!utente.bloccato" data-ng-click="blocca(utente.username)">Blocca</button>
+        <button data-ng-disabled="bloccato" data-ng-if="utente.bloccato" data-ng-click="sblocca(utente.username)">Sblocca</button> -
+        <button data-ng-click="modifica(utente.username)">Modifica</button> -
+        <button data-ng-click="controllaAttivita(utente.username)">Attività</button>
+      </td>
+    </tr>
+  </table>
 </div>
