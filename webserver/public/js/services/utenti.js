@@ -14,6 +14,20 @@ angular.module('beaconApp.services.utenti',[])
             callback({status: 0});
           });
         },
+        getUtente: function(username, callback) {
+          $http({
+                method: 'POST',
+                url: myServer.url + ':' + myServer.port + '/utente/',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    						data: $.param({
+    							username: username
+    						})
+              }).then(function(response) {
+                callback(response.data);
+              }, function(response) {
+                // Nothing... gestire meglio l'errore
+              });
+            },
 				blocca: function(username, callback) {
 					$http({
 						method: 'POST',

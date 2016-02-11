@@ -1,7 +1,7 @@
 
 angular.module('beaconApp.controllers.utenti', [])
 
-.controller('UtentiCtrl', function($scope, Utenti) {
+.controller('UtentiCtrl', function($scope, $location, Utenti) {
   $scope.bloccato = true;
   $scope.utenti = [];
   var callbackUpdate = function(risposta) {
@@ -30,8 +30,8 @@ angular.module('beaconApp.controllers.utenti', [])
     Utenti.sblocca(nome, callbackUpdate);
   };
 
-  $scope.modifica = function(nome) {
-    alert('Modifica: ' + nome + ' funzione da implementare!!!');
+  $scope.modifica = function(username) {
+    $location.path('/utente/' + username);
   };
 
   $scope.controllaAttivita = function(nome) {

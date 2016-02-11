@@ -5,6 +5,7 @@
         "io": "null",
         "nome": "iBeacons ingresso",
         "descrizione": "iBeacons posizionato all'ingresso dell'edificio",
+        "permessi": " ",
         "caratteristiche": {
             "uuid": "ACFD065E-C3C0-11E3-9BBE-1A514932AC0",
             "major": "0",
@@ -17,6 +18,7 @@
         "io": "null",
         "nome": "iBeacons scrivania",
         "descrizione": "iBeacons posizionato nella mia scrivania",
+        "permessi": " ",
         "caratteristiche": {
             "uuid": "ACFD065E-C3C0-11E3-9BBE-1A514932AC0",
             "major": "0",

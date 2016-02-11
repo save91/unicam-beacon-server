@@ -21,6 +21,10 @@ beaconApp.config(['$routeProvider',
         templateUrl: 'templates/utenti.html',
         controller: 'UtentiCtrl'
       }).
+      when('/utente/:username', {
+        templateUrl: 'templates/utente.html',
+        controller: 'UtenteCtrl'
+      }).
       when('/operazioni', {
         templateUrl: 'templates/operazioni.html',
         controller: 'OperazioniCtrl'

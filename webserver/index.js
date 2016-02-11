@@ -56,6 +56,31 @@ app.get('/utenti', function (req, res) {
   });
 });
 
+app.post('/utente', function (req, res) {
+  var users = [];
+  var trovato = -1;
+  var i = 0;
+  console.log('user request');
+  fs.readFile(USERS_FILE, function(err, data) {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+    var users = JSON.parse(data);
+    while(trovato===-1 && i<users.length) {
+      if(users[i].username===req.body.username) {
+        trovato = i;
+      }
+      i++;
+    }
+    if(trovato>=0) {
+      res.status(200).send(users[trovato]);
+    } else {
+      res.status(404).send('User not found.');
+    }
+  });
+});
+
 app.get('/beacons', function (req, res) {
   console.log('beacons request');
   fs.readFile(BEACONS_FILE, function(err, data) {
