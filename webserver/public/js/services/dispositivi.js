@@ -1,8 +1,5 @@
 angular.module('beaconApp.services.dispositivi',[])
-.constant("myServer", {
-		"url": "http://localhost",
-		"port": "8000"
-})
+
 .factory('Dispositivi', function($http, myServer) {
   return {
   	getAll: function(callback) {

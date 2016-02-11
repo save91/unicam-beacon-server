@@ -1,1 +1,1 @@
-[{"username":"save","nome":"Saverio","cognome":"Tosi","psw":"123456","permessi":"admin","bloccato":false},{"username":"guest","nome":"Special","cognome":"Guest","psw":"123456","permessi":"user","bloccato":true}]
+[{"username":"save","nome":"Saverio","cognome":"Tosi","psw":"123456","permessi":"admin","bloccato":true},{"username":"guest","nome":"Special","cognome":"Guest","psw":"123456","permessi":"user","bloccato":false}]

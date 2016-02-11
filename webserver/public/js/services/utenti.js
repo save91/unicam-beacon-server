@@ -1,8 +1,5 @@
 angular.module('beaconApp.services.utenti',[])
-.constant("myServer", {
-		"url": "http://localhost",
-		"port": "8000"
-})
+
 .factory('Utenti', function($http, myServer) {
   return {
   	getAll: function(callback) {

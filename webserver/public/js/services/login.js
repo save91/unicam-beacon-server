@@ -1,8 +1,5 @@
 angular.module('beaconApp.services.login',[])
-.constant("myServer", {
-		"url": "http://localhost",
-		"port": "8000"
-})
+
 .factory('Login', function($http, myServer) {
   return {
   	login: function(username, psw, callback) {
