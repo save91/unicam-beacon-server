@@ -10,24 +10,31 @@ angular.module('beaconApp.controllers.utenti', [])
         //$scope.utenti = [];
         //alert(messaggio);
       } else {
+        for(var i=0;i<risposta.utenti.length;i++) {
+          if(risposta.utenti[i].bloccato==="true" || risposta.utenti[i].bloccato===true) {
+            risposta.utenti[i].bloccato = true;
+          } else {
+            risposta.utenti[i].bloccato = false;
+          }
+        }
         $scope.utenti = risposta.utenti;
       }
   };
-  $scope.utenti = Utenti.getAll(callbackUpdate);
+  $scope.utenti = Utenti.getAll().then(callbackUpdate);
 
   $scope.aggiorna = function() {
     $scope.bloccato = true;
-    Utenti.getAll(callbackUpdate);
+    Utenti.getAll().then(callbackUpdate);
   };
 
   $scope.blocca = function(nome) {
     $scope.bloccato = true;
-    Utenti.blocca(nome, callbackUpdate);
+    Utenti.blocca(nome).then(callbackUpdate);
   };
 
   $scope.sblocca = function(nome) {
     $scope.bloccato = true;
-    Utenti.sblocca(nome, callbackUpdate);
+    Utenti.sblocca(nome).then(callbackUpdate);
   };
 
   $scope.modifica = function(username) {

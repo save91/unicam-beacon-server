@@ -18,7 +18,7 @@ var beaconApp = angular.module('beaconApp', [
   'beaconApp.services.beacons',
   'beaconApp.services.dispositivi'
 ]).
-constant("myServer", {
+constant("MY_SERVER", {
 		"url": "http://localhost",
 		"port": "8000"
 });

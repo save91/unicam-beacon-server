@@ -23,16 +23,16 @@ angular.module('beaconApp.controllers.dispositivi', [])
       }
   };
 
-  $scope.beacons = Beacons.getAll(callbackUpdateiBeacons);
-  $scope.dispositivi = Dispositivi.getAll(callbackUpdateDispositivi);
+  $scope.beacons = Beacons.getAll().then(callbackUpdateiBeacons);
+  $scope.dispositivi = Dispositivi.getAll().then(callbackUpdateDispositivi);
 
   $scope.aggiornaiBeacons = function() {
     $scope.bloccato = true;
-    Beacons.getAll(callbackUpdateiBeacons);
+    Beacons.getAll().then(callbackUpdateiBeacons);
   };
 
   $scope.aggiornaDispositivi = function() {
     $scope.bloccato = true;
-    Dispositivi.getAll(callbackUpdateDispositivi);
+    Dispositivi.getAll().then(callbackUpdateDispositivi);
   };
 })

@@ -1,64 +1,72 @@
 angular.module('beaconApp.services.utenti',[])
 
-.factory('Utenti', function($http, myServer) {
+.factory('Utenti', function($http, MY_SERVER) {
   return {
-  	getAll: function(callback) {
-      $http({
+  	getAll: function() {
+      return $http({
             method: 'GET',
-            url: myServer.url + ':' + myServer.port + '/utenti'
+            url: MY_SERVER.url + ':' + MY_SERVER.port + '/utenti'
           }).then(function(response) {
-            callback({
+            return {
 							status: 1,
-							utenti: response.data});
-          }, function(response) {
-            callback({status: 0});
+							utenti: response.data};
           });
         },
-        getUtente: function(username, callback) {
-          $http({
+        getUtente: function(username) {
+          return $http({
                 method: 'POST',
-                url: myServer.url + ':' + myServer.port + '/utente/',
+                url: MY_SERVER.url + ':' + MY_SERVER.port + '/utente/',
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
     						data: $.param({
     							username: username
     						})
               }).then(function(response) {
-                callback(response.data);
-              }, function(response) {
-                // Nothing... gestire meglio l'errore
+                return{
+    							status: 1,
+    							utente: response.data};
               });
             },
-				blocca: function(username, callback) {
-					$http({
+				blocca: function(username) {
+					return $http({
 						method: 'POST',
-						url: myServer.url + ':' + myServer.port + '/blocca_utente',
+						url: MY_SERVER.url + ':' + MY_SERVER.port + '/blocca_utente',
 						headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 						data: $.param({
 							username: username
 						})
 					}).then(function(response) {
-						callback({
+						return {
 							status: 1,
-							utenti: response.data});
-					}, function(response) {
-						callback({status: 0});
+							utenti: response.data
+            };
 					});
 				},
-				sblocca: function(username, callback) {
-					$http({
+
+				sblocca: function(username) {
+					return $http({
 						method: 'POST',
-						url: myServer.url + ':' + myServer.port + '/sblocca_utente',
+						url: MY_SERVER.url + ':' + MY_SERVER.port + '/sblocca_utente',
 						headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 						data: $.param({
 							username: username
 						})
 					}).then(function(response) {
-						callback({
+						return {
 							status: 1,
-							utenti: response.data});
-					}, function(response) {
-						callback({status: 0});
+							utenti: response.data};
 					});
-				}
+				},
+        updateUtente: function(user) {
+          return $http({
+						method: 'POST',
+						url: MY_SERVER.url + ':' + MY_SERVER.port + '/aggiorna_utente',
+						headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+						data: $.param(user)
+					}).then(function(response) {
+						return {
+							status: 1,
+							utente: response.data};
+					});
+        }
   };
 });

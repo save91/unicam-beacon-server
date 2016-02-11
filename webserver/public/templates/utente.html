@@ -4,7 +4,7 @@
   modificare i singoli utenti e i dispositvi ad esso associato</p>
   <input data-ng-disabled="bloccato" type="button" value="Aggiorna" data-ng-click="aggiorna()">
   <h2>Modifica profilo utente</h2>
-  <form>
+  <form data-ng-submit="modifica()">
     <table>
       <tr>
         <td>Username: </td><td>{{utente.username}}</td>
