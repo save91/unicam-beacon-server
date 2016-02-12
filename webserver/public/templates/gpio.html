@@ -1,0 +1,18 @@
+<div>
+  <h2>GPIO</h2>
+  <div ng-repeat="GPIO in GPIOs">
+    <p>GPIO: {{GPIO.GPIO}}</p>
+    <p>Tipo: {{GPIO.tipo}}</p>
+    <p>Associato:
+      <select>
+        <option value="0">Nessuno</option>
+      </select>
+    </p>
+    <p>Azioni:
+      <button ng-if="GPIO.tipo==='output'" data-ng-click="on(GPIO.id)">On</button>
+      <button ng-if="GPIO.tipo==='output'" data-ng-click="off(GPIO.id)">Off</button>
+      <button ng-if="GPIO.tipo==='input'" data-ng-click="read(GPIO.id)">Leggi</button>
+    </p>
+    <hr/>
+  </div>
+</div>

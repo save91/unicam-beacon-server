@@ -7,6 +7,9 @@ angular.module('beaconApp.services.home',[])
                nome: "Gestisci i tuoi dispositivi",
                url: "#/dispositivi"
              }, {
+               nome: "Gestione GPIO",
+               url: "#/gpio"
+             }, {
                nome: "Gestione utenti",
                url: "#/utenti"
              }, {

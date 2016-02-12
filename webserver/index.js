@@ -1,5 +1,6 @@
 var fs = require('fs');
 var express = require('express');
+var gpio = require('rpi-gpio');
 var cors = require('cors');
 var bodyParser = require('body-parser');
 var app = express();
@@ -13,6 +14,7 @@ var USERS_FILE = ("json/users.json");
 var BEACONS_FILE = ("json/beacons.json");
 var DISPOSITIVI_FILE = ("json/dispositivi.json");
 var IO_FILE = ("json/io.json");
+var GPIO_FILE = ("json/gpio.json");
 var SERVERPORT = 8000;
 
 
@@ -196,6 +198,11 @@ app.get('/io', function (req, res) {
   });
 });
 
+app.get('/gpio', function (req, res) {
+  console.log('gpio request');
+  res.status(200).send({"status":"1","gpio":GPIOs});
+});
+
 app.get('/dispositivi', function (req, res) {
   console.log('dispositivi request');
   fs.readFile(DISPOSITIVI_FILE, function(err, data) {
@@ -343,6 +350,25 @@ process.on('SIGINT', function(){
      process.exit();
 });
 
-
+//Main
+var GPIOs = [];
+fs.readFile(GPIO_FILE, function(err, data) {
+  if (err) {
+    console.error(err);
+    process.exit(1);
+  }
+  GPIOs = JSON.parse(data);
+};
+for(var i=0;i<GPIOs.length;i++) {
+  if(GPIOs[i].tipo==="output") {
+    gpio.setup(GPIOs[i].GPIO, gpio.DIR_OUT, function(err){
+      if (err) {
+        console.log("Error opening pin " + err);
+        return;
+      }
+      GPIOs[i].STATO = 0;
+    }
+  }
+}
 app.listen(SERVERPORT);
-console.log('Server listening on port ' + SERVERPORT);
+console.log('GPIO setup completed and server listening on port ' + SERVERPORT);

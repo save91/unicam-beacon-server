@@ -9,6 +9,10 @@ beaconApp.config(['$routeProvider',
         templateUrl: 'templates/login.html',
         controller: 'LoginCtrl'
       }).
+      when('/gpio', {
+        templateUrl: 'templates/gpio.html',
+        controller: 'GPIOCtrl'
+      }).
       when('/registrati', {
         templateUrl: 'templates/registrati.html',
         controller: 'RegistratiCtrl'
