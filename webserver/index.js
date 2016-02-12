@@ -369,9 +369,9 @@ app.use(function (err, req, res, next) {
   }
 });
 
-function setPin(PIN, value, callback) {
-    console.log("Setting pin "+PIN+" to " + value);
-    gpio.write(PIN, value, function(err) {
+function setPin(pin, value, callback) {
+    console.log("Setting pin "+pin+" to " + value);
+    gpio.write(pin, value, function(err) {
         if (err) {
                 console.log("error writing " + err);
                 callback("error writing " + err);
@@ -402,8 +402,19 @@ fs.readFile(GPIO_FILE, function(err, data) {
     process.exit(1);
   }
   GPIOs = JSON.parse(data);
+  debugger;
+  for(var i=0;i<GPIOs.length;i++) {
+   if(GPIOs[i].tipo==="output") {
+    gpio.setup(GPIOs[i].GPIO, gpio.DIR_OUT, function(err){
+      if (err) {
+        console.log("Error opening pin " + err);
+        return;
+      }
+    });
+   }
+  }
 });
-for(var i=0;i<GPIOs.length;i++) {
+/*for(var i=0;i<GPIOs.length;i++) {
   if(GPIOs[i].tipo==="output") {
     gpio.setup(GPIOs[i].GPIO, gpio.DIR_OUT, function(err){
       if (err) {
@@ -413,6 +424,7 @@ for(var i=0;i<GPIOs.length;i++) {
       GPIOs[i].stato = 0;
     });
   }
-}
+}*/
+   
 app.listen(SERVERPORT);
 console.log('GPIO setup completed and server listening on port ' + SERVERPORT);
