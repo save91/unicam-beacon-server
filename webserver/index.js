@@ -228,6 +228,30 @@ app.post('/gpio_set', function (req, res) {
   }
 });
 
+app.post('/gpio_get', function (req, res) {
+  debugger;
+  console.log('get gpio request');
+  var i = 0;
+  var trovato = -1;
+  var id = parseInt(req.body.id);
+  while(trovato===-1 && i<GPIOs.length) {
+    if(GPIOs[i].id===id) {
+      trovato = i;
+    }
+    i++;
+  }
+  if(trovato>=0) {
+    readStatus(GPIOs[trovato].GPIO, function(err, value) {
+      if (err) {
+        res.status(500).send('Oops, Something went wrong! ' + err);
+      } else {
+        GPIOs[trovato].stato = value;
+        res.status(200).send({status:"1", gpio: GPIOs});
+      }
+    })
+  }
+});
+
 app.get('/dispositivi', function (req, res) {
   console.log('dispositivi request');
   fs.readFile(DISPOSITIVI_FILE, function(err, data) {
@@ -381,6 +405,18 @@ function setPin(pin, value, callback) {
     });
 }
 
+function readStatus(PIN, callback) {
+    console.log("reading pin "+PIN);
+    gpio.read(PIN, function(err,value) {
+        if (err) {
+                console.log("error reading pin " + err, null);
+                callback("error reading pin " + err, null);
+                return;
+            }
+        callback(null,value);
+    });
+}
+
 function unexportPins() {
   gpio.destroy(function() {
     console.log('All pins unexported');
@@ -411,20 +447,16 @@ fs.readFile(GPIO_FILE, function(err, data) {
         return;
       }
     });
-   }
-  }
-});
-/*for(var i=0;i<GPIOs.length;i++) {
-  if(GPIOs[i].tipo==="output") {
-    gpio.setup(GPIOs[i].GPIO, gpio.DIR_OUT, function(err){
+  }else if(GPIOs[i].tipo==="input"){
+    gpio.setup(GPIOs[i].GPIO, gpio.DIR_IN, function(err){
       if (err) {
         console.log("Error opening pin " + err);
         return;
       }
-      GPIOs[i].stato = 0;
     });
   }
-}*/
-   
+  }
+});
+
 app.listen(SERVERPORT);
 console.log('GPIO setup completed and server listening on port ' + SERVERPORT);

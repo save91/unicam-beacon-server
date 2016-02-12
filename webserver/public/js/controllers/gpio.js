@@ -22,6 +22,6 @@ angular.module('beaconApp.controllers.gpio', [])
   };
 
   $scope.read = function(id) {
-    alert("Letto pin "+id);
+    GPIO.getGPIO(id).then(callbackGPIO);
   };
 })
