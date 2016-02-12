@@ -70,6 +70,10 @@ angular.module('beaconApp.controllers.dispositivi', [])
     }else {
       $scope.dispositivo.type = "Cancello";
     }
-  }
+  };
+
+  $scope.eliminaDispositivo = function(id) {
+    Dispositivi.eliminaDispositivo(id).then(callbackUpdateDispositivi);
+  };
 
 })

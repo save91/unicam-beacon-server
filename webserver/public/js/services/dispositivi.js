@@ -36,6 +36,18 @@ angular.module('beaconApp.services.dispositivi',[])
       }).then(function(response) {
         return response.data;
       });
-      }
+    },
+    eliminaDispositivo: function(id) {
+      return $http({
+        method: 'POST',
+        url: MY_SERVER.url + ':' + MY_SERVER.port + '/elimina_dispositivo',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        data: $.param({
+          id: id
+        })
+      }).then(function(response) {
+        return response.data;
+      });
+    }
     };
   });

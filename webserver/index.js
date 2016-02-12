@@ -239,6 +239,38 @@ app.post('/aggiungi_dispositivo', function (req, res) {
   });
 });
 
+app.post('/elimina_dispositivo', function (req, res) {
+  var dispositivi = [];
+  var trovato = -1;
+  var i = 0;
+  var id = parseInt(req.body.id);
+  console.log('delete dispositivo request');
+  fs.readFile(DISPOSITIVI_FILE, function(err, data) {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+    dispositivi = JSON.parse(data);
+    while(trovato===-1 && i<dispositivi.length) {
+      debugger;
+      if(dispositivi[i].id===id) {
+        trovato = i;
+      }
+      i++;
+    }
+    if(trovato>=0) {
+      dispositivi.splice(trovato,1);
+    }
+    fs.writeFile(DISPOSITIVI_FILE, JSON.stringify(dispositivi, null), function(err) {
+      if (err) {
+        console.error(err);
+        process.exit(1);
+      }
+      res.status(200).send({"status":"1","dispositivi":dispositivi});
+    });
+  });
+});
+
 app.post('/blocca_utente', function (req, res) {
   console.log('block user request');
   fs.readFile(USERS_FILE, function(err, data) {
