@@ -22,6 +22,6 @@ angular.module('beaconApp.controllers.gpio', [])
   };
 
   $scope.read = function(id) {
-    GPIO.getGPIO(id).then(callbackGPIO);
+    GPIO.readGPIO(id).then(callbackGPIO);
   };
 })

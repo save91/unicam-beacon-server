@@ -23,7 +23,7 @@ angular.module('beaconApp.services.gpio',[])
           return response.data;
           });
         },
-        getGPIO: function(id) {
+        readGPIO: function(id) {
           return $http({
             method: 'POST',
             url: MY_SERVER.get() + '/gpio_get',
