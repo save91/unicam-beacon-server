@@ -216,7 +216,7 @@ app.post('/gpio_set', function (req, res) {
     }
     i++;
   }
-  if(trovato>0) {
+  if(trovato>=0) {
     setPin(GPIOs[trovato].GPIO, val, function(err) {
       if (err) {
         res.status(500).send('Oops, Something went wrong! ' + err);
