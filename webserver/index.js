@@ -358,7 +358,7 @@ fs.readFile(GPIO_FILE, function(err, data) {
     process.exit(1);
   }
   GPIOs = JSON.parse(data);
-};
+});
 for(var i=0;i<GPIOs.length;i++) {
   if(GPIOs[i].tipo==="output") {
     gpio.setup(GPIOs[i].GPIO, gpio.DIR_OUT, function(err){
@@ -367,7 +367,7 @@ for(var i=0;i<GPIOs.length;i++) {
         return;
       }
       GPIOs[i].STATO = 0;
-    }
+    });
   }
 }
 app.listen(SERVERPORT);
