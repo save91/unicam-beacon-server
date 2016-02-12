@@ -19,7 +19,7 @@ angular.module('beaconApp.controllers.login', [])
 
     $scope.login = function() {
       $scope.bloccato = true;
-      Login.login($scope.username, $scope.psw, callbackLogin);
+      Login.login($scope.username, $scope.psw).then(callbackLogin);
     };
 
 

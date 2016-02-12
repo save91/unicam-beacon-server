@@ -22,5 +22,8 @@ var beaconApp = angular.module('beaconApp', [
 ]).
 constant("MY_SERVER", {
 		"url": "http://localhost",
-		"port": "8000"
+		"port": "8000",
+    "get": function() {
+      return (this.url + ":" + this.port);
+    }
 });
