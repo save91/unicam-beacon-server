@@ -204,6 +204,7 @@ app.get('/gpio', function (req, res) {
 });
 
 app.post('/gpio_set', function (req, res) {
+  debugger;
   console.log('set gpio request');
   var i = 0;
   var trovato = -1;
@@ -409,7 +410,7 @@ for(var i=0;i<GPIOs.length;i++) {
         console.log("Error opening pin " + err);
         return;
       }
-      GPIOs[i].STATO = 0;
+      GPIOs[i].stato = 0;
     });
   }
 }
