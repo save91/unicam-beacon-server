@@ -17,6 +17,10 @@ beaconApp.config(['$routeProvider',
         templateUrl: 'templates/dispositivi.html',
         controller: 'DispositiviCtrl'
       }).
+      when('/registra_ibeacon/:id', {
+        templateUrl: 'templates/registra_ibeacon.html',
+        controller: 'RegistraiBeaconCtrl'
+      }).
       when('/utenti', {
         templateUrl: 'templates/utenti.html',
         controller: 'UtentiCtrl'

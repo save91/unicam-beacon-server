@@ -31,7 +31,7 @@ angular.module('beaconApp.services.dispositivi',[])
           nome: dispositivo.nome,
           descrizione: dispositivo.descrizione,
           permessi: " ",
-          caratteristiche: null
+          caratteristiche: dispositivo.caratteristiche
         })
       }).then(function(response) {
         return response.data;

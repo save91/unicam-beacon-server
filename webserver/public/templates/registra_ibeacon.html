@@ -1,0 +1,26 @@
+<div>
+  <h1>Registra iBeacon</h1>
+  <form ng-submit="aggiungi()">
+    <table>
+      <tr>
+        <td>Nome: </td><td><input ng-model="dispositivo.nome" type="text" required/></td>
+      </tr>
+      <tr>
+        <td>Descrizione: </td><td><input ng-model="dispositivo.descrizione" type="text" required/></td>
+      </tr>
+      <tr>
+        <td>UUID: </td><td>{{dispositivo.caratteristiche.uuid}}</td>
+      </tr>
+      <tr>
+        <td>Major: </td><td>{{dispositivo.caratteristiche.major}}</td>
+      </tr>
+      <tr>
+        <td>Minor: </td><td>{{dispositivo.caratteristiche.minor}}</td>
+      </tr>
+      <tr>
+        <td> <td><input type="submit" value="Aggiungi"/></td>
+      </tr>
+
+    </table>
+  </form>
+</div>

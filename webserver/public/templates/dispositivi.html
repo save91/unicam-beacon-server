@@ -17,7 +17,9 @@
       <td>{{beacon.uuid}}</td>
       <td>{{beacon.major}}</td>
       <td>{{beacon.minor}}</td>
-      <td><button data-ng-click="eliminaBeacon(beacon.id)">Elimina</button> - <a href="">Registra</a></td>
+      <td>
+        <button data-ng-click="eliminaBeacon(beacon.id)">Elimina</button> -
+        <a href="#/registra_ibeacon/{{beacon.id}}">Registra</a></td>
     </tr>
   </table>
   <hr/>
@@ -33,7 +35,7 @@
       <tr>
         <td>IO: </td>
         <td>
-          <select ng-model="dispositivo.io">
+          <select data-ng-model="dispositivo.io" data-ng-change="cambia_tipo()">
             <option value="input">Input</option>
             <option value="output">Output</option>
           </select>
@@ -42,8 +44,8 @@
       <tr>
         <td>Tipo: </td>
         <td>
-          <select>
-            <option data-ng-repeat="io in ios|IOFilter:dispositivo.io" value="io.id">{{io.nome}}</option>
+          <select data-ng-model="dispositivo.type" required>
+            <option data-ng-repeat="io in ios|IOFilter:dispositivo.io" value="{{io.nome}}">{{io.nome}}</option>
           </select>
         </td>
       </tr>
@@ -59,8 +61,8 @@
     <h3>{{dispositivo.nome}}</h3>
     <p>ID: {{dispositivo.id}}</p>
     <p>IO: {{dispositivo.io}}</p>
-    <p>descrizione: {{dispositivo.descrizione}}</p>
-    <a href="">Blocca</a> - <a href="">Modifica</a>
+    <p>Tipo: {{dispositivo.type}}</p>
+    <p>Descrizione: {{dispositivo.descrizione}}</p>
+    <a href="">Elimina</a> - <a href="">Blocca</a> - <a href="">Modifica</a>
   </div>
-  <hr/>
 </div>

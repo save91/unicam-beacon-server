@@ -129,6 +129,31 @@ app.get('/beacons', function (req, res) {
   });
 });
 
+app.post('/beacon', function (req, res) {
+  var beacons = [];
+  var trovato = -1;
+  var i = 0;
+  console.log('beacon request');
+  fs.readFile(BEACONS_FILE, function(err, data) {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+    var beacons = JSON.parse(data);
+    while(trovato===-1 && i<beacons.length) {
+      if(beacons[i].id===req.body.id) {
+        trovato = i;
+      }
+      i++;
+    }
+    if(trovato>=0) {
+      res.status(200).send({status: "1", beacon : beacons[trovato]});
+    } else {
+      res.status(404).send('Beacon not found.');
+    }
+  });
+});
+
 app.post('/elimina_beacon', function (req, res) {
   var beacons = [];
   var trovato = -1;
@@ -201,7 +226,7 @@ app.post('/aggiungi_dispositivo', function (req, res) {
       nome: req.body.nome,
       descrizione: req.body.descrizione,
       permessi: " ",
-      caratteristiche: null
+      caratteristiche: req.body.caratteristiche
     }
     dispositivi.push(newDispositivo);
     fs.writeFile(DISPOSITIVI_FILE, JSON.stringify(dispositivi, null), function(err) {

@@ -4,7 +4,9 @@ angular.module('beaconApp.controllers.dispositivi', [])
 .controller('DispositiviCtrl', function($scope, Beacons, Dispositivi) {
   $scope.bloccato = true;
   $scope.dispositivo = {
-    io: "input"
+    io: "input",
+    caratteristiche: null,
+    type: "Pulsante"
   };
   var callbackUpdateiBeacons = function(risposta) {
       $scope.bloccato = false;
@@ -43,6 +45,7 @@ angular.module('beaconApp.controllers.dispositivi', [])
   $scope.aggiungi  = function() {
     Dispositivi.aggiungi($scope.dispositivo).then(callbackUpdateDispositivi);
     $scope.dispositivo.io = "input";
+    $scope.dispositivo.type = "Pulsante";
     $scope.dispositivo.nome = "";
     $scope.dispositivo.descrizione = "";
   }
@@ -60,4 +63,13 @@ angular.module('beaconApp.controllers.dispositivi', [])
   $scope.eliminaBeacon = function(id) {
     Beacons.eliminaBeacon(id).then(callbackUpdateiBeacons);
   };
+
+  $scope.cambia_tipo = function() {
+    if($scope.dispositivo.io === "input") {
+      $scope.dispositivo.type = "Pulsante";
+    }else {
+      $scope.dispositivo.type = "Cancello";
+    }
+  }
+
 })
