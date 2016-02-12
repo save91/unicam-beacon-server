@@ -14,11 +14,11 @@ angular.module('beaconApp.controllers.gpio', [])
   GPIO.getGPIO().then(callbackGPIO);
 
   $scope.on = function(id) {
-    alert("On led "+id);
+    GPIO.setGPIO(id, 1).then(callbackGPIO);
   };
 
   $scope.off = function(id) {
-    alert("Off led "+id);
+    GPIO.setGPIO(id, 0).then(callbackGPIO);
   };
 
   $scope.read = function(id) {

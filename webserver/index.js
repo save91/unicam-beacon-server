@@ -203,6 +203,30 @@ app.get('/gpio', function (req, res) {
   res.status(200).send({"status":"1","gpio":GPIOs});
 });
 
+app.post('/gpio_set', function (req, res) {
+  console.log('set gpio request');
+  var i = 0;
+  var trovato = -1;
+  var id = parseInt(req.body.id);
+  var val = parseInt(req.body.value);
+  while(trovato===-1 && i<GPIOs.length) {
+    if(GPIOs[i].id===id) {
+      trovato = i;
+    }
+    i++;
+  }
+  if(trovato>0) {
+    setPin(GPIOs[trovato].GPIO, val, {
+      if (err) {
+        res.status(500).send('Oops, Something went wrong! ' + err);
+      } else {
+        GPIOs[trovato].stato = val;
+        res.status(200).send({status:"1", gpio: GPIOs});
+      }
+    })
+  }
+});
+
 app.get('/dispositivi', function (req, res) {
   console.log('dispositivi request');
   fs.readFile(DISPOSITIVI_FILE, function(err, data) {
@@ -344,10 +368,29 @@ app.use(function (err, req, res, next) {
   }
 });
 
+function setPin(PIN, value, callback) {
+    console.log("Setting pin "+PIN+" to " + value);
+    gpio.write(PIN, value, function(err) {
+        if (err) {
+                console.log("error writing " + err);
+                callback("error writing " + err);
+                return;
+            }
+            callback();
+    });
+}
+
+function unexportPins() {
+  gpio.destroy(function() {
+    console.log('All pins unexported');
+    process.exit();
+  });
+}
+
 //catches ctrl+c event
 process.on('SIGINT', function(){
      console.log("Stop webserver");
-     process.exit();
+     unexportPins();
 });
 
 //Main

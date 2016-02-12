@@ -9,6 +9,19 @@ angular.module('beaconApp.services.gpio',[])
       }).then(function(response) {
         return response.data;
         });
-      }
+      },
+      setGPIO: function(id, value) {
+        return $http({
+          method: 'POST',
+          url: MY_SERVER.get() + '/gpio_set',
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+          data: $.param({
+            id: id,
+            value: value
+          })
+        }).then(function(response) {
+          return response.data;
+          });
+        }
     };
 });
