@@ -11,6 +11,31 @@ angular.module('beaconApp.services.dispositivi',[])
 							status: 1,
 							dispositivi: response.data}
             });
-          }
-        };
+          },
+    getIO: function() {
+      return $http({
+        method: 'GET',
+        url: MY_SERVER.url + ':' + MY_SERVER.port + '/io'
+      }).then(function(response) {
+        return response.data;
+        });
+      },
+    aggiungi: function(dispositivo) {
+      return $http({
+        method: 'POST',
+        url: MY_SERVER.url + ':' + MY_SERVER.port + '/aggiungi_dispositivo',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        data: $.param({
+          type: dispositivo.type,
+          io: dispositivo.io,
+          nome: dispositivo.nome,
+          descrizione: dispositivo.descrizione,
+          permessi: " ",
+          caratteristiche: null
+        })
+      }).then(function(response) {
+        return response.data;
+      });
+      }
+    };
   });

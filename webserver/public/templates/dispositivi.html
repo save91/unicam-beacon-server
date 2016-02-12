@@ -21,8 +21,40 @@
     </tr>
   </table>
   <hr/>
-  <input type="button" value="Aggiorna dispositivi" ng-click="aggiornaDispositivi()">
+  <h2>Aggiungi un nuovo dispositivo</h2>
+  <form ng-submit="aggiungi()">
+    <table>
+      <tr>
+        <td>Nome: </td><td><input ng-model="dispositivo.nome" type="text" required/></td>
+      </tr>
+      <tr>
+        <td>Descrizione: </td><td><input ng-model="dispositivo.descrizione" type="text" required/></td>
+      </tr>
+      <tr>
+        <td>IO: </td>
+        <td>
+          <select ng-model="dispositivo.io">
+            <option value="input">Input</option>
+            <option value="output">Output</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Tipo: </td>
+        <td>
+          <select>
+            <option data-ng-repeat="io in ios|IOFilter:dispositivo.io" value="io.id">{{io.nome}}</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td> <td><input type="submit" value="Aggiungi"/></td>
+      </tr>
+    </table>
+  </form>
+  <hr/>
   <h2>Elenco dispositivi</h2>
+  <input type="button" value="Aggiorna dispositivi" ng-click="aggiornaDispositivi()">
   <div data-ng-repeat="dispositivo in dispositivi">
     <h3>{{dispositivo.nome}}</h3>
     <p>ID: {{dispositivo.id}}</p>

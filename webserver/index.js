@@ -12,6 +12,7 @@ app.use(cors());
 var USERS_FILE = ("json/users.json");
 var BEACONS_FILE = ("json/beacons.json");
 var DISPOSITIVI_FILE = ("json/dispositivi.json");
+var IO_FILE = ("json/io.json");
 var SERVERPORT = 8000;
 
 
@@ -158,6 +159,18 @@ app.post('/elimina_beacon', function (req, res) {
   });
 });
 
+app.get('/io', function (req, res) {
+  console.log('io request');
+  fs.readFile(IO_FILE, function(err, data) {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+    var io = JSON.parse(data);
+    res.status(200).send({"status":"1","io":io});
+  });
+});
+
 app.get('/dispositivi', function (req, res) {
   console.log('dispositivi request');
   fs.readFile(DISPOSITIVI_FILE, function(err, data) {
@@ -167,6 +180,37 @@ app.get('/dispositivi', function (req, res) {
     }
     var dispositivi = JSON.parse(data);
     res.status(200).send(dispositivi);
+  });
+});
+
+app.post('/aggiungi_dispositivo', function (req, res) {
+  console.log('add dispositivo request');
+  fs.readFile(DISPOSITIVI_FILE, function(err, data) {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+    var dispositivi = JSON.parse(data);
+    // NOTE: In a real implementation, we would likely rely on a database or
+    // some other approach (e.g. UUIDs) to ensure a globally unique id. We'll
+    // treat Date.now() as unique-enough for our purposes.
+    var newDispositivo = {
+      id: Date.now(),
+      type: req.body.type,
+      io: req.body.io,
+      nome: req.body.nome,
+      descrizione: req.body.descrizione,
+      permessi: " ",
+      caratteristiche: null
+    }
+    dispositivi.push(newDispositivo);
+    fs.writeFile(DISPOSITIVI_FILE, JSON.stringify(dispositivi, null), function(err) {
+      if (err) {
+        console.error(err);
+        process.exit(1);
+      }
+      res.status(200).send({status: "1", dispositivi: dispositivi});
+    });
   });
 });
 
