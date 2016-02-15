@@ -228,6 +228,32 @@ app.post('/gpio_set', function (req, res) {
   }
 });
 
+app.post('/gpio_edit', function (req, res) {
+  console.log('edit gpio request');
+  var GPIOS;
+  var dispositivi;
+  var id_GPIO = parseInt(req.body.id_GPIO);
+  var id_dipositivo = parseInt(req.body.id_dipositivo);
+  associa_GPIO(id_GPIO, id_dipositivo);
+  associa_dispositivo(id_dipositivo, id_GPIO);
+  fs.readFile(GPIO_FILE, function(err, data) {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+    GPIOs = JSON.parse(data);
+  }
+  fs.readFile(DISPOSITIVO_FILE, function(err, data) {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+    dispositivi = JSON.parse(data);
+  }
+  res.status(200).send({status:"1", dispositivi: dispositivi, gpio: GPIOs});
+});
+
+
 app.post('/gpio_get', function (req, res) {
   debugger;
   console.log('get gpio request');
@@ -282,6 +308,7 @@ app.post('/aggiungi_dispositivo', function (req, res) {
       nome: req.body.nome,
       descrizione: req.body.descrizione,
       permessi: " ",
+      id_GPIO: 0,
       caratteristiche: req.body.caratteristiche
     }
     dispositivi.push(newDispositivo);
@@ -393,6 +420,52 @@ app.use(function (err, req, res, next) {
   }
 });
 
+function associa_GPIO(id_GPIO, id_dispositivo) {
+  var GPIOs;
+  fs.readFile(GPIO_FILE, function(err, data) {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+    GPIOs = JSON.parse(data);
+    while(trovato === -1 || i < GPIOs.length) {
+      if(GPIOs[i].id === id_GPIO) {
+        GPIOs[i].id_dispositivo = id_dispositivo;
+      }
+      i++;
+    }
+  });
+  fs.writeFile(GPIO_FILE, JSON.stringify(GPIOs, null), function(err) {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+  });
+}
+
+function associa_dispositivo(id_dispositivo, id_GPIO) {
+  var dispositivi;
+  fs.readFile(DISPOSITIVI_FILE, function(err, data) {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+    dispositivi = JSON.parse(data);
+    while(trovato === -1 || i < dispositivi.length) {
+      if(dispositivi[i].id === id_dispositivo) {
+        dispositivi[i].id_GPIO = id_GPIO;
+      }
+      i++;
+    }
+  });
+  fs.writeFile(DISPOSITIVI_FILE, JSON.stringify(dispositivi, null), function(err) {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+  });
+}
+
 function setPin(pin, value, callback) {
     console.log("Setting pin "+pin+" to " + value);
     gpio.write(pin, value, function(err) {
@@ -430,10 +503,6 @@ process.on('SIGINT', function(){
      unexportPins();
 });
 
-gpio.on('change', function(channel, value) {
-	console.log('Channel ' + channel + ' value is now ' + value);
-});
-
 //Main
 var GPIOs = [];
 fs.readFile(GPIO_FILE, function(err, data) {
@@ -452,7 +521,12 @@ fs.readFile(GPIO_FILE, function(err, data) {
       }
     });
   }else if(GPIOs[i].tipo==="input"){
-    gpio.setup(GPIOs[i].GPIO, gpio.DIR_IN, gpio.EDGE_BOTH);
+    gpio.setup(GPIOs[i].GPIO, gpio.DIR_IN, function(err){
+      if (err) {
+        console.log("Error opening pin " + err);
+        return;
+      }
+    });
   }
   }
 });
