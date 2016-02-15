@@ -1,7 +1,7 @@
 
 angular.module('beaconApp.controllers.gpio', [])
 
-.controller('GPIOCtrl', function($scope, GPIO, dispositivi) {
+.controller('GPIOCtrl', function($scope, GPIO, Dispositivi) {
   $scope.GPIOs = [];
   $scope.dispositivi = [];
   var callbackGPIO = function(risposta) {
@@ -18,7 +18,7 @@ angular.module('beaconApp.controllers.gpio', [])
       $scope.dispositivi = [];
       alert("Impossibile scaricare l'elenco dei dispositivi");
     } else {
-      $scope.dispositivi = risposta.dispositivi;
+      $scope.dispositivi = risposta;
     }
   };
 

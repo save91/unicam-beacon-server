@@ -5,7 +5,7 @@
     <p>Tipo: {{GPIO.tipo}}</p>
     <p>Stato: {{GPIO.stato}}</p>
     <p>Associato:
-      <select data-ng-model="GPIO.id_dispositivo" data-ng-repeat="dispositivo in dispositvi|DispositiviFilter:GPIO.tipo">
+      <select data-ng-model="GPIO.id_dispositivo" data-ng-repeat="dispositivo in dispositvi">
         <option value="dispositivo.id">{{dispositivo.nome}}</option>
       </select>
     </p>

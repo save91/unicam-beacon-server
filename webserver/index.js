@@ -242,14 +242,14 @@ app.post('/gpio_edit', function (req, res) {
       process.exit(1);
     }
     GPIOs = JSON.parse(data);
-  }
+  });
   fs.readFile(DISPOSITIVO_FILE, function(err, data) {
     if (err) {
       console.error(err);
       process.exit(1);
     }
     dispositivi = JSON.parse(data);
-  }
+  });
   res.status(200).send({status:"1", dispositivi: dispositivi, gpio: GPIOs});
 });
 
