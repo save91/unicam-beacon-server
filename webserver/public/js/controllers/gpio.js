@@ -20,6 +20,8 @@ angular.module('beaconApp.controllers.gpio', [])
       alert("Impossibile scaricare l'elenco dei dispositivi");
     } else {
       $scope.dispositivi = risposta.dispositivi;
+      $scope.dispositivi.push({id:0, nome:"Nessuno", io:"input", id_GPIO:0});
+      $scope.dispositivi.push({id:0, nome:"Nessuno", io:"output", id_GPIO:0});
     }
   };
 
@@ -29,8 +31,8 @@ angular.module('beaconApp.controllers.gpio', [])
       $scope.GPIOs = [];
       alert("Impossibile scaricare l'elenco dei dispositivi");
     } else {
-      $scope.dispositivi = risposta.dispositivi;
-      $scope.GPIOs = risposta.gpio;
+      GPIO.getGPIO().then(callbackGPIO);
+      Dispositivi.getAll().then(callbackDispositivi);
     }
   };
 

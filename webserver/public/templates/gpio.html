@@ -5,9 +5,7 @@
     <p>Tipo: {{GPIO.tipo}}</p>
     <p>Stato: {{GPIO.stato}}</p>
     <p>Associato:
-      <select data-ng-model="GPIO.id_dispositivo" data-ng-change="cambia(GPIO.id, GPIO.id_dispositivo)">
-        <option value=0>Nessuno</option>
-        <option data-ng-repeat="dispositivo in dispositivi|DispositiviFilter:GPIO.tipo" value={{dispositivo.id}}>{{dispositivo.nome}}</option>
+      <select data-ng-options="dispositivo.id as dispositivo.nome for dispositivo in dispositivi|DispositiviFilter:GPIO.tipo:GPIO.id_dispositivo" data-ng-model="GPIO.id_dispositivo" data-ng-change="cambia(GPIO.id, GPIO.id_dispositivo)">
       </select>
     </p>
     <p>Azioni:
