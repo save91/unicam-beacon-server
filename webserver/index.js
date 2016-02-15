@@ -243,7 +243,7 @@ app.post('/gpio_edit', function (req, res) {
     }
     GPIOs = JSON.parse(data);
   });
-  fs.readFile(DISPOSITIVO_FILE, function(err, data) {
+  fs.readFile(DISPOSITIVI_FILE, function(err, data) {
     if (err) {
       console.error(err);
       process.exit(1);
