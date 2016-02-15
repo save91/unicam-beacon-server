@@ -234,22 +234,8 @@ app.post('/gpio_edit', function (req, res) {
   var dispositivi;
   var id_GPIO = parseInt(req.body.id_GPIO);
   var id_dipositivo = parseInt(req.body.id_dipositivo);
-  associa_GPIO(id_GPIO, id_dipositivo);
-  associa_dispositivo(id_dipositivo, id_GPIO);
-  fs.readFile(GPIO_FILE, function(err, data) {
-    if (err) {
-      console.error(err);
-      process.exit(1);
-    }
-    GPIOs = JSON.parse(data);
-  });
-  fs.readFile(DISPOSITIVI_FILE, function(err, data) {
-    if (err) {
-      console.error(err);
-      process.exit(1);
-    }
-    dispositivi = JSON.parse(data);
-  });
+  GPIOs = associa_GPIO(id_GPIO, id_dipositivo);
+  dispositivi = associa_dispositivo(id_dipositivo, id_GPIO);
   res.status(200).send({status:"1", dispositivi: dispositivi, gpio: GPIOs});
 });
 
@@ -421,7 +407,7 @@ app.use(function (err, req, res, next) {
 });
 
 function associa_GPIO(id_GPIO, id_dispositivo) {
-  var GPIOs;
+  var GPIOs = [];
   fs.readFile(GPIO_FILE, function(err, data) {
     if (err) {
       console.error(err);
@@ -434,17 +420,18 @@ function associa_GPIO(id_GPIO, id_dispositivo) {
       }
       i++;
     }
+    fs.writeFile(GPIO_FILE, JSON.stringify(GPIOs, null), function(err) {
+      if (err) {
+        console.error(err);
+        process.exit(1);
+      }
+    });
   });
-  fs.writeFile(GPIO_FILE, JSON.stringify(GPIOs, null), function(err) {
-    if (err) {
-      console.error(err);
-      process.exit(1);
-    }
-  });
+  return GPIOs;
 }
 
 function associa_dispositivo(id_dispositivo, id_GPIO) {
-  var dispositivi;
+  var dispositivi = [];
   fs.readFile(DISPOSITIVI_FILE, function(err, data) {
     if (err) {
       console.error(err);
@@ -457,13 +444,14 @@ function associa_dispositivo(id_dispositivo, id_GPIO) {
       }
       i++;
     }
+    fs.writeFile(DISPOSITIVI_FILE, JSON.stringify(dispositivi, null), function(err) {
+      if (err) {
+        console.error(err);
+        process.exit(1);
+      }
+    });
   });
-  fs.writeFile(DISPOSITIVI_FILE, JSON.stringify(dispositivi, null), function(err) {
-    if (err) {
-      console.error(err);
-      process.exit(1);
-    }
-  });
+  return dispositivi;
 }
 
 function setPin(pin, value, callback) {
