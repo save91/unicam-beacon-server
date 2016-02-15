@@ -430,6 +430,10 @@ process.on('SIGINT', function(){
      unexportPins();
 });
 
+gpio.on('change', function(channel, value) {
+	console.log('Channel ' + channel + ' value is now ' + value);
+});
+
 //Main
 var GPIOs = [];
 fs.readFile(GPIO_FILE, function(err, data) {
@@ -448,12 +452,7 @@ fs.readFile(GPIO_FILE, function(err, data) {
       }
     });
   }else if(GPIOs[i].tipo==="input"){
-    gpio.setup(GPIOs[i].GPIO, gpio.DIR_IN, function(err){
-      if (err) {
-        console.log("Error opening pin " + err);
-        return;
-      }
-    });
+    gpio.setup(GPIOs[i].GPIO, gpio.DIR_IN, gpio.EDGE_BOTH);
   }
   }
 });
