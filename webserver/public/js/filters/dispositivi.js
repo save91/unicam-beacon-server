@@ -8,4 +8,14 @@ angular.module('beaconApp.filters.dispositivi', [])
       }
     return out;
   };
+})
+.filter('BeaconFilter', function() {
+  return function(input) {
+    var out = [];
+      for (var i = 0; i < input.length; i++){
+          if(input[i].type === "iBeacon" )
+              out.push(input[i]);
+      }
+    return out;
+  };
 });

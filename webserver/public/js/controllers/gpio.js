@@ -22,6 +22,7 @@ angular.module('beaconApp.controllers.gpio', [])
       $scope.dispositivi = risposta.dispositivi;
       $scope.dispositivi.push({id:0, nome:"Nessuno", io:"input", id_GPIO:0});
       $scope.dispositivi.push({id:0, nome:"Nessuno", io:"output", id_GPIO:0});
+      $scope.dispositivi.push({id:0, nome:"Nessuno", io:null, type:"iBeacon"});
     }
   };
 
@@ -53,5 +54,9 @@ angular.module('beaconApp.controllers.gpio', [])
 
   $scope.cambia = function(id_gpio, id_dispositivo) {
     GPIO.associa(id_gpio, id_dispositivo).then(callback);
-  }
+  };
+
+  $scope.cambiaBeacon = function(id_gpio, id_ibeacon) {
+    GPIO.associaBeacon(id_gpio, id_ibeacon).then(callback);
+  };
 })

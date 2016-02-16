@@ -214,26 +214,33 @@ app.get('/gpio', function (req, res) {
 app.post('/gpio_set', function (req, res) {
   debugger;
   console.log('set gpio request');
-  var i = 0;
-  var trovato = -1;
-  var id = parseInt(req.body.id);
-  var val = parseInt(req.body.value);
-  while(trovato===-1 && i<GPIOs.length) {
-    if(GPIOs[i].id===id) {
-      trovato = i;
+  fs.readFile(GPIO_FILE, function(err, data) {
+    if (err) {
+      console.error(err);
+      process.exit(1);
     }
-    i++;
-  }
-  if(trovato>=0) {
-    setPin(GPIOs[trovato].GPIO, val, function(err) {
-      if (err) {
-        res.status(500).send('Oops, Something went wrong! ' + err);
-      } else {
-        GPIOs[trovato].stato = val;
-        res.status(200).send({status:"1", gpio: GPIOs});
+    var GPIOs = JSON.parse(data);
+    var i = 0;
+    var trovato = -1;
+    var id = parseInt(req.body.id);
+    var val = parseInt(req.body.value);
+    while(trovato===-1 && i<GPIOs.length) {
+      if(GPIOs[i].id===id) {
+        trovato = i;
       }
-    })
-  }
+      i++;
+    }
+    if(trovato>=0) {
+      setPin(GPIOs[trovato].GPIO, val, function(err) {
+        if (err) {
+          res.status(500).send('Oops, Something went wrong! ' + err);
+        } else {
+          GPIOs[trovato].stato = val;
+          res.status(200).send({status:"1", gpio: GPIOs});
+        }
+      })
+    }
+  });
 });
 
 app.post('/gpio_edit', function (req, res) {
@@ -264,29 +271,83 @@ app.post('/gpio_edit', function (req, res) {
   });
 });
 
+app.post('/gpio_edit_ibeacon', function (req, res) {
+  console.log('edit gpio request');
+  var id_GPIO = parseInt(req.body.id_gpio);
+  var id_ibeacon = parseInt(req.body.id_ibeacon);
+  var GPIOs;
+
+  associa_iBeacon(id_GPIO, id_ibeacon);
+
+  fs.readFile(DISPOSITIVI_FILE, function(err, data) {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+    var dispositivi = JSON.parse(data);
+    fs.readFile(GPIO_FILE, function(err, data) {
+      if (err) {
+        console.error(err);
+        process.exit(1);
+      }
+      var GPIOs = JSON.parse(data);
+      res.status(200).send({status:"1"});
+    });
+  });
+});
 
 app.post('/gpio_get', function (req, res) {
   debugger;
   console.log('get gpio request');
+  fs.readFile(GPIO_FILE, function(err, data) {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+    var GPIOs = JSON.parse(data);
+    var i = 0;
+    var trovato = -1;
+    var id = parseInt(req.body.id);
+    while(trovato===-1 && i<GPIOs.length) {
+      if(GPIOs[i].id===id) {
+        trovato = i;
+      }
+      i++;
+    }
+    if(trovato>=0) {
+      readStatus(GPIOs[trovato].GPIO, function(err, value) {
+        if (err) {
+          res.status(500).send('Oops, Something went wrong! ' + err);
+        } else {
+          GPIOs[trovato].stato = value;
+          res.status(200).send({status:"1", gpio: GPIOs});
+        }
+      })
+    }
+  });
+});
+
+app.post('/dispositivo', function (req, res) {
+  console.log('dispositivo request');
   var i = 0;
   var trovato = -1;
   var id = parseInt(req.body.id);
-  while(trovato===-1 && i<GPIOs.length) {
-    if(GPIOs[i].id===id) {
-      trovato = i;
+  fs.readFile(DISPOSITIVI_FILE, function(err, data) {
+    if (err) {
+      console.error(err);
+      process.exit(1);
     }
-    i++;
-  }
-  if(trovato>=0) {
-    readStatus(GPIOs[trovato].GPIO, function(err, value) {
-      if (err) {
-        res.status(500).send('Oops, Something went wrong! ' + err);
-      } else {
-        GPIOs[trovato].stato = value;
-        res.status(200).send({status:"1", gpio: GPIOs});
+    var dispositivi = JSON.parse(data);
+    while(trovato===-1 && i<GPIOs.length) {
+      if(dispositivi[i].id===id) {
+        trovato = i;
       }
-    })
-  }
+      i++;
+    }
+    if(trovato>=0) {
+      res.status(200).send(dispositivi[trovato]);
+    }
+  });
 });
 
 app.get('/dispositivi', function (req, res) {
@@ -298,6 +359,24 @@ app.get('/dispositivi', function (req, res) {
     }
     var dispositivi = JSON.parse(data);
     res.status(200).send(dispositivi);
+  });
+});
+
+app.get('/dispositivi_output', function (req, res) {
+  console.log('dispositivi output request');
+  fs.readFile(DISPOSITIVI_FILE, function(err, data) {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+    var dispositivi = JSON.parse(data);
+    var dispositivi_output = [];
+    for(var i = 0; i < dispositivi.length; i++) {
+      if(dispositivi[i].io === "output" && dispositivi[i].id_GPIO !== 0) {
+        dispositivi_output.push(dispositivi[i]);
+      }
+    }
+    res.status(200).send(dispositivi_output);
   });
 });
 
@@ -444,6 +523,31 @@ function associa_GPIO(id_GPIO, id_dispositivo) {
       if(GPIOs[i].id === id_GPIO) {
         associa_dispositivo(GPIOs[i].id_dispositivo,0);
         GPIOs[i].id_dispositivo = id_dispositivo;
+        trovato = i;
+      }
+      i++;
+    }
+    fs.writeFile(GPIO_FILE, JSON.stringify(GPIOs, null), function(err) {
+      if (err) {
+        console.error(err);
+        process.exit(1);
+      }
+    });
+  });
+}
+
+function associa_iBeacon(id_GPIO, id_ibeacon) {
+  var trovato = -1;
+  var i = 0;
+  fs.readFile(GPIO_FILE, function(err, data) {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+    GPIOs = JSON.parse(data);
+    while(trovato === -1 && i < GPIOs.length) {
+      if(GPIOs[i].id === id_GPIO) {
+        GPIOs[i].id_ibeacon = id_ibeacon;
         trovato = i;
       }
       i++;

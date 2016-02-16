@@ -47,7 +47,19 @@ angular.module('beaconApp.services.gpio',[])
           }).then(function(response) {
             return response.data;
             });
-
+        },
+        associaBeacon: function(id_gpio, id_ibeacon) {
+          return $http({
+            method: 'POST',
+            url: MY_SERVER.get() + '/gpio_edit_ibeacon',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            data: $.param({
+              id_gpio: id_gpio,
+              id_ibeacon: id_ibeacon
+            })
+          }).then(function(response) {
+            return response.data;
+            });
         }
     };
 });
