@@ -48,6 +48,19 @@ angular.module('beaconApp.services.dispositivi',[])
       }).then(function(response) {
         return response.data;
       });
+    },
+    salvaDispositivo: function(id, automatico) {
+      return $http({
+        method: 'POST',
+        url: MY_SERVER.get() + '/salva_dispositivo',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        data: $.param({
+          id: id,
+          automatico, automatico
+        })
+      }).then(function(response) {
+        return response.data;
+      });
     }
     };
   });

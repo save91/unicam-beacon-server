@@ -251,8 +251,9 @@ app.post('/gpio_edit', function (req, res) {
   var dispositivi;
   debugger;
 
-  associa_GPIO(id_GPIO, id_dispositivo);
   associa_dispositivo(id_dispositivo, id_GPIO);
+  associa_GPIO(id_GPIO, id_dispositivo);
+
 
   fs.readFile(DISPOSITIVI_FILE, function(err, data) {
     if (err) {
@@ -271,29 +272,12 @@ app.post('/gpio_edit', function (req, res) {
   });
 });
 
-app.post('/gpio_edit_ibeacon', function (req, res) {
-  console.log('edit gpio request');
-  var id_GPIO = parseInt(req.body.id_gpio);
+app.post('/dispositivo_edit_ibeacon', function (req, res) {
+  console.log('edit dispositivo request');
+  var id_dispositivo = parseInt(req.body.id_dispositivo);
   var id_ibeacon = parseInt(req.body.id_ibeacon);
-  var GPIOs;
+  associa_iBeacon(id_dispositivo, id_ibeacon, res);
 
-  associa_iBeacon(id_GPIO, id_ibeacon);
-
-  fs.readFile(DISPOSITIVI_FILE, function(err, data) {
-    if (err) {
-      console.error(err);
-      process.exit(1);
-    }
-    var dispositivi = JSON.parse(data);
-    fs.readFile(GPIO_FILE, function(err, data) {
-      if (err) {
-        console.error(err);
-        process.exit(1);
-      }
-      var GPIOs = JSON.parse(data);
-      res.status(200).send({status:"1"});
-    });
-  });
 });
 
 app.post('/gpio_get', function (req, res) {
@@ -350,6 +334,44 @@ app.post('/dispositivo', function (req, res) {
   });
 });
 
+app.post('/salva_dispositivo', function (req, res) {
+  var dispositivi = [];
+  var trovato = -1;
+  var i = 0;
+  var id = parseInt(req.body.id);
+  var automatico;
+  if(req.body.automatico === "true" || req.body.automatico === true) {
+    automatico = true;
+  }else {
+    automatico = false;
+  }
+  console.log('delete dispositivo request');
+  fs.readFile(DISPOSITIVI_FILE, function(err, data) {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+    dispositivi = JSON.parse(data);
+    while(trovato===-1 && i<dispositivi.length) {
+      debugger;
+      if(dispositivi[i].id===id) {
+        trovato = i;
+      }
+      i++;
+    }
+    if(trovato>=0) {
+      dispositivi[trovato].automatico = automatico;
+    }
+    fs.writeFile(DISPOSITIVI_FILE, JSON.stringify(dispositivi, null), function(err) {
+      if (err) {
+        console.error(err);
+        process.exit(1);
+      }
+      res.status(200).send({"status":"1","dispositivi":dispositivi});
+    });
+  });
+});
+
 app.get('/dispositivi', function (req, res) {
   console.log('dispositivi request');
   fs.readFile(DISPOSITIVI_FILE, function(err, data) {
@@ -364,16 +386,44 @@ app.get('/dispositivi', function (req, res) {
 
 app.get('/dispositivi_output', function (req, res) {
   console.log('dispositivi output request');
+
   fs.readFile(DISPOSITIVI_FILE, function(err, data) {
     if (err) {
       console.error(err);
       process.exit(1);
     }
+    debugger;
+    var dispositivo = {};
     var dispositivi = JSON.parse(data);
+    var ibeacons = JSON.parse(data);
     var dispositivi_output = [];
+    var j = 0;
+    var trovato;
     for(var i = 0; i < dispositivi.length; i++) {
       if(dispositivi[i].io === "output" && dispositivi[i].id_GPIO !== 0) {
-        dispositivi_output.push(dispositivi[i]);
+        dispositivo = {};
+        dispositivo.nome = dispositivi[i].nome;
+        dispositivo.descrizione = dispositivi[i].descrizione;
+        dispositivo.stato = dispositivi[i].stato;
+        dispositivo.distanza = "far";
+        dispositivo.automatico = dispositivi[i].automatico;
+        dispositivo.disabilitato = dispositivi[i].id_ibeacon;
+        dispositivo.uuid = 0;
+        dispositivo.major = 0;
+        dispositivo.minor = 0;
+        j = 0;
+        trovato = -1;
+        while(trovato === -1 && j < ibeacons.length) {
+          if(ibeacons[j].id === dispositivi[i].id_ibeacon) {
+            trovato = 1;
+            dispositivo.uuid = ibeacons[j].caratteristiche.uuid;
+            dispositivo.major = ibeacons[j].caratteristiche.major;
+            dispositivo.minor = ibeacons[j].caratteristiche.minor;
+          }
+          j++;
+        }
+        dispositivo.id_GPIO = dispositivi[i].id_GPIO;
+        dispositivi_output.push(dispositivo);
       }
     }
     res.status(200).send(dispositivi_output);
@@ -399,6 +449,7 @@ app.post('/aggiungi_dispositivo', function (req, res) {
       descrizione: req.body.descrizione,
       permessi: " ",
       id_GPIO: 0,
+      id_ibeacon: 0,
       caratteristiche: req.body.caratteristiche
     }
     dispositivi.push(newDispositivo);
@@ -521,7 +572,6 @@ function associa_GPIO(id_GPIO, id_dispositivo) {
     GPIOs = JSON.parse(data);
     while(trovato === -1 && i < GPIOs.length) {
       if(GPIOs[i].id === id_GPIO) {
-        associa_dispositivo(GPIOs[i].id_dispositivo,0);
         GPIOs[i].id_dispositivo = id_dispositivo;
         trovato = i;
       }
@@ -536,27 +586,28 @@ function associa_GPIO(id_GPIO, id_dispositivo) {
   });
 }
 
-function associa_iBeacon(id_GPIO, id_ibeacon) {
+function associa_iBeacon(id_dispositivo, id_ibeacon, res) {
   var trovato = -1;
   var i = 0;
-  fs.readFile(GPIO_FILE, function(err, data) {
+  fs.readFile(DISPOSITIVI_FILE, function(err, data) {
     if (err) {
       console.error(err);
       process.exit(1);
     }
-    GPIOs = JSON.parse(data);
-    while(trovato === -1 && i < GPIOs.length) {
-      if(GPIOs[i].id === id_GPIO) {
-        GPIOs[i].id_ibeacon = id_ibeacon;
+    dispositivi = JSON.parse(data);
+    while(trovato === -1 && i < dispositivi.length) {
+      if(dispositivi[i].id === id_dispositivo) {
+        dispositivi[i].id_ibeacon = id_ibeacon;
         trovato = i;
       }
       i++;
     }
-    fs.writeFile(GPIO_FILE, JSON.stringify(GPIOs, null), function(err) {
+    fs.writeFile(DISPOSITIVI_FILE, JSON.stringify(dispositivi, null), function(err) {
       if (err) {
         console.error(err);
         process.exit(1);
       }
+        res.status(200).send({status:"1", dispositivi: dispositivi});
     });
   });
 }
@@ -574,6 +625,7 @@ function associa_dispositivo(id_dispositivo, id_GPIO) {
     debugger;
     while(trovato === -1 && i < dispositivi.length) {
       if(dispositivi[i].id === id_dispositivo) {
+        associa_GPIO(dispositivi[i].id_GPIO,0);
         dispositivi[i].id_GPIO = id_GPIO;
         trovato = i;
       }

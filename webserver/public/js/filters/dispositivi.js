@@ -9,6 +9,16 @@ angular.module('beaconApp.filters.dispositivi', [])
     return out;
   };
 })
+.filter('DispositiviTipoFilter', function() {
+  return function(input, tipo) {
+    var out = [];
+      for (var i = 0; i < input.length; i++){
+          if(input[i].io === tipo)
+              out.push(input[i]);
+      }
+    return out;
+  };
+})
 .filter('BeaconFilter', function() {
   return function(input) {
     var out = [];

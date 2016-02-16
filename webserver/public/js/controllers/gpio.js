@@ -11,6 +11,7 @@ angular.module('beaconApp.controllers.gpio', [])
       alert("Impossibile scaricare l'elenco dei GPIO");
     } else {
       $scope.GPIOs = risposta.gpio;
+      $scope.GPIOs.push({id:0, GPIO:"Nessuno"});
     }
   };
 
@@ -32,8 +33,9 @@ angular.module('beaconApp.controllers.gpio', [])
       $scope.GPIOs = [];
       alert("Impossibile scaricare l'elenco dei dispositivi");
     } else {
-      GPIO.getGPIO().then(callbackGPIO);
       Dispositivi.getAll().then(callbackDispositivi);
+      GPIO.getGPIO().then(callbackGPIO);
+
     }
   };
 
@@ -56,7 +58,4 @@ angular.module('beaconApp.controllers.gpio', [])
     GPIO.associa(id_gpio, id_dispositivo).then(callback);
   };
 
-  $scope.cambiaBeacon = function(id_gpio, id_ibeacon) {
-    GPIO.associaBeacon(id_gpio, id_ibeacon).then(callback);
-  };
 })

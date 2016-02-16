@@ -4,14 +4,6 @@
     <p>GPIO: {{GPIO.GPIO}}</p>
     <p>Tipo: {{GPIO.tipo}}</p>
     <p>Stato: {{GPIO.stato}}</p>
-    <p>Dispositivo associato:
-      <select data-ng-options="dispositivo.id as dispositivo.nome for dispositivo in dispositivi|DispositiviFilter:GPIO.tipo:GPIO.id_dispositivo" data-ng-model="GPIO.id_dispositivo" data-ng-change="cambia(GPIO.id, GPIO.id_dispositivo)">
-      </select>
-    </p>
-    <p data-ng-if="GPIO.tipo === 'output'">iBeacon associato:
-      <select data-ng-options="ibeacon.id as ibeacon.nome for ibeacon in dispositivi|BeaconFilter" data-ng-change="cambiaBeacon(GPIO.id, GPIO.id_ibeacon)" data-ng-model="GPIO.id_ibeacon">
-      </select>
-    </p>
     <p>Azioni:
       <button ng-if="GPIO.tipo==='output'" data-ng-click="on(GPIO.id)">On</button>
       <button ng-if="GPIO.tipo==='output'" data-ng-click="off(GPIO.id)">Off</button>
