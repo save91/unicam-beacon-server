@@ -5,7 +5,7 @@ angular.module('beaconApp.services.dispositivi',[])
   	getAll: function() {
       return $http({
             method: 'GET',
-            url: MY_SERVER.get() + '/dispositivi'
+            url: MY_SERVER.get() + '/dispositivi/dispositivi'
           }).then(function(response) {
             return {
 							status: 1,
@@ -15,7 +15,7 @@ angular.module('beaconApp.services.dispositivi',[])
     getIO: function() {
       return $http({
         method: 'GET',
-        url: MY_SERVER.get() + '/io'
+        url: MY_SERVER.get() + '/gpio/io'
       }).then(function(response) {
         return response.data;
         });
@@ -23,7 +23,7 @@ angular.module('beaconApp.services.dispositivi',[])
     aggiungi: function(dispositivo) {
       return $http({
         method: 'POST',
-        url: MY_SERVER.get() + '/aggiungi_dispositivo',
+        url: MY_SERVER.get() + '/dispositivi/aggiungi_dispositivo',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         data: $.param({
           type: dispositivo.type,
@@ -40,7 +40,7 @@ angular.module('beaconApp.services.dispositivi',[])
     eliminaDispositivo: function(id) {
       return $http({
         method: 'POST',
-        url: MY_SERVER.get() + '/elimina_dispositivo',
+        url: MY_SERVER.get() + '/dispositivi/elimina_dispositivo',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         data: $.param({
           id: id
@@ -52,7 +52,7 @@ angular.module('beaconApp.services.dispositivi',[])
     salvaDispositivo: function(id, automatico) {
       return $http({
         method: 'POST',
-        url: MY_SERVER.get() + '/salva_dispositivo',
+        url: MY_SERVER.get() + '/dispositivi/salva_dispositivo',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         data: $.param({
           id: id,
