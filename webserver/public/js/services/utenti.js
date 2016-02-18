@@ -5,7 +5,7 @@ angular.module('beaconApp.services.utenti',[])
   	getAll: function() {
       return $http({
             method: 'GET',
-            url: MY_SERVER.get() + '/utenti/utenti'
+            url: MY_SERVER.get() + '/utenti'
           }).then(function(response) {
             return {
 							status: 1,
@@ -15,7 +15,7 @@ angular.module('beaconApp.services.utenti',[])
         getUtente: function(username) {
           return $http({
                 method: 'POST',
-                url: MY_SERVER.get() + '/utenti/utente/',
+                url: MY_SERVER.get() + '/utente/',
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
     						data: $.param({
     							username: username
@@ -29,7 +29,7 @@ angular.module('beaconApp.services.utenti',[])
 				blocca: function(username) {
 					return $http({
 						method: 'POST',
-						url: MY_SERVER.get() + '/utenti/blocca_utente',
+						url: MY_SERVER.get() + '/blocca_utente',
 						headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 						data: $.param({
 							username: username
@@ -45,7 +45,7 @@ angular.module('beaconApp.services.utenti',[])
 				sblocca: function(username) {
 					return $http({
 						method: 'POST',
-						url: MY_SERVER.get() + '/utenti/sblocca_utente',
+						url: MY_SERVER.get() + '/sblocca_utente',
 						headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 						data: $.param({
 							username: username
@@ -59,7 +59,7 @@ angular.module('beaconApp.services.utenti',[])
         updateUtente: function(user) {
           return $http({
 						method: 'POST',
-						url: MY_SERVER.get() + '/utenti/aggiorna_utente',
+						url: MY_SERVER.get() + '/aggiorna_utente',
 						headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 						data: $.param(user)
 					}).then(function(response) {

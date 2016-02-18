@@ -5,7 +5,7 @@ angular.module('beaconApp.services.beacons',[])
   	getAll: function() {
       return $http({
             method: 'GET',
-            url: MY_SERVER.get() + '/ibeacons/beacons'
+            url: MY_SERVER.get() + '/beacons'
           }).then(function(response) {
             return {
 							status: 1,
@@ -15,7 +15,7 @@ angular.module('beaconApp.services.beacons',[])
       eliminaBeacon: function(id) {
         return $http({
           method: 'POST',
-          url: MY_SERVER.get() + '/ibeacons/elimina_beacon',
+          url: MY_SERVER.get() + '/elimina_beacon',
           headers: {'Content-Type': 'application/x-www-form-urlencoded'},
           data: $.param({
             id: id
@@ -27,7 +27,7 @@ angular.module('beaconApp.services.beacons',[])
       getBeacon: function(id) {
         return $http({
           method: 'POST',
-          url: MY_SERVER.get() + '/ibeacons/beacon',
+          url: MY_SERVER.get() + '/beacon',
           headers: {'Content-Type': 'application/x-www-form-urlencoded'},
           data: $.param({
             id: id
