@@ -28,6 +28,6 @@ constant("MY_SERVER", {
 		"url": "http://192.168.24.100",
 		"port": "8000",
     "get": function() {
-      return (this.url + ":" + this.port);
+      return ("");
     }
 });

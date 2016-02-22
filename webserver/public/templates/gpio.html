@@ -1,6 +1,6 @@
 <div>
   <h2>GPIO</h2>
-  <div ng-repeat="GPIO in GPIOs">
+  <div ng-repeat="GPIO in GPIOs" ng-if="GPIO.GPIO !== 'Nessuno'">
     <p>GPIO: {{GPIO.GPIO}}</p>
     <p>Tipo: {{GPIO.tipo}}</p>
     <p>Stato: {{GPIO.stato}}</p>
