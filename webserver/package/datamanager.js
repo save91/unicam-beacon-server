@@ -9,7 +9,7 @@ var GPIO_FILE = ("json/gpio.json");
 var datamanager = {};
 //Questa funzione legge gli users, li aggiunge alla request e li inoltra alla callback successiva
 datamanager.get_users = function (req, res, next) {
-  console.log('Lettura dispositivi');
+  console.log('Lettura utenti');
   fs.readFile(USERS_FILE, function(err, data) {
     if (err) {
       console.error(err);

@@ -68,48 +68,56 @@ dispositivi.dispositivi_output = function (req, res) {
   var dispositivi_output = [];
   var j = 0;
   var trovato;
-  for(var i = 0; i < req.dispositivi.length; i++) {
-    if(req.dispositivi[i].io === "output" && req.dispositivi[i].id_GPIO !== 0) {
-      dispositivo = {};
-      dispositivo.nome = req.dispositivi[i].nome;
-      dispositivo.descrizione = req.dispositivi[i].descrizione;
-      dispositivo.stato = req.dispositivi[i].stato;
-      dispositivo.distanza = "Sconosciuta";
-      dispositivo.proximity = "ProximityFar";
-      dispositivo.automatico = req.dispositivi[i].automatico;
-      dispositivo.disabilitato = 0;
-      dispositivo.uuid = 0;
-      dispositivo.major = 0;
-      dispositivo.minor = 0;
-      j = 0;
-      trovato = -1;
-      while(trovato === -1 && j < req.dispositivi.length) {
-        if(req.dispositivi[j].id === req.dispositivi[i].id_ibeacon) {
-          trovato = 1;
-          dispositivo.uuid = req.dispositivi[j].caratteristiche.uuid;
-          dispositivo.major = req.dispositivi[j].caratteristiche.major;
-          dispositivo.minor = req.dispositivi[j].caratteristiche.minor;
-        }
-        j++;
-      }
-      j = 0;
-      trovato = -1;
-      while(trovato === -1 && j < req.dispositivi.length) {
-        if(req.gpio[j].id === req.dispositivi[i].id_GPIO) {
-          trovato = 1;
-          if(req.gpio[j].stato === true || req.gpio[j].stato === 1) {
-            dispositivo.stato = true;
-          }else {
-            dispositivo.stato = false;
+  //if(req.user) {
+  //  if(req.user.bloccato !== true) {
+      for(var i = 0; i < req.dispositivi.length; i++) {
+        if(req.dispositivi[i].io === "output" && req.dispositivi[i].id_GPIO !== 0) {
+          dispositivo = {};
+          dispositivo.nome = req.dispositivi[i].nome;
+          dispositivo.descrizione = req.dispositivi[i].descrizione;
+          dispositivo.stato = req.dispositivi[i].stato;
+          dispositivo.distanza = "Sconosciuta";
+          dispositivo.proximity = "ProximityFar";
+          dispositivo.automatico = req.dispositivi[i].automatico;
+          dispositivo.disabilitato = 0;
+          dispositivo.uuid = 0;
+          dispositivo.major = 0;
+          dispositivo.minor = 0;
+          j = 0;
+          trovato = -1;
+          while(trovato === -1 && j < req.dispositivi.length) {
+            if(req.dispositivi[j].id === req.dispositivi[i].id_ibeacon) {
+              trovato = 1;
+              dispositivo.uuid = req.dispositivi[j].caratteristiche.uuid;
+              dispositivo.major = req.dispositivi[j].caratteristiche.major;
+              dispositivo.minor = req.dispositivi[j].caratteristiche.minor;
+            }
+            j++;
           }
+          j = 0;
+          trovato = -1;
+          while(trovato === -1 && j < req.dispositivi.length) {
+            if(req.gpio[j].id === req.dispositivi[i].id_GPIO) {
+              trovato = 1;
+              if(req.gpio[j].stato === true || req.gpio[j].stato === 1) {
+                dispositivo.stato = true;
+              }else {
+                dispositivo.stato = false;
+              }
+            }
+            j++;
+          }
+          dispositivo.id_GPIO = req.dispositivi[i].id_GPIO;
+          dispositivi_output.push(dispositivo);
         }
-        j++;
       }
-      dispositivo.id_GPIO = req.dispositivi[i].id_GPIO;
-      dispositivi_output.push(dispositivo);
-    }
+    res.status(200).send(dispositivi_output);
+  /*}else{
+    res.status(403).send([]);
   }
-  res.status(200).send(dispositivi_output);
+}else {
+  res.status(403).send([]);
+}*/
 };
 
 dispositivi.aggiungi_dispositivo = function (req, res, next) {

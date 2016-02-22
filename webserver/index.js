@@ -5,10 +5,23 @@ var bodyParser = require('body-parser');
 var dispositivi = require('./routes/dispositivi');
 var users = require('./routes/utenti');
 var ibeacons = require('./routes/ibeacons');
-var gpio = require('./routes/gpio');
+
+//export NODE_ENV=production
+//export NODE_ENV=development
+//settare NODE_ENV su production e development per lanciare il server
+//rispettivamente su Raspberry o PC
+var environment = process.env.NODE_ENV
+console.log("Environment: ", environment);
+if(environment === "development"){
+  var gpio = require('./routes/gpio-fake');
+  console.log("PC....Avvio in corso");
+} else {
+  var gpio = require('./routes/gpio');
+  console.log("Raspberry....Avvio in corso");
+}
+
 var datamanager = require('./package/datamanager');
 var app = express();
-
 var SERVERPORT = 8000;
 
 app.use(express.static(__dirname + '/public'));
@@ -16,19 +29,24 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
 
-// middleware that is specific to this router
+// middleware log
 app.use(function timeLog(req, res, next) {
   console.log('Time: ', Date.now());
   next();
 });
 
+// middleware authentication
+app.use([datamanager.get_users, users.authentication]);
+
 //Routing API utente
-app.post('/login', [datamanager.get_users, users.login]);
-app.post('/utente', [datamanager.get_users, users.utente]);
-app.get('/utenti', [datamanager.get_users, users.utenti]);
-app.post('/blocca_utente', [datamanager.get_users, users.blocca_utente, datamanager.set_users]);
-app.post('/sblocca_utente', [datamanager.get_users, users.sblocca_utente, datamanager.set_users]);
-app.post('/aggiorna_utente', [datamanager.get_users, users.aggiorna_utente, datamanager.set_users]);
+app.get('/utenti',  users.utenti);
+app.post('/login', users.login);
+app.post('/utente',  users.utente);
+app.post('/check_username', users.check_username);
+app.post('/blocca_utente', [users.blocca_utente, datamanager.set_users]);
+app.post('/sblocca_utente', [users.sblocca_utente, datamanager.set_users]);
+app.post('/aggiorna_utente', [users.aggiorna_utente, datamanager.set_users]);
+app.post('/aggiungi_utente', [users.aggiungi_utente, datamanager.set_users]);
 
 //Routing API dispositivo
 app.get('/dispositivi', [datamanager.get_dispositivi, dispositivi.dispositivi]);

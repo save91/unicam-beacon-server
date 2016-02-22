@@ -1,6 +1,31 @@
 //Oggetto user
 users = {};
 
+//Ritorna su req.user l'utente autenticato
+users.authentication = function (req, res, next) {
+  console.log("Authentication...");
+  if(req.headers.authorization) {
+    var pos = -1;
+    var i = 0;
+    var base64 = req.headers.authorization.split(' ');
+    var parametri = new Buffer(base64[1], 'base64').toString('ascii').split(':');
+    debugger;
+    while(pos === -1 && i<req.users.length) {
+      if(parametri[0] === req.users[i].username && parametri[1] === req.users[i].psw) {
+        pos = i;
+        req.user = req.users[i];
+      }
+      i++;
+    }
+    if(req.user) {
+      console.log("User: ", req.user.username );
+    }else{
+      console.log("User: undefined");
+    }
+  }
+  next();
+}
+
 users.login = function (req, res) {
   console.log('login request');
   var pos = -1;
@@ -13,6 +38,7 @@ users.login = function (req, res) {
   if(pos>=0) {
     //Invio tutto tranne la pasword
     res.status(200).send({
+      username: req.users[pos].username,
       nome: req.users[pos].nome,
       cognome: req.users[pos].cognome,
       permessi: req.users[pos].permessi,
@@ -26,7 +52,20 @@ users.login = function (req, res) {
 users.utenti = function (req, res) {
     console.log('users request');
     res.status(200).send(req.users);
+};
 
+users.check_username = function (req, res) {
+    console.log('check_username request');
+    debugger;
+    var i = 0;
+    var trovato = false;
+    while(trovato === false && i < req.users.length) {
+      if(req.users[i].username === req.body.username) {
+        trovato = true;
+      }
+      i++;
+    }
+    res.status(200).send({trovato: trovato});
 };
 
 users.utente = function (req, res) {
@@ -49,7 +88,7 @@ users.utente = function (req, res) {
 users.aggiorna_utente = function (req, res, next) {
   var trovato = -1;
   var i = 0;
-  console.log('user request');
+  console.log('update user request');
   while(trovato===-1 && i<req.users.length) {
     if(req.users[i].username===req.body.username) {
       trovato = i;
@@ -66,6 +105,19 @@ users.aggiorna_utente = function (req, res, next) {
   } else {
     res.status(500).send('Oops, Something went wrong!');
   }
+};
+
+users.aggiungi_utente = function (req, res, next) {
+  var user = {}
+  user.username = req.body.username;
+  user.nome = req.body.nome;
+  user.cognome = req.body.cognome;
+  user.password = req.body.password;
+  user.permessi = "user";
+  user.bloccato = true;
+  req.users.push(user);
+  res.status(200).send({status: "ok"});
+  next();
 };
 
 users.blocca_utente = function (req, res, next) {

@@ -128,7 +128,11 @@ function readStatus(PIN, callback) {
 }
 
 gpio.init = function () {
-    fs.readFile(GPIO_FILE, function(err, data) {
+  GPIO.on('change', function(channel, value) {
+    debugger;
+    console.log('Channel ' + channel + ' value is now ' + value);
+  });
+  fs.readFile(GPIO_FILE, function(err, data) {
     var GPIOs = [];
     if (err) {
       console.error(err);
@@ -137,23 +141,24 @@ gpio.init = function () {
     GPIOs = JSON.parse(data);
     for(var i=0;i<GPIOs.length;i++) {
     if(GPIOs[i].tipo==="output") {
-     GPIO.setup(GPIOs[i].GPIO, gpio.DIR_OUT, function(err){
+      console.log("GPIO: "+ GPIOs[i].GPIO +"output");
+     GPIO.setup(GPIOs[i].GPIO, GPIO.DIR_OUT, function(err){
         if (err) {
           console.log("Error opening pin " + err);
           return;
         }
       });
     }else if(GPIOs[i].tipo==="input"){
-      GPIO.setup(GPIOs[i].GPIO, gpio.DIR_IN, function(err){
-        if (err) {
-          console.log("Error opening pin " + err);
-          return;
-        }
-      });
+      console.log("GPIO: "+ GPIOs[i].GPIO +"input");
+      GPIO.setup(GPIOs[i].GPIO, GPIO.DIR_IN, GPIO.EDGE_BOTH);
     }
     }
+
   });
+
 };
+
+
 
 gpio.unexportPins = function() {
   GPIO.destroy(function() {
