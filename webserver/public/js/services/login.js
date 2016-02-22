@@ -9,7 +9,7 @@ angular.module('beaconApp.services.login',[])
 			var risposta = {};
       return $http({
             method: 'POST',
-            url: MY_SERVER.get() + '/utenti/login',
+            url: MY_SERVER.get() + '/login',
 						headers: {'Content-Type': 'application/x-www-form-urlencoded'},
  						data: $.param({
 							username: username,
