@@ -12,7 +12,7 @@ var ibeacons = require('./routes/ibeacons');
 //rispettivamente su Raspberry o PC
 var environment = process.env.NODE_ENV
 console.log("Environment: ", environment);
-if(environment === "development"){
+if(environment === "development") {
   var gpio = require('./routes/gpio-fake');
   console.log("PC....Avvio in corso");
 } else {
@@ -58,7 +58,9 @@ app.post('/dispositivo_edit_ibeacon', [datamanager.get_dispositivi, dispositivi.
 
 //Routing API iBeacon
 app.get('/beacons', [datamanager.get_beacons, ibeacons.beacons]);
+app.get('/beacons_registrabili', [datamanager.get_beacons, ibeacons.beacons_registrabili]);
 app.post('/elimina_beacon', [datamanager.get_beacons, ibeacons.elimina_beacon, datamanager.set_beacons]);
+app.post('/aggiungi_beacon', [datamanager.get_beacons, ibeacons.aggiungi_beacon, datamanager.set_beacons]);
 app.post('/beacon', [datamanager.get_beacons, ibeacons.beacon, datamanager.set_beacons]);
 
 //Routing API gpio

@@ -5,7 +5,7 @@ angular.module('beaconApp.services.beacons',[])
   	getAll: function() {
       return $http({
             method: 'GET',
-            url: MY_SERVER.get() + '/beacons'
+            url: MY_SERVER.get() + '/beacons_registrabili'
           }).then(function(response) {
             return {
 							status: 1,
