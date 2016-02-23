@@ -51,36 +51,24 @@
   <input type="button" class="btn btn-success" value="Aggiorna dispositivi" ng-click="aggiornaDispositivi()">
 </div>
 <div class="jumbotron">
-  <h2>Aggiungi un nuovo dispositivo</h2>
-  <form data-ng-submit="aggiungi()">
-    <table class="table">
-      <tr>
-        <td>Nome: </td><td><input data-ng-model="dispositivo.nome" type="text" required/></td>
-      </tr>
-      <tr>
-        <td>Descrizione: </td><td><input data-ng-model="dispositivo.descrizione" type="text" required/></td>
-      </tr>
-      <tr>
-        <td>IO: </td>
-        <td>
-          <select data-ng-model="dispositivo.io" data-ng-change="cambia_tipo()" class="form-control">
+  <center>
+  <div class="div-centrato1">
+
+        <form class="form-signin" data-ng-submit="aggiungi()">
+        <h2 class="form-signin-heading">Aggiungi un nuovo dispositivo</h2>
+        <label for="name" class="sr-only">Nome</label>
+        <input type="text" id="name" class="form-control" placeholder="Nome" data-ng-model="dispositivo.nome" required="" autofocus="">
+        <label for="descrizione" class="sr-only">Descrizione</label>
+        <textarea style="resize:none; overflow:auto; width: 100%; height: 50px;" id="descrizione" data-ng-model="dispositivo.descrizione" class="form-control" placeholder="Descrizione" required=""></textarea>
+        <select data-ng-model="dispositivo.io" data-ng-change="cambia_tipo()" class="form-control">
             <option value="input">Input</option>
             <option value="output">Output</option>
           </select>
-        </td>
-      </tr>
-      <tr>
-        <td>Tipo: </td>
-        <td>
-          <select data-ng-model="dispositivo.type" required>
+          <select data-ng-model="dispositivo.type" required class="form-control">
             <option data-ng-repeat="io in ios|IOFilter:dispositivo.io" value="{{io.nome}}">{{io.nome}}</option>
           </select>
-        </td>
-      </tr>
-      <tr>
-        <td> <td><input type="submit" class="btn btn-success" value="Aggiungi"/></td>
-      </tr>
-    </table>
-  </form>
-  <hr/>
-</div>
+          <input type="submit" class="btn btn-lg btn-success btn-block" value="Aggiungi"/>
+      </form>
+    </div>
+  </center>
+  </div>
