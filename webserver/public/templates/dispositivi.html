@@ -13,11 +13,12 @@
   <div class="table-responsive">
   <table class="table">
     <thead>
-    <tr>
+    <tr class="active">
       <th>ID</th>
       <th>Uuid</th>
       <th>Major</th>
       <th>Minor</th>
+      <th>Azioni</th>
     </tr>
   </thead>
     <tr data-ng-repeat="beacon in beacons">
@@ -43,12 +44,13 @@
   <div class="table-responsive">
   <table class="table">
     <thead>
-      <tr>
+      <tr class="active">
         <th>Nome</th>
         <th>ID</th>
         <th>IO</th>
         <th>Tipo</th>
         <th>Descrizione</th>
+        <th>Azioni</th>
       </tr>
     </thead>
   <tr data-ng-repeat="dispositivo in dispositivi">
