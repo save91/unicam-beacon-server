@@ -1,13 +1,12 @@
 var fs = require('fs');
 var GPIO = require('rpi-gpio');
 var GPIO_FILE = ("json/gpio.json");
-//Oggetto gpio
 var gpio = {};
 
+//La messa in sicurezza verrà fatta successivamente, dato che la gestione de GPIO va modificata
 gpio.io = function (req, res) {
   console.log('io request');
   res.status(200).send({"status":"1","io":req.io});
-
 };
 
 gpio.gpio = function (req, res) {
@@ -40,7 +39,6 @@ gpio.gpio_set = function (req, res, next) {
   }
 };
 
-
 gpio.gpio_edit = function (req, res, next) {
   console.log('edit gpio request');
   var id_GPIO = parseInt(req.body.id_gpio);
@@ -64,7 +62,6 @@ gpio.gpio_edit = function (req, res, next) {
     }
     i++;
   }
-  //
   trovato = -1;
   i = 0;
   while(trovato === -1 && i < req.gpio.length) {
@@ -77,7 +74,6 @@ gpio.gpio_edit = function (req, res, next) {
   res.status(200).send({status:"1"});
   next();
 };
-
 
 gpio.gpio_get = function (req, res, next) {
   console.log('get gpio request');
@@ -153,12 +149,8 @@ gpio.init = function () {
       GPIO.setup(GPIOs[i].GPIO, GPIO.DIR_IN, GPIO.EDGE_BOTH);
     }
     }
-
   });
-
 };
-
-
 
 gpio.unexportPins = function() {
   GPIO.destroy(function() {

@@ -1,65 +1,83 @@
-//Oggetto dispositivi
 var dispositivi = {};
 
+//La modifica è permessa soltanto all'admin
 dispositivi.dispositivo_edit_ibeacon = function (req, res, next) {
   console.log('edit dispositivo request');
-  var id_dispositivo = parseInt(req.body.id_dispositivo);
-  var id_ibeacon = parseInt(req.body.id_ibeacon);
-  var trovato = -1;
-  var i = 0;
-  while(trovato === -1 && i < req.dispositivi.length) {
-    if(req.dispositivi[i].id === id_dispositivo) {
+  if(req.user.permessi === "admin" && req.user.bloccato === false) {
+    var id_dispositivo = parseInt(req.body.id_dispositivo);
+    var id_ibeacon = parseInt(req.body.id_ibeacon);
+    var trovato = -1;
+    var i = 0;
+    while(trovato === -1 && i < req.dispositivi.length) {
+      if(req.dispositivi[i].id === id_dispositivo) {
         req.dispositivi[i].id_ibeacon = id_ibeacon;
         trovato = i;
       }
-    i++;
+      i++;
+    }
+    res.status(200).send({status:"1", dispositivi: req.dispositivi});
+    next();
+  } else {
+    res.status(403).send([]);
   }
-  res.status(200).send({status:"1", dispositivi: req.dispositivi});
-  next();
 };
 
+//La lettura del dispositivo è permessa solo agli utenti attivi
 dispositivi.dispositivo = function (req, res) {
   console.log('dispositivo request');
-  var i = 0;
-  var trovato = -1;
-  var id = parseInt(req.body.id);
-  while(trovato===-1 && i<req.dispositivi.length) {
-    if(req.dispositivi[i].id===id) {
-      trovato = i;
+  if(req.user.bloccato === false) {
+    var i = 0;
+    var trovato = -1;
+    var id = parseInt(req.body.id);
+    while(trovato===-1 && i<req.dispositivi.length) {
+      if(req.dispositivi[i].id===id) {
+        trovato = i;
+      }
+      i++;
     }
-    i++;
-  }
-  if(trovato>=0) {
-    res.status(200).send(req.dispositivi[trovato]);
+    if(trovato>=0) {
+      res.status(200).send(req.dispositivi[trovato]);
+    }
+  } else {
+    res.status(403).send([]);
   }
 };
 
+//La modifica è permessa solo all'admin
 dispositivi.salva_dispositivo = function (req, res, next) {
-  var trovato = -1;
-  var i = 0;
-  var id = parseInt(req.body.id);
-  var automatico;
-  if(req.body.automatico === "true" || req.body.automatico === true) {
-    automatico = true;
-  }else {
-    automatico = false;
-  }
-  while(trovato===-1 && i<req.dispositivi.length) {
-    if(req.dispositivi[i].id===id) {
-      trovato = i;
+  if(req.user.permessi === "admin" && req.user.bloccato === false) {
+    var trovato = -1;
+    var i = 0;
+    var id = parseInt(req.body.id);
+    var automatico;
+    if(req.body.automatico === "true" || req.body.automatico === true) {
+      automatico = true;
+    }else {
+      automatico = false;
     }
-  i++;
+    while(trovato===-1 && i<req.dispositivi.length) {
+      if(req.dispositivi[i].id===id) {
+        trovato = i;
+      }
+      i++;
+    }
+    if(trovato>=0) {
+      req.dispositivi[trovato].automatico = automatico;
+    }
+    res.status(200).send({"status":"1","dispositivi":req.dispositivi});
+    next();
+  } else {
+    res.status(403).send([]);
   }
-  if(trovato>=0) {
-    req.dispositivi[trovato].automatico = automatico;
-  }
-  res.status(200).send({"status":"1","dispositivi":req.dispositivi});
-  next();
 };
 
 dispositivi.dispositivi = function (req, res) {
   console.log('dispositivi request');
-  res.status(200).send(req.dispositivi);
+  if(req.user.bloccato === false) {
+    res.status(200).send(req.dispositivi);
+  } else {
+    res.status(403).send([]);
+  }
 };
 
 dispositivi.dispositivi_output = function (req, res) {
@@ -68,8 +86,7 @@ dispositivi.dispositivi_output = function (req, res) {
   var dispositivi_output = [];
   var j = 0;
   var trovato;
-  //if(req.user) {
-  //  if(req.user.bloccato !== true) {
+  if(req.user.bloccato === false) {
       for(var i = 0; i < req.dispositivi.length; i++) {
         if(req.dispositivi[i].io === "output" && req.dispositivi[i].id_GPIO !== 0) {
           dispositivo = {};
@@ -112,30 +129,31 @@ dispositivi.dispositivi_output = function (req, res) {
         }
       }
     res.status(200).send(dispositivi_output);
-  /*}else{
+  }else {
     res.status(403).send([]);
   }
-}else {
-  res.status(403).send([]);
-}*/
 };
 
 dispositivi.aggiungi_dispositivo = function (req, res, next) {
   console.log('add dispositivo request');
-  var newDispositivo = {
-    id: Date.now(),
-    type: req.body.type,
-    io: req.body.io,
-    nome: req.body.nome,
-    descrizione: req.body.descrizione,
-    permessi: " ",
-    id_GPIO: 0,
-    id_ibeacon: 0,
-    caratteristiche: req.body.caratteristiche
-  }
-  req.dispositivi.push(newDispositivo);
+  if(req.user.bloccato ===false) {
+    var newDispositivo = {
+      id: Date.now(),
+      type: req.body.type,
+      io: req.body.io,
+      nome: req.body.nome,
+      descrizione: req.body.descrizione,
+      permessi: " ",
+      id_GPIO: 0,
+      id_ibeacon: 0,
+      caratteristiche: req.body.caratteristiche
+    }
+    req.dispositivi.push(newDispositivo);
     res.status(200).send({status: "1", dispositivi: req.dispositivi});
     next();
+  } else {
+    res.status(403).send([]);
+  }
 };
 
 dispositivi.elimina_dispositivo = function (req, res, next) {
@@ -143,17 +161,21 @@ dispositivi.elimina_dispositivo = function (req, res, next) {
   var i = 0;
   var id = parseInt(req.body.id);
   console.log('delete dispositivo request');
-  while(trovato===-1 && i<req.dispositivi.length) {
-    if(req.dispositivi[i].id===id) {
-      trovato = i;
+  if(req.user.bloccato === false && req.user.permessi === "admin") {
+    while(trovato===-1 && i<req.dispositivi.length) {
+      if(req.dispositivi[i].id===id) {
+        trovato = i;
+      }
+      i++;
     }
-    i++;
-  }
-  if(trovato>=0) {
-    req.dispositivi.splice(trovato,1);
-  }
+    if(trovato>=0) {
+      req.dispositivi.splice(trovato,1);
+    }
     res.status(200).send({"status":"1","dispositivi":req.dispositivi});
     next();
+  } else {
+    res.status(403).send([]);
+  }
 };
 
 module.exports = dispositivi;

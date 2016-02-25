@@ -1,7 +1,7 @@
 
 angular.module('beaconApp.controllers.login', [])
 
-.controller('LoginCtrl', function($scope, $location, Login) {
+.controller('LoginCtrl', function($scope, $location, $http, Login) {
     $scope.username = "";
     $scope.psw = "";
     $scope.bloccato = false;
@@ -13,6 +13,9 @@ angular.module('beaconApp.controllers.login', [])
         if(risposta.status === 0) {
           alert("Nome utente o password errati");
         } else {
+          window.localStorage['Authorization'] = 'Basic '+ window.btoa($scope.username +':'+$scope.psw);
+          console.log($scope.username + ':' + $scope.psw);
+          $http.defaults.headers.common.Authorization = window.localStorage['Authorization'];
           $location.path('/');
         }
     }
