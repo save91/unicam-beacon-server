@@ -18,6 +18,8 @@ angular.module('beaconApp.services.login',[])
           }).then(function(response) {
             return {
 							status: 1,
+              username: username,
+              password: psw,
 							utente: response.data};
           });
         }

@@ -42,6 +42,6 @@ beaconApp.config(['$routeProvider',
         controller: 'LogCtrl'
       }).
       otherwise({
-        redirectTo: '/login'
+        redirectTo: '/'
       });
   }]);

@@ -6,6 +6,11 @@ angular.module('beaconApp.controllers.login', [])
     $scope.psw = "";
     $scope.bloccato = false;
     $scope.utente = {};
+    if($http.defaults.headers.common.Authorization !== "") {
+      $scope.autenticato = true;
+    } else {
+      $scope.autenticato = false;
+    }
 
     var callbackLogin = function(risposta) {
         $scope.bloccato = false;
@@ -13,17 +18,21 @@ angular.module('beaconApp.controllers.login', [])
         if(risposta.status === 0) {
           alert("Nome utente o password errati");
         } else {
-          window.localStorage['Authorization'] = 'Basic '+ window.btoa($scope.username +':'+$scope.psw);
+          window.localStorage['Authorization'] = 'Basic '+ window.btoa(risposta.username +':'+risposta.password);
           console.log($scope.username + ':' + $scope.psw);
           $http.defaults.headers.common.Authorization = window.localStorage['Authorization'];
           $location.path('/');
         }
     }
 
-    $scope.login = function() {
+    $scope.logout = function() {
+      window.localStorage.clear();
+      $http.defaults.headers.common.Authorization = "";
+      $scope.autenticato = false;
+    }
+
+    $scope.login = function(username, psw) {
       $scope.bloccato = true;
-      Login.login($scope.username, $scope.psw).then(callbackLogin);
+      Login.login(username, psw).then(callbackLogin);
     };
-
-
 })

@@ -126,22 +126,18 @@ users.aggiorna_utente = function (req, res, next) {
 }
 };
 
-//Operazione permessa soltanto all'admin
+//È permesso a tutti di registrarsi
 users.aggiungi_utente = function (req, res, next) {
-  if(req.user.bloccato === false && req.user.permessi === "admin") {
-    var user = {}
-    user.username = req.body.username;
-    user.nome = req.body.nome;
-    user.cognome = req.body.cognome;
-    user.password = req.body.password;
-    user.permessi = "user";
-    user.bloccato = true;
-    req.users.push(user);
-    res.status(200).send({status: "ok"});
-    next();
-  } else {
-    res.status(403).send([]);
-  }
+  var user = {}
+  user.username = req.body.username;
+  user.nome = req.body.nome;
+  user.cognome = req.body.cognome;
+  user.psw = req.body.password;
+  user.permessi = "user";
+  user.bloccato = true;
+  req.users.push(user);
+  res.status(200).send({status: "ok"});
+  next();
 };
 
 //Operazione consentita soltanto agli admin
