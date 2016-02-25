@@ -1,68 +1,93 @@
-<div>
-  <h1>Gestione dispositivi</h1>
+<div class="row centrato2">
+  <div class="col-md-4">
+<div class="jumbotron">
+  <h2>Gestione dispositivi</h2>
   <p>In questa pagina hai la possibilità aggiungere nuovi dispositi,
   sia di ingresso che di uscita, e registrarne di nuovi</p>
-  <input type="button" value="Aggiorna iBeacons" ng-click="aggiornaiBeacons()">
+  <input type="button" class="btn btn-success" value="Aggiorna iBeacons" ng-click="aggiornaiBeacons()">
+</div>
+</div>
+<div class="col-md-8">
+  <div class="jumbotron">
   <h2>Elenco iBeacons non registrati</h2>
-  <table>
-    <tr>
+  <div class="table-responsive">
+  <table class="table">
+    <thead>
+    <tr class="active">
       <th>ID</th>
       <th>Uuid</th>
       <th>Major</th>
       <th>Minor</th>
       <th>Azioni</th>
     </tr>
+  </thead>
     <tr data-ng-repeat="beacon in beacons">
       <td>{{beacon.id}}</td>
       <td>{{beacon.uuid}}</td>
       <td>{{beacon.major}}</td>
       <td>{{beacon.minor}}</td>
       <td>
-        <button data-ng-click="eliminaBeacon(beacon.id)">Elimina</button> -
-        <a href="#/registra_ibeacon/{{beacon.id}}">Registra</a></td>
+        <button data-ng-click="eliminaBeacon(beacon.id)" class="btn btn-primary">Elimina</button>
+        <a href="#/registra_ibeacon/{{beacon.id}}" class="btn btn-primary">Registra</a>
+        </td>
     </tr>
   </table>
-  <hr/>
-  <h2>Aggiungi un nuovo dispositivo</h2>
-  <form ng-submit="aggiungi()">
-    <table>
-      <tr>
-        <td>Nome: </td><td><input ng-model="dispositivo.nome" type="text" required/></td>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+  <div class="col-md-8">
+  <div class="jumbotron">
+  <h2>Elenco dispositivi</h2>
+  <div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr class="active">
+        <th>Nome</th>
+        <th>ID</th>
+        <th>IO</th>
+        <th>Tipo</th>
+        <th>Descrizione</th>
+        <th>Azioni</th>
       </tr>
-      <tr>
-        <td>Descrizione: </td><td><input ng-model="dispositivo.descrizione" type="text" required/></td>
-      </tr>
-      <tr>
-        <td>IO: </td>
-        <td>
-          <select data-ng-model="dispositivo.io" data-ng-change="cambia_tipo()">
+    </thead>
+  <tr data-ng-repeat="dispositivo in dispositivi">
+    <td>{{dispositivo.nome}}</td>
+    <td>ID: {{dispositivo.id}}</td>
+    <td>IO: {{dispositivo.io}}</td>
+    <td>Tipo: {{dispositivo.type}}</td>
+    <td>Descrizione: {{dispositivo.descrizione}}</td>
+    <td><button data-ng-click="eliminaDispositivo(dispositivo.id)" class="btn btn-primary">Elimina</button></td>
+  </tr>
+</table>
+</div>
+  <input type="button" class="btn btn-success" value="Aggiorna dispositivi" ng-click="aggiornaDispositivi()">
+</div>
+</div>
+<div class="col-md-4">
+<div class="jumbotron">
+  <center>
+  <div class="div-centrato1">
+
+        <form class="form-signin" data-ng-submit="aggiungi()">
+        <h2 class="form-signin-heading">Aggiungi un nuovo dispositivo</h2>
+        <label for="name" class="sr-only">Nome</label>
+        <input type="text" id="name" class="form-control" placeholder="Nome" data-ng-model="dispositivo.nome" required="" autofocus="">
+        <label for="descrizione" class="sr-only">Descrizione</label>
+        <textarea style="resize:none; overflow:auto; width: 100%; height: 50px;" id="descrizione" data-ng-model="dispositivo.descrizione" class="form-control" placeholder="Descrizione" required=""></textarea>
+        <select data-ng-model="dispositivo.io" data-ng-change="cambia_tipo()" class="form-control">
             <option value="input">Input</option>
             <option value="output">Output</option>
           </select>
-        </td>
-      </tr>
-      <tr>
-        <td>Tipo: </td>
-        <td>
-          <select data-ng-model="dispositivo.type" required>
+          <select data-ng-model="dispositivo.type" required class="form-control">
             <option data-ng-repeat="io in ios|IOFilter:dispositivo.io" value="{{io.nome}}">{{io.nome}}</option>
           </select>
-        </td>
-      </tr>
-      <tr>
-        <td> <td><input type="submit" value="Aggiungi"/></td>
-      </tr>
-    </table>
-  </form>
-  <hr/>
-  <h2>Elenco dispositivi</h2>
-  <input type="button" value="Aggiorna dispositivi" ng-click="aggiornaDispositivi()">
-  <div data-ng-repeat="dispositivo in dispositivi">
-    <h3>{{dispositivo.nome}}</h3>
-    <p>ID: {{dispositivo.id}}</p>
-    <p>IO: {{dispositivo.io}}</p>
-    <p>Tipo: {{dispositivo.type}}</p>
-    <p>Descrizione: {{dispositivo.descrizione}}</p>
-    <button data-ng-click="eliminaDispositivo(dispositivo.id)">Elimina</button>
+          <input type="submit" class="btn btn-lg btn-success btn-block" value="Aggiungi"/>
+      </form>
+    </div>
+  </center>
   </div>
+</div>
 </div>

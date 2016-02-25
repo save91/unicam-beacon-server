@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="css/animations.css">
 
   <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-animate/angular-animate.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
@@ -36,13 +37,37 @@
   <script src="js/services/gpio.js"></script>
 </head>
 <body>
-  <h1>Unicam-Beacon-Server</h1>
-  <hr/>
-  <div class="view-container">
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand">MyNerdOffice</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#/">Home</a></li>
+            <li><a href="#/dispositivi">Gestione dispositivi</a></li>
+            <li><a href="#/gpio">Gestione GPIO</a></li>
+            <li><a href="#/utenti">Gestione utenti</a></li>
+            <li><a href="#/operazioni">Gestione operazioni</a></li>
+            <li><a href="#/log">Log</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+  <div class="container-fluid view-container">
     <div ng-view class="view-frame"></div>
   </div>
-  <hr/>
-  <h5>Powered by Saverio Tosi</h5>
+  <footer class="footer">
+      <div class="container-fluid">
+        <p class="text-muted">Powered by Saverio Tosi</p>
+      </div>
+    </footer>
 
 </body>
 </html>

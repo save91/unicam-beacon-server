@@ -1,26 +1,13 @@
-<div>
-  <h1>Registra iBeacon</h1>
-  <form ng-submit="aggiungi()">
-    <table>
-      <tr>
-        <td>Nome: </td><td><input ng-model="dispositivo.nome" type="text" required/></td>
-      </tr>
-      <tr>
-        <td>Descrizione: </td><td><input ng-model="dispositivo.descrizione" type="text" required/></td>
-      </tr>
-      <tr>
-        <td>UUID: </td><td>{{dispositivo.caratteristiche.uuid}}</td>
-      </tr>
-      <tr>
-        <td>Major: </td><td>{{dispositivo.caratteristiche.major}}</td>
-      </tr>
-      <tr>
-        <td>Minor: </td><td>{{dispositivo.caratteristiche.minor}}</td>
-      </tr>
-      <tr>
-        <td> <td><input type="submit" value="Aggiungi"/></td>
-      </tr>
-
-    </table>
+<div class="container div-centrato">
+  <form class="form-signin" ng-submit="aggiungi()">
+    <h2 class="form-signin-heading">Registra il tuo beacon!</h2>
+    <label for="nome" class="sr-only">Nome</label>
+        <input id="nome" placeholder="Nome" class="form-control" ng-model="dispositivo.nome" type="text" required/>
+    <label for="descrizione" class="sr-only">Descrizione</label>
+<textarea style="resize:none; overflow:auto; width: 100%; height: 50px;" id="descrizione" ng-model="dispositivo.descrizione" class="form-control" placeholder="Descrizione" required=""></textarea>
+        <p class="lead">UUID: {{dispositivo.caratteristiche.uuid}}</p>
+        <p class="lead">Major: {{dispositivo.caratteristiche.major}}</p>
+        <p class="lead">Minor: {{dispositivo.caratteristiche.minor}}</p>
+          <input class="btn btn-lg btn-success btn-block" type="submit" value="Aggiungi"/></td>
   </form>
 </div>

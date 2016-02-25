@@ -1,21 +1,21 @@
-<div>
-  <h2>Gestione operazioni</h2>
-  <div ng-repeat="dispositivo in dispositivi|DispositiviTipoFilter:'output'">
-    <p>Nome: {{dispositivo.nome}}</p>
-    <p>Descrizione: {{dispositivo.descrizione}}</p>
-    <p>Tipo: {{dispositivo.type}}</p>
+<div class="row centrato2">
+  <div class="col-md-4" ng-repeat="dispositivo in dispositivi|DispositiviTipoFilter:'output'">
+    <div class="jumbotron">
+    <p><strong>Nome:</strong> {{dispositivo.nome}}</p>
+    <p><strong>Descrizione:</strong> {{dispositivo.descrizione}}</p>
+    <p><strong>Tipo:</strong> {{dispositivo.type}}</p>
     <p>GPIO associato:
-      <select data-ng-options="gpio.id as gpio.GPIO for gpio in GPIOs|GPIOFilter:'output':dispositivo.id" data-ng-model="dispositivo.id_GPIO" data-ng-change="cambia(dispositivo.id_GPIO, dispositivo.id)">
+      <select class="form-control" data-ng-options="gpio.id as gpio.GPIO for gpio in GPIOs|GPIOFilter:'output':dispositivo.id" data-ng-model="dispositivo.id_GPIO" data-ng-change="cambia(dispositivo.id_GPIO, dispositivo.id)">
       </select>
     </p>
     <p>iBeacon associato:
-      <select data-ng-options="ibeacon.id as ibeacon.nome for ibeacon in dispositivi|BeaconFilter" data-ng-change="cambiaBeacon(dispositivo.id, dispositivo.id_ibeacon)" data-ng-model="dispositivo.id_ibeacon">
+      <select class="form-control" data-ng-options="ibeacon.id as ibeacon.nome for ibeacon in dispositivi|BeaconFilter" data-ng-change="cambiaBeacon(dispositivo.id, dispositivo.id_ibeacon)" data-ng-model="dispositivo.id_ibeacon">
       </select>
     </p>
     <p ng-if="dispositivo.id_ibeacon !== 0">
       Automatico:
       <input type="checkbox" ng-model="dispositivo.automatico" ng-change="salvaDispositivo(dispositivo.id, dispositivo.automatico)">
     </p>
-    <hr/>
   </div>
+</div>
 </div>
