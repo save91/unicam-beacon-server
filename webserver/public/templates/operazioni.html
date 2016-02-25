@@ -12,10 +12,10 @@
       <select class="form-control" data-ng-options="ibeacon.id as ibeacon.nome for ibeacon in dispositivi|BeaconFilter" data-ng-change="cambiaBeacon(dispositivo.id, dispositivo.id_ibeacon)" data-ng-model="dispositivo.id_ibeacon">
       </select>
     </p>
-    <p ng-if="dispositivo.id_ibeacon !== 0">
+    <div class="check-element sample-show-hide" ng-show="dispositivo.id_ibeacon !== 0" style="clear:both;">
       Automatico:
       <input type="checkbox" ng-model="dispositivo.automatico" ng-change="salvaDispositivo(dispositivo.id, dispositivo.automatico)">
-    </p>
+    </div>
   </div>
 </div>
 </div>

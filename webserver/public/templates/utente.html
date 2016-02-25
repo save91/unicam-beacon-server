@@ -1,48 +1,37 @@
-<div>
-  <h1>Utente</h1>
-  <p>In questa pagina hai la possibilità di
-  modificare i singoli utenti e i dispositvi ad esso associato</p>
-  <h2>Modifica profilo utente</h2>
-  <form data-ng-submit="modifica()">
-    <table>
-      <tr>
-        <td>Username: </td><td>{{utente.username}}</td>
-      </tr>
-      <tr>
-        <td>Nome: </td><td><input type="text" data-ng-model="utente.nome" /></td>
-      </tr>
-      <tr>
-        <td>Cognome: </td><td><input type="text" data-ng-model="utente.cognome" /></td>
-      </tr>
-      <tr>
-        <td>Permessi: </td>
-        <td>
-          <select data-ng-model="utente.permessi">
+<div class="row centrato2">
+  <div class="col-md-4">
+    <div class="jumbotron">
+  <form class="form-signin" data-ng-submit="modifica()">
+      <h2 class="form-signin-heading">Modifica profilo utente</h2>
+    <strong>Username:</strong><label for:"username" class="form-control">{{utente.username}}</label>
+  <strong>Dati Personali:</strong><label for="name" class="sr-only">Nome</label>
+    <input type="text" id="name" class="form-control" placeholder="Nome" data-ng-model="utente.nome" required="" autofocus="">
+    <label for="Surname" class="sr-only">Cognome</label>
+    <input type="text" id="surname" class="form-control" placeholder="Cognome" data-ng-model="utente.cognome" required="" autofocus="">
+<strong>Permessi:</strong><select data-ng-model="utente.permessi" class="form-control">
             <option value="admin">Admin</option>
             <option value="user">User</option>
           </select>
-        </td>
-      </tr>
-      <tr>
-        <td>Bloccato: </td><td><input type="checkbox" data-ng-model="utente.bloccato"/></td>
-      </tr>
-      <tr>
-        <td> </td><td><input type="submit" value="Modifica"/></td>
-      </tr>
-    </table>
+  <strong>Bloccato: </strong><input type="checkbox" data-ng-model="utente.bloccato"/>
+  <input type="submit" class="btn btn-lg btn-success btn-block" value="Modifica"/>
   </form>
   <a href="">Visualizza log utente</a>
-  <hr/>
-
+</div>
+</div>
+<div class="col-md-8">
+<div class="jumbotron">
   <h2>Elenco dispositivi a cui può accedere</h2>
-  <table>
-    <tr>
+<div class="table-responsive">
+<table class="table">
+  <thead>
+    <tr class="active">
       <th>ID</th>
       <th>Tipo</th>
       <th>IO</th>
       <th>Nome</th>
       <th>Descrizione</th>
     </tr>
+  </thead>
     <tr data-ng-repeat="dispositivo in dispositivi">
       <td>{{dispositivo.id}}</td>
       <td>{{dispositivo.type}}</td>
@@ -51,4 +40,6 @@
       <td>{{dispositivo.descrizione}}</td>
     </tr>
   </table>
+</div>
+</div>
 </div>

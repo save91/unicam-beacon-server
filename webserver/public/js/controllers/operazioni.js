@@ -1,5 +1,5 @@
 
-angular.module('beaconApp.controllers.operazioni', [])
+angular.module('beaconApp.controllers.operazioni', [] )
 
 .controller('OperazioniCtrl', function($scope, Dispositivi, GPIO) {
   $scope.dispositivi = [];
