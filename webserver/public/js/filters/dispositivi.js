@@ -9,11 +9,11 @@ angular.module('beaconApp.filters.dispositivi', [])
     return out;
   };
 })
-.filter('DispositiviTipoFilter', function() {
-  return function(input, tipo) {
+.filter('TypeandSearchDeviceFilter', function() {
+  return function(input, tipo, query) {
     var out = [];
       for (var i = 0; i < input.length; i++){
-          if(input[i].io === tipo)
+          if(input[i].io === tipo && (input[i].nome.toUpperCase().indexOf(query.toUpperCase()) !== -1))
               out.push(input[i]);
       }
     return out;

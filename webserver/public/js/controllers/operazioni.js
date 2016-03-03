@@ -1,7 +1,8 @@
 
 angular.module('beaconApp.controllers.operazioni', [] )
 
-.controller('OperazioniCtrl', function($scope, Dispositivi, GPIO) {
+.controller('OperazioniCtrl', function($scope, Dispositivi, GPIO, search) {
+  $scope.self = search;
   $scope.dispositivi = [];
   $scope.GPIOs = [];
 

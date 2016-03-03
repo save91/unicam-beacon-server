@@ -1,9 +1,20 @@
+.inizioparte{
+  text-align: left
+}
+.sfondo{
+      box-shadow: 5px 5px 5px grey;
+}
+
+.navbar-inverse .navbar-brand {
+    color: rgba(255, 255, 255, 1);
+}
 th {
   text-align: center;}
 .div-centrato1{
 width:300px;}
 .div-centrato{
-width:400px;}
+width:400px;
+}
 body {
   padding-top: 50px;
 }
@@ -45,7 +56,7 @@ body {
   text-align: center;
   border-bottom: .05rem solid #e5e5e5;
 }
-.jumbotron .btn {
+.jumbotron  .btn {
   padding: .75rem 1.5rem;
   font-size: 1.5rem;
 }
@@ -65,7 +76,7 @@ body {
   .header {
     margin-bottom: 2rem;
   }
-  .jumbotron {
+  .jumbotron{
     border-bottom: 0;
   }
 }

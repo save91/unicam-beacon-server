@@ -4,6 +4,7 @@
 
 var beaconApp = angular.module('beaconApp', [
   'ngRoute',
+  'beaconAnimations',
   'beaconApp.controllers.home',
   'beaconApp.controllers.login',
   'beaconApp.controllers.registrati',
@@ -14,6 +15,7 @@ var beaconApp = angular.module('beaconApp', [
   'beaconApp.controllers.log',
   'beaconApp.controllers.registra_ibeacon',
   'beaconApp.controllers.gpio',
+  'beaconApp.controllers.navbar',
   'beaconApp.filters.io',
   'beaconApp.filters.gpio',
   'beaconApp.filters.dispositivi',
@@ -22,7 +24,8 @@ var beaconApp = angular.module('beaconApp', [
   'beaconApp.services.utenti',
   'beaconApp.services.beacons',
   'beaconApp.services.dispositivi',
-  'beaconApp.services.gpio'
+  'beaconApp.services.gpio',
+  'beaconApp.services.navbar'
 ]).
 constant("MY_SERVER", {
 		"url": "http://192.168.24.100",

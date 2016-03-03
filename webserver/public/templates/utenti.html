@@ -1,6 +1,6 @@
-<div class="row centrato2">
+<div class="row centrato2 container-fluid">
   <div class="col-md-4">
-  <div class="jumbotron">
+  <div class="jumbotron sfondo">
   <h2>Admin</h2>
   <p>In questa pagina hai la possibilità di
   modificare e bloccare gli utenti.</p>
@@ -8,7 +8,7 @@
 </div>
 </div>
   <div class="col-md-8">
-  <div class="jumbotron">
+  <div class="jumbotron sfondo">
 <div class="table-responsive">
   <table class="table">
     <thead>
@@ -26,10 +26,15 @@
       <td>{{utente.cognome}}</td>
       <td>{{utente.permessi}}</td>
       <td>
-        <button class="btn btn-primary" data-ng-disabled="bloccato" data-ng-if="!utente.bloccato" data-ng-click="blocca(utente.username)">Blocca</button>
-        <button class="btn btn-primary" data-ng-disabled="bloccato" data-ng-if="utente.bloccato" data-ng-click="sblocca(utente.username)">Sblocca</button>
-        <button class="btn btn-primary" data-ng-click="modifica(utente.username)">Modifica</button>
-        <button class="btn btn-primary" data-ng-click="controllaAttivita(utente.username)">Attività</button>
+        <div class="btn-group">
+          <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Azioni <span class="caret"></span></a>
+          <ul class="dropdown-menu inizioparte">
+            <li><a data-ng-disabled="bloccato" data-ng-if="!utente.bloccato" data-ng-click="blocca(utente.username)"><i class="glyphicon glyphicon-user"> Blocca</i></a></li>
+            <li><a data-ng-disabled="bloccato" data-ng-if="utente.bloccato" data-ng-click="sblocca(utente.username)"><i class="glyphicon glyphicon-user"> Sblocca</i></a></li>
+            <li><a data-ng-click="modifica(utente.username)"><i class="glyphicon glyphicon-edit"> Modifica</i></a></li>
+            <li><a ><i data-ng-click="controllaAttivita(utente.username)"><i class="glyphicon glyphicon-sort-by-attributes"> Attività</i></a></li>
+          </ul>
+        </div>
       </td>
     </tr>
   </table>

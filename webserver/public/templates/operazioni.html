@@ -1,6 +1,8 @@
-<div class="row centrato2">
-  <div class="col-md-4" ng-repeat="dispositivo in dispositivi|DispositiviTipoFilter:'output'">
-    <div class="jumbotron">
+<form class="navbar-form navbar-right">
+    </form>
+<div class="row centrato2 container-fluid">
+  <div class="col-md-4 operazioni" ng-repeat="dispositivo in dispositivi|TypeandSearchDeviceFilter:'output':self.message">
+    <div class="jumbotron sfondo">
     <p><strong>Nome:</strong> {{dispositivo.nome}}</p>
     <p><strong>Descrizione:</strong> {{dispositivo.descrizione}}</p>
     <p><strong>Tipo:</strong> {{dispositivo.type}}</p>
@@ -12,10 +14,11 @@
       <select class="form-control" data-ng-options="ibeacon.id as ibeacon.nome for ibeacon in dispositivi|BeaconFilter" data-ng-change="cambiaBeacon(dispositivo.id, dispositivo.id_ibeacon)" data-ng-model="dispositivo.id_ibeacon">
       </select>
     </p>
-    <div class="check-element sample-show-hide" ng-show="dispositivo.id_ibeacon !== 0" style="clear:both;">
+    <div ng-show="dispositivo.id_ibeacon !== 0" style="clear:both;">
       Automatico:
-      <input type="checkbox" ng-model="dispositivo.automatico" ng-change="salvaDispositivo(dispositivo.id, dispositivo.automatico)">
-    </div>
+      <input  type="checkbox" ng-model="dispositivo.automatico"  ng-change="salvaDispositivo(dispositivo.id, dispositivo.automatico)">
+  </div>
+  </div>
   </div>
 </div>
 </div>
