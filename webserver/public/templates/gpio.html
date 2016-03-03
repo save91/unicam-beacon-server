@@ -1,19 +1,19 @@
-<div class="centrato2" ng-if="!GPIOs.length">
-  <div class="jumbotron">
+<div class="centrato2 container-fluid" ng-if="!GPIOs.length">
+  <div class="jumbotron sfondo">
     <h1>Non ci sono GPIO</h1>
   </div>
 </div>
-<div class="row centrato2">
-<div class="col-md-4" ng-repeat="GPIO in GPIOs" ng-if="GPIO.GPIO !== 'Nessuno'">
-<div class="jumbotron">
-    <p><strong>GPIO</strong>: {{GPIO.GPIO}}</p>
-    <p><strong>Tipo</strong>: {{GPIO.tipo}}</p>
-    <p><strong>Stato</strong>: {{GPIO.stato}}</p>
-    <p>
-      <button class="btn btn-primary" ng-if="GPIO.tipo==='output'" data-ng-click="on(GPIO.id)">On</button>
-      <button class="btn btn-primary" ng-if="GPIO.tipo==='output'" data-ng-click="off(GPIO.id)">Off</button>
-      <button class="btn btn-success" ng-if="GPIO.tipo==='input'" data-ng-click="read(GPIO.id)">Leggi</button>
-    </p>
-</div>
+<div class="row centrato2 container-fluid">
+  <div class="col-md-4 GPIO" ng-repeat="GPIO in GPIOs" ng-if="GPIO.GPIO !== 'Nessuno'">
+    <div class="jumbotron sfondo">
+      <p><strong>GPIO</strong>: {{GPIO.GPIO}}</p>
+      <p><strong>Tipo</strong>: {{GPIO.tipo}}</p>
+      <p><strong>Stato</strong>: {{GPIO.stato}}</p>
+      <p>
+        <button class="button button1 btn btn-primary" ng-if="GPIO.tipo==='output'" data-ng-click="on(GPIO.id)"><span>On</span></button>
+        <button class="button button2 btn btn-primary" ng-if="GPIO.tipo==='output'" data-ng-click="off(GPIO.id)"><span>Off</span></button>
+        <button class="btn btn-success" ng-if="GPIO.tipo==='input'" data-ng-click="read(GPIO.id)">Leggi</button>
+      </p>
+    </div>
   </div>
 </div>
