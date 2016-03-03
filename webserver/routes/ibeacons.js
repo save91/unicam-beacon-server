@@ -1,30 +1,26 @@
-//Oggetto beacon
+//Object beacon
 var beacons = {};
 
-//Solo gli utenti attivi possono visualizzare lo stato dei beacons
 beacons.beacons = function (req, res) {
-  console.log('beacons request');
-  if(req.user.bloccato === false) {
+  if(req.user.block === false) {
     res.status(200).send(req.beacons);
   } else {
-    res.status(403).send([]);
+    res.status(401).send("Authorization required");
   }
 };
 
-//Solo gli utenti attivi possono visualizzare lo stato dei beacons
-beacons.beacons_registrabili = function (req, res) {
-  console.log('beacons registrabili request');
-  if(req.user.bloccato === false) {
+beacons.unregistered_beacons = function (req, res) {
+  if(req.user.block === false) {
     var beacons = [];
     debugger;
     for(var i = 0; i < req.beacons.length; i++) {
-      if(req.beacons[i].stato === 1) {
+      if(req.beacons[i].state === 1) {
         beacons.push(req.beacons[i]);
       }
     }
     res.status(200).send(beacons);
   } else {
-    res.status(403).send([]);
+    res.status(401).send("Authorizetion required");
   }
 };
 

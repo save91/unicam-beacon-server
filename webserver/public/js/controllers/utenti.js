@@ -10,7 +10,7 @@ angular.module('beaconApp.controllers.utenti', [])
         //$scope.utenti = [];
         //alert(messaggio);
       } else {
-        for(var i=0;i<risposta.utenti.length;i++) {
+        for(var i=0; i<risposta.utenti.length; i++) {
           if(risposta.utenti[i].bloccato==="true" || risposta.utenti[i].bloccato===true) {
             risposta.utenti[i].bloccato = true;
           } else {
@@ -20,6 +20,11 @@ angular.module('beaconApp.controllers.utenti', [])
         $scope.utenti = risposta.utenti;
       }
   };
+
+  var callback = function() {
+    $scope.utenti = Utenti.getAll().then(callbackUpdate);
+  }
+
   $scope.utenti = Utenti.getAll().then(callbackUpdate);
 
   $scope.aggiorna = function() {
@@ -27,14 +32,16 @@ angular.module('beaconApp.controllers.utenti', [])
     Utenti.getAll().then(callbackUpdate);
   };
 
-  $scope.blocca = function(nome) {
+  $scope.blocca = function(user) {
     $scope.bloccato = true;
-    Utenti.blocca(nome).then(callbackUpdate);
+    user.block = true;
+    Utenti.updateUtente(user).then(callback);
   };
 
-  $scope.sblocca = function(nome) {
+  $scope.sblocca = function(user) {
     $scope.bloccato = true;
-    Utenti.sblocca(nome).then(callbackUpdate);
+    user.block = false;
+    Utenti.updateUtente(user).then(callback);
   };
 
   $scope.modifica = function(username) {

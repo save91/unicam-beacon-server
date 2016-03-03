@@ -2,14 +2,12 @@
 var fs = require('fs');
 var USERS_FILE = ("json/users.json");
 var BEACONS_FILE = ("json/beacons.json");
-var DISPOSITIVI_FILE = ("json/dispositivi.json");
+var DEVICE_FILE = ("json/devices.json");
 var IO_FILE = ("json/io.json");
 var GPIO_FILE = ("json/gpio.json");
 
 var datamanager = {};
-//Questa funzione legge gli users, li aggiunge alla request e li inoltra alla callback successiva
 datamanager.get_users = function (req, res, next) {
-  console.log('Lettura utenti');
   fs.readFile(USERS_FILE, function(err, data) {
     if (err) {
       console.error(err);
@@ -20,9 +18,7 @@ datamanager.get_users = function (req, res, next) {
   });
 };
 
-//Questa funzione scrive gli users
 datamanager.set_users = function (req, res) {
-  console.log('Scrittura users');
   fs.writeFile(USERS_FILE, JSON.stringify(req.users, null), function(err) {
     if (err) {
       console.error(err);
@@ -31,9 +27,7 @@ datamanager.set_users = function (req, res) {
   });
 };
 
-//Questa funzione legge i beacons, li aggiunge alla request e li inoltra alla callback successiva
 datamanager.get_beacons = function (req, res, next) {
-  console.log('Lettura iBeacons');
   fs.readFile(BEACONS_FILE, function(err, data) {
     if (err) {
       console.error(err);
@@ -44,9 +38,7 @@ datamanager.get_beacons = function (req, res, next) {
   });
 };
 
-//Questa funzione scrive i beacons
 datamanager.set_beacons = function (req, res, next) {
-  console.log('Scrittura beacons');
   fs.writeFile(BEACONS_FILE, JSON.stringify(req.beacons, null), function(err) {
     if (err) {
       console.error(err);
@@ -55,23 +47,19 @@ datamanager.set_beacons = function (req, res, next) {
   });
 };
 
-//Questa funzione legge i dispositivi, li aggiunge alla request e li inoltra alla callback successiva
-datamanager.get_dispositivi = function (req, res, next) {
-  console.log('Lettura dispositivi');
-  fs.readFile(DISPOSITIVI_FILE, function(err, data) {
+datamanager.get_devices = function (req, res, next) {
+  fs.readFile(DEVICE_FILE, function(err, data) {
     if (err) {
       console.error(err);
       process.exit(1);
     }
-    req.dispositivi = JSON.parse(data);
+    req.devices = JSON.parse(data);
     next();
   });
 };
 
-//Questa funzione scrive i dispositivi
-datamanager.set_dispositivi = function (req, res, next) {
-  console.log('Scrittura dispositivi');
-  fs.writeFile(DISPOSITIVI_FILE, JSON.stringify(req.dispositivi, null), function(err) {
+datamanager.set_devices = function (req, res, next) {
+  fs.writeFile(DEVICE_FILE, JSON.stringify(req.devices, null), function(err) {
     if (err) {
       console.error(err);
       process.exit(1);

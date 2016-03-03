@@ -1,91 +1,81 @@
-//gpio-fake.js
+//gpio-fake
 var fs = require('fs');
-//var GPIO = require('rpi-gpio');
 var GPIO_FILE = ("json/gpio.json");
-//Oggetto gpio
 var gpio = {};
 
 gpio.io = function (req, res) {
-  console.log('io request');
-  res.status(200).send({"status":"1","io":req.io});
+  res.status(200).send(req.io);
 };
 
 gpio.gpio = function (req, res) {
-  console.log('gpio request');
-  res.status(200).send({"status":"1","gpio":req.gpio});
+  res.status(200).send(req.gpio);
 };
 
 gpio.gpio_set = function (req, res, next) {
-  console.log('set gpio request');
   var i = 0;
-  var trovato = -1;
+  var pos = -1;
   var id = parseInt(req.body.id);
   var val = parseInt(req.body.value);
-  while(trovato===-1 && i<req.gpio.length) {
-    if(req.gpio[i].id===id) {
-      trovato = i;
+  while(pos === -1 && i < req.gpio.length) {
+    if(req.gpio[i].id === id) {
+      pos = i;
     }
     i++;
   }
-  if(trovato>=0) {
-    res.status(200).send({status:"1", gpio: req.gpio});
+  if(pos>=0) {
+    res.status(200).send(req.gpio);
     next();
   }
 };
 
-
 gpio.gpio_edit = function (req, res, next) {
-  console.log('edit gpio request');
   var id_GPIO = parseInt(req.body.id_gpio);
-  var id_dispositivo = parseInt(req.body.id_dispositivo);
-  var trovato = -1;
+  var id_device = parseInt(req.body.id_device);
+  var pos = -1;
   var i = 0;
-  //
-  while(trovato === -1 && i < req.dispositivi.length) {
-    if(req.dispositivi[i].id === id_dispositivo) {
-      var trovato2 = -1;
+  while(pos === -1 && i < req.devices.length) {
+    if(req.dispositivi[i].id === id_device) {
+      var pos2 = -1;
       var j = 0;
-      while(trovato2 === -1 && j < req.gpio.length) {
-        if(req.gpio[j].id === req.dispositivi[i].id_GPIO) {
-          req.gpio[j].id_dispositivo = 0;
-          trovato2 = j;
+      while(pos2 === -1 && j < req.gpio.length) {
+        if(req.gpio[j].id === req.devices[i].id_GPIO) {
+          req.gpio[j].id_device = 0;
+          pos2 = j;
         }
         j++;
       }
-      req.dispositivi[i].id_GPIO = id_GPIO;
-      trovato = i;
+      req.devices[i].id_GPIO = id_GPIO;
+      pos = i;
     }
     i++;
   }
-  //
-  trovato = -1;
+  pos = -1;
   i = 0;
-  while(trovato === -1 && i < req.gpio.length) {
+  while(pos === -1 && i < req.gpio.length) {
     if(req.gpio[i].id === id_GPIO) {
-      req.gpio[i].id_dispositivo = id_dispositivo;
-      trovato = i;
+      req.gpio[i].id_device = id_device;
+      pos = i;
     }
     i++;
   }
-  res.status(200).send({status:"1"});
+  res.status(200).send("Success");
   next();
 };
 
 
 gpio.gpio_get = function (req, res, next) {
-  console.log('get gpio request');
   var i = 0;
-  var trovato = -1;
+  var pos = -1;
   var id = parseInt(req.body.id);
-  while(trovato===-1 && i<req.gpio.length) {
+  while(pos===-1 && i<req.gpio.length) {
     if(req.gpio[i].id===id) {
-      trovato = i;
+      pos = i;
     }
     i++;
   }
-  if(trovato>=0) {
-    req.gpio[trovato].stato = true;
-    res.status(200).send({status:"1", gpio: req.gpio});
+  if(pos>=0) {
+    req.gpio[pos].state = true;
+    res.status(200).send(req.gpio);
     next();
   }
 };
@@ -95,12 +85,12 @@ function setPin(pin, value, callback) {
 }
 
 function readStatus(PIN, callback) {
-  console.log("reading pin "+PIN);
+  console.log("Reading pin "+PIN);
   callback(null,true);
 }
 
 gpio.init = function () {
-  console.log('Inizializzazione GPIO');
+  console.log('Init GPIO');
 };
 
 gpio.unexportPins = function() {

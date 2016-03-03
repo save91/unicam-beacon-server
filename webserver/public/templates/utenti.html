@@ -22,12 +22,12 @@
   </thead>
     <tr data-ng-repeat="utente in utenti">
       <td>{{utente.username}}</td>
-      <td>{{utente.nome}}</td>
-      <td>{{utente.cognome}}</td>
-      <td>{{utente.permessi}}</td>
+      <td>{{utente.firstname}}</td>
+      <td>{{utente.lastname}}</td>
+      <td>{{utente.permission}}</td>
       <td>
-        <button class="btn btn-primary" data-ng-disabled="bloccato" data-ng-if="!utente.bloccato" data-ng-click="blocca(utente.username)">Blocca</button>
-        <button class="btn btn-primary" data-ng-disabled="bloccato" data-ng-if="utente.bloccato" data-ng-click="sblocca(utente.username)">Sblocca</button>
+        <button class="btn btn-primary" data-ng-disabled="bloccato" data-ng-if="!utente.block" data-ng-click="blocca(utente)">Blocca</button>
+        <button class="btn btn-primary" data-ng-disabled="bloccato" data-ng-if="utente.block" data-ng-click="sblocca(utente)">Sblocca</button>
         <button class="btn btn-primary" data-ng-click="modifica(utente.username)">Modifica</button>
         <button class="btn btn-primary" data-ng-click="controllaAttivita(utente.username)">Attività</button>
       </td>
