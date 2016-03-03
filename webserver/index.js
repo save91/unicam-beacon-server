@@ -6,6 +6,7 @@ var morgan = require('morgan');
 var devices = require('./routes/devices');
 var users = require('./routes/user');
 var ibeacons = require('./routes/ibeacons');
+var settings = require('./routes/settings');
 
 var environment = process.env.NODE_ENV
 console.log("Environment: ", environment);
@@ -33,16 +34,17 @@ app.use(cors());
 app.use([datamanager.get_users, users.authentication, morgan('common', {stream: accessLogStream})]);
 
 //Routing HelloPackets
-//app.get('/hello');//Coming Soon
+app.get('/hello', [datamanager.get_settings, settings.hello]);
 
 //Routing API user
 app.get('/user',  users.users);
 app.post('/user', [users.add_user, datamanager.set_users]);
 app.post('/user/login', users.login);
 app.post('/user/check_username', users.check_username);
+//add.put('/user/:username/photo', );
+//add.get('/user/:username/photo', );
 app.get('/user/:username', [users.user, datamanager.set_users]);
 app.put('/user/:username', [users.update_user, datamanager.set_users]);
-//add.put('/user/:username/photo');//Coming Soon
 
 //Routing API device
 app.get('/device', [datamanager.get_devices, devices.devices]);

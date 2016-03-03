@@ -5,8 +5,30 @@ var BEACONS_FILE = ("json/beacons.json");
 var DEVICE_FILE = ("json/devices.json");
 var IO_FILE = ("json/io.json");
 var GPIO_FILE = ("json/gpio.json");
+var SETTING_FILE = ("json/settings.json");
 
 var datamanager = {};
+
+datamanager.get_settings = function (req, res, next) {
+  fs.readFile(SETTING_FILE, function(err, data) {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+    req.settings = JSON.parse(data);
+    next();
+  });
+};
+
+datamanager.set_settings = function (req, res) {
+  fs.writeFile(SETTING_FILE, JSON.stringify(req.settings, null), function(err) {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+  });
+};
+
 datamanager.get_users = function (req, res, next) {
   fs.readFile(USERS_FILE, function(err, data) {
     if (err) {
