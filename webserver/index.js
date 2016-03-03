@@ -2,6 +2,7 @@ var fs = require('fs');
 var express = require('express');
 var cors = require('cors');
 var bodyParser = require('body-parser');
+var morgan = require('morgan');
 var devices = require('./routes/devices');
 var users = require('./routes/user');
 var ibeacons = require('./routes/ibeacons');
@@ -20,17 +21,16 @@ var datamanager = require('./models/datamanager');
 var app = express();
 var SERVERPORT = 8000;
 
+// create a write stream (in append mode)
+var accessLogStream = fs.createWriteStream(__dirname + '/access.log', {flags: 'a'})
+
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
 
 // middleware authentication & log
-app.use([datamanager.get_users, users.authentication, function timeLog(req, res, next) {
-  //TODO: Real log
-  console.log('Time: ', Date.now());
-  next();
-}]);
+app.use([datamanager.get_users, users.authentication, morgan('common', {stream: accessLogStream})]);
 
 //Routing HelloPackets
 //app.get('/hello');//Coming Soon
