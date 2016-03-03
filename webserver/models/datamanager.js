@@ -91,9 +91,7 @@ datamanager.set_io = function (req, res, next) {
   });
 };
 
-//Questa funzione legge i GPIO, li aggiunge alla request e li inoltra alla callback successiva
 datamanager.get_gpio = function (req, res, next) {
-  console.log('Lettura GPIO');
   fs.readFile(GPIO_FILE, function(err, data) {
     if (err) {
       console.error(err);
@@ -115,19 +113,15 @@ datamanager.set_gpio = function (req, res, next) {
   });
 };
 
-//Questa funzione scrive i GPIO
-datamanager.set_dispositivi_gpio = function (req, res) {
-  console.log('Scrittura gpio');
+datamanager.set_devices_gpio = function (req, res) {
   fs.writeFile(GPIO_FILE, JSON.stringify(req.gpio, null), function(err) {
     if (err) {
       console.error(err);
-      process.exit(1);
     }
   });
-  fs.writeFile(DISPOSITIVI_FILE, JSON.stringify(req.dispositivi, null), function(err) {
+  fs.writeFile(DEVICE_FILE, JSON.stringify(req.devices, null), function(err) {
     if (err) {
       console.error(err);
-      process.exit(1);
     }
   });
 };

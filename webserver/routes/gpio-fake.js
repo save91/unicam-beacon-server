@@ -4,79 +4,103 @@ var GPIO_FILE = ("json/gpio.json");
 var gpio = {};
 
 gpio.io = function (req, res) {
-  res.status(200).send(req.io);
+  if(!req.user.block) {
+    res.status(200).send(req.io);
+  } else {
+    res.status(401).send("Authentication required");
+  }
 };
 
 gpio.gpio = function (req, res) {
-  res.status(200).send(req.gpio);
+  if(req.user.block === false) {
+    res.status(200).send(req.gpio);
+  } else {
+    res.status(401).send("Authentication required");
+  }
 };
 
 gpio.gpio_set = function (req, res, next) {
-  var i = 0;
-  var pos = -1;
-  var id = parseInt(req.body.id);
-  var val = parseInt(req.body.value);
-  while(pos === -1 && i < req.gpio.length) {
-    if(req.gpio[i].id === id) {
-      pos = i;
+  if(!req.user.block) {
+    var i = 0;
+    var pos = -1;
+    var id = parseInt(req.params.id);
+    var val = parseInt(req.body.value);
+    while(pos === -1 && i < req.gpio.length) {
+      if(req.gpio[i].id === id) {
+        pos = i;
+        req.gpio[i].value = val;
+      }
+      i++;
     }
-    i++;
-  }
-  if(pos>=0) {
-    res.status(200).send(req.gpio);
-    next();
+    if(pos>=0) {
+      res.status(200).send("Success");
+      next();
+    } else {
+      res.status(404).send("GPIO not found");
+    }
+  } else {
+    res.status(401).send("Authorization required");
   }
 };
 
 gpio.gpio_edit = function (req, res, next) {
-  var id_GPIO = parseInt(req.body.id_gpio);
-  var id_device = parseInt(req.body.id_device);
-  var pos = -1;
-  var i = 0;
-  while(pos === -1 && i < req.devices.length) {
-    if(req.dispositivi[i].id === id_device) {
-      var pos2 = -1;
-      var j = 0;
-      while(pos2 === -1 && j < req.gpio.length) {
-        if(req.gpio[j].id === req.devices[i].id_GPIO) {
-          req.gpio[j].id_device = 0;
-          pos2 = j;
+  if(!req.user.block) {
+    var id_GPIO = parseInt(req.body.id_gpio);
+    var id_device = parseInt(req.body.id_device);
+    var pos = -1;
+    var i = 0;
+    while(pos === -1 && i < req.devices.length) {
+      if(req.devices[i].id === id_device) {
+        var pos2 = -1;
+        var j = 0;
+        while(pos2 === -1 && j < req.gpio.length) {
+          if(req.gpio[j].id === req.devices[i].id_GPIO) {
+            req.gpio[j].id_device = 0;
+            pos2 = j;
+          }
+          j++;
         }
-        j++;
+        req.devices[i].id_GPIO = id_GPIO;
+        pos = i;
       }
-      req.devices[i].id_GPIO = id_GPIO;
-      pos = i;
+      i++;
     }
-    i++;
-  }
-  pos = -1;
-  i = 0;
-  while(pos === -1 && i < req.gpio.length) {
-    if(req.gpio[i].id === id_GPIO) {
-      req.gpio[i].id_device = id_device;
-      pos = i;
+    pos = -1;
+    i = 0;
+    while(pos === -1 && i < req.gpio.length) {
+      if(req.gpio[i].id === id_GPIO) {
+        req.gpio[i].id_device = id_device;
+        pos = i;
+      }
+      i++;
     }
-    i++;
+    res.status(200).send("Success");
+    next();
+  } else  {
+    res.status(401).send("Authentication required");
   }
-  res.status(200).send("Success");
-  next();
 };
 
-
 gpio.gpio_get = function (req, res, next) {
-  var i = 0;
-  var pos = -1;
-  var id = parseInt(req.body.id);
-  while(pos===-1 && i<req.gpio.length) {
-    if(req.gpio[i].id===id) {
-      pos = i;
+  if(!req.user.block) {
+    var i = 0;
+    var pos = -1;
+    var id = parseInt(req.params.id);
+    while(pos===-1 && i<req.gpio.length) {
+      if(req.gpio[i].id===id) {
+        pos = i;
+      }
+      i++;
     }
-    i++;
-  }
-  if(pos>=0) {
-    req.gpio[pos].state = true;
-    res.status(200).send(req.gpio);
-    next();
+    if(pos>=0) {
+      req.gpio[pos].state = true;
+      res.status(200).send(req.gpio[pos]);
+      next();
+    } else {
+      res.status(404).send("Not found");
+    }
+  } else {
+    res.status(401).send("Authorization required");
   }
 };
 

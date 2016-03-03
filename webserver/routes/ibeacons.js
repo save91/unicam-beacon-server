@@ -12,7 +12,6 @@ beacons.beacons = function (req, res) {
 beacons.unregistered_beacons = function (req, res) {
   if(req.user.block === false) {
     var beacons = [];
-    debugger;
     for(var i = 0; i < req.beacons.length; i++) {
       if(req.beacons[i].state === 1) {
         beacons.push(req.beacons[i]);
@@ -24,62 +23,61 @@ beacons.unregistered_beacons = function (req, res) {
   }
 };
 
-//solo per utenti attivi
 beacons.beacon = function (req, res) {
-  var trovato = -1;
+  var pos = -1;
   var i = 0;
-  console.log('beacon request');
-  if(req.user.bloccato === false) {
-    while(trovato===-1 && i<req.beacons.length) {
-      if(req.beacons[i].id===parseInt(req.body.id)) {
-        trovato = i;
+  if(req.user.block === false) {
+    while(pos === -1 && i < req.beacons.length) {
+      if(req.beacons[i].id === parseInt(req.params.id)) {
+        pos = i;
       }
       i++;
     }
-    if(trovato>=0) {
-      res.status(200).send({status: "1", beacon : req.beacons[trovato]});
+    if(pos>=0) {
+      res.status(200).send(req.beacons[pos]);
     } else {
       res.status(404).send('Beacon not found.');
     }
   } else {
-    res.status(403).send([]);
+    res.status(401).send("Authentication required");
   }
 };
 
-//Operazione permessa solo agli admin
-beacons.elimina_beacon = function (req, res, next) {
-  var trovato = -1;
+beacons.delete_beacon = function (req, res, next) {
+  var pos = -1;
   var i = 0;
-  console.log('delete beacon request');
-  if(req.user.permessi === "admin" && req.user.bloccato === false) {
-    while(trovato===-1 && i<req.beacons.length) {
-      if(req.beacons[i].id===parseInt(req.body.id)) {
-        trovato = i;
-        req.beacons[i].stato = 2;
+  if(req.user.permission === 0 && req.user.block === false) {
+    while(pos === -1 && i < req.beacons.length) {
+      if(req.beacons[i].id === parseInt(req.params.id)) {
+        pos = i;
+        req.beacons[i].state = 2;
       }
       i++;
     }
-    next();
-    res.status(200).send({"status":"1","beacons":req.beacons});
+    if(pos >= 0) {
+      next();
+      res.status(200).send("Success");
+    } else {
+      res.status(404).send("Beacon not found");
+    }
   } else {
-    res.status(403).send("Non hai i permessi");
+    res.status(401).send("Authentication required");
   }
 };
 
-beacons.aggiungi_beacon = function (req, res, next) {
-  console.log('add beacon request');
-  if(req.user.permessi === "admin" && req.user.bloccato === false) {
+beacons.add_beacon = function (req, res, next) {
+  if(req.user.block === false) {
     var beacon = {};
     beacon.id = Date.now();
     beacon.uuid = req.body.uuid;
     beacon.major = req.body.major;
     beacon.minor = req.body.minor;
-    beacon.stato = 1;
+    beacon.state = 1;
     req.beacons.push(beacon);
-    res.status(200).send(req.beacons);
+    res.status(200).send("Success");
     next();
   } else {
-    res.status(403).send([]);
+    res.status(401).send("Authorization required");
   }
 };
 

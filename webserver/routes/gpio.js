@@ -3,100 +3,116 @@ var GPIO = require('rpi-gpio');
 var GPIO_FILE = ("json/gpio.json");
 var gpio = {};
 
-//La messa in sicurezza verrà fatta successivamente, dato che la gestione de GPIO va modificata
 gpio.io = function (req, res) {
-  console.log('io request');
-  res.status(200).send({"status":"1","io":req.io});
+  if(!req.user.block) {
+    res.status(200).send(req.io);
+  } else {
+    res.status(401).send("Authentication required");
+  }
 };
 
 gpio.gpio = function (req, res) {
-  console.log('gpio request');
-  res.status(200).send({"status":"1","gpio":req.gpio});
+  if(req.user.block === false) {
+    res.status(200).send(req.gpio);
+  } else {
+    res.status(401).send("Authentication required");
+  }
 };
 
 gpio.gpio_set = function (req, res, next) {
-  console.log('set gpio request');
-  var i = 0;
-  var trovato = -1;
-  var id = parseInt(req.body.id);
-  var val = parseInt(req.body.value);
-  while(trovato===-1 && i<req.gpio.length) {
-    if(req.gpio[i].id===id) {
-      trovato = i;
-    }
-    i++;
-  }
-  if(trovato>=0) {
-    setPin(req.gpio[trovato].GPIO, val, function(err) {
-      if (err) {
-        res.status(500).send('Oops, Something went wrong! ' + err);
-      } else {
-        req.gpio[trovato].stato = val;
-        res.status(200).send({status:"1", gpio: req.gpio});
-        next();
+  if(!req.user.block) {
+    var i = 0;
+    var pos = -1;
+    var id = parseInt(req.body.id);
+    var val = parseInt(req.body.value);
+    while(pos===-1 && i<req.gpio.length) {
+      if(req.gpio[i].id===id) {
+        pos = i;
       }
-    })
+      i++;
+    }
+    if(pos>=0) {
+      setPin(req.gpio[pos].GPIO, val, function(err) {
+        if (err) {
+          res.status(500).send('Oops, Something went wrong! ' + err);
+        } else {
+          req.gpio[pos].stato = val;
+          res.status(200).send("Success");
+          next();
+        }
+      })
+    } else {
+      res.status(404).send("GPIO not found");
+    }
+  } else {
+    res.status(401).send("Authorization required");
   }
 };
 
 gpio.gpio_edit = function (req, res, next) {
-  console.log('edit gpio request');
-  var id_GPIO = parseInt(req.body.id_gpio);
-  var id_dispositivo = parseInt(req.body.id_dispositivo);
-  var trovato = -1;
-  var i = 0;
-  //
-  while(trovato === -1 && i < req.dispositivi.length) {
-    if(req.dispositivi[i].id === id_dispositivo) {
-      var trovato2 = -1;
-      var j = 0;
-      while(trovato2 === -1 && j < req.gpio.length) {
-        if(req.gpio[j].id === req.dispositivi[i].id_GPIO) {
-          req.gpio[j].id_dispositivo = 0;
-          trovato2 = j;
+  if(!req.user.block) {
+    var id_GPIO = parseInt(req.body.id_gpio);
+    var id_device = parseInt(req.body.id_device);
+    var pos = -1;
+    var i = 0;
+    while(pos === -1 && i < req.devices.length) {
+      if(req.devices[i].id === id_device) {
+        var pos2 = -1;
+        var j = 0;
+        while(pos2 === -1 && j < req.gpio.length) {
+          if(req.gpio[j].id === req.devices[i].id_GPIO) {
+            req.gpio[j].id_device = 0;
+            pos2 = j;
+          }
+          j++;
         }
-        j++;
+        req.devices[i].id_GPIO = id_GPIO;
+        pos = i;
       }
-      req.dispositivi[i].id_GPIO = id_GPIO;
-      trovato = i;
+      i++;
     }
-    i++;
-  }
-  trovato = -1;
-  i = 0;
-  while(trovato === -1 && i < req.gpio.length) {
-    if(req.gpio[i].id === id_GPIO) {
-      req.gpio[i].id_dispositivo = id_dispositivo;
-      trovato = i;
+    pos = -1;
+    i = 0;
+    while(pos === -1 && i < req.gpio.length) {
+      if(req.gpio[i].id === id_GPIO) {
+        req.gpio[i].id_device = id_device;
+        pos = i;
+      }
+      i++;
     }
-    i++;
+    res.status(200).send("Success");
+    next();
+  } else  {
+    res.status(401).send("Authentication required");
   }
-  res.status(200).send({status:"1"});
-  next();
 };
 
 gpio.gpio_get = function (req, res, next) {
-  console.log('get gpio request');
-  var i = 0;
-  var trovato = -1;
-  var id = parseInt(req.body.id);
-  while(trovato===-1 && i<req.gpio.length) {
-    if(req.gpio[i].id===id) {
-      trovato = i;
-    }
-    i++;
-  }
-  if(trovato>=0) {
-    readStatus(req.gpio[trovato].GPIO, function(err, value) {
-      if (err) {
-        res.status(500).send('Oops, Something went wrong! ' + err);
-      } else {
-        req.gpio[trovato].stato = value;
-        res.status(200).send({status:"1", gpio: req.gpio});
-        next();
+  if(!req.user.block) {
+    var i = 0;
+    var trovato = -1;
+    var id = parseInt(req.body.id);
+    while(trovato===-1 && i<req.gpio.length) {
+      if(req.gpio[i].id===id) {
+        trovato = i;
       }
-    });
-  }
+      i++;
+    }
+    if(trovato>=0) {
+      readStatus(req.gpio[trovato].GPIO, function(err, value) {
+        if (err) {
+          res.status(500).send('Oops, Something went wrong! ' + err);
+        } else {
+          req.gpio[trovato].stato = value;
+          res.status(200).send({status:"1", gpio: req.gpio});
+          next();
+        } else {
+          res.status(404).send("Not found");
+        }
+      });
+    } else {
+      res.status(401).send("Authorization required");
+    }
 };
 
 function setPin(pin, value, callback) {

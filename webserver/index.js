@@ -55,16 +55,16 @@ app.post('/device/ibeacon', [datamanager.get_devices, devices.device_ibeacon, da
 
 //Routing API iBeacon
 app.get('/beacon', [datamanager.get_beacons, ibeacons.beacons]);
+app.post('/beacon', [datamanager.get_beacons, ibeacons.add_beacon, datamanager.set_beacons]);
 app.get('/beacon/unregistered', [datamanager.get_beacons, ibeacons.unregistered_beacons]);
-//app.delete('/beacon/:id', [datamanager.get_beacons, ibeacons.delete_beacon, datamanager.set_beacons]);
-//app.post('/beacon/:id', [datamanager.get_beacons, ibeacons.add_beacon, datamanager.set_beacons]);
-//app.get('/beacon/:id', [datamanager.get_beacons, ibeacons.beacon, datamanager.set_beacons]);
+app.get('/beacon/:id', [datamanager.get_beacons, ibeacons.beacon, datamanager.set_beacons]);
+app.delete('/beacon/:id', [datamanager.get_beacons, ibeacons.delete_beacon, datamanager.set_beacons]);
 
 //Routing API gpio
-//app.get('/gpio', [datamanager.get_gpio, gpio.gpio]);
-//app.put('/gpio', [datamanager.get_gpio, datamanager.get_devices, gpio.gpio_edit, datamanager.set_devices_gpio]);
-//app.get('/gpio/:id', [datamanager.get_gpio, gpio.gpio_get, datamanager.set_gpio]);
-//app.put('/gpio/:id/set', [datamanager.get_gpio, gpio.gpio_set, datamanager.set_gpio]);
+app.get('/gpio', [datamanager.get_gpio, gpio.gpio]);
+app.put('/gpio', [datamanager.get_gpio, datamanager.get_devices, gpio.gpio_edit, datamanager.set_devices_gpio]);
+app.get('/gpio/:id', [datamanager.get_gpio, gpio.gpio_get, datamanager.set_gpio]);
+app.put('/gpio/:id/set', [datamanager.get_gpio, gpio.gpio_set, datamanager.set_gpio]);
 
 //Routing settings
 //app.get('/setting');
@@ -94,8 +94,8 @@ app.use(function (err, req, res, next) {
 
 //catches ctrl+c event
 process.on('SIGINT', function(){
-     console.log("Stop webserver");
-     gpio.unexportPins();
+  console.log("Stop webserver");
+  gpio.unexportPins();
 });
 
 //Main
