@@ -3,18 +3,17 @@ md-sidenav, .altezza  {
     height:100%;
   }
 .bianco {
-  color: white
+  color: white;
 }
-.fabSpeedDialdemoBasicUsage .text-capitalize {
-  text-transform: capitalize; }
-.fabSpeedDialdemoBasicUsage .md-fab:hover, .fabSpeedDialdemoBasicUsage .md-fab.md-focused {
-  background-color: #000 !important; }
-.fabSpeedDialdemoBasicUsage p.note {
-  font-size: 1.2rem; }
-.fabSpeedDialdemoBasicUsage .lock-size {
-  min-width: 300px;
-  min-height: 300px;
-  width: 300px;
-  height: 300px;
-  margin-left: auto;
-  margin-right: auto; }
+.sfondo {
+  background-color: #CFD8DC;
+}
+.linea1 {
+height: 5px;
+background-color: red;
+}
+.linea2 {
+  height: 2px;
+  background-color: red;
+  }
+}

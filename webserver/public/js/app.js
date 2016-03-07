@@ -5,6 +5,7 @@
 var beaconApp = angular.module('beaconApp', [
   'ngRoute',
   'ngMaterial',
+  'ngMdIcons',
   'beaconAnimations',
   'beaconApp.controllers.home',
   'beaconApp.controllers.login',

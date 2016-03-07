@@ -44,11 +44,27 @@ function($routeProvider, $mdThemingProvider) {
   otherwise({
     redirectTo: '/'
   });
-  $mdThemingProvider.theme('altTheme')
-  .primaryPalette('red')
-  $mdThemingProvider.theme('altTheme1')
-  .primaryPalette('orange')
-  $mdThemingProvider.theme('altTheme2')
-  .primaryPalette('green')
-  $mdThemingProvider.alwaysWatchTheme(true);
+  $mdThemingProvider.definePalette('amazingPaletteName', {
+    '50': '455A64',
+    '100': '455A64',
+    '200': '455A64',
+    '300': '455A64',
+    '400': '455A64',
+    '500': '455A64',
+    '600': '455A64',
+    '700': '455A64',
+    '800': '455A64',
+    '900': '455A64',
+    'A100': '455A64',
+    'A200': '455A64',
+    'A400': '455A64',
+    'A700': '455A64',
+    'contrastDefaultColor': 'light',    // whether, by default, text (contrast)
+                                        // on this palette should be dark or light
+    'contrastDarkColors': ['50', '100', //hues which contrast should be 'dark' by default
+     '200', '300', '400', 'A100'],
+    'contrastLightColors': undefined    // could also specify this if default was 'dark'
+  });
+  $mdThemingProvider.theme('default')
+    .primaryPalette('amazingPaletteName')
 }]);
