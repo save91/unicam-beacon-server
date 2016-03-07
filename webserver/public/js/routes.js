@@ -19,7 +19,7 @@ function($routeProvider, $mdThemingProvider) {
   }).
   when('/dispositivi', {
     templateUrl: 'templates/dispositivi.html',
-    controller: 'DispositiviCtrl'
+    controller: 'DevicesCtrl'
   }).
   when('/registra_ibeacon/:id', {
     templateUrl: 'templates/registra_ibeacon.html',

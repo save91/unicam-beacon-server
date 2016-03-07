@@ -55,13 +55,13 @@
               <th>Azioni</th>
             </tr>
           </thead>
-          <tr data-ng-repeat="dispositivo in dispositivi">
-            <td>{{dispositivo.nome}}</td>
-            <td>ID: {{dispositivo.id}}</td>
-            <td>IO: {{dispositivo.io}}</td>
-            <td>Tipo: {{dispositivo.type}}</td>
-            <td>  Descrizione: {{dispositivo.descrizione}}</td>
-            <td><button data-ng-click="eliminaDispositivo(dispositivo.id)" class="btn btn-primary">Elimina</button></td>
+          <tr data-ng-repeat="device in devices">
+            <td>{{device.nome}}</td>
+            <td>ID: {{device.id}}</td>
+            <td>IO: {{device.io}}</td>
+            <td>Tipo: {{device.type}}</td>
+            <td>  Descrizione: {{device.descrizione}}</td>
+            <td><button data-ng-click="deleteDevice(device)" class="btn btn-primary">Elimina</button></td>
           </tr>
         </table>
       </div>
@@ -71,7 +71,7 @@
   <div class="col-md-4">
     <div class="jumbotron sfondo">
       <center>
-        <form class="form-signin" data-ng-submit="aggiungi()">
+        <form class="form-signin" data-ng-submit="add()">
           <h2 class="form-signin-heading">Aggiungi un nuovo dispositivo</h2>
           <label for="name" class="sr-only">Nome</label>
           <input type="text" id="name" class="form-control" placeholder="Nome" data-ng-model="dispositivo.nome" required="" autofocus="">
