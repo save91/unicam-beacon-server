@@ -1,7 +1,45 @@
-<div>
-  <h1>Home Page</h1>
-  Menu:
-  <ul>
-    <li data-ng-repeat="voce in menu"><a href="{{voce.url}}">{{voce.nome}}</a></li>
-  </ul>
-</div>
+
+
+<md-content class="md-padding" md-theme-watch layout-xs="column" layout="row">
+  <md-card>
+
+ <md-card-content>
+   <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Benvenuti in Proximity Solutions</span><br>
+            <span class="md-subhead">L'Applicazione che ti permette di svolgere piccole azioni di domotica</span>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div>
+             <img src="img/ibeacon.png" class="md-media-lg card-media" alt="image caption"></div>
+          </md-card-title-media>
+        </md-card-title>
+      </md-card-content>
+    </md-card>
+  </div>
+    <div flex-xs flex-gt-xs="50" layout="column">
+      <md-card>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Che cosa stai aspettando?</span>
+            <span class="md-subhead">Loggati subito!</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button href="#/login">Login</md-button><i class="material-icons">account_circle</i>
+        </md-card-actions>
+      </md-card>
+      <md-fab-speed-dial md-open="false" md-direction="up"
+                               ng-class="md-fling">
+<md-fab-trigger>
+  <md-button aria-label="menu" class="md-fab md-warn">
+    <i class="material-icons">color_lens</i>
+         </md-button>
+         <md-fab-action>
+      <md-button ng-click="theme.color = 'default'">Blu</md-button>
+      <md-button ng-click="theme.color = 'altTheme'">Rosso</md-button>
+      <md-button ng-click="theme.color = 'altTheme1'">Arancione</md-button>
+      <md-button ng-click="theme.color = 'altTheme2'">Verde</md-button>
+    </md-fab-action>
+  </md-fab-speed-dial>
+</md-content>

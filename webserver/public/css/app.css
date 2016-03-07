@@ -1,82 +1,20 @@
-.inizioparte{
-  text-align: left
-}
-.sfondo{
-      box-shadow: 5px 5px 5px grey;
-}
-
-.navbar-inverse .navbar-brand {
-    color: rgba(255, 255, 255, 1);
-}
-th {
-  text-align: center;}
-.div-centrato1{
-width:300px;}
-.div-centrato{
-width:400px;
-}
-body {
-  padding-top: 50px;
-}
-.starter-template {
-  padding: 40px 15px;
-  text-align: center;
-}
-.centrato2{
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-}
-.footer {
-  padding-right: 1rem;
-  padding-left: 1rem;
-}
-.header {
-  padding-bottom: 1rem;
-  border-bottom: .05rem solid #e5e5e5;
-}
-.header h3 {
-  margin-top: 0;
-  margin-bottom: 0;
-  line-height: 3rem;
-}
-.footer {
-  padding-top: 1.5rem;
-  color: #777;
-  border-top: .05rem solid #e5e5e5;
-}
-@media (min-width: 48em) {
-  .container {
-    max-width: 46rem;
+.material-icons.md-48 { font-size: 48px; }
+md-sidenav, .altezza  {
+    height:100%;
   }
+.bianco {
+  color: white
 }
-.container-narrow > hr {
-  margin: 2rem 0;
-}
-.jumbotron {
-  text-align: center;
-  border-bottom: .05rem solid #e5e5e5;
-}
-.jumbotron  .btn {
-  padding: .75rem 1.5rem;
-  font-size: 1.5rem;
-}
-.marketing {
-  margin: 3rem 0;
-}
-.marketing p + h4 {
-  margin-top: 1.5rem;
-}
-@media screen and (min-width: 48em) {
-  .header,
-  .marketing,
-  .footer {
-    padding-right: 0;
-    padding-left: 0;
-  }
-  .header {
-    margin-bottom: 2rem;
-  }
-  .jumbotron{
-    border-bottom: 0;
-  }
-}
+.fabSpeedDialdemoBasicUsage .text-capitalize {
+  text-transform: capitalize; }
+.fabSpeedDialdemoBasicUsage .md-fab:hover, .fabSpeedDialdemoBasicUsage .md-fab.md-focused {
+  background-color: #000 !important; }
+.fabSpeedDialdemoBasicUsage p.note {
+  font-size: 1.2rem; }
+.fabSpeedDialdemoBasicUsage .lock-size {
+  min-width: 300px;
+  min-height: 300px;
+  width: 300px;
+  height: 300px;
+  margin-left: auto;
+  margin-right: auto; }
