@@ -90,47 +90,47 @@ devices.output_devices = function (req, res) {
   var j = 0;
   var pos;
   if(req.user.block === false) {
-      for(var i = 0; i < req.devices.length; i++) {
-        if(req.devices[i].io === "output" && req.devices[i].id_GPIO !== 0) {
-          device = {};
-          device.name = req.devices[i].nome;
-          device.description = req.devices[i].description;
-          device.state = req.devices[i].state;
-          device.distance = "Sconosciuta";
-          device.proximity = "ProximityFar";
-          device.automatic = req.devices[i].automatic;
-          device.unable = 0;
-          device.uuid = 0;
-          device.major = 0;
-          device.minor = 0;
-          j = 0;
-          pos = -1;
-          while(pos === -1 && j < req.devices.length) {
-            if(req.devices[j].id === req.devices[i].id_ibeacon) {
-              pos = j;
-              device.uuid = req.devices[j].properties.uuid;
-              device.major = req.devices[j].properties.major;
-              device.minor = req.devices[j].properties.minor;
-            }
-            j++;
+    for(var i = 0; i < req.devices.length; i++) {
+      if(req.devices[i].io === "output" && req.devices[i].id_GPIO !== 0) {
+        device = {};
+        device.name = req.devices[i].nome;
+        device.description = req.devices[i].description;
+        device.state = req.devices[i].state;
+        device.distance = "Sconosciuta";
+        device.proximity = "ProximityFar";
+        device.automatic = req.devices[i].automatic;
+        device.unable = 0;
+        device.uuid = 0;
+        device.major = 0;
+        device.minor = 0;
+        j = 0;
+        pos = -1;
+        while(pos === -1 && j < req.devices.length) {
+          if(req.devices[j].id === req.devices[i].id_ibeacon) {
+            pos = j;
+            device.uuid = req.devices[j].properties.uuid;
+            device.major = req.devices[j].properties.major;
+            device.minor = req.devices[j].properties.minor;
           }
-          j = 0;
-          pos = -1;
-          while(pos === -1 && j < req.devices.length) {
-            if(req.gpio[j].id === req.devices[i].id_GPIO) {
-              trovato = 1;
-              if(req.gpio[j].state === true || req.gpio[j].state === 1) {
-                devices.state = true;
-              }else {
-                devices.state = false;
-              }
-            }
-            j++;
-          }
-          devices.id_GPIO = req.devices[i].id_GPIO;
-          output_devices.push(device);
+          j++;
         }
+        j = 0;
+        pos = -1;
+        while(pos === -1 && j < req.devices.length) {
+          if(req.gpio[j].id === req.devices[i].id_GPIO) {
+            trovato = 1;
+            if(req.gpio[j].state === true || req.gpio[j].state === 1) {
+              devices.state = true;
+            }else {
+              devices.state = false;
+            }
+          }
+          j++;
+        }
+        devices.id_GPIO = req.devices[i].id_GPIO;
+        output_devices.push(device);
       }
+    }
     res.status(200).send(output_devices);
   }else {
     res.status(401).send("Authorization required");

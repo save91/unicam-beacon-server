@@ -72,9 +72,9 @@ users.check_username = function (req, res) {
       i++;
     }
     if(found) {
-      res.status(200).send("The username exist");
+      res.status(403).send("The username exist");
     } else {
-      res.status(404).send("The username does not exist");
+      res.status(200).send("The username does not exist");
     }
 };
 
@@ -88,7 +88,7 @@ users.user = function (req, res) {
     }
     i++;
   }
-  if(pos>=0 && req.user.block === false &&(req.user.permission === 0 || req.user.username === req.users[trovato].username)) {
+  if(pos>=0 && ((req.user.block === false && req.user.permission === 0) || req.user.username === req.users[pos].username)) {
     res.status(200).send(req.users[pos]);
   } else {
     res.status(404).send('User not found.');
