@@ -62,11 +62,15 @@
       </md-list>
     </md-sidenav>
     <div flex layout="column">
-      <md-toolbar class="md-whiteframe-z2" layout="row" >
-        <md-button hide-gt-md ng-click="toggleSidenav('left')" aria-label="Menu">
-          <i class="material-icons bianco">menu</i>
-        </md-button>
-        <h3 class="inset bianco"> Proximity Solutions</h3>
+        <md-toolbar layout="row">
+     <div class="md-toolbar-tools md-whiteframe-z2">
+       <md-button  hide-gt-md ng-click="toggleSidenav('left')" class="md-icon-button" aria-label="Settings">
+         <i class="material-icons bianco">menu</i>
+       </md-button>
+       <h2>
+         <span class="bianco">Proximity Solutions</span>
+       </h2>
+     </div>
       </md-toolbar>
       <div class="view-container">
         <div ng-view class="view-frame">
