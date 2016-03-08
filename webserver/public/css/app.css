@@ -1,20 +1,13 @@
 .material-icons.md-48 { font-size: 48px; }
-md-sidenav, .altezza  {
-    height:100%;
+ .altezza  {
+   height: :100%;
   }
 .bianco {
   color: white
 }
-.fabSpeedDialdemoBasicUsage .text-capitalize {
-  text-transform: capitalize; }
-.fabSpeedDialdemoBasicUsage .md-fab:hover, .fabSpeedDialdemoBasicUsage .md-fab.md-focused {
-  background-color: #000 !important; }
-.fabSpeedDialdemoBasicUsage p.note {
-  font-size: 1.2rem; }
-.fabSpeedDialdemoBasicUsage .lock-size {
-  min-width: 300px;
-  min-height: 300px;
-  width: 300px;
-  height: 300px;
-  margin-left: auto;
-  margin-right: auto; }
+.azzurro { color: green; }
+.grigio { color: #636363;}
+hgroup {
+	text-align:center;
+	margin-top: 4em;
+}

@@ -36,4 +36,9 @@ angular.module('beaconApp.controllers.login', [])
     }
   );
 };
+$scope.errore = function($scope) {
+$scope.project = {
+  rate: 500
+};
+}
 })

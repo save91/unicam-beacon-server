@@ -28,8 +28,11 @@ var beaconApp = angular.module('beaconApp', [
   'beaconApp.services.gpio',
   'beaconApp.services.navbar',
   'beaconApp.services.theme'
-]).
-constant("MY_SERVER", {
+])
+.run(function($http) {
+    $http.defaults.headers.common.Authorization = window.localStorage['Authorization'] || "";
+})
+.constant("MY_SERVER", {
 		"url": "http://192.168.24.100",
 		"port": "8000",
     "get": function() {
