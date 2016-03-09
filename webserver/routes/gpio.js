@@ -38,7 +38,11 @@ gpio.gpio_set = function (req, res, next) {
           res.status(500).send('Oops, Something went wrong! ' + err);
         } else {
           req.gpio[pos].stato = val;
-          execute('espeak -v it "' + req.user.firstname + ' ha ' + val===true?"acceso":"spento" + ' un led" 2>/dev/null');
+          var action = "acceso";
+	  if(val === 0) {
+	    action = "spento";
+          }	
+          execute('espeak -v it "' + req.user.firstname + ' ha ' + action  + ' un led" 2>/dev/null');
           res.status(200).send("Success");
           next();
         }
@@ -121,6 +125,7 @@ gpio.gpio_get = function (req, res, next) {
 
 function setPin(pin, value, callback) {
   console.log("Setting pin "+pin+" to " + value);
+  debugger;
   GPIO.write(pin, value, function(err) {
     if (err) {
       console.log("error writing " + err);
@@ -145,7 +150,6 @@ function readStatus(PIN, callback) {
 
 gpio.init = function () {
   GPIO.on('change', function(channel, value) {
-    debugger;
     console.log('Channel ' + channel + ' value is now ' + value);
   });
   fs.readFile(GPIO_FILE, function(err, data) {
@@ -154,9 +158,10 @@ gpio.init = function () {
       console.error(err);
       process.exit(1);
     }
+    debugger;
     GPIOs = JSON.parse(data);
     for(var i=0;i<GPIOs.length;i++) {
-      if(GPIOs[i].tipo==="output") {
+      if(GPIOs[i].type==="output") {
         console.log("GPIO: "+ GPIOs[i].GPIO +"output");
         GPIO.setup(GPIOs[i].GPIO, GPIO.DIR_OUT, function(err){
           if (err) {
@@ -164,7 +169,7 @@ gpio.init = function () {
             return;
           }
         });
-      }else if(GPIOs[i].tipo==="input"){
+      }else if(GPIOs[i].type==="input"){
         console.log("GPIO: "+ GPIOs[i].GPIO +"input");
         GPIO.setup(GPIOs[i].GPIO, GPIO.DIR_IN, GPIO.EDGE_BOTH);
       }
