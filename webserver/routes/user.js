@@ -55,33 +55,32 @@ users.login = function (req, res) {
 };
 
 users.users = function (req, res) {
-    if(req.user.block === false && req.user.permission === 0) {
-      res.status(200).send(req.users);
-    } else {
-      res.status(401).send("Authorization required");
-    }
+  if(req.user.block === false && req.user.permission === 0) {
+    res.status(200).send(req.users);
+  } else {
+    res.status(401).send("Authorization required");
+  }
 };
 
 users.check_username = function (req, res) {
-    var i = 0;
-    var found = false;
-    while(found === false && i < req.users.length) {
-      if(req.users[i].username === req.body.username) {
-        found = true;
-      }
-      i++;
+  var i = 0;
+  var found = false;
+  while(found === false && i < req.users.length) {
+    if(req.users[i].username === req.body.username) {
+      found = true;
     }
-    if(found) {
-      res.status(403).send("The username exist");
-    } else {
-      res.status(200).send("The username does not exist");
-    }
+    i++;
+  }
+  if(found) {
+    res.status(403).send("The username exist");
+  } else {
+    res.status(200).send("The username does not exist");
+  }
 };
 
 users.user = function (req, res) {
   var pos = -1;
   var i = 0;
-  debugger;
   while(pos===-1 && i<req.users.length) {
     if(req.users[i].username===req.params.username) {
       pos = i;
@@ -96,7 +95,6 @@ users.user = function (req, res) {
 };
 
 users.update_user = function (req, res, next) {
-  debugger;
   if(req.user.block === false && req.user.permission === 0) {
     var pos = -1;
     var i = 0;

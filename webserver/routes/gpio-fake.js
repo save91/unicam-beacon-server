@@ -2,6 +2,7 @@
 var fs = require('fs');
 var GPIO_FILE = ("json/gpio.json");
 var gpio = {};
+var execute = require('child_process').exec;
 
 gpio.io = function (req, res) {
   if(!req.user.block) {
@@ -34,6 +35,7 @@ gpio.gpio_set = function (req, res, next) {
     }
     if(pos>=0) {
       res.status(200).send("Success");
+      execute('espeak -v it "' + req.user.firstname + ' ha effettuato un operazione"');
       next();
     } else {
       res.status(404).send("GPIO not found");

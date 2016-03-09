@@ -2,6 +2,7 @@ var fs = require('fs');
 var GPIO = require('rpi-gpio');
 var GPIO_FILE = ("json/gpio.json");
 var gpio = {};
+var execute = require('child_process').exec;
 
 gpio.io = function (req, res) {
   if(!req.user.block) {
@@ -37,6 +38,7 @@ gpio.gpio_set = function (req, res, next) {
           res.status(500).send('Oops, Something went wrong! ' + err);
         } else {
           req.gpio[pos].stato = val;
+          execute('espeak -v it "' + req.user.firstname + ' ha ' + val===true?"acceso":"spento" + ' un led" 2>/dev/null');
           res.status(200).send("Success");
           next();
         }
@@ -104,39 +106,41 @@ gpio.gpio_get = function (req, res, next) {
           res.status(500).send('Oops, Something went wrong! ' + err);
         } else {
           req.gpio[trovato].stato = value;
-          res.status(200).send({status:"1", gpio: req.gpio});
+          execute('espeak -v it "' + req.user.firstname + ' ha effettuato un operazione"');
+          res.status(200).send("Success");
           next();
-        } else {
-          res.status(404).send("Not found");
-        }
-      });
-    } else {
-      res.status(401).send("Authorization required");
+        });
+      }
+    }  else {
+      res.status(404).send("GPIO not found");
     }
+  } else {
+    res.status(401).send("Authorization required");
+  }
 };
 
 function setPin(pin, value, callback) {
-    console.log("Setting pin "+pin+" to " + value);
-    GPIO.write(pin, value, function(err) {
-        if (err) {
-                console.log("error writing " + err);
-                callback("error writing " + err);
-                return;
-            }
-            callback();
-    });
+  console.log("Setting pin "+pin+" to " + value);
+  GPIO.write(pin, value, function(err) {
+    if (err) {
+      console.log("error writing " + err);
+      callback("error writing " + err);
+      return;
+    }
+    callback();
+  });
 }
 
 function readStatus(PIN, callback) {
-    console.log("reading pin "+PIN);
-    GPIO.read(PIN, function(err,value) {
-        if (err) {
-                console.log("error reading pin " + err, null);
-                callback("error reading pin " + err, null);
-                return;
-            }
-        callback(null,value);
-    });
+  console.log("reading pin "+PIN);
+  GPIO.read(PIN, function(err,value) {
+    if (err) {
+      console.log("error reading pin " + err, null);
+      callback("error reading pin " + err, null);
+      return;
+    }
+    callback(null,value);
+  });
 }
 
 gpio.init = function () {
@@ -152,18 +156,18 @@ gpio.init = function () {
     }
     GPIOs = JSON.parse(data);
     for(var i=0;i<GPIOs.length;i++) {
-    if(GPIOs[i].tipo==="output") {
-      console.log("GPIO: "+ GPIOs[i].GPIO +"output");
-     GPIO.setup(GPIOs[i].GPIO, GPIO.DIR_OUT, function(err){
-        if (err) {
-          console.log("Error opening pin " + err);
-          return;
-        }
-      });
-    }else if(GPIOs[i].tipo==="input"){
-      console.log("GPIO: "+ GPIOs[i].GPIO +"input");
-      GPIO.setup(GPIOs[i].GPIO, GPIO.DIR_IN, GPIO.EDGE_BOTH);
-    }
+      if(GPIOs[i].tipo==="output") {
+        console.log("GPIO: "+ GPIOs[i].GPIO +"output");
+        GPIO.setup(GPIOs[i].GPIO, GPIO.DIR_OUT, function(err){
+          if (err) {
+            console.log("Error opening pin " + err);
+            return;
+          }
+        });
+      }else if(GPIOs[i].tipo==="input"){
+        console.log("GPIO: "+ GPIOs[i].GPIO +"input");
+        GPIO.setup(GPIOs[i].GPIO, GPIO.DIR_IN, GPIO.EDGE_BOTH);
+      }
     }
   });
 };

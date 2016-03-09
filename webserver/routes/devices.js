@@ -96,6 +96,9 @@ devices.output_devices = function (req, res) {
         device.name = req.devices[i].nome;
         device.description = req.devices[i].description;
         device.state = req.devices[i].state;
+        //TEMPORANEO
+        device.id_GPIO = req.devices[i].id_GPIO;
+        //TEMPORANEO
         device.distance = "Sconosciuta";
         device.proximity = "ProximityFar";
         device.automatic = req.devices[i].automatic;
