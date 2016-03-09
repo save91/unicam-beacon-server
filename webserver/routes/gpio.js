@@ -24,7 +24,7 @@ gpio.gpio_set = function (req, res, next) {
   if(!req.user.block) {
     var i = 0;
     var pos = -1;
-    var id = parseInt(req.body.id);
+    var id = parseInt(req.params.id);
     var val = parseInt(req.body.value);
     while(pos===-1 && i<req.gpio.length) {
       if(req.gpio[i].id===id) {
