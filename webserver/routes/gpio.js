@@ -53,7 +53,7 @@ gpio.gpio_set = function (req, res, next) {
 
 gpio.gpio_edit = function (req, res, next) {
   if(!req.user.block) {
-    var id_GPIO = parseInt(req.body.id_gpio);
+    var id_GPIO = parseInt(req.params.id_gpio);
     var id_device = parseInt(req.body.id_device);
     var pos = -1;
     var i = 0;
