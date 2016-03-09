@@ -93,7 +93,7 @@ gpio.gpio_get = function (req, res, next) {
   if(!req.user.block) {
     var i = 0;
     var trovato = -1;
-    var id = parseInt(req.body.id);
+    var id = parseInt(req.params.id);
     while(trovato===-1 && i<req.gpio.length) {
       if(req.gpio[i].id===id) {
         trovato = i;
