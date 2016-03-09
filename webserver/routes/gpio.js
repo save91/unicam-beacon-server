@@ -109,8 +109,8 @@ gpio.gpio_get = function (req, res, next) {
           execute('espeak -v it "' + req.user.firstname + ' ha effettuato un operazione"');
           res.status(200).send("Success");
           next();
-        });
-      }
+        };
+      });
     }  else {
       res.status(404).send("GPIO not found");
     }
