@@ -1,0 +1,7 @@
+{
+  "dhcp": false,
+  "ip": "127.0.0.1",
+  "netmask": "255.255.255.255",
+  "version": "1.0.0",
+  "name": "MyNerdOffice"
+}
