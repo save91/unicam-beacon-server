@@ -5,9 +5,32 @@
 .bianco {
   color: white
 }
-.azzurro { color: green; }
+.lime {color: #a6d276;}
+.verde { color: green; }
+.rosso {color: red;}
+.blu {color: blue;}
+.arancione {color: orange;}
 .grigio { color: #636363;}
+.azzurro { color: #4AACD3;}
 hgroup {
 	text-align:center;
 	margin-top: 4em;
 }
+.sroll{
+  position: relative;
+  height: 100%;
+  overflow-y: scroll;
+}
+.tabsdemoDynamicHeight {
+  background-color: transparent !important; }
+  .tabsdemoDynamicHeight {
+    background: #f6f6f6;
+    border: 1px solid #e1e1e1; }
+    .tabsdemoDynamicHeight md-content md-tabs md-tabs-wrapper {
+      background: white; }
+  .tabsdemoDynamicHeight md-content h1:first-child {
+    margin-top: 0;
+   }
+    md-icon svg {
+      fill: inherit;
+    }

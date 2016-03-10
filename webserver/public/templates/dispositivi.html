@@ -1,34 +1,87 @@
+  <div layout="row" layout-xs="column">
+    <div flex-xs flex-gt-xs="50" layout="column">
+      <md-card>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Gestione dispositivi</span>
+            <span class="md-subhead">In questa pagina hai la possibilità aggiungere nuovi dispositi,
+              sia di ingresso che di uscita, e registrarne di nuovi</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button ng-click="getAll()" class="md-raised md-primary"><span class="bianco">Aggiorna iBeacons</span></md-button>
+        </md-card-actions>
+      </md-card>
+      <md-card>
+        <md-toolbar class="md-whiteframe-z2">
+          <p class="bianco">Elenco Dispositivi:</p>
+        </md-toolbar>
+      <md-tabs class="tabsdemoDynamicHeight" md-dynamic-height md-border-bottom>
+        <md-tab ng-repeat="device in devices" label="{{device.name}}">
+           <md-content class="md-padding">
 
-<h2>Gestione dispositivi</h2>
-      <p>In questa pagina hai la possibilità aggiungere nuovi dispositi,
-        sia di ingresso che di uscita, e registrarne di nuovi</p>
-      <input type="button" value="Aggiorna iBeacons" ng-click="aggiornaiBeacons()">
+             <strong class="rosso">Nome:</strong> {{device.name}}<br>
+              <strong class="lime">Id:</strong> {{device.id}}<br>
+              <strong class="arancione"> Io:</strong> {{device.io}}<br>
+              <strong class="azzurro"> Tipo:</strong> {{device.type}}<br>
+              <strong class="verde"> Descrizione:</strong> {{device.description}}
+              <md-tab-actions layout="row" layout-align="end right">
+              <md-button class="md-raised md-primary" data-ng-click="deleteDevice(device)">
+               <md-icon style="fill: white" md-svg-icon="img/delete.svg"></md-icon><span class="bianco">Elimina</span>
+                      </md-button>
+                    </md-tab-actions>
+             </md-content>
+           </md-tab>
+         </md-tabs>
+      </md-card>
     </div>
+    <div flex-xs flex-gt-xs="50" layout="column">
+      <md-card>
+        <md-toolbar class="md-whiteframe-z2">
+          <p class="bianco">iBeacons non registrati:</p>
+        </md-toolbar>
+      <md-tabs class="tabsdemoDynamicHeight" md-dynamic-height md-border-bottom>
+        <md-tab ng-repeat="beacon in beacons" label={{$index}}>
+           <md-content class="md-padding">
+
+             <strong class="lime">Id:</strong> {{beacon.id}}<br>
+              <strong class="azzurro">Uuid:</strong> {{beacon.uuid}}<br>
+              <strong class="rosso"> Major:</strong> {{beacon.major}}<br>
+              <strong class="arancione"> Minor:</strong> {{beacon.minor}}<br>
+              <md-tab-actions layout="row" layout-align="end right">
+                <md-menu>
+                  <md-button class="md-raised md-primary"ng-click="$mdOpenMenu()"><span class="bianco">azioni</span></md-button>
+                  <md-menu-content>
+                    <md-menu-item>
+              <md-button  data-ng-click="deleteBeacon(beacon)"> <md-icon class="md-alt-text" md-svg-icon="img/delete.svg"></md-icon>
+              Elimina
+                      </md-button>
+
+                    </md-menu-item>
+                       <md-menu-divider></md-menu-divider>
+                       <md-menu-item>
+              <md-button href="#registra_ibeacon/{{beacon.id}}"><md-icon md-svg-icon="img/penna.svg"></md-icon>Registra iBeacon </md-button>
+
+                    </md-menu-item>
+                  </md-menu-content>
+                  </md-menu>
+                    </md-tab-actions>
+             </md-content>
+           </md-tab>
+         </md-tabs>
+      </md-card>
   </div>
-<div class="col-md-8">
-  <div class="jumbotron sfondo">
-    <h2>Elenco iBeacons non registrati</h2>
-      <div class="table-responsive">
-        <table class="table">
-          <thead>
-            <tr class="active">
-              <th>ID</th>
-              <th>Uuid</th>
-              <th>Major</th>
-              <th>Minor</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tr data-ng-repeat="beacon in beacons">
-            <td>{{beacon.id}}</td>
-            <td>{{beacon.uuid}}</td>
-            <td>{{beacon.major}}</td>
-            <td>{{beacon.minor}}</td>
-            <td>
-              <div class="btn-group">
-                <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Azioni <span class="caret"></span></a>
+   <md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="showAdd($event)">
+     <md-tooltip md-direction="left">
+              Aggiungi dispositivo
+            </md-tooltip>
+     <md-icon style="fill: white" md-svg-icon="img/add.svg"></md-icon></md-button>
+
+
+
+            <!--    <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Azioni <span class="caret"></span></a>
                 <ul class="dropdown-menu inizioparte">
-                  <li><a  data-ng-click="eliminaBeacon(beacon.id)"><i class="glyphicon glyphicon-trash"> Elimina</i></a></li>
+                  <li><md-button data-ng-click="deleteBeacon(beacon)">Elimina</md-button></li>
                   <li><a href="#/registra_ibeacon/{{beacon.id}}"><i class="glyphicon glyphicon-inbox"> Registra</i></a></li>
                 </ul>
               </div>
@@ -65,7 +118,7 @@
           </tr>
         </table>
       </div>
-      <input type="button" class="btn btn-success" value="Aggiorna dispositivi" ng-click="aggiornaDispositivi()">
+      <input type="button" class="btn btn-success" value="Aggiorna dispositivi" ng-click="updateDevices()">
     </div>
   </div>
   <div class="col-md-4">
@@ -81,13 +134,14 @@
             <option value="input">Input</option>
             <option value="output">Output</option>
           </select>
-          <select data-ng-model="dispositivo.type" required class="form-control">
-            <option data-ng-repeat="io in ios|IOFilter:dispositivo.io" value="{{io.nome}}">{{io.nome}}</option>
+          <select data-ng-model="dispositivo.type" required >
+            <option data-ng-repeat="io in ios|IOFilter:device.io" value="{{io.name}}">{{io.name}}</option>
           </select>
           <input type="submit" class="btn btn-lg btn-success btn-block" value="Aggiungi"/>
         </form>
       </center>
       </div>
   </div>
+</div>
 </div>
 </md-content>

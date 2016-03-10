@@ -50,5 +50,6 @@ function($routeProvider, $mdThemingProvider) {
   .primaryPalette('orange')
   $mdThemingProvider.theme('altTheme2')
   .primaryPalette('green')
+  $mdThemingProvider.setDefaultTheme('altTheme');
   $mdThemingProvider.alwaysWatchTheme(true);
 }]);

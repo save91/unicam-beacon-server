@@ -1,33 +1,21 @@
 
 angular.module('beaconApp.controllers.dispositivi', [])
 
-.controller('DevicesCtrl', function($scope, Beacons, Devices) {
-  $scope.bloccato = true;
+.controller('DevicesCtrl', function($scope, $mdDialog, Beacons, Devices, $mdBottomSheet) {
+  $scope.beacons = [];
+  $scope.ios = [];
   $scope.device = {
     io: "input",
     properties: null,
     type: "Pulsante"
   };
-  var callbackUpdateiBeacons = function(risposta) {
-    $scope.bloccato = false;
-    if(risposta.status === 0) {
-      $scope.beacons = [];
-      alert("Impossibile scaricare l'elenco dei beacons");
-    } else {
-      $scope.beacons = risposta.beacons;
-    }
+  var getIos = function () {
+    $scope.ios = [{
+        name: "uno",
+        type: "input"
+    }];
   };
 
-  var callbackIO = function(risposta) {
-    $scope.bloccato = false;
-    if(risposta.status === 0) {
-      $scope.devices = [];
-      alert("Impossibile scaricare l'elenco dei dispositivi");
-    } else {
-      $scope.ios = risposta.io;
-    }
-  };
-  $scope.beacons = Beacons.getAll().then(callbackUpdateiBeacons);
   var updateDevices = function () {
     Devices.getAll().then(function(res) {
       $scope.devices= res.data;
@@ -36,11 +24,19 @@ angular.module('beaconApp.controllers.dispositivi', [])
       alert (res.data);
     }
   );
+};
+
+var updateBeacons = function() {
+  Beacons.getAll().then(function(res){
+    $scope.beacons = res.data;
+  },
+  function(res) {
+    alert (res.data);
+  });
 }
 
-updateDevices();
 
-$scope.ios = [];
+
 
 $scope.add  = function() {
   Devices.add($scope.device).then(
@@ -57,18 +53,21 @@ $scope.add  = function() {
   $scope.device.description = "";
 }
 
-$scope.aggiornaiBeacons = function() {
-  $scope.bloccato = true;
-  Beacons.getAll().then(callbackUpdateiBeacons);
+$scope.getAll = function() {
+  updateBeacons();
 };
 
-$scope.aggiornaDispositivi = function() {
-  $scope.bloccato = true;
+$scope.updateDevices = function() {
   updateDevices();
 };
 
-$scope.eliminaBeacon = function(id) {
-  Beacons.eliminaBeacon(id).then(callbackUpdateiBeacons);
+$scope.deleteBeacon = function(beacon) {
+  Beacons.deleteBeacon(beacon).then(function(res){
+    updateBeacons();
+  },
+  function(res){
+    alert (res.data);
+  });
 };
 
 $scope.cambia_tipo = function() {
@@ -89,4 +88,25 @@ $scope.deleteDevice = function(device) {
     }
   );
 };
+
+
+$scope.showAdd = function(ev) {
+  $mdDialog.show({
+     controller: 'IoCtrl',
+     templateUrl: 'templates/aggiungidispositivo.html',
+
+     targetEvent: ev,
+   })
+   .then(function(answer) {
+     $scope.alert = 'You said the information was "' + answer + '".';
+   }, function() {
+     $scope.alert = 'You cancelled the dialog.';
+   })
+ };
+
+updateDevices();
+updateBeacons();
+getIos();
+
+
 });

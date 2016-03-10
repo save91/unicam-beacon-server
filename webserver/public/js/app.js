@@ -17,6 +17,7 @@ var beaconApp = angular.module('beaconApp', [
   'beaconApp.controllers.registra_ibeacon',
   'beaconApp.controllers.gpio',
   'beaconApp.controllers.navbar',
+  'beaconApp.controllers.aggiungidispositivo',
   'beaconApp.filters.io',
   'beaconApp.filters.gpio',
   'beaconApp.filters.dispositivi',

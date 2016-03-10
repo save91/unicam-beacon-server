@@ -9,7 +9,7 @@ angular.module('beaconApp.services.beacons',[])
       return http.post( MY_SERVER.get() + '/beacon', beacon);
     },
     deleteBeacon: function(beacon) {
-      return $http( MY_SERVER.get() + '/beacon/', beacon.id);
+      return $http.delete( MY_SERVER.get() + '/beacon/' + beacon.id);
     },
     getBeacon: function(beacon) {
       return $http.get( MY_SERVER.get() + '/beacon/' + beacon.id);

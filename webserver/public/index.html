@@ -29,6 +29,7 @@
   <script src="js/controllers/registra_ibeacon.js"></script>
   <script src="js/controllers/gpio.js"></script>
   <script src="js/controllers/navbar.js"></script>
+  <script src="js/controllers/aggiungidispositivo.js"></script>
   <script src="js/filters/io.js"></script>
   <script src="js/filters/gpio.js"></script>
   <script src="js/filters/dispositivi.js"></script>
@@ -39,9 +40,9 @@
   <script src="js/services/dispositivi.js"></script>
   <script src="js/services/gpio.js"></script>
   <script src="js/services/navbar.js"></script>
-    <script src="js/services/theme.js"></script>
+  <script src="js/services/theme.js"></script>
 </head>
-<body layout="row" md-theme="{{ theme.color }}" md-theme-watch  ng-controller="NavigationController">
+<body  layout="row" md-theme="{{ theme.color }}" md-theme-watch  ng-controller="NavigationController">
   <md-sidenav layout="column" class=" md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
     <md-toolbar class="md-tall md-hue-2 md-whiteframe-z2">
       <center><h3 flex>Logo</h3></center>
@@ -58,26 +59,19 @@
       </md-list-item>
     </md-list>
   </md-sidenav>
-
-      <div layout="column" class="relative" layout-fill role="main">
-  <md-toolbar layout="column">
-  <div class="md-toolbar-tools md-whiteframe-z2">
-  <md-button  hide-gt-sm ng-click="toggleSidenav('left')" class="md-icon-button" aria-label="Settings">
-   <i class="material-icons bianco">menu</i>
-  </md-button>
-  <h2>
-   <span class="bianco">Proximity Solutions</span>
-  </h2>
+  <div layout="column" class="assoluto" layout-fill role="main">
+    <md-toolbar>
+      <div class="md-toolbar-tools md-whiteframe-z2">
+        <md-button  hide-gt-sm ng-click="toggleSidenav('left')" class="md-icon-button" aria-label="Settings">
+          <i class="material-icons bianco">menu</i>
+        </md-button>
+        <h2>
+          <span class="bianco">Proximity Solutions</span>
+        </h2>
+      </div>
+    </md-toolbar>
+          <md-content flex md-scroll-y ng-view class="md-padding">
+          </md-content>
   </div>
-</md-toolbar>
-<md-content flex md-scroll-y>
-<ui-view layout="column" layout-fill layout-padding>
-<div class="view-container">
-  <div ng-view class="view-frame">
-  </div>
-</div>
-</ui-view>
-</md-content>
-</div>
 </body>
 </html>
