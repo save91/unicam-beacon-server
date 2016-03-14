@@ -1,5 +1,6 @@
   <div layout="row" layout-xs="column">
     <div flex-xs flex-gt-xs="50" layout="column">
+
       <md-card>
         <md-card-title>
           <md-card-title-text>
@@ -76,72 +77,4 @@
               Aggiungi dispositivo
             </md-tooltip>
      <md-icon style="fill: white" md-svg-icon="img/add.svg"></md-icon></md-button>
-
-
-
-            <!--    <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Azioni <span class="caret"></span></a>
-                <ul class="dropdown-menu inizioparte">
-                  <li><md-button data-ng-click="deleteBeacon(beacon)">Elimina</md-button></li>
-                  <li><a href="#/registra_ibeacon/{{beacon.id}}"><i class="glyphicon glyphicon-inbox"> Registra</i></a></li>
-                </ul>
-              </div>
-            </td>
-          </tr>
-        </table>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="row container-fluid">
-  <div class="col-md-8">
-    <div class="jumbotron sfondo">
-      <h2>Elenco dispositivi</h2>
-      <div class="table-responsive">
-        <table class="table">
-          <thead>
-            <tr class="active">
-              <th>Nome</th>
-              <th>ID</th>
-              <th>IO</th>
-              <th>Tipo</th>
-              <th>Descrizione</th>
-              <th>Azioni</th>
-            </tr>
-          </thead>
-          <tr data-ng-repeat="device in devices">
-            <td>{{device.nome}}</td>
-            <td>ID: {{device.id}}</td>
-            <td>IO: {{device.io}}</td>
-            <td>Tipo: {{device.type}}</td>
-            <td>  Descrizione: {{device.descrizione}}</td>
-            <td><button data-ng-click="deleteDevice(device)" class="btn btn-primary">Elimina</button></td>
-          </tr>
-        </table>
-      </div>
-      <input type="button" class="btn btn-success" value="Aggiorna dispositivi" ng-click="updateDevices()">
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="jumbotron sfondo">
-      <center>
-        <form class="form-signin" data-ng-submit="add()">
-          <h2 class="form-signin-heading">Aggiungi un nuovo dispositivo</h2>
-          <label for="name" class="sr-only">Nome</label>
-          <input type="text" id="name" class="form-control" placeholder="Nome" data-ng-model="dispositivo.nome" required="" autofocus="">
-          <label for="descrizione" class="sr-only">Descrizione</label>
-          <textarea style="resize:none; overflow:auto; width: 100%; height: 50px;" id="descrizione" data-ng-model="dispositivo.descrizione" class="form-control" placeholder="Descrizione" required=""></textarea>
-          <select data-ng-model="dispositivo.io" data-ng-change="cambia_tipo()" class="form-control">
-            <option value="input">Input</option>
-            <option value="output">Output</option>
-          </select>
-          <select data-ng-model="dispositivo.type" required >
-            <option data-ng-repeat="io in ios|IOFilter:device.io" value="{{io.name}}">{{io.name}}</option>
-          </select>
-          <input type="submit" class="btn btn-lg btn-success btn-block" value="Aggiungi"/>
-        </form>
-      </center>
-      </div>
-  </div>
-</div>
-</div>
-</md-content>
+   </div>
