@@ -1,30 +1,61 @@
-<div class="row centrato2 container-fluid">
-  <div class="col-md-4">
-  <div class="jumbotron sfondo">
-  <h2>Admin</h2>
-  <p>In questa pagina hai la possibilità di
-  modificare e bloccare gli utenti.</p>
-      <input data-ng-disabled="bloccato" class="btn btn-success" type="button" value="Aggiorna" data-ng-click="updateDevices()">
-</div>
-</div>
-  <div class="col-md-8">
-  <div class="jumbotron sfondo">
-<div class="table-responsive">
-  <table class="table">
-    <thead>
-    <tr class="active">
-      <th>Username</th>
-      <th>Nome</th>
-      <th>Cognome</th>
-      <th>Permessi</th>
-      <th>Azioni</th>
-    </tr>
+
+<div layout="row" layout-xs="column">
+    <div flex-xs flex-gt-xs="50" layout="column">
+      <md-card>
+        <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">Admin</span>
+          <span class="md-subhead">In questa pagina hai la possibilità di modificare e bloccare gli utenti</span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-actions layout="row" layout-align="end center">
+        <md-button ng-click="updateUser()" class="md-raised md-primary"><span class="bianco">Aggiorna Utenti</span></md-button>
+      </md-card-actions>
+      </md-card>
+    </div>
+  <div flex-xs flex-gt-xs="50" layout="column">
+    <md-card>
+      <md-toolbar class="md-whiteframe-z2">
+        <p class="bianco">iBeacons non registrati:</p>
+      </md-toolbar>
+    <md-tabs class="tabsdemoDynamicHeight" md-dynamic-height md-border-bottom>
+      <md-tab ng-repeat="user in users" label={{$index}}>
+         <md-content class="md-padding">
+
+           <strong class="lime">Username:</strong> {{user.username}}<br>
+            <strong class="azzurro">Nome:</strong> {{user.firstname}}<br>
+            <strong class="rosso"> Cognome:</strong> {{user.lastname}}<br>
+            <strong class="arancione"> Permessi:</strong> {{user.permission}}<br>
+            <md-tab-actions layout="row" layout-align="end right">
+              <md-menu>
+                <md-button class="md-raised md-primary"ng-click="$mdOpenMenu()"><span class="bianco">azioni</span></md-button>
+                <md-menu-content>
+                  <md-menu-item>
+            <md-button  data-ng-click="deleteBeacon(beacon)"> <md-icon class="md-alt-text" md-svg-icon="img/delete.svg"></md-icon>
+            Elimina
+                    </md-button>
+
+                  </md-menu-item>
+                     <md-menu-divider></md-menu-divider>
+                     <md-menu-item>
+            <md-button href="#registra_ibeacon/{{beacon.id}}"><md-icon md-svg-icon="img/penna.svg"></md-icon>Registra iBeacon </md-button>
+
+                  </md-menu-item>
+                </md-menu-content>
+                </md-menu>
+                  </md-tab-actions>
+           </md-content>
+         </md-tab>
+       </md-tabs>
+    </md-card>
+  </div>
+<!--<
   </thead>
-    <tr data-ng-repeat="utente in utenti">
-      <td>{{utente.username}}</td>
-      <td>{{utente.firstname}}</td>
-      <td>{{utente.lastname}}</td>
-      <td>{{utente.permission}}</td>
+    <tr data-ng-repeat="user in users">
+      <td>{{user.username}}</td>
+      <td>{{user.firstename}}</td>
+      <td>{{user.lastname}}</td>
+      <td>{{user.permission}}</td>
       <td>
         <div class="btn-group">
           <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Azioni <span class="caret"></span></a>
