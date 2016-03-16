@@ -11,13 +11,12 @@ angular.module('beaconApp.services.utenti',[])
     checkUsername: function(user){
       return $http.post(MY_SERVER.get() + '/user', {username: user.username});
     },
-    getUsername: function(user){
-      return $http.get(MY_SERVER.get() + '/user' + user.username);
+    getUser: function(user){
+      return $http.get(MY_SERVER.get() + '/user/' + user.username);
     },
-    updatedUser: function(user){
-      return $http.put(MY_SERVER.get() + '/user' + user.username, {
-        username: user.username,
-        firstename: user.firstename,
+    editUser: function(user){
+      return $http.put(MY_SERVER.get() + '/user/' + user.username, {
+        firstname: user.firstname,
         lastname: user.lastname,
         permission: user.permission,
         block: user.block

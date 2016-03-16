@@ -8,6 +8,9 @@ angular.module('beaconApp.controllers.home', [])
         self.hover = false;
   $scope.menu = Home.getMenu();
   $scope.theme = theme;
+  $scope.setTheme = function (color) {
+    $scope.theme.color = color;
+  };
   $scope.user = null;
   if(localStorage["user"]) {
     $scope.user = JSON.parse(localStorage.getItem("user"));

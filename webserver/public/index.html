@@ -33,6 +33,7 @@
   <script src="js/filters/io.js"></script>
   <script src="js/filters/gpio.js"></script>
   <script src="js/filters/dispositivi.js"></script>
+  <script src="js/filters/range.js"></script>
   <script src="js/services/login.js"></script>
   <script src="js/services/home.js"></script>
   <script src="js/services/utenti.js"></script>
@@ -43,10 +44,12 @@
   <script src="js/services/theme.js"></script>
 </head>
 <body  layout="row" md-theme="{{ theme.color }}" md-theme-watch  ng-controller="NavigationController">
-  <md-sidenav layout="column" class=" md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
+  <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
     <md-toolbar class="md-tall md-hue-2 md-whiteframe-z2">
-      <center><h3 flex>Logo</h3></center>
-      <h4>Menu</h4>
+       <div layout="column" class="md-toolbar-tools-bottom inset">
+      <center><img src="img/logo.png" class="logo"></center>
+    </div>
+    <center><div>Proximity System</div></center>
     </md-toolbar>
     <md-list>
       <md-list-item ng-repeat="nav1 in nav">
@@ -59,19 +62,9 @@
       </md-list-item>
     </md-list>
   </md-sidenav>
-  <div layout="column" class="assoluto" layout-fill role="main">
-    <md-toolbar>
-      <div class="md-toolbar-tools md-whiteframe-z2">
-        <md-button  hide-gt-sm ng-click="toggleSidenav('left')" class="md-icon-button" aria-label="Settings">
-          <i class="material-icons bianco">menu</i>
-        </md-button>
-        <h2>
-          <span class="bianco">Proximity Solutions</span>
-        </h2>
-      </div>
-    </md-toolbar>
-          <md-content flex md-scroll-y ng-view class="md-padding">
-          </md-content>
-  </div>
+
+          <div layout="column" layout-fill  ng-view >
+          </div>
+
 </body>
 </html>

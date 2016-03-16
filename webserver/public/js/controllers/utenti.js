@@ -1,45 +1,45 @@
 
 angular.module('beaconApp.controllers.utenti', [])
 
-.controller('UtentiCtrl', function($scope, $location, Utenti) {
-  $scope.users = [];
+.controller('UtentiCtrl', function($scope, $location, Utenti, $mdDialog) {
+  $scope.user = [];
 
-  var updatedUser = function() {
+  $scope.updateUser = function() {
     Utenti.getAll().then(function(res){
       $scope.users = res.data;
     },
     function (res) {
       alert (res.data);
+    });
+  };
+  $scope.blockUser = function (user) {
+    if (user.block === true) {
+      user.block = false;
+    } else {
+      user.block = true;
     }
-  );
-};
-$scope.createUser = function () {
-  Utenti.createUser($scope.users).then(
-    function(res) {
-      updateUser();
+    Utenti.editUser(user).then(function(res) {
+      $scope.updateUser();
     },
-    function (res){
+    function(res) {
       alert (res.data);
     }
   );
-  $scope.user.username = "";
-  $scope.user.firstename = "";
-  $scope.user.lastaname = "";
-  $scope.user.permission = 10;
-  $scope.user.block = true;
-}
-$scope.updatedUser = function () {
-  updatedUser();
 };
-$scope.checkUsername = function () {
-  Utenti.checkUsername($scope.users).then(
-    function(res) {
-      updateUser();
-    },
-    function (res){
-      alert (res.data);
-    }
-  )
+$scope.showAdd = function(user, ev) {
+  $scope.user = user;
+  $mdDialog.show({
+    controller : 'UtenteCtrl',
+    scope: $scope,
+    templateUrl: 'templates/utente.html',
+
+    targetEvent: ev,
+  })
+  .finally(function() {
+    $scope.updateUser();
+  });
 };
-updatedUser();
+
+
+$scope.updateUser();
 })

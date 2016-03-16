@@ -21,6 +21,7 @@ var beaconApp = angular.module('beaconApp', [
   'beaconApp.filters.io',
   'beaconApp.filters.gpio',
   'beaconApp.filters.dispositivi',
+  'beaconApp.filters.range',
   'beaconApp.services.login',
   'beaconApp.services.home',
   'beaconApp.services.utenti',

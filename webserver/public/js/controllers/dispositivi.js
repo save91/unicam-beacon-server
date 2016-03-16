@@ -1,7 +1,7 @@
 
 angular.module('beaconApp.controllers.dispositivi', [])
 
-.controller('DevicesCtrl', function($scope, $mdDialog, Beacons, Devices, $mdBottomSheet) {
+.controller('DevicesCtrl', function($scope, $mdDialog, Beacons, Devices) {
   $scope.beacons = [];
   $scope.ios = [];
   $scope.device = {
@@ -97,11 +97,9 @@ $scope.showAdd = function(ev) {
 
      targetEvent: ev,
    })
-   .then(function(answer) {
-     $scope.alert = 'You said the information was "' + answer + '".';
-   }, function() {
-     $scope.alert = 'You cancelled the dialog.';
-   })
+   .finally(function() {
+     updateDevices();
+   });
  };
 
 updateDevices();

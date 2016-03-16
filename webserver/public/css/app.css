@@ -1,6 +1,6 @@
 .material-icons.md-48 { font-size: 48px; }
  .altezza  {
-   height: :100%;
+   height: 100%;
   }
 .bianco {
   color: white
@@ -34,3 +34,7 @@ hgroup {
     md-icon svg {
       fill: inherit;
     }
+.logo{
+   width: 70px;
+    height: 70px;
+ }
