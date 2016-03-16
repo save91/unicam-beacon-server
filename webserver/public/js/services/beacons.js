@@ -2,39 +2,20 @@ angular.module('beaconApp.services.beacons',[])
 
 .factory('Beacons', function($http, MY_SERVER) {
   return {
-  	getAll: function() {
-      return $http({
-            method: 'GET',
-            url: MY_SERVER.get() + '/beacons_registrabili'
-          }).then(function(response) {
-            return {
-							status: 1,
-							beacons: response.data};
-          });
-        },
-      eliminaBeacon: function(id) {
-        return $http({
-          method: 'POST',
-          url: MY_SERVER.get() + '/elimina_beacon',
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-          data: $.param({
-            id: id
-          })
-        }).then(function(response) {
-          return response.data;
-        })
-      },
-      getBeacon: function(id) {
-        return $http({
-          method: 'POST',
-          url: MY_SERVER.get() + '/beacon',
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-          data: $.param({
-            id: id
-          })
-        }).then(function(response) {
-          return response.data;
-        })
-      }
+    getAll: function() {
+      return $http.get( MY_SERVER.get() + '/beacon');
+    },
+    addBeacon: function(beacon){
+      return http.post( MY_SERVER.get() + '/beacon', beacon);
+    },
+    deleteBeacon: function(beacon) {
+      return $http.delete( MY_SERVER.get() + '/beacon/' + beacon.id);
+    },
+    getBeacon: function(beacon) {
+      return $http.get( MY_SERVER.get() + '/beacon/' + beacon.id);
+    },
+    getUnregisteredBeacon: function(){
+      return $http.get( MY_SERVER.get() + '/beacon/unregistered');
+    }
   };
 });

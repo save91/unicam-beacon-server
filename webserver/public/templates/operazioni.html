@@ -1,11 +1,7 @@
-<form class="navbar-form navbar-right">
-    </form>
-<div class="row centrato2 container-fluid">
-  <div class="col-md-4 operazioni" ng-repeat="dispositivo in dispositivi|TypeandSearchDeviceFilter:'output':self.message">
-    <div class="jumbotron sfondo">
-    <p><strong>Nome:</strong> {{dispositivo.nome}}</p>
-    <p><strong>Descrizione:</strong> {{dispositivo.descrizione}}</p>
-    <p><strong>Tipo:</strong> {{dispositivo.type}}</p>
+<div ng-repeat="device in devices">
+    <p><strong>Nome:</strong> {{device.name}}</p>
+    <p><strong>Descrizione:</strong> {{device.description}}</p>
+    <p><strong>Tipo:</strong> {{device.type}}</p>
     <p>GPIO associato:
       <select class="form-control" data-ng-options="gpio.id as gpio.GPIO for gpio in GPIOs|GPIOFilter:'output':dispositivo.id" data-ng-model="dispositivo.id_GPIO" data-ng-change="cambia(dispositivo.id_GPIO, dispositivo.id)">
       </select>
@@ -17,8 +13,6 @@
     <div ng-show="dispositivo.id_ibeacon !== 0" style="clear:both;">
       Automatico:
       <input  type="checkbox" ng-model="dispositivo.automatico"  ng-change="salvaDispositivo(dispositivo.id, dispositivo.automatico)">
-  </div>
-  </div>
-  </div>
+
 </div>
 </div>

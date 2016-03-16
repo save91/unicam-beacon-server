@@ -1,55 +1,45 @@
 
 angular.module('beaconApp.controllers.utenti', [])
 
-.controller('UtentiCtrl', function($scope, $location, Utenti) {
-  $scope.bloccato = true;
-  $scope.utenti = [];
-  var callbackUpdate = function(risposta) {
-      $scope.bloccato = false;
-      if(risposta.status === 0) {
-        //$scope.utenti = [];
-        //alert(messaggio);
-      } else {
-        for(var i=0; i<risposta.utenti.length; i++) {
-          if(risposta.utenti[i].bloccato==="true" || risposta.utenti[i].bloccato===true) {
-            risposta.utenti[i].bloccato = true;
-          } else {
-            risposta.utenti[i].bloccato = false;
-          }
-        }
-        $scope.utenti = risposta.utenti;
-      }
+.controller('UtentiCtrl', function($scope, $location, Utenti, $mdDialog) {
+  $scope.user = [];
+
+  $scope.updateUser = function() {
+    Utenti.getAll().then(function(res){
+      $scope.users = res.data;
+    },
+    function (res) {
+      alert (res.data);
+    });
   };
+  $scope.blockUser = function (user) {
+    if (user.block === true) {
+      user.block = false;
+    } else {
+      user.block = true;
+    }
+    Utenti.editUser(user).then(function(res) {
+      $scope.updateUser();
+    },
+    function(res) {
+      alert (res.data);
+    }
+  );
+};
+$scope.showAdd = function(user, ev) {
+  $scope.user = user;
+  $mdDialog.show({
+    controller : 'UtenteCtrl',
+    scope: $scope,
+    templateUrl: 'templates/utente.html',
 
-  var callback = function() {
-    $scope.utenti = Utenti.getAll().then(callbackUpdate);
-  }
+    targetEvent: ev,
+  })
+  .finally(function() {
+    $scope.updateUser();
+  });
+};
 
-  $scope.utenti = Utenti.getAll().then(callbackUpdate);
 
-  $scope.aggiorna = function() {
-    $scope.bloccato = true;
-    Utenti.getAll().then(callbackUpdate);
-  };
-
-  $scope.blocca = function(user) {
-    $scope.bloccato = true;
-    user.block = true;
-    Utenti.updateUtente(user).then(callback);
-  };
-
-  $scope.sblocca = function(user) {
-    $scope.bloccato = true;
-    user.block = false;
-    Utenti.updateUtente(user).then(callback);
-  };
-
-  $scope.modifica = function(username) {
-    $location.path('/utente/' + username);
-  };
-
-  $scope.controllaAttivita = function(nome) {
-    alert('Controlla attività: ' + nome + ' funzione da implementare!!!');
-  };
-
+$scope.updateUser();
 })

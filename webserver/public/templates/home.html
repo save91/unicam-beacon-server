@@ -1,7 +1,69 @@
-<div>
-  <h1>Home Page</h1>
-  Menu:
-  <ul>
-    <li data-ng-repeat="voce in menu"><a href="{{voce.url}}">{{voce.nome}}</a></li>
-  </ul>
-</div>
+<md-toolbar>
+  <div class="md-toolbar-tools md-whiteframe-z2" md-scroll-shrink>
+    <md-button  hide-gt-sm ng-click="toggleSidenav('left')" class="md-icon-button" aria-label="Settings">
+      <i class="material-icons bianco">menu</i>
+    </md-button>
+    <h2>
+      <span class="bianco">Home</span>
+    </h2>
+  </div>
+</md-toolbar>
+<md-content class="md-padding" layout="row" layout-xs="column">
+  <div flex-xs flex-gt-xs="50">
+    <md-card>
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">Benvenuti in Proximity Solutions</span><br>
+          <span class="md-subhead">L'Applicazione che ti permette di svolgere piccole azioni di domotica</span>
+        </md-card-title-text>
+        <md-card-title-media>
+          <img src="img/ibeacon.png" class="md-media-lg card-media" alt="image caption">
+        </md-card-title>
+      </md-card>
+      <div ng-if="!user">
+        <md-card>
+          <md-card-title>
+            <md-card-title-text>
+              <span class="md-headline">Che cosa stai aspettando?</span>
+              <span class="md-subhead">Loggati subito!</span>
+            </md-card-title-text>
+          </md-card-title>
+          <md-card-actions layout="row" layout-align="end center">
+            <md-button href="#/login">Login</md-button><i class="material-icons">account_circle</i>
+          </md-card-actions>
+        </md-card>
+      </div>
+      <div ng-if="user">
+        <md-card>
+          <md-toolbar>
+            <p class="bianco">Ciao {{user.firstname}}!</p>
+          </md-toolbar>
+          <md-card-title>
+            <md-card-title-text>
+              <span class="md-headline"> vuoi disconnetterti?</span>
+              <span class="md-subhead">Clicca su logout!</span>
+            </md-card-title-text>
+          </md-card-title>
+          <md-card-actions layout="row" layout-align="end center">
+            <md-button href="#/login">Logout</md-button><i class="material-icons">account_circle</i>
+          </md-card-actions>
+        </md-card>
+      </div>
+    </div>
+  </div>
+</md-content>
+<md-fab-speed-dial ng-hide="demo.hidden" md-direction="left" md-open="demo.isOpen"
+class="md-scale md-fab-bottom-right" ng-class="{ 'md-hover-full': demo.hover }"
+ng-mouseenter="demo.isOpen=true" ng-mouseleave="demo.isOpen=false">
+<md-fab-trigger>
+  <md-button aria-label="menu" class="md-fab">
+    <md-icon style="fill: white" md-svg-icon="img/palette.svg"></md-icon>
+  </md-button>
+</md-fab-trigger>
+<md-fab-actions>
+  <md-button class="md-fab md-raised md-mini" ng-click="setTheme('default')"><md-icon style="fill: blue" md-svg-icon="img/paint.svg"></md-icon></md-button>
+  <md-button class="md-fab md-raised md-mini" ng-click="setTheme('altTheme')"><md-icon style="fill: red" md-svg-icon="img/paint.svg"></md-icon></md-button>
+  <md-button class="md-fab md-raised md-mini" ng-click="setTheme('altTheme1')"><md-icon style="fill: orange" md-svg-icon="img/paint.svg"></md-icon></md-button>
+  <md-button class="md-fab md-raised md-mini" ng-click="setTheme('altTheme2')"><md-icon style="fill: green" md-svg-icon="img/paint.svg"></md-icon></md-button>
+</md-fab-actions>
+</md-fab-speed-dial>

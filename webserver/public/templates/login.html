@@ -1,15 +1,47 @@
-<div ng-if="!autenticato" class="container div-centrato">
-  <form class="form-signin" data-ng-submit="login(username, psw)">
-        <h2 class="form-signin-heading">Che aspetti? Loggati!</h2>
-        <label for="username" class="sr-only">Username</label>
-        <input type="text" id="username" class="form-control" placeholder="username" data-ng-model="username" required="" autofocus="">
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" data-ng-model="psw" class="form-control" placeholder="password" required="">
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+<md-toolbar>
+  <div class="md-toolbar-tools md-whiteframe-z2" md-scroll-shrink>
+    <md-button  hide-gt-sm ng-click="toggleSidenav('left')" class="md-icon-button" aria-label="Settings">
+      <i class="material-icons bianco">menu</i>
+    </md-button>
+    <h2>
+      <span class="bianco">Login</span>
+    </h2>
+  </div>
+</md-toolbar>
+<md-content ng-if="!user">
+  <hgroup>
+    <h1 class="grigio">Che Aspetti? Loggati</h1>
+    <p class="azzurro">by D'Argenio Marco and Tosi Saverio</p>
+  </hgroup>
+  <br>
+  <div layout="row" layout-align="center center">
+    <md-card flex="50"  layout-align="center center">
+      <form ng-submit="login(username,password)">
+        <md-input-container>
+          <label for="username">Username</label>
+          <input id="username" data-ng-model="username" required="">
+          <div ng-messages="projectForm.clientName.$error">
+            <div ng-message="required">Attenzione! Questo dato è obbligatorio</div>
+          </div>
+        </md-input-container><br>
+        <md-input-container  flex-gt-sm>
+          <label for="inputPassword">Password</label>
+          <input type="password" id="inputPassword" data-ng-model="password" required="">
+          <div ng-messages="projectForm.clientName.$error">
+            <div ng-message="required">Attenzione! Questo dato è obbligatorio</div>
+          </div>
+        </md-input-container><br>
+        <md-card-actions layout="row" layout-align="center center">
+          <md-button class="md-primary md-raised" type="submit"><span class="bianco">Accedi</span></md-button>
+        </md-card-actions>
       </form>
-        <a href="#/registrati">Non sei registrato?</a>
-</div>
-<div ng-if="autenticato" class="container div-centrato">
-  <h2 class="form-signin-heading">Sei sicuro che vuoi uscire!</h2>
-  <button class="btn btn-lg btn-primary btn-block" ng-click="logout()">Log out</button>
-</div>
+    </md-card>
+  </div>
+</md-content>
+<md-content ng-if="user">
+  <hgroup>
+    <h1 class="grigio">Salve {{user.firstname}}, <br> per disconnetterti clicca qua sotto!</h1>
+    <p class="azzurro">by D'Argenio Marco and Tosi Saverio</p>
+    <md-button class="md-primary md-raised" ng-click="logout()"><span class="bianco">logout</span></md-button>
+  </hgroup>
+</md-content>
