@@ -3,8 +3,9 @@ var settings = {};
 
 settings.hello = function (req, res) {
   var response = {
+    port: "8000",
     name: req.settings.name,
-    varsion: req.settings.version
+    version: req.settings.version
   };
   res.status(200).send(response);
 }

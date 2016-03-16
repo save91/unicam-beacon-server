@@ -47,6 +47,7 @@ users.login = function (req, res) {
       firstname: req.users[pos].firstname,
       lastname: req.users[pos].lastname,
       permission: req.users[pos].permission,
+      photo: req.users[pos].photo,
       block: req.users[pos].block
     });
   }else {
@@ -130,9 +131,10 @@ users.add_user = function (req, res, next) {
   user.lastname = req.body.lastname;
   user.password = req.body.password;
   user.permission = 10;
+  user.photo = req.body.photo;
   user.block = true;
   req.users.push(user);
-  res.status(201).send("Success");
+  res.status(201).send(user);
   next();
 };
 
