@@ -33,9 +33,6 @@ app.use(cors());
 // middleware authentication & log
 app.use([datamanager.get_users, users.authentication, morgan('common', {stream: accessLogStream})]);
 
-//Routing HelloPackets
-app.get('/hello', [datamanager.get_settings, settings.hello]);
-
 //Routing API user
 app.get('/user',  users.users);
 app.post('/user', [users.add_user, datamanager.set_users]);
@@ -69,7 +66,11 @@ app.get('/gpio/:id', [datamanager.get_gpio, gpio.gpio_get, datamanager.set_gpio]
 app.put('/gpio/:id/set', [datamanager.get_gpio, gpio.gpio_set, datamanager.set_gpio]);
 
 //Routing settings
-//app.get('/setting');
+app.get('/hello', [datamanager.get_settings, settings.hello]);
+app.get('/setting/halt', settings.halt);
+app.get('/setting/reboot', settings.reboot);
+app.get('/setting/exit', settings.exit);
+app.get('/setting/update', settings.update);
 //app.put('/setting');
 //app.get('/setting/:operazione');
 

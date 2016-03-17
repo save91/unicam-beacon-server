@@ -2,16 +2,17 @@
 <html lang="it" ng-app="beaconApp">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
   <title>Unicam-Beacon</title>
   <link rel="stylesheet" href="css/app.css">
   <link rel="stylesheet" href="css/animations.css">
-  <link rel="stylesheet" href="./bower_components/angular-material/angular-material.css"/>
+  <link rel="stylesheet" href="bower_components/angular-material/angular-material.css"/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <script src="bower_components/jquery/dist/jquery.js"></script>
   <script src="bower_components/angular/angular.js"></script>
-  <script src="./bower_components/angular-animate/angular-animate.js" type="text/javascript" ></script>
-  <script src="./bower_components/angular-aria/angular-aria.js" type="text/javascript" ></script>
-  <script src="./bower_components/angular-material/angular-material.js" type="text/javascript" ></script>
+  <script src="bower_components/angular-animate/angular-animate.js" type="text/javascript" ></script>
+  <script src="bower_components/angular-aria/angular-aria.js" type="text/javascript" ></script>
+  <script src="bower_components/angular-material/angular-material.js" type="text/javascript" ></script>
   <script src="bower_components/angular-animate/angular-animate.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="bower_components/angular-resource/angular-resource.js"></script>
@@ -30,6 +31,7 @@
   <script src="js/controllers/gpio.js"></script>
   <script src="js/controllers/navbar.js"></script>
   <script src="js/controllers/aggiungidispositivo.js"></script>
+  <script src="js/controllers/settings.js"></script>
   <script src="js/filters/io.js"></script>
   <script src="js/filters/gpio.js"></script>
   <script src="js/filters/dispositivi.js"></script>
@@ -42,14 +44,15 @@
   <script src="js/services/gpio.js"></script>
   <script src="js/services/navbar.js"></script>
   <script src="js/services/theme.js"></script>
+  <script src="js/services/settings.js"></script>
 </head>
 <body  layout="row" md-theme="{{ theme.color }}" md-theme-watch  ng-controller="NavigationController">
   <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
     <md-toolbar class="md-tall md-hue-2 md-whiteframe-z2">
-       <div layout="column" class="md-toolbar-tools-bottom inset">
-      <center><img src="img/logo.png" class="logo"></center>
-    </div>
-    <center><div>Proximity System</div></center>
+      <div layout="column" class="md-toolbar-tools-bottom inset">
+        <center><img src="img/logo.png" class="logo"></center>
+      </div>
+      <center><div>Proximity System</div></center>
     </md-toolbar>
     <md-list>
       <md-list-item ng-repeat="nav1 in nav">
@@ -62,9 +65,7 @@
       </md-list-item>
     </md-list>
   </md-sidenav>
-
-          <div layout="column" layout-fill  ng-view >
-          </div>
-
+  <div layout="column" layout-fill  ng-view >
+  </div>
 </body>
 </html>
