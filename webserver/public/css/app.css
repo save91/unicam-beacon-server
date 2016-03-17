@@ -1,82 +1,40 @@
-.inizioparte{
-  text-align: left
-}
-.sfondo{
-      box-shadow: 5px 5px 5px grey;
-}
-
-.navbar-inverse .navbar-brand {
-    color: rgba(255, 255, 255, 1);
-}
-th {
-  text-align: center;}
-.div-centrato1{
-width:300px;}
-.div-centrato{
-width:400px;
-}
-body {
-  padding-top: 50px;
-}
-.starter-template {
-  padding: 40px 15px;
-  text-align: center;
-}
-.centrato2{
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-}
-.footer {
-  padding-right: 1rem;
-  padding-left: 1rem;
-}
-.header {
-  padding-bottom: 1rem;
-  border-bottom: .05rem solid #e5e5e5;
-}
-.header h3 {
-  margin-top: 0;
-  margin-bottom: 0;
-  line-height: 3rem;
-}
-.footer {
-  padding-top: 1.5rem;
-  color: #777;
-  border-top: .05rem solid #e5e5e5;
-}
-@media (min-width: 48em) {
-  .container {
-    max-width: 46rem;
+.material-icons.md-48 { font-size: 48px; }
+ .altezza  {
+   height: 100%;
   }
+.bianco {
+  color: white
 }
-.container-narrow > hr {
-  margin: 2rem 0;
+.lime {color: #a6d276;}
+.verde { color: green; }
+.rosso {color: red;}
+.blu {color: blue;}
+.arancione {color: orange;}
+.grigio { color: #636363;}
+.azzurro { color: #4AACD3;}
+hgroup {
+	text-align:center;
+	margin-top: 4em;
 }
-.jumbotron {
-  text-align: center;
-  border-bottom: .05rem solid #e5e5e5;
+.sroll{
+  position: relative;
+  height: 100%;
+  overflow-y: scroll;
 }
-.jumbotron  .btn {
-  padding: .75rem 1.5rem;
-  font-size: 1.5rem;
-}
-.marketing {
-  margin: 3rem 0;
-}
-.marketing p + h4 {
-  margin-top: 1.5rem;
-}
-@media screen and (min-width: 48em) {
-  .header,
-  .marketing,
-  .footer {
-    padding-right: 0;
-    padding-left: 0;
-  }
-  .header {
-    margin-bottom: 2rem;
-  }
-  .jumbotron{
-    border-bottom: 0;
-  }
-}
+.tabsdemoDynamicHeight {
+  background-color: transparent !important; }
+  .tabsdemoDynamicHeight {
+    background: #f6f6f6;
+    border: 1px solid #e1e1e1; }
+    .tabsdemoDynamicHeight md-content md-tabs md-tabs-wrapper {
+      background: white; }
+  .tabsdemoDynamicHeight md-content h1:first-child {
+    margin-top: 0;
+   }
+    md-icon svg {
+      fill: inherit;
+    }
+.logo{
+   width: 70px;
+    height: 70px;
+ }

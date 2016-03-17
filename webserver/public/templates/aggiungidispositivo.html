@@ -1,0 +1,32 @@
+<md-dialog class="md-primary">
+  <md-content class="md-padding">
+      <div layout="column" layout-sm="column">
+        <md-input-container flex>
+          <label for="name">Nome</label>
+          <input type="text" id="name" data-ng-model="device.name" required="">
+        </md-input-container>
+        <md-input-container flex>
+          <label for="descrizione">Descrizione</label>
+          <input id="descrizione" data-ng-model="device.description" required="">
+        </md-input-container>
+      </div>
+      <div layout="row" layout-sm="column">
+      <md-input-container flex>
+        <md-select data-ng-model="device.io" data-ng-change="cambia_tipo()">
+          <md-option value="input">Input</md-option>
+          <md-option value="output">Output</md-option>
+        </md-select>
+      </md-input-container>
+        <md-input-container flex>
+          <label>Io</label>
+          <md-select data-ng-model="device.type" required>
+            <md-option data-ng-repeat="io in ios|IOFilter:device.io" value="{{io.name}}">{{io.name}}</option>
+            </md-select>
+          </md-input-container>
+        </div>
+          <div class="md-actions" layout="row">
+
+            <md-button class="md-container" ng-click="add()">aggiungi </md-button>
+              <md-button class="md-container" ng-click="hide()">esci </md-button>
+          </div>
+        </md-dialog>

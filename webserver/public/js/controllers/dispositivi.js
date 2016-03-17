@@ -1,79 +1,110 @@
 
 angular.module('beaconApp.controllers.dispositivi', [])
 
-.controller('DispositiviCtrl', function($scope, Beacons, Dispositivi) {
-  $scope.bloccato = true;
-  $scope.dispositivo = {
+.controller('DevicesCtrl', function($scope, $mdDialog, Beacons, Devices) {
+  $scope.beacons = [];
+  $scope.ios = [];
+  $scope.device = {
     io: "input",
-    caratteristiche: null,
+    properties: null,
     type: "Pulsante"
   };
-  var callbackUpdateiBeacons = function(risposta) {
-      $scope.bloccato = false;
-      if(risposta.status === 0) {
-        $scope.beacons = [];
-        alert("Impossibile scaricare l'elenco dei beacons");
-      } else {
-        $scope.beacons = risposta.beacons;
-      }
+  var getIos = function () {
+    $scope.ios = [{
+        name: "uno",
+        type: "input"
+    }];
   };
 
-  var callbackIO = function(risposta) {
-      $scope.bloccato = false;
-      if(risposta.status === 0) {
-        $scope.dispositivi = [];
-        alert("Impossibile scaricare l'elenco dei dispositivi");
-      } else {
-        $scope.ios = risposta.io;
-      }
-  };
-
-  var callbackUpdateDispositivi = function(risposta) {
-      $scope.bloccato = false;
-      if(risposta.status === 0) {
-        $scope.dispositivi = [];
-        alert("Impossibile scaricare l'elenco dei dispositivi");
-      } else {
-        $scope.dispositivi = risposta.dispositivi;
-      }
-  };
-
-  $scope.beacons = Beacons.getAll().then(callbackUpdateiBeacons);
-  $scope.dispositivi = Dispositivi.getAll().then(callbackUpdateDispositivi);
-  $scope.ios = Dispositivi.getIO().then(callbackIO);
-
-  $scope.aggiungi  = function() {
-    Dispositivi.aggiungi($scope.dispositivo).then(callbackUpdateDispositivi);
-    $scope.dispositivo.io = "input";
-    $scope.dispositivo.type = "Pulsante";
-    $scope.dispositivo.nome = "";
-    $scope.dispositivo.descrizione = "";
-  }
-
-  $scope.aggiornaiBeacons = function() {
-    $scope.bloccato = true;
-    Beacons.getAll().then(callbackUpdateiBeacons);
-  };
-
-  $scope.aggiornaDispositivi = function() {
-    $scope.bloccato = true;
-    Dispositivi.getAll().then(callbackUpdateDispositivi);
-  };
-
-  $scope.eliminaBeacon = function(id) {
-    Beacons.eliminaBeacon(id).then(callbackUpdateiBeacons);
-  };
-
-  $scope.cambia_tipo = function() {
-    if($scope.dispositivo.io === "input") {
-      $scope.dispositivo.type = "Pulsante";
-    }else {
-      $scope.dispositivo.type = "Cancello";
+  var updateDevices = function () {
+    Devices.getAll().then(function(res) {
+      $scope.devices= res.data;
+    },
+    function (res) {
+      alert (res.data);
     }
-  };
+  );
+};
 
-  $scope.eliminaDispositivo = function(id) {
-    Dispositivi.eliminaDispositivo(id).then(callbackUpdateDispositivi);
-  };
+var updateBeacons = function() {
+  Beacons.getAll().then(function(res){
+    $scope.beacons = res.data;
+  },
+  function(res) {
+    alert (res.data);
+  });
+}
 
-})
+
+
+
+$scope.add  = function() {
+  Devices.add($scope.device).then(
+    function(res) {
+      updateDevices();
+    },
+    function (res) {
+      alert (res.data);
+    }
+  );
+  $scope.device.io = "input";
+  $scope.device.type = "Pulsante";
+  $scope.device.name = "";
+  $scope.device.description = "";
+}
+
+$scope.getAll = function() {
+  updateBeacons();
+};
+
+$scope.updateDevices = function() {
+  updateDevices();
+};
+
+$scope.deleteBeacon = function(beacon) {
+  Beacons.deleteBeacon(beacon).then(function(res){
+    updateBeacons();
+  },
+  function(res){
+    alert (res.data);
+  });
+};
+
+$scope.cambia_tipo = function() {
+  if($scope.dispositivo.io === "input") {
+    $scope.dispositivo.type = "Pulsante";
+  }else {
+    $scope.dispositivo.type = "Cancello";
+  }
+};
+
+$scope.deleteDevice = function(device) {
+  Devices.deleteDevice(device).then(
+    function(res){
+      updateDevices();
+    },
+    function (res){
+      alert (res.data);
+    }
+  );
+};
+
+
+$scope.showAdd = function(ev) {
+  $mdDialog.show({
+     controller: 'IoCtrl',
+     templateUrl: 'templates/aggiungidispositivo.html',
+
+     targetEvent: ev,
+   })
+   .finally(function() {
+     updateDevices();
+   });
+ };
+
+updateDevices();
+updateBeacons();
+getIos();
+
+
+});
