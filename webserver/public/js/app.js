@@ -18,6 +18,7 @@ var beaconApp = angular.module('beaconApp', [
   'beaconApp.controllers.gpio',
   'beaconApp.controllers.navbar',
   'beaconApp.controllers.aggiungidispositivo',
+  'beaconApp.controllers.settings',
   'beaconApp.filters.io',
   'beaconApp.filters.gpio',
   'beaconApp.filters.dispositivi',
@@ -29,7 +30,8 @@ var beaconApp = angular.module('beaconApp', [
   'beaconApp.services.dispositivi',
   'beaconApp.services.gpio',
   'beaconApp.services.navbar',
-  'beaconApp.services.theme'
+  'beaconApp.services.theme',
+  'beaconApp.services.settings',
 ])
 .run(function($http) {
     $http.defaults.headers.common.Authorization = window.localStorage['Authorization'] || "";

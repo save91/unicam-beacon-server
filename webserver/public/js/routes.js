@@ -41,6 +41,10 @@ function($routeProvider, $mdThemingProvider) {
     templateUrl: 'templates/log.html',
     controller: 'LogCtrl'
   }).
+  when('/settings', {
+    templateUrl: 'templates/settings.html',
+    controller: 'SettingsCtrl'
+  }).
   otherwise({
     redirectTo: '/'
   });
