@@ -23,10 +23,10 @@
       </md-card-title>
     </md-card-content>
     <md-card-actions layout="row" layout-align="end center">
-      <md-button data-ng-click="setOnGPIO(GPIO)" class="md-primary md-raised">
+      <md-button data-ng-click="setGPIO(GPIO.id, 1)" class="md-primary md-raised">
         <span class="bianco">On</span>
       </md-button>
-      <md-button data-ng-click="setOffGPIO(GPIO)" class="md-primary md-raised">
+      <md-button data-ng-click="setGPIO(GPIO.id, 0)" class="md-primary md-raised">
         <span class="bianco">Off</span>
       </md-button>
     </md-menu-item>

@@ -5,38 +5,17 @@ angular.module('beaconApp.controllers.gpio', [])
   var updateGPIO = function () {
     GPIO.getAll().then(function(res) {
       $scope.GPIOs= res.data;
-    },
-    function (res) {
+    }, function (res) {
       alert (res.data);
-    }
-  );
-};
-$scope.setOutputGPIO = function (value) {
-  GPIO.setOutputGPIO(value).then(
-    function(res){
-      alert(res.data);
-    }
-  )
-}
-$scope.setOffGPIO = function (gpio) {
-  gpio.state = false;
-  GPIO.setOutputGPIO(gpio).then(function(res) {
-    updateGPIO();
-  },
-  function(res) {
-    alert (res.data);
-  }
-);
-};
-$scope.setOnGPIO = function (gpio) {
-  gpio.state = true;
-  GPIO.setOutputGPIO(gpio).then(function(res) {
-    updateGPIO();
-  },
-  function(res) {
-    alert (res.data);
-  }
-);
-};
-updateGPIO();
+    });
+  };
+  $scope.setGPIO = function (id, value) {
+    GPIO.setOutputGPIO(id, value).then(function(res) {
+      updateGPIO();
+    },
+    function(res) {
+      alert (res.data);
+    });
+  };
+  updateGPIO();
 })

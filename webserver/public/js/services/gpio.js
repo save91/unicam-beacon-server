@@ -11,8 +11,8 @@ angular.module('beaconApp.services.gpio',[])
     getGPIO: function(gpio){
       return $http.get(MY_SERVER.get() + '/gpio/' + gpio.id);
     },
-    setOutputGPIO: function(gpio){
-      return $http.put(MY_SERVER.get() + '/gpio/' + gpio.id + '/set', {value: gpio.state});
+    setOutputGPIO: function(id, value){
+      return $http.put(MY_SERVER.get() + '/gpio/' + id + '/set', {value: value});
     }
   };
 });
