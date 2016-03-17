@@ -9,17 +9,18 @@
   </div>
 </md-toolbar>
 <md-content class="md-padding">
-<div layout="column">
-  <md-card>
-    <md-card-title>
-      <md-card-title-text>
-        <span class="md-headline">Admin</span>
-        <span class="md-subhead">In questa pagina hai la possibilità di modificare e bloccare gli utenti</span>
-      </md-card-title-text>
-    </md-card-title>
-    <md-card-actions layout="row" layout-align="end center">
-      <md-button ng-click="updateUser()" class="md-raised md-primary">
-        <span class="bianco">Aggiorna Utenti</span></md-button>
+  <div layout="column">
+    <md-card>
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">Admin</span>
+          <span class="md-subhead">In questa pagina hai la possibilità di modificare e bloccare gli utenti</span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-actions layout="row" layout-align="end center">
+        <md-button ng-click="updateUser()" class="md-raised md-primary">
+          <span class="bianco">Aggiorna Utenti</span>
+        </md-button>
       </md-card-actions>
     </md-card>
   </div>
@@ -33,37 +34,39 @@
       <md-card-title>
         <md-card-title-media>
           <div>
-            <img src="img/avatar.JPG" class="md-media-lg card-media" alt="image caption"></div>
-          </md-card-title-media>
-          <md-card-content>
-            <strong class="azzurro">Nome:</strong> {{user.firstname}}<br>
-            <strong class="rosso"> Cognome:</strong> {{user.lastname}}<br>
-            <strong class="arancione"> Permessi:</strong> {{user.permission}}<br>
-          </md-card-title>
-        </md-card-content>
-        <md-card-actions layout="row" layout-align="end center">
-          <md-menu>
-            <md-button class="md-raised md-primary" ng-click="$mdOpenMenu()"><span class="bianco">azioni</span></md-button>
-            <md-menu-content>
-              <md-menu-item>
-                <md-button data-ng-if="!user.block" data-ng-click="blockUser(user)">
-                  <md-icon class="md-alt-text" md-svg-icon="img/block.svg"></md-icon>
-                  Blocca
-                </md-button>
-                <md-button data-ng-if="user.block" data-ng-click="blockUser(user)">
-                  <md-icon md-svg-icon="img/person.svg"></md-icon>
-                    Sblocca</md-button>
-              </md-menu-item>
-              <md-menu-divider></md-menu-divider>
-              <md-menu-item>
-                <md-button ng-click="showAdd(user)">
-                  <md-icon md-svg-icon="img/penna.svg"></md-icon>
-                  Modifica
-                </md-button>
-              </md-menu-item>
-            </md-menu-content>
-          </md-menu>
-        </md-card-actions>
-      </md-card>
-    </div>
+            <img src="img/avatar.JPG" class="md-media-lg card-media" alt="image caption">
+          </div>
+        </md-card-title-media>
+        <md-card-content>
+          <strong class="azzurro">Nome:</strong> {{user.firstname}}<br>
+          <strong class="rosso"> Cognome:</strong> {{user.lastname}}<br>
+          <strong class="arancione"> Permessi:</strong> {{user.permission}}<br>
+        </md-card-title>
+      </md-card-content>
+      <md-card-actions layout="row" layout-align="end center">
+        <md-menu>
+          <md-button class="md-raised md-primary" ng-click="$mdOpenMenu()"><span class="bianco">azioni</span></md-button>
+          <md-menu-content>
+            <md-menu-item>
+              <md-button data-ng-if="!user.block" data-ng-click="blockUser(user)">
+                <md-icon class="md-alt-text" md-svg-icon="img/block.svg"></md-icon>
+                Blocca
+              </md-button>
+              <md-button data-ng-if="user.block" data-ng-click="blockUser(user)">
+                <md-icon md-svg-icon="img/person.svg"></md-icon>
+                Sblocca
+              </md-button>
+            </md-menu-item>
+            <md-menu-divider></md-menu-divider>
+            <md-menu-item>
+              <md-button ng-click="showAdd(user)">
+                <md-icon md-svg-icon="img/penna.svg"></md-icon>
+                Modifica
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+      </md-card-actions>
+    </md-card>
+  </div>
 </md-content>

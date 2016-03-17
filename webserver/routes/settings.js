@@ -1,5 +1,6 @@
 //Object setting
 var settings = {};
+var exec = require('child_process').exec;
 var environment = process.env.NODE_ENV
 if(environment === "development") {
   var gpio = require('../routes/gpio-fake');
@@ -19,11 +20,29 @@ settings.hello = function (req, res) {
 };
 
 settings.halt = function (req, res) {
-  res.status(200).send("halt");
+  exec("halt", function (error, stdout, stderr) {
+    console.log('exec: ' + stdout);
+    console.log('stderr: ' + stderr);
+    if (error !== null) {
+      console.log('exec error: ' + error);
+      res.status(403).send("permesso negato");
+    } else {
+      res.status(200).send("halt");
+    }
+  });
 };
 
 settings.reboot = function (req, res) {
-  res.status(200).send("reboot");
+  exec("reboot", function (error, stdout, stderr) {
+    console.log('exec: ' + stdout);
+    console.log('stderr: ' + stderr);
+    if (error !== null) {
+      console.log('exec error: ' + error);
+      res.status(403).send("permesso negato");
+    } else {
+      res.status(200).send("reboot");
+    }
+  });
 };
 
 settings.exit = function (req, res) {

@@ -24,10 +24,10 @@ angular.module('beaconApp.controllers.aggiungidispositivo', [])
         $mdDialog.hide();
       },
       function (res) {
-        alert (res.data);
+        alert(res.data);
       },
       function(res) {
-
+        $scope.
         $scope.device.io = "input";
         $scope.device.type = "Pulsante";
         $scope.device.name = "";
