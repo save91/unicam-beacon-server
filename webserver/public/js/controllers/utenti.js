@@ -9,7 +9,15 @@ angular.module('beaconApp.controllers.utenti', [])
       $scope.users = res.data;
     },
     function (res) {
-      alert (res.data);
+      alert = $mdDialog.alert()
+           .title('Attenzione')
+           .content(res.data)
+           .ok('Chiudi');
+           $mdDialog
+          .show( alert )
+          .finally(function() {
+            alert = undefined;
+          });
     });
   };
   $scope.blockUser = function (user) {
@@ -22,15 +30,24 @@ angular.module('beaconApp.controllers.utenti', [])
       $scope.updateUser();
     },
     function(res) {
-      alert (res.data);
+      alert = $mdDialog.alert()
+           .title('Attenzione')
+           .content(res.data)
+           .ok('Chiudi');
+           $mdDialog
+          .show( alert )
+          .finally(function() {
+            alert = undefined;
+          });
     }
   );
 };
 $scope.showAdd = function(user, ev) {
-  $scope.user = user;
   $mdDialog.show({
     controller : 'UtenteCtrl',
-    scope: $scope,
+    locals: {
+      user: user
+    },
     templateUrl: 'templates/utente.html',
 
     targetEvent: ev,

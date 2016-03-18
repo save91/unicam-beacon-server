@@ -1,29 +1,20 @@
 
 angular.module('beaconApp.controllers.registra_ibeacon', [])
 
-.controller('RegistraiBeaconCtrl', function($scope, $routeParams, $location, Beacons, Dispositivi) {
-  $scope.dispositivo = {};
-  var visualizza = function(risposta) {
-    $scope.bloccato = false;
-    $scope.dispositivo = {
-      type : "iBeacon",
-      io : "null",
-      nome : "",
-      descrizione : "",
-      permessi : "",
-      caratteristiche : {
-        uuid : risposta.beacon.uuid,
-        major : risposta.beacon.major,
-        minor : risposta.beacon.minor
-      }
-    }
+.controller('RegistraiBeaconCtrl', function($scope, $rootScope, Devices, Beacons, beacon, $mdDialog) {
+  $scope.beacon = {};
+  $scope.beacon.properties = beacon;
+  $scope.closeDialog = function() {
+    $mdDialog.hide();
   };
-  Beacons.getBeacon($routeParams.id).then(visualizza);
+  $scope.add  = function() {
 
-  $scope.aggiungi = function() {
-    Dispositivi.aggiungi($scope.dispositivo);
-    Beacons.eliminaBeacon($routeParams.id);
-    $location.path("/dispositivi");
-  };
-
-})
+    $scope.beacon.io = "null";
+    $scope.beacon.type = "Beacon";
+    Devices.add($scope.beacon).then(
+      function(res) {
+        Beacons.deleteBeacon(beacon);
+        $mdDialog.hide();
+      });
+    };
+  })

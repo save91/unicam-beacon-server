@@ -1,7 +1,7 @@
 
 angular.module('beaconApp.controllers.login', [])
 
-.controller('LoginCtrl', function($scope, $location, $http, Login) {
+.controller('LoginCtrl', function($scope, $location, $http, Login, $mdDialog) {
   $scope.user = null;
   if(localStorage["user"]) {
     $scope.user = JSON.parse(localStorage.getItem("user"));
@@ -11,7 +11,6 @@ angular.module('beaconApp.controllers.login', [])
 
   $scope.login = function(username, password) {
     Login.login(username, password).then(function(res) {
-      alert('Login effettuato');
       window.localStorage['Authorization'] = 'Basic '+ window.btoa(username +':'+password);
       $http.defaults.headers.common.Authorization = window.localStorage['Authorization'];
       localStorage.setItem("user", JSON.stringify(res.data));
@@ -19,7 +18,15 @@ angular.module('beaconApp.controllers.login', [])
       $scope.autenticato = true;
     },
     function(res) {
-      alert('login fallito');
+      alert = $mdDialog.alert()
+         .title('Attenzione')
+         .content('Username o Password errato/i!')
+         .ok('Chiudi');
+         $mdDialog
+        .show( alert )
+        .finally(function() {
+          alert = undefined;
+        });
     });
   };
   $scope.errore = function($scope) {
@@ -28,7 +35,14 @@ angular.module('beaconApp.controllers.login', [])
     };
   };
   $scope.logout = function(){
-    alert ('logoutEffettuato');
+    alert = $mdDialog.alert()
+         .content('logout effettuato')
+         .ok('Chiudi');
+         $mdDialog
+        .show( alert )
+        .finally(function() {
+          alert = undefined;
+        });
     $http.defaults.headers.common.Authorization= "";
     localStorage.removeItem("user");
     localStorage.removeItem("Authorization")

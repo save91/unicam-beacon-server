@@ -1,18 +1,30 @@
-<div ng-repeat="device in devices">
-    <p><strong>Nome:</strong> {{device.name}}</p>
-    <p><strong>Descrizione:</strong> {{device.description}}</p>
-    <p><strong>Tipo:</strong> {{device.type}}</p>
-    <p>GPIO associato:
-      <select class="form-control" data-ng-options="gpio.id as gpio.GPIO for gpio in GPIOs|GPIOFilter:'output':dispositivo.id" data-ng-model="dispositivo.id_GPIO" data-ng-change="cambia(dispositivo.id_GPIO, dispositivo.id)">
-      </select>
-    </p>
-    <p>iBeacon associato:
-      <select class="form-control" data-ng-options="ibeacon.id as ibeacon.nome for ibeacon in dispositivi|BeaconFilter" data-ng-change="cambiaBeacon(dispositivo.id, dispositivo.id_ibeacon)" data-ng-model="dispositivo.id_ibeacon">
-      </select>
-    </p>
-    <div ng-show="dispositivo.id_ibeacon !== 0" style="clear:both;">
-      Automatico:
-      <input  type="checkbox" ng-model="dispositivo.automatico"  ng-change="salvaDispositivo(dispositivo.id, dispositivo.automatico)">
+<md-toolbar>
+  <div class="md-toolbar-tools md-whiteframe-z2" md-scroll-shrink>
+    <md-button  hide-gt-sm ng-click="toggleSidenav('left')" class="md-icon-button" aria-label="Settings">
+      <i class="material-icons bianco">menu</i>
+    </md-button>
+    <h2>
+      <span class="bianco">Operazioni</span>
+    </h2>
+  </div>
+</md-toolbar>
+<md-content>
 
-</div>
+</md-content>
+<div ng-repeat="device in devices"
+<p><strong>Nome:</strong> {{device.name}}</p>
+<p><strong>Descrizione:</strong> {{device.description}}</p>
+<p><strong>Tipo:</strong> {{device.type}}</p>
+<p>GPIO associato:
+  <select class="form-control" data-ng-options="gpio.id as gpio.GPIO for gpio in GPIOs|GPIOFilter:'output':dispositivo.id" data-ng-model="dispositivo.id_GPIO" data-ng-change="cambia(dispositivo.id_GPIO, dispositivo.id)">
+  </select>
+</p>
+<p>iBeacon associato:
+  <select class="form-control" data-ng-options="ibeacon.id as ibeacon.nome for ibeacon in dispositivi|BeaconFilter" data-ng-change="cambiaBeacon(dispositivo.id, dispositivo.id_ibeacon)" data-ng-model="dispositivo.id_ibeacon">
+  </select>
+</p>
+<div ng-show="dispositivo.id_ibeacon !== 0" style="clear:both;">
+  Automatico:
+  <input  type="checkbox" ng-model="dispositivo.automatico"  ng-change="salvaDispositivo(dispositivo.id, dispositivo.automatico)">
+
 </div>

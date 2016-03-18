@@ -5,6 +5,9 @@ angular.module('beaconApp.services.dispositivi',[])
     getAll: function() {
       return $http.get( MY_SERVER.get() + '/device');
     },
+    getIos: function() {
+      return $http.get( MY_SERVER.get() + '/io');
+    },
     add: function(device) {
       return $http.post(MY_SERVER.get() + '/device', device);
     },

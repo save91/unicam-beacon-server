@@ -47,7 +47,7 @@
           <p class="bianco">iBeacons non registrati:</p>
         </md-toolbar>
         <md-tabs class="tabsdemoDynamicHeight" md-dynamic-height md-border-bottom>
-          <md-tab ng-repeat="beacon in beacons" label={{$index}}>
+          <md-tab ng-repeat="beacon in beacons | stateFilter" label={{$index}}>
             <md-content class="md-padding">
               <strong class="lime">Id:</strong> {{beacon.id}}<br>
               <strong class="azzurro">Uuid:</strong> {{beacon.uuid}}<br>
@@ -64,7 +64,9 @@
                     </md-menu-item>
                     <md-menu-divider></md-menu-divider>
                     <md-menu-item>
-                      <md-button href="#registra_ibeacon/{{beacon.id}}"><md-icon md-svg-icon="img/penna.svg"></md-icon>Registra iBeacon </md-button>
+                      <md-button ng-click="showAdd1(beacon)">
+                        <md-icon md-svg-icon="img/penna.svg"></md-icon>Registra iBeacon
+                      </md-button>
                     </md-menu-item>
                   </md-menu-content>
                 </md-menu>

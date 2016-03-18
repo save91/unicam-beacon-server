@@ -28,4 +28,14 @@ angular.module('beaconApp.filters.dispositivi', [])
       }
     return out;
   };
+})
+  .filter('stateFilter', function() {
+    return function(input) {
+      var out = [];
+        for (var i = 0; i < input.length; i++){
+            if(input[i].state === 1 )
+                out.push(input[i]);
+        }
+      return out;
+    };
 });
