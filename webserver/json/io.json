@@ -1,8 +1,0 @@
-[
-  {"id":"1","type":"input","name":"Pulsante"},
-  {"id":"2","type":"input","name":"Orologio"},
-  {"id":"3","type":"input","name":"Fotocellula"},
-  {"id":"4","type":"output","name":"Cancello"},
-  {"id":"5","type":"output","name":"Apriporta"},
-  {"id":"6","type":"output","name":"Lampada"}
-]
