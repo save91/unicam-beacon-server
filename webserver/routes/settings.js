@@ -20,6 +20,7 @@ settings.hello = function (req, res) {
 };
 
 settings.halt = function (req, res) {
+  gpio.unexportPins();
   exec("halt", function (error, stdout, stderr) {
     console.log('exec: ' + stdout);
     console.log('stderr: ' + stderr);
@@ -33,6 +34,7 @@ settings.halt = function (req, res) {
 };
 
 settings.reboot = function (req, res) {
+  gpio.unexportPins();
   exec("reboot", function (error, stdout, stderr) {
     console.log('exec: ' + stdout);
     console.log('stderr: ' + stderr);

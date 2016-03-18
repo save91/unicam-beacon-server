@@ -5,11 +5,7 @@ var gpio = {};
 var execute = require('child_process').exec;
 
 gpio.io = function (req, res) {
-  if(!req.user.block) {
-    res.status(200).send(req.io);
-  } else {
-    res.status(401).send("Authentication required");
-  }
+  res.status(200).send(req.io);
 };
 
 gpio.gpio = function (req, res) {

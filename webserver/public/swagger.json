@@ -1,0 +1,1124 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "API REST ",
+        "version": "1.0.0",
+        "title": "Swagger MyNerdOffice",
+        "contact": {
+            "email": "saverio.tosi@studenti.unicam.it"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "host": "192.168.1.104:8000",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "user",
+            "description": "Everything about Users"
+        },
+        {
+            "name": "device",
+            "description": "Everything about Devices"
+        },
+        {
+            "name": "beacon",
+            "description": "Everything about Beacons"
+        },
+        {
+            "name": "gpio",
+            "description": "Everything about GPIO"
+        },
+        {
+            "name": "io",
+            "description": "Everything about IO"
+        },
+        {
+            "name": "setting",
+            "description": "Everything about Settings"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "securityDefinitions": {
+        "basicAuth": {
+            "type": "basic",
+            "description": "HTTP Basic Authentication. Works over `HTTP` and `HTTPS`"
+        }
+    },
+    "paths": {
+        "/user": {
+            "get": {
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "Get array of user",
+                "description": "",
+                "operationId": "getUsers",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/User"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Authorization required"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Create user",
+                "description": "This can be done by everyone for registration.",
+                "operationId": "createUser",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "username",
+                        "description": "Username",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "firstname",
+                        "description": "Firstname",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "lastname",
+                        "description": "Lastname",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "password",
+                        "description": "Password",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/user/login": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Logs user into the system",
+                "description": "",
+                "operationId": "loginUser",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "username",
+                        "description": "The user name for login",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "password",
+                        "description": "The password for login in clear text",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    }
+                }
+            }
+        },
+        "/user/check_username": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Check username",
+                "description": "",
+                "operationId": "checkUsername",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "formData",
+                        "description": "The user name to check",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The username exist"
+                    },
+                    "404": {
+                        "description": "The username does not exist"
+                    }
+                }
+            }
+        },
+        "/user/{username}": {
+            "get": {
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "Get user by username",
+                "description": "",
+                "operationId": "getUserByName",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "path",
+                        "description": "The name that needs to be fetched.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "Updated user",
+                "description": "This can only be done by the admin.",
+                "operationId": "updateUser",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "path",
+                        "description": "username of the user that that need to be updated",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "firstname",
+                        "description": "Firstname",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "lastname",
+                        "description": "Lastname",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "permission",
+                        "description": "Permission",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "block",
+                        "description": "Permission",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseUser"
+                        }
+                    },
+                    "401": {
+                        "description": "Authentication required"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            }
+        },
+        "/device": {
+            "get": {
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ],
+                "tags": [
+                    "device"
+                ],
+                "summary": "Get array of Device",
+                "description": "",
+                "operationId": "getDevices",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Device"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Authorization required"
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ],
+                "tags": [
+                    "device"
+                ],
+                "summary": "Create a new device Device",
+                "description": "",
+                "operationId": "addDevices",
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "type",
+                        "description": "type of device",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "io",
+                        "description": "input or output",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "permission",
+                        "description": "permission",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "properties",
+                        "description": "Properties",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Authorization required"
+                    }
+                }
+            }
+        },
+        "/device/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ],
+                "tags": [
+                    "device"
+                ],
+                "summary": "Get one Device",
+                "description": "",
+                "operationId": "getDevice",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The id that needs to be fetched.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Device"
+                        }
+                    },
+                    "401": {
+                        "description": "Authorization required"
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ],
+                "tags": [
+                    "device"
+                ],
+                "summary": "Edit one Device",
+                "description": "",
+                "operationId": "addDevice",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The id of Device that needs to be updated.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "automatic",
+                        "description": "Set the type of operation",
+                        "required": true,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Device"
+                        }
+                    },
+                    "401": {
+                        "description": "Authorization required"
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ],
+                "tags": [
+                    "device"
+                ],
+                "summary": "Delete Device",
+                "description": "",
+                "operationId": "deleteDevice",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The id of Device that needs to be deleted.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Authorization required"
+                    },
+                    "404": {
+                        "description": "Device not found"
+                    }
+                }
+            }
+        },
+        "/device/ibeacon": {
+            "post": {
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ],
+                "tags": [
+                    "device"
+                ],
+                "summary": "Set the association between Device & Beacon",
+                "description": "",
+                "operationId": "editBeaconsDevices",
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "id_device",
+                        "description": "ID of the device",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "id_ibeacon",
+                        "description": "ID of the beacon",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Authorization required"
+                    },
+                    "404": {
+                        "description": "Device not found"
+                    }
+                }
+            }
+        },
+        "/device/output": {
+            "get": {
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ],
+                "tags": [
+                    "device"
+                ],
+                "summary": "Get array of output Devices",
+                "description": "",
+                "operationId": "getUnregisteredDevices",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Device"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Authorization required"
+                    }
+                }
+            }
+        },
+        "/beacon": {
+            "get": {
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ],
+                "tags": [
+                    "beacon"
+                ],
+                "summary": "Get array of beacons",
+                "description": "",
+                "operationId": "getBeacons",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Beacon"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Authorization required"
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ],
+                "tags": [
+                    "beacon"
+                ],
+                "summary": "Add a new beacon",
+                "description": "",
+                "operationId": "postBeacon",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "formData",
+                        "description": "The uuid of the beacon.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "major",
+                        "in": "formData",
+                        "description": "The major id of the beacon.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "minor",
+                        "in": "formData",
+                        "description": "The minor of the beacon.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Authorization required"
+                    }
+                }
+            }
+        },
+        "/beacon/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ],
+                "tags": [
+                    "beacon"
+                ],
+                "summary": "Get beacon by ID",
+                "description": "",
+                "operationId": "getBeacon",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The id that needs to be fetched.",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Beacon"
+                        }
+                    },
+                    "401": {
+                        "description": "Authorization require"
+                    },
+                    "404": {
+                        "description": "Beacon not found"
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ],
+                "tags": [
+                    "beacon"
+                ],
+                "summary": "Delete a beacon",
+                "description": "",
+                "operationId": "deleteBeacon",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The id of the beacon to delete.",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Authorization required"
+                    }
+                }
+            }
+        },
+        "/beacon/unregistered": {
+            "get": {
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ],
+                "tags": [
+                    "beacon"
+                ],
+                "summary": "Get array of unregistered beacons",
+                "description": "",
+                "operationId": "getUnregistaredBeacons",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Beacon"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Authorization required"
+                    }
+                }
+            }
+        },
+        "/gpio": {
+            "get": {
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ],
+                "tags": [
+                    "gpio"
+                ],
+                "summary": "Get array of GPIO",
+                "description": "",
+                "operationId": "getGPIOs",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/GPIO"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Authorization required"
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ],
+                "tags": [
+                    "gpio"
+                ],
+                "summary": "Edit a GPIO",
+                "description": "Bind between GPIO and output device",
+                "operationId": "editGPIO",
+                "parameters": [
+                    {
+                        "name": "id_gpio",
+                        "in": "formData",
+                        "description": "The id of the GPIO.",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "id_device",
+                        "in": "formData",
+                        "description": "The id of the output Device.",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Authorization required"
+                    }
+                }
+            }
+        },
+        "/gpio/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ],
+                "tags": [
+                    "gpio"
+                ],
+                "summary": "Get a GPIO",
+                "description": "",
+                "operationId": "getGPIO",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The id that needs to be fetched.",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/GPIO"
+                        }
+                    },
+                    "401": {
+                        "description": "Authorization required"
+                    },
+                    "404": {
+                        "description": "GPIO not found"
+                    }
+                }
+            }
+        },
+        "/gpio/{id}/set": {
+            "put": {
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ],
+                "tags": [
+                    "gpio"
+                ],
+                "summary": "Set the output of the GPIO",
+                "description": "",
+                "operationId": "setBeacons",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The id of the GPIO to set.",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "value",
+                        "in": "formData",
+                        "description": "The new value of the GPIO",
+                        "required": true,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Authorization required"
+                    },
+                    "404": {
+                        "description": "GPIO not found"
+                    }
+                }
+            }
+        },
+        "/hello": {
+            "get": {
+                "tags": [
+                    "setting"
+                ],
+                "summary": "Use to detect if the server is up",
+                "description": "",
+                "operationId": "hello",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The server is up",
+                        "schema": {
+                            "$ref": "#/definitions/HelloPacket"
+                        }
+                    }
+                }
+            }
+        },
+        "/io": {
+            "get": {
+                "tags": [
+                    "setting"
+                ],
+                "summary": "Use to get the list of IO type",
+                "description": "",
+                "operationId": "io",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The list of IO type",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/IO"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "User": {
+            "type": "object",
+            "properties": {
+                "username": {
+                    "type": "string"
+                },
+                "firstname": {
+                    "type": "string"
+                },
+                "lastname": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "permission": {
+                    "type": "integer"
+                },
+                "block": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "ResponseUser": {
+            "type": "object",
+            "properties": {
+                "username": {
+                    "type": "string"
+                },
+                "firstname": {
+                    "type": "string"
+                },
+                "lastname": {
+                    "type": "string"
+                },
+                "permission": {
+                    "type": "integer"
+                },
+                "block": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "Device": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "io": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "permission": {
+                    "type": "integer"
+                },
+                "id_GPIO": {
+                    "type": "integer"
+                },
+                "id_ibeacon": {
+                    "type": "integer"
+                },
+                "properties": {
+                    "type": "object"
+                }
+            }
+        },
+        "Beacon": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "uuid": {
+                    "type": "string"
+                },
+                "major": {
+                    "type": "string"
+                },
+                "minor": {
+                    "type": "string"
+                },
+                "state": {
+                    "type": "integer"
+                }
+            }
+        },
+        "GPIO": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "GPIO": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "permission": {
+                    "type": "integer"
+                },
+                "id_GPIO": {
+                    "type": "integer"
+                },
+                "id_ibeacon": {
+                    "type": "integer"
+                }
+            }
+        },
+        "HelloPacket": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "version": {
+                    "type": "string"
+                }
+            }
+        },
+        "IO": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

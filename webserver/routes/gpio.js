@@ -4,12 +4,8 @@ var GPIO_FILE = ("json/gpio.json");
 var gpio = {};
 var execute = require('child_process').exec;
 
-gpio.io = function (req, res) {
-  if(!req.user.block) {
-    res.status(200).send(req.io);
-  } else {
-    res.status(401).send("Authentication required");
-  }
+gpio.io = function (req, res) {  
+  res.status(200).send(req.io);
 };
 
 gpio.gpio = function (req, res) {
@@ -39,9 +35,9 @@ gpio.gpio_set = function (req, res, next) {
         } else {
           req.gpio[pos].stato = val;
           var action = "acceso";
-	  if(val === 0) {
-	    action = "spento";
-          }	
+          if(val === 0) {
+            action = "spento";
+          }
           execute('espeak -v it "' + req.user.firstname + ' ha ' + action  + ' un led" 2>/dev/null');
           res.status(200).send("Success");
           next();

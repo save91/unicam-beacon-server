@@ -71,11 +71,9 @@ app.get('/setting/halt', settings.halt);
 app.get('/setting/reboot', settings.reboot);
 app.get('/setting/exit', settings.exit);
 app.get('/setting/update', settings.update);
-//app.put('/setting');
-//app.get('/setting/:operazione');
 
 //Routing API io
-//app.get('/io', [datamanager.get_io, gpio.io]);
+app.get('/io', [datamanager.get_io, gpio.io]);
 
 // Express routes for any other unrecognised incoming requests
 app.get('*', function (req, res) {
