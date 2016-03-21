@@ -2,7 +2,6 @@
 var fs = require('fs');
 var GPIO_FILE = ("json/gpio.json");
 var gpio = {};
-var execute = require('child_process').exec;
 
 gpio.io = function (req, res) {
   res.status(200).send(req.io);
@@ -31,7 +30,6 @@ gpio.gpio_set = function (req, res, next) {
     }
     if(pos>=0) {
       res.status(200).send("Success");
-      execute('espeak -v it "' + req.user.firstname + ' ha effettuato un operazione"');
       next();
     } else {
       res.status(404).send("GPIO not found");
@@ -105,6 +103,8 @@ gpio.gpio_get = function (req, res, next) {
 function setPin(pin, value, callback) {
   console.log("Setting pin "+pin+" to " + value);
 }
+
+gpio.setPin = setPin;
 
 function readStatus(PIN, callback) {
   console.log("Reading pin "+PIN);

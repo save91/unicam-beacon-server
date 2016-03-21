@@ -49,6 +49,7 @@ app.post('/device', [datamanager.get_devices, devices.add_device, datamanager.se
 app.get('/device/output', [datamanager.get_devices, datamanager.get_gpio, devices.output_devices]);
 app.get('/device/:id', [datamanager.get_devices, devices.device]);
 app.put('/device/:id', [datamanager.get_devices, devices.update_device, datamanager.set_devices]);
+app.put('/device/:id/:action', [datamanager.get_devices, datamanager.get_gpio, devices.action_device, datamanager.set_devices]);
 app.delete('/device/:id', [datamanager.get_devices, devices.delete_device ,datamanager.set_devices]);
 app.post('/device/ibeacon', [datamanager.get_devices, devices.device_ibeacon, datamanager.set_devices]);
 

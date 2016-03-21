@@ -2,9 +2,8 @@ var fs = require('fs');
 var GPIO = require('rpi-gpio');
 var GPIO_FILE = ("json/gpio.json");
 var gpio = {};
-var execute = require('child_process').exec;
 
-gpio.io = function (req, res) {  
+gpio.io = function (req, res) {
   res.status(200).send(req.io);
 };
 
@@ -38,7 +37,6 @@ gpio.gpio_set = function (req, res, next) {
           if(val === 0) {
             action = "spento";
           }
-          execute('espeak -v it "' + req.user.firstname + ' ha ' + action  + ' un led" 2>/dev/null');
           res.status(200).send("Success");
           next();
         }
@@ -130,7 +128,9 @@ function setPin(pin, value, callback) {
     }
     callback();
   });
-}
+};
+
+gpio.setPin = setPin;
 
 function readStatus(PIN, callback) {
   console.log("reading pin "+PIN);
@@ -142,7 +142,7 @@ function readStatus(PIN, callback) {
     }
     callback(null,value);
   });
-}
+};
 
 gpio.init = function () {
   GPIO.on('change', function(channel, value) {

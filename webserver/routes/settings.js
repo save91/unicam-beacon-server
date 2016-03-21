@@ -4,10 +4,8 @@ var exec = require('child_process').exec;
 var environment = process.env.NODE_ENV
 if(environment === "development") {
   var gpio = require('../routes/gpio-fake');
-  console.log("PC...booting");
 } else {
   var gpio = require('../routes/gpio');
-  console.log("Raspberry...booting");
 }
 
 settings.hello = function (req, res) {

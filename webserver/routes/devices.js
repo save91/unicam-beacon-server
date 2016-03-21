@@ -1,4 +1,11 @@
 var devices = {};
+var environment = process.env.NODE_ENV;
+var execute = require('child_process').exec;
+if(environment === "development") {
+  var gpio = require('../routes/gpio-fake');
+} else {
+  var gpio = require('../routes/gpio');
+}
 
 devices.device_ibeacon = function (req, res, next) {
   if(req.user.permission === 0 && req.user.block === false) {
@@ -74,6 +81,71 @@ devices.update_device = function (req, res, next) {
   }
 };
 
+devices.action_device = function (req, res, next) {
+  if(req.user.block === false) {
+    var message = "";
+    var pos = -1;
+    var i = 0;
+    var id = parseInt(req.params.id);
+    var action = req.params.action;
+    while(pos===-1 && i<req.devices.length) {
+      if(req.devices[i].id===id) {
+        pos = i;
+      }
+      i++;
+    }
+    if(pos>=0 && req.user.permission <= req.devices[pos].permission) {
+      var i = 0;
+      var app = -1;
+      while(app===-1 && i<req.devices.length) {
+        if(req.gpio[i].id===req.devices[pos].id_GPIO) {
+          app = i;
+        }
+        i++;
+      }
+      if(app >= 0) {
+        message += req.user.firstname + " ha ";
+        switch (action) {
+          case 'on':
+          gpio.setPin(req.gpio[app].GPIO, 1, function(err) {
+            if(err) {
+              console.log("Something went wrong");
+            }
+          });
+          message += "acceso ";
+          break;
+          case 'off':
+          gpio.setPin(req.gpio[app].GPIO, 0, function(err) {
+            if(err) {
+              console.log("Something went wrong");
+            }
+          });
+          message += "spento ";
+          break;
+          case 'open':
+          gpio.setPin(req.gpio[app].GPIO, 1, function(err) {
+            if(err) {
+              console.log("Something went wrong");
+            }
+          });
+          message += "aperto ";
+          break;
+        }
+        message += req.devices[pos].name;
+        execute('espeak -v it "' + message + '" 2>/dev/null');
+        res.status(200).send("Success");
+        next();
+      } else {
+        res.status(404).send("Gpio not found");
+      }
+    } else {
+      res.status(404).send("Device not found");
+    }
+  } else {
+    res.status(401).send("Authentication required");
+  }
+};
+
 devices.devices = function (req, res) {
   debugger;
   if(req.user.block === false) {
@@ -91,14 +163,12 @@ devices.output_devices = function (req, res) {
   var pos;
   if(req.user.block === false) {
     for(var i = 0; i < req.devices.length; i++) {
-      if(req.devices[i].io === "output" && req.devices[i].id_GPIO !== 0) {
+      if(req.devices[i].io === "output" && req.devices[i].id_GPIO !== 0 && req.user.permission <= req.devices[i].permission) {
         device = {};
-        device.name = req.devices[i].nome;
+        device.id = req.devices[i].id;
+        device.name = req.devices[i].name;
         device.description = req.devices[i].description;
-        device.state = req.devices[i].state;
-        //TEMPORANEO
-        device.id_GPIO = req.devices[i].id_GPIO;
-        //TEMPORANEO
+        device.type = req.devices[i].type;
         device.distance = "Sconosciuta";
         device.proximity = "ProximityFar";
         device.automatic = req.devices[i].automatic;
@@ -119,9 +189,9 @@ devices.output_devices = function (req, res) {
         }
         j = 0;
         pos = -1;
-        while(pos === -1 && j < req.devices.length) {
+        while(pos === -1 && j < req.gpio.length) {
           if(req.gpio[j].id === req.devices[i].id_GPIO) {
-            trovato = 1;
+            pos = j;
             if(req.gpio[j].state === true || req.gpio[j].state === 1) {
               devices.state = true;
             }else {
