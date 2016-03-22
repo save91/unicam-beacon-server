@@ -48,12 +48,13 @@
 </head>
 <body class="sfondo" layout="row" md-theme="{{ theme.color }}" md-theme-watch  ng-controller="NavigationController">
   <md-sidenav ng-if="user.username !== ''" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
-    <md-toolbar class="md-tall md-hue-2 md-whiteframe-z2">
-      <div layout="column" class="md-toolbar-tools-bottom inset">
-        <center><img src="img/logo.png" class="logo"></center>
+    <md-toolbar md-scroll>
+      <div  class="inset">
+        <img src="img/logo.png" class="logo">
+        <span>roximity System</span>
       </div>
-      <center><div>Proximity System</div></center>
     </md-toolbar>
+    <md-content>
     <md-list>
       <md-list-item ng-repeat="nav1 in nav">
         <div class="inset grigio">
@@ -64,6 +65,7 @@
         </md-button>
       </md-list-item>
     </md-list>
+  </md-content>
   </md-sidenav>
   <div class="sfondo" layout="column" layout-fill  ng-view >
   </div>
