@@ -9,6 +9,16 @@ angular.module('beaconApp.filters.dispositivi', [])
     return out;
   };
 })
+.filter('DeviceOutputFilter', function() {
+  return function(input) {
+    var out = [];
+      for (var i = 0; i < input.length; i++){
+          if(input[i].io === 'output')
+              out.push(input[i]);
+      }
+    return out;
+  };
+})
 .filter('TypeandSearchDeviceFilter', function() {
   return function(input, tipo, query) {
     var out = [];
@@ -23,7 +33,7 @@ angular.module('beaconApp.filters.dispositivi', [])
   return function(input) {
     var out = [];
       for (var i = 0; i < input.length; i++){
-          if(input[i].type === "iBeacon" )
+          if(input[i].type === "ibeacon" )
               out.push(input[i]);
       }
     return out;

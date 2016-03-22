@@ -18,8 +18,8 @@ angular.module('beaconApp.services.dispositivi',[])
       return $http.get(MY_SERVER.get() + '/device/' + device.id);
     },
 
-    editDevice: function(id, automatic) {
-      return $http.put(MY_SERVER.get() + '/device/' + device.id,{automatic:automatic});
+    editDevice: function(device) {
+      return $http.put(MY_SERVER.get() + '/device/' + device.id, device);
     },
     setBeaconDevice: function(device, beacon){
       return $http.post(MY_SERVER.get() + '/device/ibeacon', {id_device: device.id, id_beacon:beacon.id} )

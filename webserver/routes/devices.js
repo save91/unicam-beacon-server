@@ -71,6 +71,8 @@ devices.update_device = function (req, res, next) {
     }
     if(pos>=0) {
       req.devices[pos].automatic = automatic;
+      req.devices[pos].id_GPIO = req.body.id_GPIO;
+      req.devices[pos].id_ibeacon = req.body.id_ibeacon;
       res.status(200).send(req.devices[pos]);
       next();
     } else {
