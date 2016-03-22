@@ -8,8 +8,8 @@
     </h2>
   </div>
 </md-toolbar>
-<md-content class="md-padding">
-  <div layout="column">
+<md-content>
+  <div class="md-padding sfondo" layout="column">
     <md-card>
       <md-card-title>
         <md-card-title-text>
@@ -24,8 +24,9 @@
       </md-card-actions>
     </md-card>
   </div>
-  <div layout="row" layout-wrap>
-    <md-card flex="49" ng-repeat="user in users">
+  <div class="sfondo" layout="row" layout-xs="column" layout-wrap>
+    <div flex-xs flex-gt-xs="50" ng-repeat="user in users">
+    <md-card >
       <md-toolbar class="md-whiteframe-z2">
         <div layout="row" layout-align="center center">
           <p class="bianco">{{user.username}}</p>
@@ -41,8 +42,9 @@
           <strong class="azzurro">Nome:</strong> {{user.firstname}}<br>
           <strong class="rosso"> Cognome:</strong> {{user.lastname}}<br>
           <strong class="arancione"> Permessi:</strong> {{user.permission}}<br>
+            </md-card-content>
         </md-card-title>
-      </md-card-content>
+
       <md-card-actions layout="row" layout-align="end center">
         <md-menu>
           <md-button class="md-raised md-primary" ng-click="$mdOpenMenu()"><span class="bianco">azioni</span></md-button>
@@ -68,5 +70,6 @@
         </md-menu>
       </md-card-actions>
     </md-card>
+  </div>
   </div>
 </md-content>

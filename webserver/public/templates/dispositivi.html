@@ -8,73 +8,75 @@
     </h2>
   </div>
 </md-toolbar>
-<md-content layout="row" layout-xs="column" class="md-padding">
-  <div flex-xs flex-gt-xs="50">
-    <md-card>
-      <md-card-title>
-        <md-card-title-text>
-          <span class="md-headline">Gestione dispositivi</span>
-          <span class="md-subhead">In questa pagina hai la possibilità di aggiungere nuovi dispositivi,
-            sia di ingresso che di uscita, e registrarne di nuovi, inizia subito cliccando il tasto +!</span>
-          </md-card-title-text>
-        </md-card-title>
-      </md-card>
+<md-content >
+  <div  class="md-padding sfondo" layout="row" layout-xs="column">
+    <div flex-xs flex-gt-xs="50" >
       <md-card>
-        <md-toolbar class="md-whiteframe-z2">
-          <p class="bianco">Elenco Dispositivi:</p>
-        </md-toolbar>
-        <md-tabs class="tabsdemoDynamicHeight" md-dynamic-height md-border-bottom>
-          <md-tab ng-repeat="device in devices" label="{{device.name}}">
-            <md-content class="md-padding">
-              <strong class="rosso">Nome:</strong> {{device.name}}<br>
-              <strong class="lime">Id:</strong> {{device.id}}<br>
-              <strong class="arancione"> Io:</strong> {{device.io}}<br>
-              <strong class="azzurro"> Tipo:</strong> {{device.type}}<br>
-              <strong class="verde"> Descrizione:</strong> {{device.description}}
-              <md-tab-actions layout="row" layout-align="end right">
-                <md-button class="md-raised md-primary" data-ng-click="deleteDevice(device)">
-                  <md-icon style="fill: white" md-svg-icon="img/delete.svg"></md-icon><span class="bianco">Elimina</span>
-                </md-button>
-              </md-tab-actions>
-            </md-content>
-          </md-tab>
-        </md-tabs>
-      </md-card>
-    </div>
-    <div flex-xs flex-gt-xs="50" layout="column">
-      <md-card>
-        <md-toolbar class="md-whiteframe-z2">
-          <p class="bianco">iBeacons non registrati:</p>
-        </md-toolbar>
-        <md-tabs class="tabsdemoDynamicHeight" md-dynamic-height md-border-bottom>
-          <md-tab ng-repeat="beacon in beacons | stateFilter" label={{$index}}>
-            <md-content class="md-padding">
-              <strong class="lime">Id:</strong> {{beacon.id}}<br>
-              <strong class="azzurro">Uuid:</strong> {{beacon.uuid}}<br>
-              <strong class="rosso"> Major:</strong> {{beacon.major}}<br>
-              <strong class="arancione"> Minor:</strong> {{beacon.minor}}<br>
-              <md-tab-actions layout="row" layout-align="end right">
-                <md-menu>
-                  <md-button class="md-raised md-primary"ng-click="$mdOpenMenu()"><span class="bianco">azioni</span></md-button>
-                  <md-menu-content>
-                    <md-menu-item>
-                      <md-button  data-ng-click="deleteBeacon(beacon)"> <md-icon class="md-alt-text" md-svg-icon="img/delete.svg"></md-icon>
-                        Elimina
-                      </md-button>
-                    </md-menu-item>
-                    <md-menu-divider></md-menu-divider>
-                    <md-menu-item>
-                      <md-button ng-click="showAdd1(beacon)">
-                        <md-icon md-svg-icon="img/penna.svg"></md-icon>Registra iBeacon
-                      </md-button>
-                    </md-menu-item>
-                  </md-menu-content>
-                </md-menu>
-              </md-tab-actions>
-            </md-content>
-          </md-tab>
-        </md-tabs>
-      </md-card>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Gestione dispositivi</span>
+            <span class="md-subhead">In questa pagina hai la possibilità di aggiungere nuovi dispositivi,
+              sia di ingresso che di uscita, e registrarne di nuovi, inizia subito cliccando il tasto +!</span>
+            </md-card-title-text>
+          </md-card-title>
+        </md-card>
+        <md-card>
+          <md-toolbar class="md-whiteframe-z2">
+            <center><p class="bianco">Elenco Dispositivi:</p></center>
+          </md-toolbar>
+          <md-tabs class="tabsdemoDynamicHeight" md-dynamic-height md-border-bottom>
+            <md-tab ng-repeat="device in devices" label="{{device.name}}">
+              <md-content class="md-padding">
+                <strong class="rosso">Nome:</strong> {{device.name}}<br>
+                <strong class="lime">Id:</strong> {{device.id}}<br>
+                <strong class="arancione"> Io:</strong> {{device.io}}<br>
+                <strong class="azzurro"> Tipo:</strong> {{device.type}}<br>
+                <strong class="verde"> Descrizione:</strong> {{device.description}}
+                <md-tab-actions layout="row" layout-align="end right">
+                  <md-button class="md-raised md-primary" data-ng-click="deleteDevice(device)">
+                    <md-icon style="fill: white" md-svg-icon="img/delete.svg"></md-icon><span class="bianco">Elimina</span>
+                  </md-button>
+                </md-tab-actions>
+              </md-content>
+            </md-tab>
+          </md-tabs>
+        </md-card>
+      </div>
+      <div flex-xs flex-gt-xs="50">
+        <md-card>
+          <md-toolbar class="md-whiteframe-z2">
+            <center><p class="bianco">iBeacons non registrati:</p></center>
+          </md-toolbar>
+          <md-tabs class="tabsdemoDynamicHeight" md-dynamic-height md-border-bottom>
+            <md-tab ng-repeat="beacon in beacons | stateFilter" label={{$index}}>
+              <md-content class="md-padding">
+                <strong class="lime">Id:</strong> {{beacon.id}}<br>
+                <strong class="azzurro">Uuid:</strong> {{beacon.uuid}}<br>
+                <strong class="rosso"> Major:</strong> {{beacon.major}}<br>
+                <strong class="arancione"> Minor:</strong> {{beacon.minor}}<br>
+                <md-tab-actions layout="row" layout-align="end right">
+                  <md-menu>
+                    <md-button class="md-raised md-primary"ng-click="$mdOpenMenu()"><span class="bianco">azioni</span></md-button>
+                    <md-menu-content>
+                      <md-menu-item>
+                        <md-button  data-ng-click="deleteBeacon(beacon)"> <md-icon class="md-alt-text" md-svg-icon="img/delete.svg"></md-icon>
+                          Elimina
+                        </md-button>
+                      </md-menu-item>
+                      <md-menu-divider></md-menu-divider>
+                      <md-menu-item>
+                        <md-button ng-click="showAdd1(beacon)">
+                          <md-icon md-svg-icon="img/penna.svg"></md-icon>Registra iBeacon
+                        </md-button>
+                      </md-menu-item>
+                    </md-menu-content>
+                  </md-menu>
+                </md-tab-actions>
+              </md-content>
+            </md-tab>
+          </md-tabs>
+        </md-card>
+      </div>
     </div>
   </md-content>
   <md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="showAdd($event)">

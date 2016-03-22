@@ -36,4 +36,5 @@ var getGPIO = function() {
     }
   )};
   getAll();
+  getGPIO();
 });

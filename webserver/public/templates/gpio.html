@@ -8,8 +8,10 @@
     </h2>
   </div>
 </md-toolbar>
-<md-content ng-if="GPIO.GPIO !== 'Nessuno'" layout="row" layout-wrap class="md-padding">
-  <md-card flex="49" ng-repeat="GPIO in GPIOs">
+<md-content>
+  <div class="md-padding sfondo" ng-if="GPIOs.length" layout="row" layout-xs="column" layout-wrap>
+    <div flex-xs flex-gt-xs="33" ng-repeat="GPIO in GPIOs">
+  <md-card>
     <md-toolbar class="md-whiteframe-z2">
       <div layout="row" layout-align="center center">
         <p class="bianco">GPIO numero {{$index + 1}}</p>
@@ -32,6 +34,8 @@
     </md-menu-item>
   </md-card-actions>
 </md-card>
+</div>
+</div>
 </md-content>
 <md-content ng-if="!GPIOs.length">
   <h1>Non ci sono GPIO</h1>

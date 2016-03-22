@@ -2,9 +2,8 @@
  .altezza  {
    height: 100%;
   }
-.bianco {
-  color: white
-}
+.sfondo {background-color: #FAFAFA}
+.bianco {color: white}
 .lime {color: #a6d276;}
 .verde { color: green; }
 .rosso {color: red;}

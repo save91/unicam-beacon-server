@@ -35,4 +35,5 @@ angular.module('beaconApp.controllers.gpio', [])
       });
       updateGPIO();
     };
+    updateGPIO();
 });

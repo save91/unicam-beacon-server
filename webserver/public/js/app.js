@@ -33,8 +33,17 @@ var beaconApp = angular.module('beaconApp', [
   'beaconApp.services.theme',
   'beaconApp.services.settings',
 ])
-.run(function($http) {
-    $http.defaults.headers.common.Authorization = window.localStorage['Authorization'] || "";
+.run(function($http, Login) {
+  $http.defaults.headers.common.Authorization = window.localStorage['Authorization'] || "";
+      if(window.localStorage["user"]) {
+        var user = JSON.parse(window.localStorage["user"]);
+        Login.user.username = user.username,
+        Login.user.firstname = user.firstname,
+        Login.user.lastname = user.lastname,
+        Login.user.permission = user.permission,
+        Login.user.photo = user.photo,
+        Login.user.block = user.block
+      }
 })
 .constant("MY_SERVER", {
 		"url": "http://192.168.24.100",
