@@ -1,13 +1,20 @@
-<div class="container div-centrato">
-  <form class="form-signin" ng-submit="aggiungi()">
-    <h2 class="form-signin-heading">Registra il tuo beacon!</h2>
-    <label for="nome" class="sr-only">Nome</label>
-    <input id="nome" placeholder="Nome" class="form-control" ng-model="dispositivo.nome" type="text" required/>
-    <label for="descrizione" class="sr-only">Descrizione</label>
-    <textarea style="resize:none; overflow:auto; width: 100%; height: 50px;" id="descrizione" ng-model="dispositivo.descrizione" class="form-control" placeholder="Descrizione" required=""></textarea>
-    <p class="lead">UUID: {{dispositivo.caratteristiche.uuid}}</p>
-    <p class="lead">Major: {{dispositivo.caratteristiche.major}}</p>
-    <p class="lead">Minor: {{dispositivo.caratteristiche.minor}}</p>
-    <input class="btn btn-lg btn-success btn-block" type="submit" value="Aggiungi"/></td>
-  </form>
-</div>
+<md-dialog class="md-padding">
+  <div layout="column" layout-sm="column">
+    <form ng-submit="add()">
+    <md-input-container flex>
+      <label for="name">Nome</label>
+      <input id="name"  data-ng-model="beacon.name" required>
+    </md-input-container>
+    <md-input-container flex>
+      <label for="description">Descrizione</label>
+      <input id="description"  data-ng-model="beacon.description">
+    </md-input-container>
+    <p><strong class="rosso">Uuid:</strong> {{beacon.properties.uuid}}</p>
+    <center><p><strong class="azzurro">Major:</strong> {{beacon.properties.major}}
+      <strong class="arancione">Minor:</strong> {{beacon.properties.minor}}</p>
+      <div  layout="row" layout-align="center center">
+        <md-button class="md-container md-raised" type="submit">Aggiungi</md-button>
+        <md-button class="md-container md-raised" ng-click="closeDialog()">Cancella</md-button>
+      </div>
+    </form>
+    </md-dialog>

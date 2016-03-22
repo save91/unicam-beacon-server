@@ -1,38 +1,39 @@
 angular.module('beaconApp.controllers.navbar', [])
-.controller('NavigationController', function ($scope, $location, search, $mdSidenav, theme) {
+.controller('NavigationController', function ($scope, $location, search, $mdSidenav, theme, Login) {
   $scope.self = search;
+  $scope.user = Login.user;
   $scope.toggleSidenav = function(menuId) {
     $mdSidenav(menuId).toggle();
   };
   $scope.nav = [{
     name: "Home",
     link: "#/",
-    icon: "home"
+    icon: "img/home.svg"
   },
   {
     name: "Gestione Dispositivi",
     link: "#/dispositivi",
-    icon: "speaker_phone"
+    icon: "img/speaker_phone.svg"
   },
   {
     name: "Gestione GPIO",
     link: "#/gpio",
-    icon:"lightbulb_outline"
+    icon:"img/lightbulb_outline.svg"
   },
   {
     name: "Gestione Utenti",
     link: "#/utenti",
-    icon: "perm_identity"
+    icon: "img/perm_identity.svg"
   },
   {
     name: "Gestione Operazioni",
     link: "#/operazioni",
-    icon: "build"
+    icon: "img/build.svg"
   },
   {
     name: "Impostazioni",
     link: "#/settings",
-    icon: "settings"
+    icon: "img/settings.svg"
   }];
   $scope.theme=theme;
   $scope.visualizza = false;

@@ -1,9 +1,7 @@
-<md-dialog>
-  <md-content class="md-padding">
+<md-dialog class="md-padding">
+  <md-content>
     <div layout="column" layout-sm="column">
-      <md-input-container flex>
-        <label for:"username">{{user.username}}</label>
-      </md-input-container>
+        <center><h2>{{user.username}}</h2></center>
       <md-input-container flex>
         <label for:"name">Nome</label>
         <input id="name"  data-ng-model="user.firstname">
@@ -17,7 +15,7 @@
       </md-select>
       <md-checkbox data-ng-model="user.block">Bloccato</md-checkbox>
       <md-button ng-click="editUser(user)">Aggiorna</md-button>
-        <md-button class="md-container" ng-click="closeDialog()">esci </md-button>
+        <md-button class="md-container" ng-click="closeDialog()">Cancella</md-button>
     </div>
   </md-content>
 </md-dialog>

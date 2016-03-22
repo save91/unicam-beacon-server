@@ -18,7 +18,6 @@
         </md-select>
       </md-input-container>
         <md-input-container flex>
-          <label>Io</label>
           <md-select data-ng-model="device.type" required>
             <md-option data-ng-repeat="io in ios|IOFilter:device.io" value="{{io.name}}">{{io.name}}</option>
             </md-select>

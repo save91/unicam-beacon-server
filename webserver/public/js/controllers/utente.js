@@ -1,16 +1,25 @@
 angular.module('beaconApp.controllers.utente', [])
 
-.controller('UtenteCtrl', function($scope, Utenti, $mdDialog) {
+.controller('UtenteCtrl', function($scope, Utenti, user, $mdDialog) {
+  $scope.user = user;
   $scope.closeDialog = function() {
        $mdDialog.hide();
      };
   $scope.editUser = function(user) {
-    Utenti.editUser(user).then(
+    Utenti.editUser($scope.user).then(
       function(res) {
-      $mdDialog.hide($event);
+      $mdDialog.hide();
     },
     function(res) {
-      alert (res.data);
+      alert = $mdDialog.alert()
+           .title('Attenzione')
+           .content(res.data)
+           .ok('Chiudi');
+           $mdDialog
+          .show( alert )
+          .finally(function() {
+            alert = undefined;
+          });
     })
   }
 });

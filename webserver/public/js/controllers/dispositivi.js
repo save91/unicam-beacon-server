@@ -4,26 +4,24 @@ angular.module('beaconApp.controllers.dispositivi', [])
 .controller('DevicesCtrl', function($scope, $mdDialog, Beacons, Devices) {
   $scope.beacons = [];
   $scope.ios = [];
-  $scope.device = {
-    io: "input",
-    properties: null,
-    type: "Pulsante"
-  };
-  var getIos = function () {
-    $scope.ios = [{
-        name: "uno",
-        type: "input"
-    }];
-  };
+  $scope.device = [];
 
-  var updateDevices = function () {
-    Devices.getAll().then(function(res) {
-      $scope.devices= res.data;
-    },
-    function (res) {
-      alert (res.data);
-    }
-  );
+var updateDevices = function () {
+  Devices.getAll().then(function(res) {
+    $scope.devices= res.data;
+  },
+  function (res) {
+    alert = $mdDialog.alert()
+         .title('Attenzione')
+         .content("non c'è la connessione al server")
+         .ok('Chiudi');
+         $mdDialog
+        .show( alert )
+        .finally(function() {
+          alert = undefined;
+        });
+  }
+);
 };
 
 var updateBeacons = function() {
@@ -31,20 +29,32 @@ var updateBeacons = function() {
     $scope.beacons = res.data;
   },
   function(res) {
-    alert (res.data);
+    alert = $mdDialog.alert()
+         .title('Attenzione')
+         .content(res.data)
+         .ok('Chiudi');
+         $mdDialog
+        .show( alert )
+        .finally(function() {
+          alert = undefined;
+        });
   });
 }
-
-
-
-
 $scope.add  = function() {
   Devices.add($scope.device).then(
     function(res) {
       updateDevices();
     },
     function (res) {
-      alert (res.data);
+      alert = $mdDialog.alert()
+           .title('Attenzione')
+           .content(res.data)
+           .ok('Chiudi');
+           $mdDialog
+          .show( alert )
+          .finally(function() {
+            alert = undefined;
+          });
     }
   );
   $scope.device.io = "input";
@@ -84,27 +94,45 @@ $scope.deleteDevice = function(device) {
       updateDevices();
     },
     function (res){
-      alert (res.data);
+      alert = $mdDialog.alert()
+           .title('Attenzione')
+           .content(res.data)
+           .ok('Chiudi');
+           $mdDialog
+          .show( alert )
+          .finally(function() {
+            alert = undefined;
+          });
     }
   );
 };
-
+$scope.showAdd1 = function(beacon, ev) {
+  $mdDialog.show({
+    controller : 'RegistraiBeaconCtrl',
+    templateUrl: 'templates/registra_ibeacon.html',
+    locals: {
+      beacon: beacon
+    },
+    targetEvent: ev,
+  })
+  .finally(function() {
+    updateDevices();
+    updateBeacons();
+  });
+};
 
 $scope.showAdd = function(ev) {
   $mdDialog.show({
-     controller: 'IoCtrl',
-     templateUrl: 'templates/aggiungidispositivo.html',
+    controller: 'IoCtrl',
+    templateUrl: 'templates/aggiungidispositivo.html',
 
-     targetEvent: ev,
-   })
-   .finally(function() {
-     updateDevices();
-   });
- };
+    targetEvent: ev,
+  })
+  .finally(function() {
+    updateDevices();
+  });
+};
 
 updateDevices();
 updateBeacons();
-getIos();
-
-
 });
