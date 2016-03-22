@@ -26,14 +26,6 @@ angular.module('beaconApp.controllers.login', [])
     };
   };
   $scope.logout = function(){
-    alert = $mdDialog.alert()
-         .content('logout effettuato')
-         .ok('Chiudi');
-    $mdDialog
-        .show( alert )
-        .finally(function() {
-          alert = undefined;
-        });
     Login.logout();
   }
 })

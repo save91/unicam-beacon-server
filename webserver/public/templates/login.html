@@ -1,11 +1,9 @@
-  <div class="sfondo"  ng-if="user.username === ''">
-    <hgroup class="sfondo">
-      <h1 class="grigio">Che Aspetti? Loggati</h1>
-      <p class="azzurro">by D'Argenio Marco and Tosi Saverio</p>
-    <br>
-    <div layout="row" layout-align="center center">
-      <md-card class="md-padding" flex="50"  layout-align="center center">
-        <form ng-submit="login(username,password)">
+    <md-toolbar  ng-if="user.username === ''" flex="33" class="md-tall">
+    </md-toolbar>
+    <div  ng-if="user.username === ''" layout="row" layout-align="center start">
+      <md-card class="move-up length"   layout-align="start center">
+        <img ng-src="img/logogrande.JPG" class="logo2">
+        <form class="md-padding" ng-submit="login(username,password)">
           <md-input-container>
             <label for="username">Username</label>
             <input id="username" data-ng-model="username" required="">
@@ -26,11 +24,11 @@
         </form>
       </md-card>
     </div>
-  </div>
 <div ng-if="user.username !== ''" class="sfondo">
   <md-toolbar>
     <div class="md-toolbar-tools md-whiteframe-z2" md-scroll-shrink>
-      <md-button  hide-gt-sm ng-click="toggleSidenav('left')" class="md-icon-button" aria-label="Settings">
+      <md-button  hide-gt-sm ng-click="toggleSidenav('left')" class="md-icon-button" aria-label="Side Panel">
+        <md-tooltip>Side Panel</md-tooltip>
         <i class="material-icons bianco">menu</i>
       </md-button>
       <h2>
