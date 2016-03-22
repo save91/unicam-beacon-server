@@ -127,6 +127,14 @@ devices.action_device = function (req, res, next) {
             if(err) {
               console.log("Something went wrong");
             }
+            setTimeout(function(){
+              gpio.setPin(req.gpio[app].GPIO, 1, function(err) {
+                if(err) {
+                  console.log("Something went wrong");
+                }
+              });
+            }, 1000);
+
           });
           message += "aperto ";
           break;
