@@ -48,26 +48,30 @@
 </head>
 <body class="sfondo" layout="row" md-theme="{{ theme.color }}" md-theme-watch  ng-controller="NavigationController">
   <md-sidenav ng-if="user.username !== ''" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
-    <md-toolbar md-scroll>
-      <div  class="inset">
-        <img src="img/logo.png" class="logo">
-        <span>roximity System</span>
+    <md-toolbar class="md-whiteframe-z2 md-hue-2" md-scroll>
+      <div class="inset">
+        <center><p class="bianco">Proximity <strong>System</strong></p></center>
       </div>
     </md-toolbar>
-    <md-content>
-    <md-list>
-      <md-list-item ng-repeat="nav1 in nav">
-        <div class="inset grigio">
-          <md-icon md-svg-icon="{{nav1.icon}}"></md-icon>
-        </div>
-        <md-button href="{{nav1.link}}" ng-click="toggleSidenav('left')">
-          <p class="grigio">{{nav1.name}}</p>
-        </md-button>
-      </md-list-item>
-    </md-list>
-  </md-content>
-  </md-sidenav>
-  <div class="sfondo" layout="column" layout-fill  ng-view >
-  </div>
-</body>
-</html>
+    <header class="immagine inset"  layout="column" layout-align="start center">
+      <span flex></span>
+      <center><img src="{{user.photo}}" class="avatar">
+        <p class="bianco">{{user.firstname}}</p></center>
+      </header>
+      <md-toolbar class="md-hue-2">
+        <md-list>
+          <md-list-item ng-repeat="nav1 in nav">
+            <div class="inset grigio">
+              <md-icon md-svg-icon="{{nav1.icon}}"></md-icon>
+            </div>
+            <md-button href="{{nav1.link}}" ng-click="toggleSidenav('left')">
+              <p class="bianco">{{nav1.name}}</p>
+            </md-button>
+          </md-list-item>
+        </md-list>
+      </md-toolbar>
+    </md-sidenav>
+    <div md-scroll class="sfondo" layout="column" layout-fill  ng-view >
+    </div>
+  </body>
+  </html>
