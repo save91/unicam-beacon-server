@@ -33,7 +33,6 @@ angular.module('beaconApp.controllers.gpio', [])
           alert = undefined;
         });
       });
-      updateGPIO();
     };
     updateGPIO();
 });

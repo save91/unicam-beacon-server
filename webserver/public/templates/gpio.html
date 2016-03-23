@@ -11,30 +11,30 @@
 <md-content>
   <div class="md-padding sfondo" ng-if="GPIOs.length" layout="row" layout-xs="column" layout-wrap>
     <div flex-xs flex-gt-xs="33" ng-repeat="GPIO in GPIOs">
-  <md-card>
-    <md-toolbar class="md-whiteframe-z2">
-      <div layout="row" layout-align="center center">
-        <p class="bianco">GPIO numero {{$index + 1}}</p>
-      </div>
-    </md-toolbar>
-    <md-card-title>
-      <md-card-content>
-        <strong class="azzurro">GPIO:</strong> {{GPIO.GPIO}}<br>
-        <strong class="rosso"> Tipo:</strong> {{GPIO.type}}<br>
-        <strong class="arancione"> Stato:</strong> {{GPIO.state}}<br>
-      </md-card-title>
-    </md-card-content>
-    <md-card-actions layout="row" layout-align="end center">
-      <md-button data-ng-click="setGPIO(GPIO.id, 1)" class="md-primary md-raised">
-        <span class="bianco">On</span>
-      </md-button>
-      <md-button data-ng-click="setGPIO(GPIO.id, 0)" class="md-primary md-raised">
-        <span class="bianco">Off</span>
-      </md-button>
-    </md-menu-item>
-  </md-card-actions>
-</md-card>
-</div>
+      <md-card>
+        <md-toolbar class="md-whiteframe-z2">
+          <div layout="row" layout-align="center center">
+            <p class="bianco">GPIO numero {{$index + 1}}</p>
+          </div>
+        </md-toolbar>
+        <md-card-title>
+          <md-card-content>
+            <strong class="azzurro">GPIO:</strong> {{GPIO.GPIO}}<br>
+            <strong class="rosso"> Tipo:</strong> {{GPIO.type}}<br>
+            <strong class="arancione"> Stato:</strong> {{GPIO.value}}<br>
+          </md-card-title>
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button data-ng-click="setGPIO(GPIO.id, 1)" class="md-primary md-raised">
+            <span class="bianco">On</span>
+          </md-button>
+          <md-button data-ng-click="setGPIO(GPIO.id, 0)" class="md-primary md-raised">
+            <span class="bianco">Off</span>
+          </md-button>
+        </md-menu-item>
+      </md-card-actions>
+    </md-card>
+  </div>
 </div>
 </md-content>
 <md-content ng-if="!GPIOs.length">
