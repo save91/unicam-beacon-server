@@ -38,7 +38,7 @@ angular.module('beaconApp.controllers.operazioni', [] )
       $scope.devices = res.data;
       $scope.devices.push({
         "id":0,
-        "type":"ibeacon",
+        "type":"Beacon",
         "io":"null",
         "name":"Nessuno"
       });

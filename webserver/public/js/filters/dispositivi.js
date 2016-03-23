@@ -33,7 +33,7 @@ angular.module('beaconApp.filters.dispositivi', [])
   return function(input) {
     var out = [];
       for (var i = 0; i < input.length; i++){
-          if(input[i].type === "ibeacon" )
+          if(input[i].type === "Beacon" )
               out.push(input[i]);
       }
     return out;

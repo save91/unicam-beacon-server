@@ -228,7 +228,7 @@ devices.add_device = function (req, res, next) {
       io: req.body.io,
       name: req.body.name,
       description: req.body.description,
-      permission: req.body.permission,
+      permission: req.body.permission || 10,
       id_GPIO: 0,
       id_ibeacon: 0,
       properties: req.body.properties
