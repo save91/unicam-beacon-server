@@ -1,9 +1,11 @@
 .material-icons.md-48 { font-size: 48px; }
- .altezza  {
-   height: 100%;
+ @media screen and (min-width: 960px) and (min-height: 480px) {
+   .altezza {
+   height: 100% !important;
   }
-.sfondo {background-color: #FAFAFA}
-.bianco {color: white}
+}
+.sfondo {background-color: #FAFAFA !important;}
+.bianco {color: white;}
 .lime {color: #a6d276;}
 .verde { color: green; }
 .rosso {color: red;}
@@ -35,13 +37,13 @@ hgroup {
       fill: inherit;
     }
 .logo{
-   width: 50px;
-    height: 50px;
+   width: 100px;
+    height: 100px;
  }
  .move-up {
-  position: relative;
+  position: relative;;
   top: -100px;
-  z-index: 99;
+  z-index: 50;
 }
 .length {
   length: 300px;
@@ -53,7 +55,7 @@ hgroup {
 .immagine{
   background-image: url("/img/daterialdesign.jpg") !important;
   background-size: 100% 100% !important;
-  height: 200px;
+  height: 200px !important;
 }
 .avatar{
   width: 80px;
@@ -71,4 +73,27 @@ hgroup {
 
 .logo3{
   border-radius: 70%;
+}
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.immagine1{
+  background-image: url("/img/immaginehome.png") !important;
+  background-size: 100% 100% !important;
+  height: 150px !important;
+  width: 400px !important;
+}
+.move-up-logo {
+ position: relative;
+ top: -60px;
+ z-index: 40;
+}
+.move-up1 {
+  position: relative;
+  top: 120px !important;
+  z-index: 70;
+}
+.altezza1{
+  height: 50px;
+}
+.altezza2{
+  height: 100px;
 }

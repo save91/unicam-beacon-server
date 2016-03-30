@@ -46,19 +46,21 @@
   <script src="js/services/theme.js"></script>
   <script src="js/services/settings.js"></script>
 </head>
-<body class="sfondo" layout="row" md-theme="{{ theme.color }}" md-theme-watch  ng-controller="NavigationController">
-  <md-sidenav ng-if="user.username !== ''" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
-    <md-toolbar class="md-whiteframe-z2 md-hue-2" md-scroll>
+<body class="sfondo" layout="column" md-theme="{{ theme.color }}" md-theme-watch  ng-controller="NavigationController">
+  <section layout="row" flex>
+  <md-sidenav layout="column" ng-if="user.username !== ''" class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
+    <md-toolbar class="md-whiteframe-z2 md-hue-2" md-scroll-shrink>
       <div class="inset">
         <center><p class="bianco">Proximity <strong>System</strong></p></center>
       </div>
     </md-toolbar>
-    <header class="immagine inset"  layout="column" layout-align="start center">
+    <md-content class="altezza">
+    <md-toolbar class="immagine inset"  layout="column" layout-align="start center">
       <span flex></span>
       <center><img src="{{user.photo}}" class="avatar">
         <p class="bianco">{{user.firstname}}</p></center>
-      </header>
-      <md-toolbar class="md-hue-2">
+      </md-toolbar>
+      <md-toolbar class="altezza md-hue-2">
         <md-list>
           <md-list-item ng-repeat="nav1 in nav">
             <div class="inset grigio">
@@ -70,8 +72,10 @@
           </md-list-item>
         </md-list>
       </md-toolbar>
+    </md-content>
     </md-sidenav>
-    <div md-scroll class="sfondo" layout="column" layout-fill  ng-view >
-    </div>
+    <md-content class="sfondo" layout="column" flex ng-view >
+    </md-content>
+  </section>
   </body>
   </html>
