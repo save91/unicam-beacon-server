@@ -15,7 +15,7 @@
     </div>
     <div layout="row" layout-align="right center">
       <md-fab-speed-dial ng-hide="demo.hidden" md-direction="down" md-open="demo.isOpen"
-      class="md-scale md-fab-top-right move-up1" ng-class="{ 'md-hover-full': demo.hover }"
+      class="md-scale md-fab-top-right move-up1 " ng-class="{ 'md-hover-full': demo.hover }"
       ng-mouseenter="demo.isOpen=true" ng-mouseleave="demo.isOpen=false">
       <md-fab-trigger>
         <md-button aria-label="menu" class="md-fab">
@@ -23,7 +23,7 @@
         </md-button>
       </md-fab-trigger>
       <md-fab-actions>
-        <md-button class="md-fab md-raised md-mini" ng-click="setTheme('default')"><md-icon style="fill: blue" md-svg-icon="img/paint.svg"></md-icon></md-button>
+        <md-button class="md-fab md-raised md-mini" ng-click="setTheme('altTheme1')"><md-icon style="fill: blue" md-svg-icon="img/paint.svg"></md-icon></md-button>
         <md-button class="md-fab md-raised md-mini" ng-click="setTheme('altTheme')"><md-icon style="fill: red" md-svg-icon="img/paint.svg"></md-icon></md-button>
         <md-button class="md-fab md-raised md-mini" ng-click="setTheme('altTheme2')"><md-icon style="fill: green" md-svg-icon="img/paint.svg"></md-icon></md-button>
       </md-fab-actions>

@@ -120,3 +120,44 @@ hgroup {
 .altezza2{
   height: 100px;
 }
+.hierachyanimation.hierachyenter {
+    -o-transform: scale(0);
+    -ms-transform: scale(0);
+    -moz-transform: scale(0);
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    -o-animation: hierachyenter 0.69s;
+    -ms-animation: hierachyenter 0.69s;
+    -moz-animation: hierachyenter 0.69s;
+    -webkit-animation: hierachyenter 0.69s;
+    animation: hierachyenter 0.69s;
+    -moz-animation-fill-mode: forwards;
+    -ms-animation-fill-mode: forwards;
+    -o-animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+@keyframes hierachyenter {
+    0% {transform: scale(0);}
+    100% {transform: scale(1);}
+}
+
+@-o-keyframes hierachyenter {
+    0% {transform: scale(0);}
+    100% {transform: scale(1);}
+}
+
+@-ms-keyframes hierachyenter {
+    0% {transform: scale(0);}
+    100% {transform: scale(1);}
+}
+
+@-moz-keyframes hierachyenter {
+    0% {transform: scale(0);}
+    100% {transform: scale(1);}
+}
+
+@-webkit-keyframes hierachyenter {
+    0% {transform: scale(0);}
+    100% {transform: scale(1);}
+}

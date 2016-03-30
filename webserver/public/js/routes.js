@@ -51,7 +51,7 @@ function($routeProvider, $mdThemingProvider) {
   $mdThemingProvider.theme('altTheme')
   .primaryPalette('red')
   $mdThemingProvider.theme('altTheme1')
-  .primaryPalette('orange')
+  .primaryPalette('cyan')
   $mdThemingProvider.theme('altTheme2')
   .primaryPalette('green')
   $mdThemingProvider.setDefaultTheme('altTheme');
