@@ -1,4 +1,4 @@
-    <md-toolbar  ng-if="user.username === ''" flex="33" class="md-tall">
+    <md-toolbar  flex="33" class="md-tall">
     </md-toolbar>
     <div  ng-if="user.username === ''" layout="row" layout-align="center start">
       <md-card class="move-up length"   layout-align="start center">
@@ -24,8 +24,28 @@
         </form>
       </md-card>
     </div>
-<div ng-if="user.username !== ''" class="sfondo">
-  <md-toolbar>
+<div ng-if="user.username !== ''" layout="row" layout-align="center center" class="sfondo">
+  <md-card class="move-up length"   layout-align="start center">
+    <img ng-src="img/logogrande.JPG" class="logo2">
+    <div class="move-up3" layout="column" layout-align="center start">
+      <center><img src="{{user.photo}}" class="logo-avatar"></center>
+    </div>
+    <div layout="row" layout-align="center start">
+      <span class="md-headline grigio">{{user.firstname}}</strong></span>
+    </div>
+    <md-card-title class="altezza2">
+      <md-card-title-text >
+        <center><span class="grigio"> Per disconnetterti clicca qua sotto!</span></center>
+
+    <center><span class="azzurro"> by D'Argenio Marco and Tosi Saverio </span></center>
+      </md-card-title-text>
+    </md-card-title>
+
+      <md-card-actions layout="row" layout-align="center center">
+      <md-button class="md-primary md-raised" ng-click="logout()"><span class="bianco">logout</span></md-button>
+      </md-card-actions>
+  </md-card>
+  <!--<md-toolbar>
     <div class="md-toolbar-tools md-whiteframe-z2" md-scroll-shrink>
       <md-button  hide-gt-sm ng-click="toggleSidenav('left')" class="md-icon-button" aria-label="Side Panel">
         <md-tooltip>Side Panel</md-tooltip>
@@ -40,5 +60,5 @@
       <h1 class="grigio">Salve {{user.firstname}}, <br> per disconnetterti clicca qua sotto!</h1>
       <p class="azzurro">by D'Argenio Marco and Tosi Saverio</p>
       <md-button class="md-primary md-raised" ng-click="logout()"><span class="bianco">logout</span></md-button>
-    </hgroup>
+    </hgroup>-->
   </div>
