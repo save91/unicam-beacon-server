@@ -76,10 +76,10 @@ hgroup {
 }
 .material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
 .immagine1{
-  background-image: url("/img/immaginehome.png") !important;
+  background-image: url("/img/immaginehome2.png") !important;
   background-size: 100% 100% !important;
   height: 150px !important;
-  width: 400px !important;
+  width: 360px !important;
 }
 .move-up-logo {
  position: relative;
