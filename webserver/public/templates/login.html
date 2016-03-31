@@ -1,4 +1,7 @@
     <md-toolbar  class="altezza-tool">
+      <md-button ng-if="user.username !== ''"  hide-gt-sm ng-click="toggleSidenav('left')" class="md-icon-button" aria-label="Settings">
+        <i class="material-icons grigio">menu</i>
+      </md-button>
     </md-toolbar>
     <div ng-if="user.username === ''" layout="row" layout-align="center start">
       <md-card class="move-up4 length"   layout-align="start center">
