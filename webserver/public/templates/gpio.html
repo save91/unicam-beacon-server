@@ -1,42 +1,67 @@
-<md-toolbar class="colortoolbar">
-  <div class="md-toolbar-tools md-whiteframe-z2" md-scroll>
+<md-toolbar ng-show="!showSearch" class="colortoolbar">
+  <div class="md-toolbar-tools md-whiteframe-z2">
     <md-button  hide-gt-sm ng-click="toggleSidenav('left')" class="md-icon-button" aria-label="Settings">
       <i class="material-icons grigio">menu</i>
     </md-button>
     <h2>
       <span class="grigio">Gestione GPIO</span>
     </h2>
+    <span flex></span>
+    <md-button class="md-icon-button" ng-click="showSearch = !showSearch">
+      <md-icon class="grigio" md-svg-icon="img/search.svg"></md-icon>
+    </md-button>
   </div>
+</md-toolbar>
+<md-toolbar  ng-show="showSearch">
+  <div class="md-toolbar-tools">
+    <md-button  hide-gt-sm ng-click="toggleSidenav('left')" class="md-icon-button" aria-label="Settings">
+      <i class="material-icons grigio">menu</i>
+    </md-button>
+    <h2>
+      <span class="bianco">Gestione GPIO</span>
+    </h2>
+    <span flex></span>
+    <div class="toolbar-input">
+      <md-input-container>
+        <label class="bianco">Cerca GPIO...</label>
+        <input class="bianco" ng-model="searchInput">
+      </md-input-container>
+    </div>
+    <md-button class="md-icon-button" ng-click="showSearch = !showSearch">
+      <md-icon md-svg-icon="img/search.svg"></md-icon>
+    </md-button>
+  </div>
+
 </md-toolbar>
 <md-content>
   <div hierachy-display class="md-padding sfondo" ng-if="GPIOs.length" layout="row" layout-xs="column" layout-wrap>
     <div flex-xs flex-gt-xs="33" ng-repeat="GPIO in GPIOs">
-  <md-card>
-    <md-toolbar class="md-whiteframe-z2">
-      <div layout="row" layout-align="center center">
-        <p class="bianco">GPIO numero {{$index + 1}}</p>
-      </div>
-    </md-toolbar>
-    <md-card-title>
-      <md-card-content>
-        <strong class="azzurro">GPIO:</strong> {{GPIO.GPIO}}<br>
-        <strong class="rosso"> Tipo:</strong> {{GPIO.type}}<br>
-        <strong class="arancione"> Stato:</strong> {{GPIO.state}}<br>
-      </md-card-title>
-    </md-card-content>
-    <md-card-actions layout="row" layout-align="end center">
-      <md-button data-ng-click="setGPIO(GPIO.id, 1)" class="md-primary md-raised">
-        <span class="bianco">On</span>
-      </md-button>
-      <md-button data-ng-click="setGPIO(GPIO.id, 0)" class="md-primary md-raised">
-        <span class="bianco">Off</span>
-      </md-button>
-    </md-menu-item>
-  </md-card-actions>
-</md-card>
-</div>
+      <md-card>
+        <md-toolbar class="md-whiteframe-z2">
+          <div layout="row" layout-align="center center">
+            <p class="bianco">GPIO numero {{$index + 1}}</p>
+          </div>
+        </md-toolbar>
+        <md-card-title>
+          <md-card-content>
+            <strong class="azzurro">GPIO:</strong> {{GPIO.GPIO}}<br>
+            <strong class="rosso"> Tipo:</strong> {{GPIO.type}}<br>
+            <strong class="arancione"> Stato:</strong> {{GPIO.state}}<br>
+          </md-card-title>
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button data-ng-click="setGPIO(GPIO.id, 1)" class="md-primary md-raised">
+            <span class="bianco">On</span>
+          </md-button>
+          <md-button data-ng-click="setGPIO(GPIO.id, 0)" class="md-primary md-raised">
+            <span class="bianco">Off</span>
+          </md-button>
+        </md-menu-item>
+      </md-card-actions>
+    </md-card>
+  </div>
 </div>
 </md-content>
-<md-content ng-if="!GPIOs.length">
-  <h1>Non ci sono GPIO</h1>
+<md-content class="sfondo" ng-if="!GPIOs.length">
+  <h1>Non ci sono GPIO :(</h1>
 </md-content>

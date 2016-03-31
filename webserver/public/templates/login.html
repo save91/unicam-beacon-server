@@ -1,6 +1,6 @@
     <md-toolbar  flex="33" class="md-tall">
     </md-toolbar>
-    <div  ng-if="user.username === ''" layout="row" layout-align="center start">
+    <div ng-if="user.username === ''" layout="row" layout-align="center start">
       <md-card class="move-up length"   layout-align="start center">
         <img ng-src="img/logogrande.JPG" class="logo2">
         <form class="md-padding" ng-submit="login(username,password)">
@@ -24,7 +24,7 @@
         </form>
       </md-card>
     </div>
-<div ng-if="user.username !== ''" layout="row" layout-align="center center" class="sfondo">
+<div hierachy-display ng-if="user.username !== ''" layout="row" layout-align="center center" class="sfondo">
   <md-card class="move-up length"   layout-align="start center">
     <img ng-src="img/logogrande.JPG" class="logo2">
     <div class="move-up3" layout="column" layout-align="center start">
@@ -45,20 +45,4 @@
       <md-button class="md-primary md-raised" ng-click="logout()"><span class="bianco">logout</span></md-button>
       </md-card-actions>
   </md-card>
-  <!--<md-toolbar>
-    <div class="md-toolbar-tools md-whiteframe-z2" md-scroll-shrink>
-      <md-button  hide-gt-sm ng-click="toggleSidenav('left')" class="md-icon-button" aria-label="Side Panel">
-        <md-tooltip>Side Panel</md-tooltip>
-        <i class="material-icons bianco">menu</i>
-      </md-button>
-      <h2>
-        <span class="bianco">Login</span>
-      </h2>
-    </div>
-  </md-toolbar>
-    <hgroup>
-      <h1 class="grigio">Salve {{user.firstname}}, <br> per disconnetterti clicca qua sotto!</h1>
-      <p class="azzurro">by D'Argenio Marco and Tosi Saverio</p>
-      <md-button class="md-primary md-raised" ng-click="logout()"><span class="bianco">logout</span></md-button>
-    </hgroup>-->
   </div>

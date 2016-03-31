@@ -5,13 +5,13 @@
   }
 }
 .sfondo {background-color: #FAFAFA !important;}
-.bianco {color: white;}
+.bianco {color: white !important;}
 .lime {color: #a6d276;}
 .verde { color: green; }
 .rosso {color: red;}
 .blu {color: blue;}
 .arancione {color: orange;}
-.grigio { color: #636363;}
+.grigio { color: #636363 !important;}
 .azzurro { color: #4AACD3;}
 .nero{color: black;}
 hgroup {
@@ -175,4 +175,7 @@ hgroup {
 @-webkit-keyframes hierachyenter {
     0% {transform: scale(0);}
     100% {transform: scale(1);}
+}
+.toolbar-input {
+  margin-top: 25px !important;
 }
