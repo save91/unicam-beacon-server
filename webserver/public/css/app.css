@@ -75,6 +75,10 @@ hgroup {
 .logo3{
   border-radius: 70%;
 }
+.move-up2 {
+  position: relative;
+  top: 220px !important;
+}
 .material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
 @media screen and (min-width: 960px) {
 .immagine1{
@@ -88,6 +92,16 @@ hgroup {
   top: 150px !important;
   z-index: 70;
 }
+
+.altezza-tool {
+ min-height: 250px !important;
+}
+.move-up4 {
+ position: relative;
+ margin-top: -100px;
+ z-index: 50;
+}
+
 .move-up {
  position: relative;;
  top: -100px;
@@ -106,14 +120,22 @@ hgroup {
   height: 150px !important;
   width: 350px !important;
 }
+.altezza-tool {
+ min-height: 250px !important;
+}
 .move-up1 {
   position: relative;
   top: 120px !important;
   z-index: 70;
 }
+.move-up4 {
+ position: relative;
+ margin-top: -200px !important;
+ z-index: 50;
+}
 .move-up {
  position: relative;;
- top: -80px;
+ top: -158px;
  z-index: 50;
 }
 .move-up3 {

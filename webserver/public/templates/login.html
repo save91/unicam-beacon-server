@@ -1,7 +1,7 @@
-    <md-toolbar  flex="33" class="md-tall">
+    <md-toolbar  class="altezza-tool">
     </md-toolbar>
     <div ng-if="user.username === ''" layout="row" layout-align="center start">
-      <md-card class="move-up length"   layout-align="start center">
+      <md-card class="move-up4 length"   layout-align="start center">
         <img ng-src="img/logogrande.JPG" class="logo2">
         <form class="md-padding" ng-submit="login(username,password)">
           <md-input-container>
@@ -25,7 +25,7 @@
       </md-card>
     </div>
 <div hierachy-display ng-if="user.username !== ''" layout="row" layout-align="center center" class="sfondo">
-  <md-card class="move-up length"   layout-align="start center">
+  <md-card class="move-up4"   layout-align="start center">
     <img ng-src="img/logogrande.JPG" class="logo2">
     <div class="move-up3" layout="column" layout-align="center start">
       <center><img src="{{user.photo}}" class="logo-avatar"></center>

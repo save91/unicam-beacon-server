@@ -21,33 +21,10 @@
           </md-card-title>
         </md-card>
         <md-card>
-          <md-toolbar hierachy-display class="md-whiteframe-z2">
-            <center><p class="bianco">Elenco Dispositivi:</p></center>
-          </md-toolbar>
-          <md-tabs class="tabsdemoDynamicHeight" md-dynamic-height md-border-bottom>
-            <md-tab ng-repeat="device in devices" label="{{device.name}}">
-              <md-content class="md-padding">
-                <strong class="rosso">Nome:</strong> {{device.name}}<br>
-                <strong class="lime">Id:</strong> {{device.id}}<br>
-                <strong class="arancione"> Io:</strong> {{device.io}}<br>
-                <strong class="azzurro"> Tipo:</strong> {{device.type}}<br>
-                <strong class="verde"> Descrizione:</strong> {{device.description}}
-                <md-tab-actions layout="row" layout-align="end right">
-                  <md-button class="md-raised md-primary" data-ng-click="deleteDevice(device)">
-                    <md-icon style="fill: white" md-svg-icon="img/delete.svg"></md-icon><span class="bianco">Elimina</span>
-                  </md-button>
-                </md-tab-actions>
-              </md-content>
-            </md-tab>
-          </md-tabs>
-        </md-card>
-      </div>
-      <div flex-xs flex-gt-xs="50">
-        <md-card>
-          <md-toolbar hierachy-display class="md-whiteframe-z2">
+          <md-toolbar  ng-if="!beacons.length" hierachy-display class="md-whiteframe-z2">
             <center><p class="bianco">iBeacons non registrati:</p></center>
           </md-toolbar>
-          <md-tabs class="tabsdemoDynamicHeight" md-dynamic-height md-border-bottom>
+          <md-tabs ng-if="!beacons.length" class="tabsdemoDynamicHeight" md-dynamic-height md-border-bottom>
             <md-tab ng-repeat="beacon in beacons | stateFilter" label={{$index}}>
               <md-content class="md-padding">
                 <strong class="lime">Id:</strong> {{beacon.id}}<br>
@@ -76,6 +53,31 @@
             </md-tab>
           </md-tabs>
         </md-card>
+      </div>
+      <div flex-xs flex-gt-xs="50">
+        <md-card>
+          <md-toolbar hierachy-display class="md-whiteframe-z2">
+            <center><p class="bianco">Elenco Dispositivi:</p></center>
+          </md-toolbar>
+          <md-tabs class="tabsdemoDynamicHeight" md-dynamic-height md-border-bottom>
+            <md-tab ng-repeat="device in devices" label="{{device.name}}">
+              <md-content class="md-padding">
+                <strong class="rosso">Nome:</strong> {{device.name}}<br>
+                <strong class="lime">Id:</strong> {{device.id}}<br>
+                <strong class="arancione"> Io:</strong> {{device.io}}<br>
+                <strong class="azzurro"> Tipo:</strong> {{device.type}}<br>
+                <strong class="verde"> Descrizione:</strong> {{device.description}}
+                <md-tab-actions layout="row" layout-align="end right">
+                  <md-button class="md-raised md-primary" data-ng-click="deleteDevice(device)">
+                    <md-icon style="fill: white" md-svg-icon="img/delete.svg"></md-icon><span class="bianco">Elimina</span>
+                  </md-button>
+                </md-tab-actions>
+              </md-content>
+            </md-tab>
+          </md-tabs>
+        </md-card>
+
+
       </div>
     </div>
   </md-content>
