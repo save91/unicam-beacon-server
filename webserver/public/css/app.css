@@ -4,6 +4,10 @@
    height: 100% !important;
   }
 }
+.immagine2{
+  background-image: url("/img/immaginehome2.png") !important;
+  background-size: 100% 100% !important;
+}
 .sfondo {background-color: #FAFAFA !important;}
 .bianco {color: white !important;}
 .lime {color: #a6d276;}
@@ -200,4 +204,7 @@ hgroup {
 }
 .toolbar-input {
   margin-top: 25px !important;
+}
+footer{
+  margin-bottom: 0px !important;
 }

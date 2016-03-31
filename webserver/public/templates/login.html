@@ -1,9 +1,9 @@
-    <md-toolbar  class="altezza-tool">
+    <md-toolbar hide-sm hide-xs  class="altezza-tool">
       <md-button ng-if="user.username !== ''"  hide-gt-sm ng-click="toggleSidenav('left')" class="md-icon-button" aria-label="Settings">
         <i class="material-icons grigio">menu</i>
       </md-button>
     </md-toolbar>
-    <div ng-if="user.username === ''" layout="row" layout-align="center start">
+    <div hide-sm hide-xs ng-if="user.username === ''" layout="row" layout-align="center start">
       <md-card class="move-up4 length"   layout-align="start center">
         <img ng-src="img/logogrande.JPG" class="logo2">
         <form class="md-padding" ng-submit="login(username,password)">
@@ -27,7 +27,39 @@
         </form>
       </md-card>
     </div>
-<div hierachy-display ng-if="user.username !== ''" layout="row" layout-align="center center" class="sfondo">
+    <!-- grafica cellulare -->
+    <div hide-gt-sm ng-if="user.username === ''" >
+      <md-toolbar class="immagine2 md-tall">
+      </md-toolbar>
+      <div class="altezza1" layout="row" layout-align="center start">
+        <img src="img/icon.png" class="logo move-up-logo">
+      </div>
+      <div layout="row" layout-align="center start">
+        <span class=" md-headline">Proximity <strong class="grigio">System</strong></span>
+      </div>
+      <center><span class="grigio"> connettiti subito!</span></center>
+      <center><form class="md-padding" ng-submit="login(username,password)">
+        <md-input-container>
+          <label for="username">Username</label>
+          <input id="username" data-ng-model="username" required="">
+          <div ng-messages="projectForm.clientName.$error">
+            <div ng-message="required">Attenzione! Questo dato è obbligatorio</div>
+          </div>
+        </md-input-container><br>
+        <md-input-container  flex-gt-sm>
+          <label for="inputPassword">Password</label>
+          <input type="password" id="inputPassword" data-ng-model="password" required="">
+          <div ng-messages="projectForm.clientName.$error">
+            <div ng-message="required">Attenzione! Questo dato è obbligatorio</div>
+          </div>
+        </md-input-container><br>
+        <div layout="row" layout-align="center center">
+          <md-button class="md-primary md-raised" type="submit"><span class="bianco">Accedi</span></md-button>
+        </div>
+      </form></center>
+      </div>
+    <!-- fine grafica cellulare -->
+<div hide-sm hide-xs hierachy-display ng-if="user.username !== ''" layout="row" layout-align="center center" class="sfondo">
   <md-card class="move-up4"   layout-align="start center">
     <img ng-src="img/logogrande.JPG" class="logo2">
     <div class="move-up3" layout="column" layout-align="center start">
@@ -39,13 +71,30 @@
     <md-card-title class="altezza2">
       <md-card-title-text >
         <center><span class="grigio"> Per disconnetterti clicca qua sotto!</span></center>
-
-    <center><span class="azzurro"> by D'Argenio Marco and Tosi Saverio </span></center>
+        <center><span class="azzurro"> by D'Argenio Marco and Tosi Saverio </span></center>
       </md-card-title-text>
     </md-card-title>
-
-      <md-card-actions layout="row" layout-align="center center">
+    <md-card-actions layout="row" layout-align="center center">
       <md-button class="md-primary md-raised" ng-click="logout()"><span class="bianco">logout</span></md-button>
       </md-card-actions>
   </md-card>
   </div>
+    <!-- grafica cellulare -->
+    <div hide-gt-sm ng-if="user.username !== ''">
+      <md-toolbar class="immagine2 md-tall">
+        <md-button  hide-gt-sm ng-click="toggleSidenav('left')" class="md-icon-button" aria-label="Settings">
+          <i class="material-icons bianco">menu</i>
+        </md-button>
+      </md-toolbar>
+      <div class="altezza1" layout="row" layout-align="center start">
+        <img src="{{user.photo}}" class="logo-avatar move-up-logo">
+      </div>
+      <div layout="column" layout-align="center center">
+        <span class=" md-headline"><strong>ciao</strong> {{user.firstname}}!</span>
+        <p flex> </p>
+        <center><span class="grigio"> Per disconnetterti clicca qua sotto!</span></center>
+        <p flex> </p>
+        <md-button class="md-primary md-raised" ng-click="logout()">
+          <span class="bianco">logout</span>
+        </md-button>
+      </div>

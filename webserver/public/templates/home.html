@@ -1,6 +1,6 @@
-<md-toolbar class="altezza-tool">
+<md-toolbar hide-sm hide-xs class="altezza-tool">
 </md-toolbar>
-<div hierachy-display layout="row" layout-align="center start">
+<div hide-sm hide-xs hierachy-display layout="row" layout-align="center start">
   <md-card class="move-up topcard" >
     <md-toolbar class="immagine1">
       <md-button  hide-gt-sm ng-click="toggleSidenav('left')" class="md-icon-button" aria-label="Settings">
@@ -13,39 +13,36 @@
     <div layout="row" layout-align="center start">
       <span class=" md-headline">Proximity <strong class="grigio">System</strong></span>
     </div>
-    <div layout="row" layout-align="right center">
-      <md-fab-speed-dial hide-gt-md ng-hide="demo.hidden" md-direction="down" md-open="demo.isOpen"
-      class="md-scale md-fab-top-right move-up1 " ng-class="{ 'md-hover-full': demo.hover }"
-      ng-mouseenter="demo.isOpen=true" ng-mouseleave="demo.isOpen=false">
-      <md-fab-trigger>
-        <md-button aria-label="menu" class="md-fab">
-          <md-icon style="fill: white" md-svg-icon="img/palette.svg"></md-icon>
-        </md-button>
-      </md-fab-trigger>
-      <md-fab-actions>
-        <md-button class="md-fab md-raised md-mini" ng-click="setTheme('altTheme1')"><md-icon style="fill: blue" md-svg-icon="img/paint.svg"></md-icon></md-button>
-        <md-button class="md-fab md-raised md-mini" ng-click="setTheme('altTheme')"><md-icon style="fill: red" md-svg-icon="img/paint.svg"></md-icon></md-button>
-        <md-button class="md-fab md-raised md-mini" ng-click="setTheme('altTheme2')"><md-icon style="fill: green" md-svg-icon="img/paint.svg"></md-icon></md-button>
-      </md-fab-actions>
+    <md-fab-speed-dial hide-xs hide-sm hide-gt-md ng-hide="demo.hidden" md-direction="down" md-open="demo.isOpen"
+    class="md-scale md-fab-bottom-right move-up1" ng-class="{ 'md-hover-full': demo.hover }"
+    ng-mouseenter="demo.isOpen=true" ng-mouseleave="demo.isOpen=false">
+    <md-fab-trigger>
+      <md-button aria-label="menu" class="md-fab">
+        <md-icon style="fill: white" md-svg-icon="img/palette.svg"></md-icon>
+      </md-button>
+    </md-fab-trigger>
+    <md-fab-actions>
+      <md-button class="md-fab md-raised md-mini" ng-click="setTheme('altTheme1')"><md-icon style="fill: blue" md-svg-icon="img/paint.svg"></md-icon></md-button>
+      <md-button class="md-fab md-raised md-mini" ng-click="setTheme('altTheme')"><md-icon style="fill: red" md-svg-icon="img/paint.svg"></md-icon></md-button>
+      <md-button class="md-fab md-raised md-mini" ng-click="setTheme('altTheme2')"><md-icon style="fill: green" md-svg-icon="img/paint.svg"></md-icon></md-button>
+    </md-fab-actions>
     </md-fab-speed-dial>
-  </div>
-
-  <div >
-    <md-card-title class="altezza2">
-      <md-card-title-text >
-        <center><span class="grigio"> the love of a small action</span></center>
-      </md-card-title-text>
-    </md-card-title>
-    <md-card-actions layout="row" layout-align="end center">
-      <md-button ng-if="user.username === ''" href="#/login">Login</md-button><i class="material-icons">account_circle</i>
-      <md-button ng-if="user.username !== ''" href="#/login">Logout</md-button>
-    </md-card-actions>
-  </div>
-</md-card>
+    <div>
+      <md-card-title class="altezza2">
+        <md-card-title-text >
+          <center><span class="grigio"> the love of a small action</span></center>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-actions layout="row" layout-align="end center">
+        <md-button ng-if="user.username === ''" href="#/login">Login</md-button><i class="material-icons">account_circle</i>
+        <md-button ng-if="user.username !== ''" href="#/login">Logout</md-button>
+      </md-card-actions>
+    </div>
+  </md-card>
 </div>
 <md-fab-speed-dial hide-md hide-sm hide-xs ng-hide="demo.hidden" md-direction="down" md-open="demo.isOpen"
- class="md-scale md-fab-bottom-right move-up2" ng-class="{ 'md-hover-full': demo.hover }"
- ng-mouseenter="demo.isOpen=true" ng-mouseleave="demo.isOpen=false">
+class="md-scale md-fab-bottom-right move-up2" ng-class="{ 'md-hover-full': demo.hover }"
+ng-mouseenter="demo.isOpen=true" ng-mouseleave="demo.isOpen=false">
 <md-fab-trigger>
   <md-button aria-label="menu" class="md-fab">
     <md-icon style="fill: white" md-svg-icon="img/palette.svg"></md-icon>
@@ -57,3 +54,37 @@
   <md-button class="md-fab md-raised md-mini" ng-click="setTheme('altTheme2')"><md-icon style="fill: green" md-svg-icon="img/paint.svg"></md-icon></md-button>
 </md-fab-actions>
 </md-fab-speed-dial>
+<!-- grafica per cellulare -->
+<div hide-gt-sm>
+  <md-toolbar class="immagine2 md-tall">
+    <md-button  hide-gt-sm ng-click="toggleSidenav('left')" class="md-icon-button" aria-label="Settings">
+      <i class="material-icons bianco">menu</i>
+    </md-button>
+  </md-toolbar>
+  <div class="altezza1" layout="row" layout-align="center start">
+    <img src="img/icon.png" class="logo move-up-logo">
+  </div>
+  <div layout="row" layout-align="center start">
+    <span class=" md-headline">Proximity <strong class="grigio">System</strong></span>
+  </div>
+  <center><span class="grigio"> the love of a small action</span></center>
+  <div layout="column" layout-align="center center">
+    <p flex> </p>
+    <md-button class="md-raised md-primary bianco" ng-if="user.username === ''" href="#/login">Login </md-button>
+    <md-button class="md-raised md-primary bianco" ng-if="user.username !== ''" href="#/login">Logout </md-button>
+  </div>
+  <md-fab-speed-dial hide-gt-md ng-hide="demo.hidden" md-direction="up" md-open="demo.isOpen"
+  class="md-scale md-fab-bottom-right" ng-class="{ 'md-hover-full': demo.hover }"
+  ng-mouseenter="demo.isOpen=true" ng-mouseleave="demo.isOpen=false">
+  <md-fab-trigger>
+    <md-button aria-label="menu" class="md-fab">
+      <md-icon style="fill: white" md-svg-icon="img/palette.svg"></md-icon>
+    </md-button>
+  </md-fab-trigger>
+  <md-fab-actions>
+    <md-button class="md-fab md-raised md-mini" ng-click="setTheme('altTheme1')"><md-icon style="fill: blue" md-svg-icon="img/paint.svg"></md-icon></md-button>
+    <md-button class="md-fab md-raised md-mini" ng-click="setTheme('altTheme')"><md-icon style="fill: red" md-svg-icon="img/paint.svg"></md-icon></md-button>
+    <md-button class="md-fab md-raised md-mini" ng-click="setTheme('altTheme2')"><md-icon style="fill: green" md-svg-icon="img/paint.svg"></md-icon></md-button>
+  </md-fab-actions>
+</md-fab-speed-dial>
+</div>
