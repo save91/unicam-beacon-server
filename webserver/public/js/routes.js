@@ -50,10 +50,13 @@ function($routeProvider, $mdThemingProvider) {
   });
   $mdThemingProvider.theme('altTheme')
   .primaryPalette('red')
+  .accentPalette('amber')
   $mdThemingProvider.theme('altTheme1')
   .primaryPalette('cyan')
+  .accentPalette('deep-orange')
   $mdThemingProvider.theme('altTheme2')
   .primaryPalette('green')
+  .accentPalette('deep-purple')
   $mdThemingProvider.setDefaultTheme('altTheme');
   $mdThemingProvider.alwaysWatchTheme(true);
 }]);
