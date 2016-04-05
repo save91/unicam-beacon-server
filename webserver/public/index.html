@@ -61,7 +61,7 @@
       <md-toolbar class="altezza md-hue-2">
         <md-list class="contact_list">
           <md-list-item ng-repeat="nav1 in nav">
-            <md-button class="contactButton no-hover larghezza" href="{{nav1.link}}" ng-click="toggleSidenav('left')">
+            <md-button class="contactButton no-hover larghezza" href="{{nav1.link}}"  ng-class="nav1.link == selectedPlanName ? 'md-raised md-accent' : 'md-raised md-accent'" ng-click="toggleSidenav('left')">
                 <md-icon class="posizione1" md-svg-icon="{{nav1.icon}}"></md-icon>
               <p class="posizione bianco contact_list">   {{nav1.name}}</p>
             </md-button>

@@ -35,6 +35,7 @@ angular.module('beaconApp.controllers.navbar', [])
     link: "#/settings",
     icon: "img/settings.svg"
   }];
+  $scope.selectedPlanName=$location.url();
   $scope.theme=theme;
   $scope.visualizza = false;
   $scope.$on('$routeChangeStart', function (next, current){
