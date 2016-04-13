@@ -35,4 +35,25 @@ angular.module('beaconApp.controllers.gpio', [])
       });
     };
     updateGPIO();
-});
+})
+.directive("hierachyDisplay", ['$timeout', function($timeout) {
+ return {
+   restrict: "EA",
+   link: function(scope, element, attr) {
+     $timeout(function() {
+       angular.forEach(element.children(), function(child, index) {
+         var duration = index / 10;
+         var singleStyle= {
+           '-o-animation-delay': duration.toString() + 's',
+           '-ms-animation-delay': duration.toString() + 's',
+           '-moz-animation-delay': duration.toString() + 's',
+           '-webkit-animation-delay': duration.toString() + 's',
+           'animation-delay': duration.toString() + 's',
+         }
+         angular.element(child).css(singleStyle);
+         angular.element(child).addClass("hierachyanimation hierachyenter");
+       })
+     })
+   }
+ }
+}]);

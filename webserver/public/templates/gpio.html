@@ -1,15 +1,40 @@
-<md-toolbar>
-  <div class="md-toolbar-tools md-whiteframe-z2" md-scroll-shrink>
+<md-toolbar ng-show="!showSearch" class="colortoolbar">
+  <div class="md-toolbar-tools md-whiteframe-z2">
+    <md-button  hide-gt-sm ng-click="toggleSidenav('left')" class="md-icon-button" aria-label="Settings">
+      <i class="material-icons grigio">menu</i>
+    </md-button>
+    <h2>
+      <span class="grigio">Gestione GPIO</span>
+    </h2>
+    <span flex></span>
+    <md-button class="md-icon-button" ng-click="showSearch = !showSearch">
+      <md-icon class="grigio" md-svg-icon="img/search.svg"></md-icon>
+    </md-button>
+  </div>
+</md-toolbar>
+<md-toolbar  ng-show="showSearch">
+  <div class="md-toolbar-tools">
     <md-button  hide-gt-sm ng-click="toggleSidenav('left')" class="md-icon-button" aria-label="Settings">
       <i class="material-icons bianco">menu</i>
     </md-button>
     <h2>
-      <span class="bianco">Gestione GPIO</span>
+      <span hide-sm hide-xs class="bianco">Gestione GPIO</span>
     </h2>
+    <span flex></span>
+    <div class="toolbar-input">
+      <md-input-container>
+        <label class="bianco">Cerca GPIO...</label>
+        <input class="bianco" ng-model="searchInput">
+      </md-input-container>
+    </div>
+    <md-button class="md-icon-button" ng-click="showSearch = !showSearch">
+      <md-icon class="bianco" md-svg-icon="img/search.svg"></md-icon>
+    </md-button>
   </div>
+
 </md-toolbar>
 <md-content>
-  <div class="md-padding sfondo" ng-if="GPIOs.length" layout="row" layout-xs="column" layout-wrap>
+  <div hierachy-display class="md-padding sfondo" ng-if="GPIOs.length" layout="row" layout-xs="column" layout-wrap>
     <div flex-xs flex-gt-xs="33" ng-repeat="GPIO in GPIOs">
       <md-card>
         <md-toolbar class="md-whiteframe-z2">
@@ -37,6 +62,6 @@
   </div>
 </div>
 </md-content>
-<md-content ng-if="!GPIOs.length">
-  <h1>Non ci sono GPIO</h1>
+<md-content class="sfondo" ng-if="!GPIOs.length">
+  <h1>Non ci sono GPIO :(</h1>
 </md-content>
