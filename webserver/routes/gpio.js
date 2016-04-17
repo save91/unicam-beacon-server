@@ -152,10 +152,19 @@ gpio.init = function () {
     var GPIOs = [];
     if (err) {
       console.error(err);
-      process.exit(1);
     }
-    debugger;
-    GPIOs = JSON.parse(data);
+    try {
+      GPIOs = JSON.parse(data);
+    } catch(e) {
+      GPIOs = [
+        {
+          "id":1,
+          "type":"output",
+          "GPIO":3,"id_device":0,
+          "state":true,"value":1
+        },
+        {"id":2,"type":"output","GPIO":5,"id_device":0,"state":0,"value":1},{"id":3,"type":"output","GPIO":7,"id_device":0,"state":0,"value":1},{"id":4,"type":"output","GPIO":11,"id_device":0,"value":1},{"id":5,"type":"output","GPIO":13,"id_device":0,"state":true,"value":1},{"id":6,"type":"output","GPIO":15,"id_device":0,"state":true,"value":1},{"id":7,"type":"output","GPIO":19,"id_device":0,"state":true, "value":1},{"id":8,"type":"output","GPIO":21,"id_device":0,"state":true,"value":1}];
+    }
     for(var i=0;i<GPIOs.length;i++) {
       if(GPIOs[i].type==="output") {
         console.log("GPIO: "+ GPIOs[i].GPIO +"output");
