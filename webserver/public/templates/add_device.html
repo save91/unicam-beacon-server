@@ -1,6 +1,6 @@
 <md-dialog>
   <md-toolbar class="md-primary">
-    <center><p class="bianco">Aggiungi dispositivo</p></center>
+    <center><p class="white">Aggiungi dispositivo</p></center>
   </md-toolbar>
   <md-content class="md-padding">
     <div layout="column" layout-sm="column">
@@ -15,19 +15,20 @@
     </div>
     <div layout="row" layout-sm="column">
       <md-input-container flex>
-        <md-select data-ng-model="device.io" data-ng-change="cambia_tipo()">
+        <md-select data-ng-model="device.io" data-ng-change="change_type()">
           <md-option value="input">Input</md-option>
           <md-option value="output">Output</md-option>
         </md-select>
       </md-input-container>
       <md-input-container flex>
         <md-select data-ng-model="device.type" required>
-          <md-option data-ng-repeat="io in ios|IOFilter:device.io" value="{{io.name}}">{{io.name}}</option>
-          </md-select>
-        </md-input-container>
-      </div>
-      <div class="md-actions" layout="row">
-        <md-button class=" md-raised md-primary" ng-click="hide()">esci </md-button>
-        <md-button class="md-raised md-primary" ng-click="add()">aggiungi </md-button>
-      </div>
-    </md-dialog>
+          <md-option data-ng-repeat="io in ios|IOFilter:device.io" value="{{io.name}}">{{io.name}}</md-option>
+        </md-select>
+      </md-input-container>
+    </div>
+    <div class="md-actions" layout="row">
+      <md-button class=" md-raised md-primary" ng-click="hide()">esci</md-button>
+      <md-button class="md-raised md-primary" ng-click="add()">aggiungi</md-button>
+    </div>
+  </md-content>
+</md-dialog>

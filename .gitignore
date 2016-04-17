@@ -3,4 +3,5 @@ logs/*
 node_modules/
 bower_components/
 *.log
+webserver/log.txt
 webserver/json/*.json

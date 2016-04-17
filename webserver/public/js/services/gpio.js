@@ -1,18 +1,18 @@
 angular.module('beaconApp.services.gpio',[])
 
-.factory('GPIO', function($http, MY_SERVER) {
+.factory('GPIO', function($http) {
   return {
     getAll: function() {
-      return $http.get(MY_SERVER.get() + '/gpio');
+      return $http.get('/gpio');
     },
     editGPIO: function(gpio, device){
-      return $http.put(MY_SERVER.get() + '/gpio', {id_gpio: gpio.id, id_device: device.id});
+      return $http.put('/gpio', {id_gpio: gpio.id, id_device: device.id});
     },
     getGPIO: function(gpio){
-      return $http.get(MY_SERVER.get() + '/gpio/' + gpio.id);
+      return $http.get('/gpio/' + gpio.id);
     },
     setOutputGPIO: function(id, value){
-      return $http.put(MY_SERVER.get() + '/gpio/' + id + '/set', {value: value});
+      return $http.put('/gpio/' + id + '/set', {value: value});
     }
   };
 });

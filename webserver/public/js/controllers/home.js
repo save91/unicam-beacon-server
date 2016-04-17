@@ -1,14 +1,14 @@
 
 angular.module('beaconApp.controllers.home', [])
 
-.controller('HomeCtrl',  function($scope, Home, theme, $timeout, Login) {
+.controller('HomeCtrl',  function($scope, Home, Theme, $timeout, Login) {
   $scope.user = Login.user;
   var self = this;
   self.hidden = false;
   self.isOpen = false;
   self.hover = false;
   $scope.menu = Home.getMenu();
-  $scope.theme = theme;
+  $scope.theme = Theme;
   $scope.setTheme = function (color) {
     $scope.theme.color = color;
   };

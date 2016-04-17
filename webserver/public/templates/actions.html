@@ -1,29 +1,29 @@
 <md-toolbar class="colortoolbar">
   <div class="md-toolbar-tools md-whiteframe-z2" md-scroll-shrink>
     <md-button  hide-gt-sm ng-click="toggleSidenav('left')" class="md-icon-button" aria-label="Settings">
-      <i class="material-icons grigio">menu</i>
+      <i class="material-icons gray">menu</i>
     </md-button>
     <h2>
-      <span class="grigio">Gestione Operazioni</span>
+      <span class="gray">Gestione Operazioni</span>
     </h2>
   </div>
 </md-toolbar>
 <md-content>
-  <div class="sfondo md-padding" layout="row" layout-xs="column" layout-wrap>
+  <div class="background md-padding" layout="row" layout-xs="column" layout-wrap>
     <div flex-xs flex-gt-xs="50" ng-repeat="device in devices|DeviceOutputFilter">
       <md-card>
         <md-toolbar class="md-whiteframe-z2">
           <div layout="row" layout-align="center center">
-            <p class="bianco">Device numero {{$index + 1}}</p>
+            <p class="white">Device numero {{$index + 1}}</p>
           </div>
         </md-toolbar>
         <md-card-title>
           <md-card-content>
-            <strong class="azzurro">Nome:</strong> {{device.name}}<br>
-            <strong class="rosso"> Descrzione:</strong> {{device.description}}<br>
-            <strong class="arancione"> Tipo:</strong> {{device.type}}<br>
+            <strong class="skyblue">Nome:</strong>{{device.name}}<br>
+            <strong class="red">Descrzione:</strong>{{device.description}}<br>
+            <strong class="arancione">Tipo:</strong>{{device.type}}<br>
             <div ng-show="device.id_ibeacon !== 0" style="clear:both;">
-              <strong class="verde"> Automatico  </strong><md-checkbox ng-model="device.automatic"  ng-change="saveDevice(device)">
+              <strong class="green">Automatico</strong><md-checkbox ng-model="device.automatic" ng-change="saveDevice(device)">
               </md-checkbox>
             </div>
           </md-card-title>

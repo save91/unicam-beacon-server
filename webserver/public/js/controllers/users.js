@@ -1,11 +1,11 @@
 
-angular.module('beaconApp.controllers.utenti', [])
+angular.module('beaconApp.controllers.users', [])
 
-.controller('UtentiCtrl', function($scope, $location, Utenti, $mdDialog) {
+.controller('UsersCtrl', function($scope, $location, Users, $mdDialog) {
   $scope.user = [];
 
   $scope.updateUser = function() {
-    Utenti.getAll().then(function(res){
+    Users.getAll().then(function(res){
       $scope.users = res.data;
     },
     function (res) {
@@ -44,11 +44,11 @@ angular.module('beaconApp.controllers.utenti', [])
 };
 $scope.showAdd = function(user, ev) {
   $mdDialog.show({
-    controller : 'UtenteCtrl',
+    controller : 'UserCtrl',
     locals: {
       user: user
     },
-    templateUrl: 'templates/utente.html',
+    templateUrl: 'templates/user.html',
 
     targetEvent: ev,
   })
@@ -56,7 +56,6 @@ $scope.showAdd = function(user, ev) {
     $scope.updateUser();
   });
 };
-
 
 $scope.updateUser();
 })

@@ -8,26 +8,26 @@ var beaconApp = angular.module('beaconApp', [
   'beaconAnimations',
   'beaconApp.controllers.home',
   'beaconApp.controllers.login',
-  'beaconApp.controllers.registrati',
-  'beaconApp.controllers.dispositivi',
-  'beaconApp.controllers.utenti',
-  'beaconApp.controllers.utente',
-  'beaconApp.controllers.operazioni',
+  'beaconApp.controllers.signup',
+  'beaconApp.controllers.devices',
+  'beaconApp.controllers.users',
+  'beaconApp.controllers.user',
+  'beaconApp.controllers.actions',
   'beaconApp.controllers.log',
-  'beaconApp.controllers.registra_ibeacon',
+  'beaconApp.controllers.signup_ibeacon',
   'beaconApp.controllers.gpio',
   'beaconApp.controllers.navbar',
-  'beaconApp.controllers.aggiungidispositivo',
+  'beaconApp.controllers.add_device',
   'beaconApp.controllers.settings',
   'beaconApp.filters.io',
   'beaconApp.filters.gpio',
-  'beaconApp.filters.dispositivi',
+  'beaconApp.filters.devices',
   'beaconApp.filters.range',
   'beaconApp.services.login',
   'beaconApp.services.home',
-  'beaconApp.services.utenti',
+  'beaconApp.services.users',
   'beaconApp.services.beacons',
-  'beaconApp.services.dispositivi',
+  'beaconApp.services.devices',
   'beaconApp.services.gpio',
   'beaconApp.services.navbar',
   'beaconApp.services.theme',
@@ -44,11 +44,4 @@ var beaconApp = angular.module('beaconApp', [
         Login.user.photo = user.photo,
         Login.user.block = user.block
       }
-})
-.constant("MY_SERVER", {
-		"url": "http://192.168.24.100",
-		"port": "8000",
-    "get": function() {
-      return ("");
-    }
 });

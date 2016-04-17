@@ -1,5 +1,5 @@
 
-angular.module('beaconApp.controllers.dispositivi', [])
+angular.module('beaconApp.controllers.devices', [])
 
 .controller('DevicesCtrl', function($scope, $mdDialog, Beacons, Devices) {
   $scope.beacons = [];
@@ -108,8 +108,8 @@ $scope.deleteDevice = function(device) {
 };
 $scope.showAdd1 = function(beacon, ev) {
   $mdDialog.show({
-    controller : 'RegistraiBeaconCtrl',
-    templateUrl: 'templates/registra_ibeacon.html',
+    controller : 'SignUpiBeaconCtrl',
+    templateUrl: 'templates/signup_ibeacon.html',
     locals: {
       beacon: beacon
     },
@@ -123,8 +123,8 @@ $scope.showAdd1 = function(beacon, ev) {
 
 $scope.showAdd = function(ev) {
   $mdDialog.show({
-    controller: 'IoCtrl',
-    templateUrl: 'templates/aggiungidispositivo.html',
+    controller: 'AddDeviceCtrl',
+    templateUrl: 'templates/add_device.html',
 
     targetEvent: ev,
   })

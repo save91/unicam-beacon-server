@@ -1,5 +1,5 @@
 angular.module('beaconApp.services.theme',[])
-.factory('theme', function (){
+.factory('Theme', function (){
   var o = {
       color: ""
     };

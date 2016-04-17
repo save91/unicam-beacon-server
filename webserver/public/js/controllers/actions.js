@@ -1,7 +1,7 @@
 
-angular.module('beaconApp.controllers.operazioni', [] )
+angular.module('beaconApp.controllers.actions', [] )
 
-.controller('OperazioniCtrl', function($scope, Devices, GPIO, $mdDialog) {
+.controller('ActionsCtrl', function($scope, Devices, GPIO, $mdDialog) {
   $scope.devices = [];
   $scope.GPIOs = [];
   $scope.saveDevice = function(device) {

@@ -1,14 +1,14 @@
-<md-toolbar hide-sm hide-xs class="altezza-tool">
+<md-toolbar hide-sm hide-xs class="height-tool">
 </md-toolbar>
 <div hide-sm hide-xs hierachy-display layout="row" layout-align="center start">
   <md-card class="move-up topcard" >
     <md-toolbar class="md-whiteframe-z2 immagine1">
     </md-toolbar>
-    <div class="altezza1" layout="row" layout-align="center start">
+    <div class="height1" layout="row" layout-align="center start">
       <img src="img/icon.png" class="md-whiteframe-z4 logo move-up-logo">
     </div>
     <div layout="row" layout-align="center start">
-      <span class=" md-headline">Proximity <strong class="grigio">System</strong></span>
+      <span class=" md-headline">Proximity <strong class="gray">System</strong></span>
     </div>
     <md-fab-speed-dial hide-xs hide-sm hide-gt-md ng-hide="demo.hidden" md-direction="down" md-open="demo.isOpen"
     class="md-scale md-fab-bottom-right move-up1" ng-class="{ 'md-hover-full': demo.hover }"
@@ -23,19 +23,19 @@
       <md-button class="md-fab md-raised md-mini" ng-click="setTheme('altTheme')"><md-icon style="fill: red" md-svg-icon="img/paint.svg"></md-icon></md-button>
       <md-button class="md-fab md-raised md-mini" ng-click="setTheme('altTheme2')"><md-icon style="fill: green" md-svg-icon="img/paint.svg"></md-icon></md-button>
     </md-fab-actions>
-    </md-fab-speed-dial>
-    <div>
-      <md-card-title class="altezza2">
-        <md-card-title-text >
-          <center><span class="grigio"> the love of a small action</span></center>
-        </md-card-title-text>
-      </md-card-title>
-      <md-card-actions layout="row" layout-align="end center">
-        <md-button ng-if="user.username === ''" href="#/login">Login</md-button><i class="material-icons">account_circle</i>
-        <md-button ng-if="user.username !== ''" href="#/login">Logout</md-button>
-      </md-card-actions>
-    </div>
-  </md-card>
+  </md-fab-speed-dial>
+  <div>
+    <md-card-title class="height2">
+      <md-card-title-text >
+        <center><span class="gray"> the love of a small action</span></center>
+      </md-card-title-text>
+    </md-card-title>
+    <md-card-actions layout="row" layout-align="end center">
+      <md-button ng-if="user.username === ''" href="#/login">Login</md-button><i class="material-icons">account_circle</i>
+      <md-button ng-if="user.username !== ''" href="#/login">Logout</md-button>
+    </md-card-actions>
+  </div>
+</md-card>
 </div>
 <md-fab-speed-dial hide-md hide-sm hide-xs ng-hide="demo.hidden" md-direction="down" md-open="demo.isOpen"
 class="md-scale md-fab-bottom-right move-up2" ng-class="{ 'md-hover-full': demo.hover }"
@@ -58,13 +58,13 @@ ng-mouseenter="demo.isOpen=true" ng-mouseleave="demo.isOpen=false">
       <i class="material-icons bianco">menu</i>
     </md-button>
   </md-toolbar>
-  <div class="altezza1" layout="row" layout-align="center start">
+  <div class="height1" layout="row" layout-align="center start">
     <img src="img/icon.png" class="md-whiteframe-z4 logo move-up-logo">
   </div>
   <div layout="row" layout-align="center start">
-    <span class=" md-headline">Proximity <strong class="grigio">System</strong></span>
+    <span class=" md-headline">Proximity <strong class="gray">System</strong></span>
   </div>
-  <center><span class="grigio"> the love of a small action</span></center>
+  <center><span class="gray"> the love of a small action</span></center>
   <div layout="column" layout-align="center center">
     <p flex> </p>
     <md-button class="md-raised md-primary bianco" ng-if="user.username === ''" href="#/login">Login </md-button>

@@ -13,29 +13,29 @@ function($routeProvider, $mdThemingProvider) {
     templateUrl: 'templates/gpio.html',
     controller: 'GPIOCtrl'
   }).
-  when('/registrati', {
-    templateUrl: 'templates/registrati.html',
-    controller: 'RegistratiCtrl'
+  when('/signup', {
+    templateUrl: 'templates/signup.html',
+    controller: 'SignUpCtrl'
   }).
-  when('/dispositivi', {
-    templateUrl: 'templates/dispositivi.html',
+  when('/devices', {
+    templateUrl: 'templates/devices.html',
     controller: 'DevicesCtrl'
   }).
-  when('/registra_ibeacon/:id', {
-    templateUrl: 'templates/registra_ibeacon.html',
-    controller: 'RegistraiBeaconCtrl'
+  when('/signup_ibeacon/:id', {
+    templateUrl: 'templates/signup_ibeacon.html',
+    controller: 'SignUpiBeaconCtrl'
   }).
-  when('/utenti', {
-    templateUrl: 'templates/utenti.html',
-    controller: 'UtentiCtrl'
+  when('/users', {
+    templateUrl: 'templates/users.html',
+    controller: 'UsersCtrl'
   }).
-  when('/utente/:username', {
-    templateUrl: 'templates/utente.html',
-    controller: 'UtenteCtrl'
+  when('/user/:username', {
+    templateUrl: 'templates/user.html',
+    controller: 'UserCtrl'
   }).
-  when('/operazioni', {
-    templateUrl: 'templates/operazioni.html',
-    controller: 'OperazioniCtrl'
+  when('/actions', {
+    templateUrl: 'templates/actions.html',
+    controller: 'ActionsCtrl'
   }).
   when('/log', {
     templateUrl: 'templates/log.html',

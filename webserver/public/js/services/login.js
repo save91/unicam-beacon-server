@@ -1,6 +1,6 @@
 angular.module('beaconApp.services.login',[])
 
-.factory('Login', function($http, MY_SERVER, $q) {
+.factory('Login', function($http, $q) {
   var Login = {
     user: {
       username: ""
@@ -11,7 +11,7 @@ angular.module('beaconApp.services.login',[])
   };
   Login.login = function(username, password) {
     var deferred = $q.defer();
-    $http.post(MY_SERVER.get() + '/user/login',
+    $http.post('/user/login',
     {
       username: username,
       password: password

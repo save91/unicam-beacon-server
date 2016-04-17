@@ -1,12 +1,12 @@
-angular.module('beaconApp.controllers.utente', [])
+angular.module('beaconApp.controllers.user', [])
 
-.controller('UtenteCtrl', function($scope, Utenti, user, $mdDialog) {
+.controller('UserCtrl', function($scope, Users, user, $mdDialog) {
   $scope.user = user;
   $scope.closeDialog = function() {
        $mdDialog.hide();
      };
   $scope.editUser = function(user) {
-    Utenti.editUser($scope.user).then(
+    Users.editUser($scope.user).then(
       function(res) {
       $mdDialog.hide();
     },

@@ -1,7 +1,7 @@
 
-angular.module('beaconApp.controllers.registra_ibeacon', [])
+angular.module('beaconApp.controllers.signup_ibeacon', [])
 
-.controller('RegistraiBeaconCtrl', function($scope, $rootScope, Devices, Beacons, beacon, $mdDialog) {
+.controller('SignUpBeaconCtrl', function($scope, $rootScope, Devices, Beacons, beacon, $mdDialog) {
   $scope.beacon = {};
   $scope.beacon.properties = beacon;
   $scope.closeDialog = function() {

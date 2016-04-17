@@ -1,18 +1,18 @@
 angular.module('beaconApp.services.settings',[])
 
-.factory('Settings', function($http, MY_SERVER) {
+.factory('Settings', function($http) {
   var settings = {};
   settings.halt = function() {
-    return $http.get(MY_SERVER.get() + '/setting/halt');
+    return $http.get('/setting/halt');
   };
   settings.reboot = function() {
-    return $http.get(MY_SERVER.get() + '/setting/reboot');
+    return $http.get('/setting/reboot');
   };
   settings.exit = function() {
-    return $http.get(MY_SERVER.get() + '/setting/exit');
+    return $http.get('/setting/exit');
   };
   settings.update = function() {
-    return $http.get(MY_SERVER.get() + '/setting/update');
+    return $http.get('/setting/update');
   };
   return settings;
 });

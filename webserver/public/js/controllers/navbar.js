@@ -1,5 +1,5 @@
 angular.module('beaconApp.controllers.navbar', [])
-.controller('NavigationController', function ($scope, $location, search, $mdSidenav, theme, Login) {
+.controller('NavigationController', function ($scope, $location, search, $mdSidenav, Theme, Login) {
   $scope.self = search;
   $scope.user = Login.user;
   $scope.toggleSidenav = function(menuId) {
@@ -12,7 +12,7 @@ angular.module('beaconApp.controllers.navbar', [])
   },
   {
     name: "Gestione Dispositivi",
-    link: "#/dispositivi",
+    link: "#/devices",
     icon: "img/speaker_phone.svg"
   },
   {
@@ -22,12 +22,12 @@ angular.module('beaconApp.controllers.navbar', [])
   },
   {
     name: "Gestione Utenti",
-    link: "#/utenti",
+    link: "#/users",
     icon: "img/perm_identity.svg"
   },
   {
     name: "Gestione Operazioni",
-    link: "#/operazioni",
+    link: "#/actions",
     icon: "img/build.svg"
   },
   {
@@ -36,7 +36,7 @@ angular.module('beaconApp.controllers.navbar', [])
     icon: "img/settings.svg"
   }];
   $scope.selectedPlanName=$location.url();
-  $scope.theme=theme;
+  $scope.theme=Theme;
   $scope.visualizza = false;
   $scope.$on('$routeChangeStart', function (next, current){
     var cerca = $location.url();

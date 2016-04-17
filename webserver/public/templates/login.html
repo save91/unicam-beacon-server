@@ -1,6 +1,6 @@
-<md-toolbar hide-sm hide-xs  class="altezza-tool">
+<md-toolbar hide-sm hide-xs  class="height-tool">
   <md-button ng-if="user.username !== ''"  hide-gt-sm ng-click="toggleSidenav('left')" class="md-icon-button" aria-label="Settings">
-    <i class="material-icons grigio">menu</i>
+    <i class="material-icons gray">menu</i>
   </md-button>
 </md-toolbar>
 <div hide-sm hide-xs ng-if="user.username === ''" layout="row" layout-align="center start">
@@ -23,7 +23,7 @@
       </md-input-container><br>
       <md-card-actions layout="row" layout-align="center center">
         <md-button class="md-primary md-raised" type="submit">
-          <span class="bianco">Accedi</span>
+          <span class="white">Accedi</span>
         </md-button>
       </md-card-actions>
     </form>
@@ -33,13 +33,13 @@
 <div hide-gt-sm ng-if="user.username === ''" >
   <md-toolbar class="immagine2 md-tall md-whiteframe-z2">
   </md-toolbar>
-  <div hierachy-display class="altezza1" layout="row" layout-align="center start">
+  <div hierachy-display class="height1" layout="row" layout-align="center start">
     <img src="img/icon.png" class="logo move-up-logo md-whiteframe-z4">
   </div>
   <div layout="row" layout-align="center start">
-    <span class=" md-headline">Proximity <strong class="grigio">System</strong></span>
+    <span class=" md-headline">Proximity <strong class="gray">System</strong></span>
   </div>
-  <center><span class="grigio"> connettiti subito!</span></center>
+  <center><span class="gray">connettiti subito!</span></center>
   <center><form class="md-padding" ng-submit="login(username,password)">
     <md-input-container>
       <label for="username">Username</label>
@@ -56,7 +56,7 @@
       </div>
     </md-input-container><br>
     <div layout="row" layout-align="center center">
-      <md-button class="md-primary md-raised" type="submit"><span class="bianco">Accedi</span></md-button>
+      <md-button class="md-primary md-raised" type="submit"><span class="white">Accedi</span></md-button>
     </div>
   </form></center>
 </div>
@@ -68,16 +68,16 @@
       <center><img src="{{user.photo}}" class="logo-avatar md-whiteframe-z4"></center>
     </div>
     <div layout="row" layout-align="center start">
-      <span class="md-headline grigio">{{user.firstname}}</strong></span>
+      <span class="md-headline gray">{{user.firstname}}</strong></span>
     </div>
-    <md-card-title class="altezza2">
+    <md-card-title class="height2">
       <md-card-title-text >
-        <center><span class="grigio"> Per disconnetterti clicca qua sotto!</span></center>
-        <center><span class="azzurro"> by D'Argenio Marco and Tosi Saverio </span></center>
+        <center><span class="gray"> Per disconnetterti clicca qua sotto!</span></center>
+        <center><span class="skyblue"> by D'Argenio Marco and Tosi Saverio </span></center>
       </md-card-title-text>
     </md-card-title>
     <md-card-actions layout="row" layout-align="center center">
-      <md-button class="md-primary md-raised" ng-click="logout()"><span class="bianco">logout</span></md-button>
+      <md-button class="md-primary md-raised" ng-click="logout()"><span class="white">logout</span></md-button>
     </md-card-actions>
   </md-card>
 </div>
@@ -85,18 +85,19 @@
 <div hide-gt-sm ng-if="user.username !== ''">
   <md-toolbar class="immagine2 md-tall md-whiteframe-z2">
     <md-button  hide-gt-sm ng-click="toggleSidenav('left')" class="md-icon-button" aria-label="Settings">
-      <i class="material-icons bianco">menu</i>
+      <i class="material-icons white">menu</i>
     </md-button>
   </md-toolbar>
-  <div class="altezza1" layout="row" layout-align="center start">
+  <div class="height1" layout="row" layout-align="center start">
     <img src="{{user.photo}}" class="md-whiteframe-z4 logo-avatar move-up-logo">
   </div>
   <div layout="column" layout-align="center center">
     <span class=" md-headline"><strong>ciao</strong> {{user.firstname}}!</span>
     <p flex> </p>
-    <center><span class="grigio"> Per disconnetterti clicca qua sotto!</span></center>
+    <center><span class="gray"> Per disconnetterti clicca qua sotto!</span></center>
     <p flex> </p>
     <md-button class="md-primary md-raised" ng-click="logout()">
-      <span class="bianco">logout</span>
+      <span class="white">logout</span>
     </md-button>
   </div>
+</div>
