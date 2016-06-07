@@ -80,14 +80,6 @@ $scope.deleteBeacon = function(beacon) {
   });
 };
 
-$scope.cambia_tipo = function() {
-  if($scope.dispositivo.io === "input") {
-    $scope.dispositivo.type = "Pulsante";
-  }else {
-    $scope.dispositivo.type = "Cancello";
-  }
-};
-
 $scope.deleteDevice = function(device) {
   Devices.deleteDevice(device).then(
     function(res){

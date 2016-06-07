@@ -14,6 +14,15 @@ angular.module('beaconApp.controllers.add_device', [])
   );
 };
 
+
+$scope.change_type = function() {
+  if($scope.device.io === "input") {
+    $scope.device.type = "Pulsante";
+  }else {
+    $scope.device.type = "Cancello";
+  }
+};
+
 $scope.hide = function () {
   $mdDialog.hide();
 }

@@ -21,7 +21,7 @@
           </md-card-title-text>
         </md-card-title>
       </md-card>
-      <md-card>
+      <md-card ng-if="beacons.length">
         <md-toolbar ng-if="!beacons.length" hierachy-display class="md-whiteframe-z2">
           <center><p class="white">iBeacons non registrati:</p></center>
         </md-toolbar>
@@ -56,7 +56,7 @@
       </md-card>
     </div>
     <div flex-xs flex-gt-xs="50">
-      <md-card>
+      <md-card ng-if="devices.length">
         <md-toolbar hierachy-display class="md-whiteframe-z2">
           <center><p class="white">Elenco Dispositivi:</p></center>
         </md-toolbar>
