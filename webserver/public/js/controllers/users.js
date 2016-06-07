@@ -26,7 +26,7 @@ angular.module('beaconApp.controllers.users', [])
     } else {
       user.block = true;
     }
-    Utenti.editUser(user).then(function(res) {
+    Users.editUser(user).then(function(res) {
       $scope.updateUser();
     },
     function(res) {
@@ -58,25 +58,4 @@ $scope.showAdd = function(user, ev) {
 };
 
 $scope.updateUser();
-})
-.directive("hierachyDisplay", ['$timeout', function($timeout) {
- return {
-   restrict: "EA",
-   link: function(scope, element, attr) {
-     $timeout(function() {
-       angular.forEach(element.children(), function(child, index) {
-         var duration = index / 10;
-         var singleStyle= {
-           '-o-animation-delay': duration.toString() + 's',
-           '-ms-animation-delay': duration.toString() + 's',
-           '-moz-animation-delay': duration.toString() + 's',
-           '-webkit-animation-delay': duration.toString() + 's',
-           'animation-delay': duration.toString() + 's',
-         }
-         angular.element(child).css(singleStyle);
-         angular.element(child).addClass("hierachyanimation hierachyenter");
-       })
-     })
-   }
- }
-}]);
+});

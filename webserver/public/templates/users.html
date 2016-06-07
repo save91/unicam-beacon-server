@@ -24,9 +24,8 @@
       </md-card-actions>
     </md-card>
   </div>
-  <div hierachy-display class="sfondo" layout="row" layout-xs="column" layout-wrap>
-    <div flex-xs flex-gt-xs="50" ng-repeat="user in users">
-    <md-card >
+  <div ng-if="users.length" layout="row" class="md-padding sfondo" layout-xs="column" layout-wrap>
+    <md-card flex-xs flex-gt-xs="50" ng-repeat="user in users">
       <md-toolbar class="md-whiteframe-z2">
         <div layout="row" layout-align="center center">
           <p class="bianco">{{user.username}}</p>
@@ -70,6 +69,5 @@
         </md-menu>
       </md-card-actions>
     </md-card>
-  </div>
   </div>
 </md-content>

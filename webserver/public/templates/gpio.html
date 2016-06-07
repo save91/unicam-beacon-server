@@ -33,31 +33,29 @@
   </div>
 </md-toolbar>
 <md-content>
-  <div hierachy-display class="md-padding background" ng-if="GPIOs.length" layout="row" layout-xs="column" layout-wrap>
-    <div flex-xs flex-gt-xs="33" ng-repeat="GPIO in GPIOs">
-      <md-card>
-        <md-toolbar class="md-whiteframe-z2">
-          <div layout="row" layout-align="center center">
-            <p class="white">GPIO numero {{$index + 1}}</p>
-          </div>
-        </md-toolbar>
-        <md-card-title>
-          <md-card-content>
-            <strong class="skyblue">GPIO:</strong> {{GPIO.GPIO}}<br>
-            <strong class="red">Tipo:</strong> {{GPIO.type}}<br>
-            <strong class="orange">Stato:</strong> {{GPIO.value}}<br>
-          </md-card-content>
-        </md-card-title>
-        <md-card-actions layout="row" layout-align="end center">
-          <md-button data-ng-click="setGPIO(GPIO.id, 1)" class="md-primary md-raised">
-            <span class="white">On</span>
-          </md-button>
-          <md-button data-ng-click="setGPIO(GPIO.id, 0)" class="md-primary md-raised">
-            <span class="white">Off</span>
-          </md-button>
-        </md-card-actions>
-      </md-card>
-    </div>
+  <div ng-if="GPIOs.length" layout="row" layout-xs="column" layout-wrap>
+    <md-card flex-xs flex-gt-xs="32" ng-repeat="GPIO in GPIOs">
+      <md-toolbar class="md-whiteframe-z2">
+        <div layout="row" layout-align="center center">
+          <p class="white">GPIO numero {{$index + 1}}</p>
+        </div>
+      </md-toolbar>
+      <md-card-title>
+        <md-card-content>
+          <strong class="skyblue">GPIO:</strong> {{GPIO.GPIO}}<br>
+          <strong class="red">Tipo:</strong> {{GPIO.type}}<br>
+          <strong class="orange">Stato:</strong> {{GPIO.value}}<br>
+        </md-card-content>
+      </md-card-title>
+      <md-card-actions layout="row" layout-align="end center">
+        <md-button data-ng-click="setGPIO(GPIO.id, 1)" class="md-primary md-raised">
+          <span class="white">On</span>
+        </md-button>
+        <md-button data-ng-click="setGPIO(GPIO.id, 0)" class="md-primary md-raised">
+          <span class="white">Off</span>
+        </md-button>
+      </md-card-actions>
+    </md-card>
   </div>
 </md-content>
 <md-content class="background" ng-if="!GPIOs.length">
