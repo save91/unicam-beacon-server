@@ -32,7 +32,7 @@ gpio.gpio_set = function (req, res, next) {
         if (err) {
           res.status(500).send('Oops, Something went wrong! ' + err);
         } else {
-          req.gpio[pos].stato = val;
+          req.gpio[pos].value = val;
           var action = "acceso";
           if(val === 0) {
             action = "spento";
