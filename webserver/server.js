@@ -1,7 +1,11 @@
-var fs = require('fs');
 var express = require('express');
-var cors = require('cors');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var routes = require('./app/routes');
+var db = require('./config/db');
+var security = require('./config/security')
+
+/*
 var morgan = require('morgan');
 var devices = require('./routes/devices');
 var users = require('./routes/user');
@@ -19,15 +23,54 @@ if(environment === "development") {
 }
 
 var datamanager = require('./models/datamanager');
+*/
+var environment = process.env.NODE_ENV;
+console.log("Environment: ", environment);
+
 var app = express();
-var SERVERPORT = 8000;
+var morgan = require('morgan');
+//app.use(morgan);
+var port = 8000;
+mongoose.connect(db.url);
+
+app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.urlencoded({extended: true}));
+
+//routes.addAPIRouter(app, mongoose);
+
+app.use(function(req, res, next){
+  res.status(404);
+  res.json({ error: 'Invalid URL' });
+});
+
+// Express route to handle errors
+app.use(function (err, req, res, next) {
+  if (req.xhr) {
+    res.status(500).send('Oops, Something went wrong!');
+  } else {
+    next(err);
+  }
+});
+
+//catches ctrl+c event
+process.on('SIGINT', function(){
+  console.log("Stop webserver");
+  //gpio.unexportPins();
+});
+
+//gpio.init
+app.listen(port);
+console.log('GPIO setup completed and server listening on port ' + port);
+
+exports = module.exports = app;
+/*
 
 // create a write stream (in append mode)
 var accessLogStream = fs.createWriteStream(__dirname + '/access.log', {flags: 'a'})
 
-app.use(express.static(__dirname + '/public'));
+
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+
 app.use(cors());
 
 // middleware authentication & log
@@ -104,3 +147,4 @@ process.on('SIGINT', function(){
 gpio.init();
 app.listen(SERVERPORT);
 console.log('GPIO setup completed and server listening on port ' + SERVERPORT);
+*/
