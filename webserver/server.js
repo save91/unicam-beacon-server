@@ -1,7 +1,8 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-var routes = require('./app/routes/user');
+var userRoutes = require('./app/routes/user');
+var deviceRoutes = require('./app/routes/device');
 var db = require('./config/db');
 var security = require('./config/security')
 
@@ -19,7 +20,8 @@ mongoose.connect(db.url);
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended: true}));
 
-routes.addAPIUser(app, mongoose);
+userRoutes.addAPIRouter(app, mongoose);
+deviceRoutes.addAPIRouter(app, mongoose);
 
 app.use(function(req, res, next){
   res.status(404);

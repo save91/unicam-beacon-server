@@ -1,6 +1,6 @@
 var express = require('express');
 
-exports.addAPIUser = function(app) {
+exports.addAPIRouter = function(app) {
 
   var router = express.Router();
 
