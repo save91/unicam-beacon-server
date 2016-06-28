@@ -1,4 +1,4 @@
-un  var fs = require('fs');
+var fs = require('fs');
 var GPIO = require('rpi-gpio');
 var GPIO_FILE = ("json/gpio.json");
 var gpio = {};
