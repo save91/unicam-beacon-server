@@ -1,8 +1,11 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+
 var userRoutes = require('./app/routes/user');
 var deviceRoutes = require('./app/routes/device');
+var beaconRoutes = require('./app/routes/beacon');
+
 var db = require('./config/db');
 var security = require('./config/security')
 
@@ -22,6 +25,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 userRoutes.addAPIRouter(app, mongoose);
 deviceRoutes.addAPIRouter(app, mongoose);
+beaconRoutes.addAPIRouter(app, mongoose);
 
 app.use(function(req, res, next){
   res.status(404);
