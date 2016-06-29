@@ -5,10 +5,9 @@ var userSchema = new mongoose.Schema({
        username: { type: String, trim: true },
        firstname: { type: String, trim: true },
        lastname: { type: String, trim: true },
-       permission: { type: Number},
-       subs: { type: [mongoose.Schema.Types.ObjectId], default: [] },
+       permission: Number,
        created: { type: Date, default: Date.now },
-       lastlogin: { type: Date, default: Date.now },
+       lastlogin: { type: Date, default: Date.now }
     },
     { collection: 'user' }
 );
