@@ -21,7 +21,7 @@ var morgan = require('morgan');
 var port = 8000;
 mongoose.connect(db.url);
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/angular'));
 app.use(bodyParser.urlencoded({extended: true}));
 
 userRoutes.addAPIRouter(app, mongoose);
