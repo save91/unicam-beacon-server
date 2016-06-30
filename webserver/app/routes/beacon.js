@@ -5,23 +5,23 @@ exports.addAPIRouter = function(app) {
   var router = express.Router();
 
  	router.get('/', function(req, res) {
-    res.status(200).send({'mesage': '/beacon:get'});
+    res.status(200).send({'msg': '/beacon:get'});
  	});
 
   router.post('/', function(req, res) {
-    res.status(200).send({'mesage': '/beacon:post'});
+    res.status(200).send({'msg': '/beacon:post'});
  	});
 
   router.get('/unregistered', function(req, res) {
-    res.status(200).send({'mesage': '/beacon/unregistered:get'});
+    res.status(200).send({'msg': '/beacon/unregistered:get'});
  	});
 
   router.get('/:id', function(req, res) {
-    res.status(200).send({'mesage': '/beacon/:id:get'});
+    res.status(200).send({'msg': '/beacon/:id:get'});
  	});
 
   router.delete('/:id', function(req, res) {
-    res.status(200).send({'mesage': '/beacon/:id:delete'});
+    res.status(200).send({'msg': '/beacon/:id:delete'});
  	});
 
   app.use('/api/v2.0/beacon', router);

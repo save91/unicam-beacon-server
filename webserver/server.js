@@ -10,8 +10,6 @@ var settingRoutes = require('./app/routes/beacon');
 var db = require('./config/db');
 var security = require('./config/security')
 
-var datamanager = require('./models/datamanager');
-
 var environment = process.env.NODE_ENV;
 console.log("Environment: ", environment);
 
