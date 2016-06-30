@@ -33,7 +33,19 @@ exports.addAPIRouter = function(app, mongoose) {
       }
     });
  	});
-
+  router.post('/check_username', function(req, res) {
+    User.findOne({
+      'username': req.body.username,
+    }, function(err, user) {
+      if(err) {
+        res.status(500).send({'msg': err.errmsg});
+      } else if(user) {
+        res.status(200).send({'msg': 'Exist'});
+      } else {
+        res.status(404).send({'msg': 'Does not exist'});
+      }
+    });
+ 	});
   router.post('/login', function(req, res) {
     User.findOne({
       'username': req.body.username,
