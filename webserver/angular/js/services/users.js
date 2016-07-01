@@ -3,19 +3,19 @@ angular.module('beaconApp.services.users',[])
 .factory('Users', function($http) {
   return {
   	getAll: function() {
-      return $http.get('/user');
+      return $http.get('/api/v2.0/user');
         },
     createUser: function(user){
-      return $http.post('/user', user);
+      return $http.post('/api/v2.0/user', user);
     },
     checkUsername: function(user){
-      return $http.post('/user', {username: user.username});
+      return $http.post('/api/v2.0/user', {username: user.username});
     },
     getUser: function(user){
-      return $http.get('/user/' + user.username);
+      return $http.get('/api/v2.0/user/' + user.username);
     },
     editUser: function(user){
-      return $http.put('/user/' + user.username, {
+      return $http.put('/api/v2.0/user/' + user.username, {
         firstname: user.firstname,
         lastname: user.lastname,
         permission: user.permission,

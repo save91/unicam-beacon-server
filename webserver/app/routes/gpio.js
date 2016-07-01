@@ -1,7 +1,7 @@
 var express = require('express');
 var GPIO = require('../models/beacon');
 
-exports.addAPIRouter = function(app) {
+exports.addAPIRoutes = function(app) {
 
   var router = express.Router();
 
