@@ -29,7 +29,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
 
 // middleware authentication & log
-app.use( morgan('common', {stream: accessLogStream}));
+app.use([userRoutes.authentication, morgan('common', {stream: accessLogStream})]);
 
 userRoutes.addAPIRouter(app, mongoose);
 deviceRoutes.addAPIRouter(app, mongoose);

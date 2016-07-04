@@ -5,7 +5,7 @@ TU1_PW = "testUser123";
 SP_APP_NAME = 'Proximity System';
 
 var frisby = require('frisby');
-var tc = require('./config/test_config');
+var tc = require('../config/test_config');
 
 frisby.create('POST missing firstName')
     .post(tc.url + '/user',

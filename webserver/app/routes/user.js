@@ -1,6 +1,30 @@
 var express = require('express');
 var User = require('../models/user');
 
+exports.authentication = function(req, res, next) {
+  if(req.headers.authorization) {
+    var base64 = req.headers.authorization.split(' ');
+    var parameters = new Buffer(base64[1], 'base64').toString('ascii').split(':');
+    User.findOne({
+      'username': parameters[0],
+      'password': parameters[1]
+    }, function(err, user) {
+      if(user) {
+        req.user = user;
+      }
+    });
+  }
+  if(!req.user) {
+    req.user = {
+      block: true,
+      permission: 100,
+      username: "anonymous",
+      firstname: "Anonymous"
+    };
+  }
+  next();
+}
+
 exports.addAPIRouter = function(app, mongoose) {
 
   var router = express.Router();
@@ -50,7 +74,7 @@ exports.addAPIRouter = function(app, mongoose) {
       User.findOne({
         'username': req.body.username,
         'password': req.body.password
-      }, function(err, user) {
+      }, 'block username firstname lastname permission photo theme',function(err, user) {
         if(err) {
           res.status(500).send({'msg': err});
         } else if(user) {

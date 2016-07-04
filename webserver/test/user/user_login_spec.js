@@ -5,7 +5,7 @@ TU2_PW = "1234567";
 SP_APP_NAME = 'Proximity System';
 
 var frisby = require('frisby');
-var tc = require('./config/test_config');
+var tc = require('../config/test_config');
 
 frisby.create('POST success login')
     .post(tc.url + '/user/login',
@@ -13,6 +13,14 @@ frisby.create('POST success login')
             'password' : TU1_PW })
     .expectStatus(200)
     .expectHeader('Content-Type', 'application/json; charset=utf-8')
+    .expectJSON({
+      block: false,
+      username: "admin",
+      firstname: "Admin",
+      lastname: "Admin",
+      permission: 0,
+      photo: "img/account.jpg",
+      theme: "red"})
 .toss()
 
 frisby.create('POST error login')

@@ -8,7 +8,7 @@ TEST_USERS = [{'fn' : 'Test', 'ln' : 'User1',
 SP_APP_NAME = 'Proximity System';
 
 var frisby = require('frisby');
-var tc = require('./config/test_config');
+var tc = require('../config/test_config');
 
 TEST_USERS.forEach(function createUser(user, index, array) {
     frisby.create('POST enroll user ' + user.email)
