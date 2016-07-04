@@ -19,7 +19,8 @@ angular.module('beaconApp.services.users',[])
         firstname: user.firstname,
         lastname: user.lastname,
         permission: user.permission,
-        block: user.block
+        block: user.block,
+        theme: user.theme
       });
     }
   };

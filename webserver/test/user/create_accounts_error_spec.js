@@ -1,6 +1,6 @@
-TU1_UN = "test"
+TU1_UN = "test6"
 TU1_FN = "Test";
-TU1_LN = "User1";
+TU1_LN = "User10";
 TU1_PW = "testUser123";
 SP_APP_NAME = 'Proximity System';
 
@@ -14,5 +14,5 @@ frisby.create('POST missing firstName')
             'password' : TU1_PW })
     .expectStatus(400)
     .expectHeader('Content-Type', 'application/json; charset=utf-8')
-    .expectJSON({'error' : 'Undefined First Name'})
+    .expectJSONTypes({'msg' : String})
 .toss()

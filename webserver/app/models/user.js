@@ -9,8 +9,9 @@ var userSchema = new mongoose.Schema({
        created: { type: Date, default: Date.now },
        photo: { type: String, default: "img/account.jpg"},
        password: String,
-       theme: String
-    }
+       theme: { type:String, default: "altTheme"}
+    },
+    {collection: 'user'}
 );
 
 userSchema.index({username : 1}, {unique:true});

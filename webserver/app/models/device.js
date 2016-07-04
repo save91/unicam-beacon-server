@@ -8,7 +8,8 @@ var deviceSchema = new mongoose.Schema({
        id_GPIO: { type: mongoose.Schema.Types.ObjectId, default: null },
        id_beacon: { type: mongoose.Schema.Types.ObjectId, default: null },
        properties: { type: mongoose.Schema.Types.Mixed }
-    }
+    },
+    {collection: 'device'}
 );
 
 var Device = mongoose.model('Device', deviceSchema);

@@ -7,7 +7,8 @@ var beaconSchema = new mongoose.Schema({
        state: { type: Number, default: 0},
        createdDate: { type: Date, default: Date.now },
        modifiedDate: { type: Date, default: Date.now }
-    }
+    },
+    {collection: 'beacon'}
 );
 
 var Beacon = mongoose.model('Beacon', beaconSchema);

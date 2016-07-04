@@ -24,6 +24,7 @@ angular.module('beaconApp.services.login',[])
       Login.user.permission = response.data.permission;
       Login.user.photo = response.data.photo;
       Login.user.block = response.data.block;
+      Login.user.theme = response.data.theme;
       window.localStorage['user'] = JSON.stringify(Login.user);
       deferred.resolve(response.data);
     },function(response) {

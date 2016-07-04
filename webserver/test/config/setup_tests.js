@@ -14,7 +14,7 @@ function connectDB(callback) {
 
 function dropUserCollection(callback) {
   console.log("dropUserCollection");
-  user = proximitysystem_test_db.collection('users');
+  user = proximitysystem_test_db.collection('user');
   if (undefined != user) {
     user.drop(function(err, reply) {
       console.log('user collection dropped');
@@ -27,7 +27,7 @@ function dropUserCollection(callback) {
 
 function insertAdminInUserCollection(callback) {
   console.log("insertAdminInUserCollection");
-  user = proximitysystem_test_db.collection('users');
+  user = proximitysystem_test_db.collection('user');
   if (undefined != user) {
     user.insertOne( {
       "block": "false",
@@ -38,7 +38,7 @@ function insertAdminInUserCollection(callback) {
       "created": new Date("2016-06-29T13:48:53.935Z"),
       "photo": "img/account.jpg",
       "password": "123456",
-      "theme": "red"
+      "theme": "altTheme"
     }, function(err, result) {
       assert.equal(err, null);
       console.log("Inserted a document into the users collection");
@@ -51,7 +51,7 @@ function insertAdminInUserCollection(callback) {
 
 function dropDeviceCollection(callback) {
   console.log("dropDeviceCollection");
-  device = proximitysystem_test_db.collection('devices');
+  device = proximitysystem_test_db.collection('device');
   if (undefined != device) {
     device.drop(function(err, reply) {
       console.log('device collection dropped');
@@ -64,7 +64,7 @@ function dropDeviceCollection(callback) {
 
 function dropBeaconCollection(callback) {
   console.log("dropBeaconCollection");
-  beacon = proximitysystem_test_db.collection('beacons');
+  beacon = proximitysystem_test_db.collection('beacon');
   if (undefined != beacon) {
     beacon.drop(function(err, reply) {
       console.log('beacon collection dropped');

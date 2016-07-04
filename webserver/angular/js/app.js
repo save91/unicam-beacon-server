@@ -33,15 +33,18 @@ var beaconApp = angular.module('beaconApp', [
   'beaconApp.services.theme',
   'beaconApp.services.settings',
 ])
-.run(function($http, Login) {
+.run(function($http, Login, Theme) {
   $http.defaults.headers.common.Authorization = window.localStorage['Authorization'] || "";
       if(window.localStorage["user"]) {
         var user = JSON.parse(window.localStorage["user"]);
-        Login.user.username = user.username,
-        Login.user.firstname = user.firstname,
-        Login.user.lastname = user.lastname,
-        Login.user.permission = user.permission,
-        Login.user.photo = user.photo,
-        Login.user.block = user.block
+        Login.user.username = user.username;
+        Login.user.firstname = user.firstname;
+        Login.user.lastname = user.lastname;
+        Login.user.permission = user.permission;
+        Login.user.photo = user.photo;
+        Login.user.block = user.block;
+        Login.user.theme = user.theme;
+        Theme.color = Login.user.theme;
+
       }
 });

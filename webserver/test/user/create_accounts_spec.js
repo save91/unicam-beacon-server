@@ -11,10 +11,10 @@ var frisby = require('frisby');
 var tc = require('../config/test_config');
 
 TEST_USERS.forEach(function createUser(user, index, array) {
-    frisby.create('POST enroll user ' + user.email)
+    frisby.create('POST enroll user ' + user.un)
         .post(tc.url + '/user',
-              { 'firstName' : user.fn,
-                'lastName' : user.ln,
+              { 'firstname' : user.fn,
+                'lastname' : user.ln,
                 'username' : user.un,
                 'password' : user.pwd })
         .expectStatus(201)
@@ -24,11 +24,10 @@ TEST_USERS.forEach(function createUser(user, index, array) {
 
 frisby.create('POST enroll duplicate user ')
     .post(tc.url + '/user',
-          { 'firstName' : TEST_USERS[0].fn,
-            'lastName' : TEST_USERS[0].ln,
+          { 'firstname' : TEST_USERS[0].fn,
+            'lastname' : TEST_USERS[0].ln,
             'username' : TEST_USERS[0].un,
             'password' : TEST_USERS[0].pwd })
     .expectStatus(400)
     .expectHeader('Content-Type', 'application/json; charset=utf-8')
-    .expectJSON({'error' : 'Account with that username already exists.  Please choose another username.'})
 .toss()
