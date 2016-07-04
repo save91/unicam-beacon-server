@@ -46,18 +46,22 @@ exports.addAPIRouter = function(app, mongoose) {
     });
  	});
   router.post('/login', function(req, res) {
-    User.findOne({
-      'username': req.body.username,
-      'password': req.body.password
-    }, function(err, user) {
-      if(err) {
-        res.status(500).send({'msg': err});
-      } else if(user) {
-        res.status(200).send({'msg': 'Success'});
-      } else {
-        res.status(400).send({'msg': 'Fail'});
-      }
-    });
+    if(req.body.username && req.body.password) {
+      User.findOne({
+        'username': req.body.username,
+        'password': req.body.password
+      }, function(err, user) {
+        if(err) {
+          res.status(500).send({'msg': err});
+        } else if(user) {
+          res.status(200).send(user);
+        } else {
+          res.status(400).send({'msg': 'Fail'});
+        }
+      });
+    } else {
+      res.status(400).send({'msg': 'Fail'});
+    }
 
  	});
 

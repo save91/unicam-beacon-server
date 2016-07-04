@@ -1,4 +1,6 @@
+var fs = require('fs');
 var express = require('express');
+var cors = require('cors');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
@@ -16,12 +18,18 @@ console.log("Environment: ", environment);
 
 var app = express();
 var morgan = require('morgan');
-//app.use(morgan);
+var accessLogStream = fs.createWriteStream(__dirname + '/access.log', {flags: 'a'})
+
 var port = 8000;
 mongoose.connect(db.url);
 
 app.use(express.static(__dirname + '/angular'));
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(cors());
+
+// middleware authentication & log
+app.use( morgan('common', {stream: accessLogStream}));
 
 userRoutes.addAPIRouter(app, mongoose);
 deviceRoutes.addAPIRouter(app, mongoose);
