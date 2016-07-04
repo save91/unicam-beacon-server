@@ -13,6 +13,7 @@
     "body-parser": "^1.4.3",
     "cors": "^2.7.1",
     "express": "^4.13.4",
+    "frisby": "^0.8.5",
     "mongoose": "^4.5.2",
     "morgan": "^1.7.0"
   }

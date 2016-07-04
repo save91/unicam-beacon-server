@@ -5,7 +5,7 @@ TEST_USERS = [{'fn' : 'Test', 'ln' : 'User1',
               {'fn' : 'Test', 'ln' : 'User3',
                'un' : 'testuser3', 'pwd' : 'testUser123'}]
 
-SP_APP_NAME = 'Reader Test';
+SP_APP_NAME = 'Proximity System';
 
 var frisby = require('frisby');
 var tc = require('./config/test_config');
