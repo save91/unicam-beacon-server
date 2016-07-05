@@ -1,5 +1,11 @@
 var express = require('express');
 var User = require('../models/user');
+var anonymous = {
+    block: true,
+    permission: 100,
+    username: "anonymous",
+    firstname: "Anonymous"
+  };
 
 exports.authentication = function(req, res, next) {
   if(req.headers.authorization) {
@@ -12,22 +18,12 @@ exports.authentication = function(req, res, next) {
       if(user) {
         req.user = user;
       } else {
-        req.user = {
-          block: true,
-          permission: 100,
-          username: "anonymous",
-          firstname: "Anonymous"
-        };
+        req.user = anonymous;
       }
       next();
     });
   }else {
-    req.user = {
-      block: true,
-      permission: 100,
-      username: "anonymous",
-      firstname: "Anonymous"
-    };
+    req.user = anonymous;
     next();
   }
 }
