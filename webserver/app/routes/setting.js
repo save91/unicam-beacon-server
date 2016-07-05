@@ -42,9 +42,5 @@ exports.addAPIRouter = function(app) {
     res.status(200).send({'msg': 'update'});
  	});
 
-  router.get('/io', function(req, res) {
-    res.status(200).send({'msg': '/setting/io:get'});
- 	});
-
   app.use('/api/v2.0/setting', router);
 }

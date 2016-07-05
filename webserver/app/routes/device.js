@@ -12,8 +12,6 @@ exports.addAPIRouter = function(app) {
         res.status(500).send({msg: err.errmsg});
       } else if(devices && devices.length>0) {
         res.status(200).send(devices);
-      } else {
-        res.status(404).send([]);
       }
     });
  	});
@@ -22,6 +20,8 @@ exports.addAPIRouter = function(app) {
     var newDevice = new Device({
       type: req.body.type,
       io: req.body.io,
+      name: req.body.name,
+      description: req.body.description,
       permission: req.body.permission,
       properties: req.body.properties,
     });
@@ -69,11 +69,21 @@ exports.addAPIRouter = function(app) {
     });
   });
 
+  router.get('/io', function(req, res) {
+    res.status(200).send([
+      {"id":"1","type":"input","name":"Pulsante"},
+      {"id":"2","type":"input","name":"Orologio"},
+      {"id":"3","type":"input","name":"Fotocellula"},
+      {"id":"4","type":"output","name":"Cancello"},
+      {"id":"5","type":"output","name":"Apriporta"},
+      {"id":"6","type":"output","name":"Lampada"}]);
+  });
+
   router.get('/:id', function(req, res) {
     Device.findById(req.params.id, function(err, device) {
       if(err) {
         res.status(500).send({msg: err.errmsg});
-      } else if(beacon) {
+      } else if(device) {
         res.status(200).send(device);
       } else {
         res.status(404).send([]);
@@ -86,16 +96,18 @@ exports.addAPIRouter = function(app) {
  	});
 
   router.delete('/:id', function(req, res) {
-    Beacon.findByIdAndRemove(req.params.id, function(err, device) {
-      if(device) {
+    Device.findByIdAndRemove(req.params.id, {}, function(err, device) {
+      if(err) {
         res.status(500).send({msg: err.errmsg});
-      } else if(beacon) {
+      } else if(device) {
         res.status(200).send({msg:'ok'});
       } else {
         res.status(404).send({msg: 'Not Found'});
       }
     });
  	});
+
+
 
   app.use('/api/v2.0/device', router);
 }

@@ -1,5 +1,5 @@
 var express = require('express');
-var GPIO = require('../models/beacon');
+var GPIO = require('../models/gpio');
 
 exports.addAPIRoutes = function(app) {
 
@@ -9,10 +9,8 @@ exports.addAPIRoutes = function(app) {
     GPIO.find(function(err, GPIOs) {
       if(err) {
         res.status(500).send({msg: err.errmsg});
-      } else if(GPIOs && GPIOs.length>0) {
+      } else if(GPIOs) {
         res.status(200).send(GPIOs);
-      } else {
-        res.status(404).send([]);
       }
     });
  	});
