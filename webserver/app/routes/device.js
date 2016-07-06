@@ -12,6 +12,8 @@ exports.addAPIRouter = function(app) {
         res.status(500).send({msg: err.errmsg});
       } else if(devices && devices.length>0) {
         res.status(200).send(devices);
+      } else {
+        res.status(200).send([]);
       }
     });
  	});
@@ -58,7 +60,9 @@ exports.addAPIRouter = function(app) {
  	});
 
   router.get('/output', function(req, res) {
-    Device.find({id_GPIO:{$ne: null}}, function(err, devices) {
+    Device.find({_GPIO:{$ne: null}})
+      .populate('_GPIO')
+      .exec(function (err, devices) {
       if(err) {
         debugger;
         res.status(500).send({msg: err.errmsg});
@@ -99,8 +103,8 @@ exports.addAPIRouter = function(app) {
       } else if(device) {
         device.name = req.body.name || device.name;
         device.description = req.body.description || device.description;
-        device.id_GPIO = req.body.id_GPIO || device.id_GPIO;
-        device.id_beacon = req.body.id_beacon || device.id_beacon;
+        device._GPIO = req.body._GPIO || device.id_GPIO;
+        device._beacon = req.body._beacon || device.id_beacon;
         device.properties = req.body.properties || device.properties;
         if(undefined != req.body.automatic) {
           device.automatic = req.body.automatic;

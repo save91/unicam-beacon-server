@@ -31,11 +31,13 @@ exports.addAPIRouter = function(app) {
  	});
 
   router.get('/unregistered', function(req, res) {
-    Beacon.find({state: 0}, function(err, beacons) {
+    Beacon.find({state: 1}, function(err, beacons) {
       if(err) {
         res.status(500).send({msg: err.errmsg});
       } else if(beacons && beacons.length>0) {
         res.status(200).send(beacons);
+      } else {
+        res.status(200).send([]);
       }
     });
  	});
@@ -47,7 +49,7 @@ exports.addAPIRouter = function(app) {
       } else if(beacon) {
         res.status(200).send(beacon);
       } else {
-        res.status(404).send([]);
+        res.status(404).send({});
       }
     });
  	});

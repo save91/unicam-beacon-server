@@ -3,14 +3,14 @@ var dbConfig = require("../../config/db.js");
 var mongoClient = require('mongodb').MongoClient;
 var assert = require("assert");
 var GPIO = [
-        {"type":"output", "GPIO":3,"id_device":null, "value":1},
-        {"type":"output","GPIO":5,"id_device":null,"value":1},
-        {"type":"output","GPIO":7,"id_device":null,"value":1},
-        {"type":"output","GPIO":11,"id_device":null,"value":1},
-        {"type":"output","GPIO":13,"id_device":null,"value":1},
-        {"type":"output","GPIO":15,"id_device":null,"value":1},
-        {"type":"output","GPIO":19,"id_device":null,"value":1},
-        {"type":"output","GPIO":21,"id_device":null,"value":1}];
+        {"type":"output", "GPIO":3, "value":1},
+        {"type":"output","GPIO":5,"value":1},
+        {"type":"output","GPIO":7,"value":1},
+        {"type":"output","GPIO":11,"value":1},
+        {"type":"output","GPIO":13,"value":1},
+        {"type":"output","GPIO":15,"value":1},
+        {"type":"output","GPIO":19,"value":1},
+        {"type":"output","GPIO":21,"value":1}];
 
 function connectDB(callback) {
   mongoClient.connect(dbConfig.testDBURL, function(err, db) {
@@ -23,7 +23,7 @@ function connectDB(callback) {
 
 function dropUserCollection(callback) {
   console.log("dropUserCollection");
-  user = proximitysystem_test_db.collection('user');
+  user = proximitysystem_test_db.collection('User');
   if (undefined != user) {
     user.drop(function(err, reply) {
       console.log('user collection dropped');
@@ -36,7 +36,7 @@ function dropUserCollection(callback) {
 
 function insertAdminInUserCollection(callback) {
   console.log("insertAdminInUserCollection");
-  user = proximitysystem_test_db.collection('user');
+  user = proximitysystem_test_db.collection('User');
   if (undefined != user) {
     user.insertOne( {
       "block": "false",
@@ -60,7 +60,7 @@ function insertAdminInUserCollection(callback) {
 
 function dropDeviceCollection(callback) {
   console.log("dropDeviceCollection");
-  device = proximitysystem_test_db.collection('device');
+  device = proximitysystem_test_db.collection('Device');
   if (undefined != device) {
     device.drop(function(err, reply) {
       console.log('device collection dropped');
@@ -73,7 +73,7 @@ function dropDeviceCollection(callback) {
 
 function dropBeaconCollection(callback) {
   console.log("dropBeaconCollection");
-  beacon = proximitysystem_test_db.collection('beacon');
+  beacon = proximitysystem_test_db.collection('Beacon');
   if (undefined != beacon) {
     beacon.drop(function(err, reply) {
       console.log('beacon collection dropped');
@@ -86,7 +86,7 @@ function dropBeaconCollection(callback) {
 
 function dropGPIOCollection(callback) {
   console.log("dropGPIOCollection");
-  gpio = proximitysystem_test_db.collection('gpio');
+  gpio = proximitysystem_test_db.collection('GPIO');
   if (undefined != gpio) {
     gpio.drop(function(err, reply) {
       console.log('gpio collection dropped');
@@ -100,13 +100,12 @@ function dropGPIOCollection(callback) {
 function insertGPIOInGPIOCollection(callback) {
   console.log("insertGPIOInGPIOCollection");
   var n = 0;
-  gpio = proximitysystem_test_db.collection('gpio');
+  gpio = proximitysystem_test_db.collection('GPIO');
   if (undefined != gpio) {
     GPIO.forEach(function createGPIO(gpios, index, array) {
       gpio.insertOne( {
         "type": gpios.type,
         "GPIO": gpios.GPIO,
-        "id_device": gpios.id_device,
         "value": gpios.value
       }, function(err, result) {
         assert.equal(err, null);

@@ -11,7 +11,7 @@ var userSchema = new mongoose.Schema({
        password: String,
        theme: { type:String, default: "altTheme"}
     },
-    {collection: 'user'}
+    {collection: 'User'}
 );
 
 userSchema.index({username : 1}, {unique:true});
