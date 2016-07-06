@@ -36,8 +36,6 @@ exports.addAPIRouter = function(app) {
         res.status(500).send({msg: err.errmsg});
       } else if(beacons && beacons.length>0) {
         res.status(200).send(beacons);
-      } else {
-        res.status(404).send([]);
       }
     });
  	});

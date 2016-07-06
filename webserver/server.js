@@ -7,7 +7,7 @@ var mongoose = require('mongoose');
 var userRoutes = require('./app/routes/user');
 var deviceRoutes = require('./app/routes/device');
 var beaconRoutes = require('./app/routes/beacon');
-var settingRoutes = require('./app/routes/beacon');
+var settingRoutes = require('./app/routes/setting');
 var gpioRoutes = require('./app/routes/gpio');
 
 var db = require('./config/db');

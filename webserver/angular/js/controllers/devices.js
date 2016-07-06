@@ -25,7 +25,7 @@ var updateDevices = function () {
 };
 
 var updateBeacons = function() {
-  Beacons.getAll().then(function(res){
+  Beacons.getUnregisteredBeacon().then(function(res){
     $scope.beacons = res.data;
   },
   function(res) {
@@ -100,7 +100,7 @@ $scope.deleteDevice = function(device) {
 };
 $scope.showAdd1 = function(beacon, ev) {
   $mdDialog.show({
-    controller : 'SignUpiBeaconCtrl',
+    controller : 'SignUpBeaconCtrl',
     templateUrl: 'templates/signup_ibeacon.html',
     locals: {
       beacon: beacon

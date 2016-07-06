@@ -27,9 +27,9 @@ exports.addAPIRouter = function(app) {
   router.get('/reboot', function(req, res) {
     exec("reboot", function (error, stdout, stderr) {
       if (error !== null) {
-        res.status(403).send({"permesso negato"});
+        res.status(403).send({"msg":"permesso negato"});
       } else {
-        res.status(200).send({"reboot"});
+        res.status(200).send({"msg":"reboot"});
       }
     });
  	});

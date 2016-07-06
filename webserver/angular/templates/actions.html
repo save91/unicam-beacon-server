@@ -14,7 +14,7 @@
       <md-card>
         <md-toolbar class="md-whiteframe-z2">
           <div layout="row" layout-align="center center">
-            <p class="white">Device numero {{$index + 1}}</p>
+            <p class="white">{{device.name}}</p>
           </div>
         </md-toolbar>
         <md-card-title>
@@ -22,7 +22,7 @@
             <strong class="skyblue">Nome:</strong>{{device.name}}<br>
             <strong class="red">Descrzione:</strong>{{device.description}}<br>
             <strong class="arancione">Tipo:</strong>{{device.type}}<br>
-            <div ng-show="device.id_ibeacon !== 0" style="clear:both;">
+            <div ng-show="device.id_beacon" style="clear:both;">
               <strong class="green">Automatico</strong><md-checkbox ng-model="device.automatic" ng-change="saveDevice(device)">
               </md-checkbox>
             </div>
@@ -32,15 +32,15 @@
           <md-input-container>
             <label>Gpio</label>
             <md-select data-ng-model="device.id_GPIO" data-ng-change="saveDevice(device)">
-              <md-option data-ng-value="gpio.id" ng-repeat="gpio in GPIOs | GPIOFilter:'output':device.id">
+              <md-option data-ng-value="gpio._id" ng-repeat="gpio in GPIOs | GPIOFilter:'output':device._id">
                 {{gpio.GPIO}}
               </md-option>
             </md-select>
           </md-input-container>
           <md-input-container>
             <label>iBeacon</label>
-            <md-select data-ng-model="device.id_ibeacon" data-ng-change="saveDevice(device)">
-              <md-option data-ng-value="ibeacon.id" data-ng-repeat="ibeacon in devices|BeaconFilter">{{ibeacon.name}}</md-option>
+            <md-select data-ng-model="device.id_beacon" data-ng-change="saveDevice(device)">
+              <md-option data-ng-value="ibeacon._id" data-ng-repeat="ibeacon in devices|BeaconFilter">{{ibeacon.name}}</md-option>
             </md-select>
           </md-input-container>
         </md-card-actions>

@@ -3,7 +3,7 @@ angular.module('beaconApp.filters.gpio', [])
   return function(input, type, id) {
     var out = [];
     for (var i = 0; i < input.length; i++){
-      if(input[i].type === type && (input[i].id_device === 0 || input[i].id_device === id ))
+      if(input[i].type === type && (input[i].id_device === null || input[i].id_device === id ))
       out.push(input[i]);
     }
     return out;

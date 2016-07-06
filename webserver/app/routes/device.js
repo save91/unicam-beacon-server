@@ -58,8 +58,9 @@ exports.addAPIRouter = function(app) {
  	});
 
   router.get('/output', function(req, res) {
-    Device.find({$not: {id_GPIO: null}}, function(err, devices) {
+    Device.find({id_GPIO:{$ne: null}}, function(err, devices) {
       if(err) {
+        debugger;
         res.status(500).send({msg: err.errmsg});
       } else if(devices && devices.length>0) {
         res.status(200).send(devices);
@@ -92,7 +93,29 @@ exports.addAPIRouter = function(app) {
  	});
 
   router.put('/:id', function(req, res) {
-    res.status(200).send({'msg': '/device/:id:put'});
+    Device.findById(req.params.id, function(err, device) {
+      if(err) {
+        res.status(500).send({msg: err.errmsg});
+      } else if(device) {
+        device.name = req.body.name || device.name;
+        device.description = req.body.description || device.description;
+        device.id_GPIO = req.body.id_GPIO || device.id_GPIO;
+        device.id_beacon = req.body.id_beacon || device.id_beacon;
+        device.properties = req.body.properties || device.properties;
+        if(undefined != req.body.automatic) {
+          device.automatic = req.body.automatic;
+        }
+        device.save(function (err) {
+          if(err) {
+            res.status(500).send({msg: err.errmsg});
+          } else {
+            res.status(200).send(device);
+          }
+        });
+      } else {
+        res.status(404).send([]);
+      }
+    });
  	});
 
   router.delete('/:id', function(req, res) {

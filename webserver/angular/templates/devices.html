@@ -22,13 +22,12 @@
         </md-card-title>
       </md-card>
       <md-card ng-if="beacons.length">
-        <md-toolbar ng-if="!beacons.length" hierachy-display class="md-whiteframe-z2">
+        <md-toolbar ng-if="beacons.length" hierachy-display class="md-whiteframe-z2">
           <center><p class="white">iBeacons non registrati:</p></center>
         </md-toolbar>
-        <md-tabs ng-if="!beacons.length" class="tabsdemoDynamicHeight" md-dynamic-height md-border-bottom>
-          <md-tab ng-repeat="beacon in beacons | stateFilter" label={{$index}}>
+        <md-tabs ng-if="beacons.length" class="tabsdemoDynamicHeight" md-dynamic-height md-border-bottom>
+          <md-tab ng-repeat="beacon in beacons" label="{{$index + 1}}">
             <md-content class="md-padding">
-              <strong class="lime">Id:</strong>{{beacon.id}}<br>
               <strong class="skyblue">Uuid:</strong>{{beacon.uuid}}<br>
               <strong class="red">Major:</strong>{{beacon.major}}<br>
               <strong class="orange"> Minor:</strong> {{beacon.minor}}<br>

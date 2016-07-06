@@ -9,10 +9,10 @@ angular.module('beaconApp.services.beacons',[])
       return http.post('/api/v2.0/beacon', beacon);
     },
     deleteBeacon: function(beacon) {
-      return $http.delete('/api/v2.0/beacon/' + beacon.id);
+      return $http.delete('/api/v2.0/beacon/' + beacon._id);
     },
     getBeacon: function(beacon) {
-      return $http.get('/api/v2.0/beacon/' + beacon.id);
+      return $http.get('/api/v2.0/beacon/' + beacon._id);
     },
     getUnregisteredBeacon: function(){
       return $http.get('/api/v2.0/beacon/unregistered');

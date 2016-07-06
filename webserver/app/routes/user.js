@@ -139,12 +139,12 @@ exports.addAPIRouter = function(app, mongoose) {
           user.photo = req.body.photo || user.photo;
           user.theme = req.body.theme || user.theme;
           user.password = req.body.password || user.password;
-          user.permission = req.body.permission || user.permission;
           //Admin can not block itself
           if(req.user.username !== req.params.username) {
             if(undefined != req.body.block) {
               user.block = req.body.block;
             }
+            user.permission = req.body.permission || user.permission;
           }
           user.save(function (err) {
             if(err) {

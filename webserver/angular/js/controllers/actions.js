@@ -12,11 +12,10 @@ angular.module('beaconApp.controllers.actions', [] )
     GPIO.getAll().then(function(res) {
       $scope.GPIOs = res.data;
       $scope.GPIOs.push({
-        "id":0,
+        "_id":null,
         "type":"output",
         "GPIO":"Nessuno",
-        "id_device":0,
-        "state":0,
+        "id_device":null,
         "value":0
       });
     },
@@ -37,7 +36,7 @@ angular.module('beaconApp.controllers.actions', [] )
     Devices.getAll().then(function(res){
       $scope.devices = res.data;
       $scope.devices.push({
-        "id":0,
+        "_id":null,
         "type":"Beacon",
         "io":"null",
         "name":"Nessuno"
