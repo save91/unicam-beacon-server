@@ -1,6 +1,7 @@
 var express = require('express');
 var Device = require('../models/device');
 var Beacon = require('../models/beacon');
+var GPIO = require('../models/gpio')
 
 exports.addAPIRouter = function(app) {
 
@@ -121,6 +122,45 @@ exports.addAPIRouter = function(app) {
       }
     });
  	});
+
+  router.put('/:id/on', function(req, res) {
+    Device.findById(req.params.id)
+      .exec(function(err, device) {
+        if(err) {
+          res.status(500).send({msg: err.errmsg});
+        } else if(device) {
+          GPIO.update({_id: device._GPIO}, {value: true}, {}, function (err, ok) {
+            if(err) {
+              res.status(500).send({msg: err.errmsg});
+            } else {
+              res.status(200).send({'msg':'ok'});
+            }
+          });
+        } else {
+          res.status(404).send([]);
+        }
+      });
+    });
+
+    router.put('/:id/off', function(req, res) {
+      Device.findById(req.params.id)
+        .populate('_GPIO')
+        .exec(function(err, device) {
+          if(err) {
+            res.status(500).send({msg: err.errmsg});
+          } else if(device) {
+            GPIO.update({_id: device._GPIO}, {value: false}, {}, function (err, ok) {
+              if(err) {
+                res.status(500).send({msg: err.errmsg});
+              } else {
+                res.status(200).send({'msg':'ok'});
+              }
+            });
+          } else {
+            res.status(404).send([]);
+          }
+        });
+      });
 
   router.delete('/:id', function(req, res) {
     Device.findByIdAndRemove(req.params.id, {}, function(err, device) {
