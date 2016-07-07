@@ -36,7 +36,13 @@ exports.addAPIRoutes = function(app) {
               res.status(500).send({msg: err.errmsg});
             } else {
               res.status(200).send(gpio);
-              pin.setPin(gpio.GPIO, gpio.value);
+              pin.setPin(gpio.GPIO, gpio.value, function(err) {
+                if (err) {
+                  res.status(500).send('Oops, Something went wrong! ' + err);
+                } else {
+                  res.status(200).send(gpio);
+                }
+              });
             }
           });
         } else {
