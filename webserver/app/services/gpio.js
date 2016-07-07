@@ -16,7 +16,7 @@ gpio.readStatus = function(PIN, callback) {
 
 gpio.setPin = function(pin, value, callback) {
   console.log("Setting pin "+pin+" to " + value);
-  GPIO.write(pin, value, function(err) {
+  RPI_GPIO.write(pin, value, function(err) {
     if (err) {
       console.log("error writing " + err);
       callback("error writing " + err);
