@@ -2,6 +2,7 @@ var express = require('express');
 var Device = require('../models/device');
 var Beacon = require('../models/beacon');
 var GPIO = require('../models/gpio')
+var pin = require('../services/gpio');
 
 exports.addAPIRouter = function(app) {
 
@@ -133,7 +134,13 @@ exports.addAPIRouter = function(app) {
             if(err) {
               res.status(500).send({msg: err.errmsg});
             } else {
-              res.status(200).send({'msg':'ok'});
+              pin.setPin(device._GPIO.GPIO, true, function(err) {
+                if (err) {
+                  res.status(500).send('Oops, Something went wrong! ' + err);
+                } else {
+                  res.status(200).send({'msg':'ok'});
+                }
+              });
             }
           });
         } else {
@@ -153,7 +160,13 @@ exports.addAPIRouter = function(app) {
               if(err) {
                 res.status(500).send({msg: err.errmsg});
               } else {
-                res.status(200).send({'msg':'ok'});
+                pin.setPin(device._GPIO.GPIO, false, function(err) {
+                  if (err) {
+                    res.status(500).send('Oops, Something went wrong! ' + err);
+                  } else {
+                    res.status(200).send({'msg':'ok'});
+                  }
+                });
               }
             });
           } else {
