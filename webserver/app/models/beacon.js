@@ -5,7 +5,6 @@ var beaconSchema = new mongoose.Schema({
        major: { type: String, trim: true },
        minor: { type: String, trim: true },
        state: { type: Number, default: 1},
-       _device: [{ type: mongoose.Schema.Types.ObjectId, ref: 'device' }],
        createdDate: { type: Date, default: Date.now },
        modifiedDate: { type: Date, default: Date.now }
     },

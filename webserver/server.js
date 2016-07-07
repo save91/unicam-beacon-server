@@ -34,10 +34,10 @@ app.use(cors());
 app.use([userRoutes.authentication, morgan('common', {stream: accessLogStream})]);
 
 userRoutes.addAPIRouter(app);
-deviceRoutes.addAPIRouter(app);
+deviceRoutes.addAPIRouter(app, environment);
 beaconRoutes.addAPIRouter(app);
 settingRoutes.addAPIRouter(app);
-gpioRoutes.addAPIRoutes(app);
+gpioRoutes.addAPIRoutes(app, environment);
 
 app.use(function(req, res, next){
   res.status(404);

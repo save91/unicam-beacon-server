@@ -14,16 +14,20 @@ gpio.readStatus = function(PIN, callback) {
   });
 };
 
-gpio.setPin = function(pin, value, callback) {
+gpio.setPin = function(pin, value, callback, environment) {
   console.log("Setting pin "+pin+" to " + value);
-  RPI_GPIO.write(pin, value, function(err) {
-    if (err) {
-      console.log("error writing " + err);
-      callback("error writing " + err);
-      return;
-    }
+  if(environment !== 'development') {
+    RPI_GPIO.write(pin, value, function(err) {
+      if (err) {
+        console.log("error writing " + err);
+        callback("error writing " + err);
+        return;
+      }
+      callback();
+    });
+  } else {
     callback();
-  });
+  }
 };
 
 gpio.init = function (environment) {
@@ -64,6 +68,8 @@ gpio.unexportPins = function(environment) {
       console.log('All pins unexported');
       process.exit();
     });
+  } else {
+    process.exit();
   }
 };
 

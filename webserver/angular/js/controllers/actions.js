@@ -15,7 +15,7 @@ angular.module('beaconApp.controllers.actions', [] )
         "_id":null,
         "type":"output",
         "GPIO":"Nessuno",
-        "_device":null,
+        "_Device":null,
         "value":0
       });
     },

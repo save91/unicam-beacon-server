@@ -7,7 +7,7 @@ var deviceSchema = new mongoose.Schema({
        description: { type: String, trim: true },
        automatic: { type: Boolean, default: false},
        _GPIO: { type: mongoose.Schema.Types.ObjectId, default: null, ref: 'GPIO' },
-       _beacon: { type: mongoose.Schema.Types.ObjectId, default: null, ref: 'Beacon'},
+       _Beacon: { type: mongoose.Schema.Types.ObjectId, default: null, ref: 'Device'},
        properties: { type: mongoose.Schema.Types.Mixed }
     },
     {collection: 'Device'}

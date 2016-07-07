@@ -2,7 +2,7 @@ var express = require('express');
 var GPIO = require('../models/gpio');
 var pin = require('../services/gpio');
 
-exports.addAPIRoutes = function(app) {
+exports.addAPIRoutes = function(app, environment) {
 
   var router = express.Router();
 
@@ -41,7 +41,7 @@ exports.addAPIRoutes = function(app) {
                 } else {
                   res.status(200).send(gpio);
                 }
-              });
+              }, environment);
             }
           });
         } else {

@@ -22,7 +22,7 @@
             <strong class="skyblue">Nome:</strong>{{device.name}}<br>
             <strong class="red">Descrzione:</strong>{{device.description}}<br>
             <strong class="arancione">Tipo:</strong>{{device.type}}<br>
-            <div ng-show="device._beacon" style="clear:both;">
+            <div ng-show="device._Beacon" style="clear:both;">
               <strong class="green">Automatico</strong><md-checkbox ng-model="device.automatic" ng-change="saveDevice(device)">
               </md-checkbox>
             </div>
@@ -39,7 +39,7 @@
           </md-input-container>
           <md-input-container>
             <label>iBeacon</label>
-            <md-select data-ng-model="device._beacon" data-ng-change="saveDevice(device)">
+            <md-select data-ng-model="device._Beacon" data-ng-change="saveDevice(device)">
               <md-option data-ng-value="ibeacon._id" data-ng-repeat="ibeacon in devices|BeaconFilter">{{ibeacon.name}}</md-option>
             </md-select>
           </md-input-container>

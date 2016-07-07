@@ -4,7 +4,7 @@ var Beacon = require('../models/beacon');
 var GPIO = require('../models/gpio')
 var pin = require('../services/gpio');
 
-exports.addAPIRouter = function(app) {
+exports.addAPIRouter = function(app, environment) {
 
   var router = express.Router();
 
@@ -61,9 +61,10 @@ exports.addAPIRouter = function(app) {
     });
  	});
 
+
   router.get('/output', function(req, res) {
     Device.find({_GPIO:{$ne: null}})
-      .populate('_GPIO')
+      .populate('_Beacon _GPIO')
       .exec(function (err, devices) {
       if(err) {
         debugger;
@@ -71,7 +72,7 @@ exports.addAPIRouter = function(app) {
       } else if(devices && devices.length>0) {
         res.status(200).send(devices);
       } else {
-        res.status(404).send([]);
+        res.status(200).send([]);
       }
     });
   });
@@ -106,7 +107,7 @@ exports.addAPIRouter = function(app) {
         device.name = req.body.name || device.name;
         device.description = req.body.description || device.description;
         device._GPIO = req.body._GPIO || device.id_GPIO;
-        device._beacon = req.body._beacon || device.id_beacon;
+        device._Beacon = req.body._Beacon || device._Beacon;
         device.properties = req.body.properties || device.properties;
         if(undefined != req.body.automatic) {
           device.automatic = req.body.automatic;
@@ -141,7 +142,7 @@ exports.addAPIRouter = function(app) {
                 } else {
                   res.status(200).send({'msg':'ok'});
                 }
-              });
+              }, environment);
             }
           });
         } else {
@@ -167,7 +168,7 @@ exports.addAPIRouter = function(app) {
                   } else {
                     res.status(200).send({'msg':'ok'});
                   }
-                });
+                }, environment);
               }
             });
           } else {
