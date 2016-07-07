@@ -57,7 +57,6 @@ app.use(function (err, req, res, next) {
 process.on('SIGINT', function(){
   console.log("Stop webserver");
   gpio.unexportPins(environment);
-  process.exit();
 });
 
 gpio.init(environment);

@@ -62,6 +62,7 @@ gpio.unexportPins = function(environment) {
   if(environment !== 'development') {
     RPI_GPIO.destroy(function() {
       console.log('All pins unexported');
+      process.exit();
     });
   }
 };
