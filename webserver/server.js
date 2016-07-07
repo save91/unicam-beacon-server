@@ -10,6 +10,8 @@ var beaconRoutes = require('./app/routes/beacon');
 var settingRoutes = require('./app/routes/setting');
 var gpioRoutes = require('./app/routes/gpio');
 
+var gpio = require('./app/services/gpio');
+
 var db = require('./config/db');
 var security = require('./config/security')
 
@@ -31,11 +33,11 @@ app.use(cors());
 // middleware authentication & log
 app.use([userRoutes.authentication, morgan('common', {stream: accessLogStream})]);
 
-userRoutes.addAPIRouter(app, mongoose);
-deviceRoutes.addAPIRouter(app, mongoose);
-beaconRoutes.addAPIRouter(app, mongoose);
-settingRoutes.addAPIRouter(app, mongoose);
-gpioRoutes.addAPIRoutes(app, mongoose);
+userRoutes.addAPIRouter(app);
+deviceRoutes.addAPIRouter(app);
+beaconRoutes.addAPIRouter(app);
+settingRoutes.addAPIRouter(app);
+gpioRoutes.addAPIRoutes(app);
 
 app.use(function(req, res, next){
   res.status(404);
@@ -54,9 +56,11 @@ app.use(function (err, req, res, next) {
 //catches ctrl+c event
 process.on('SIGINT', function(){
   console.log("Stop webserver");
+  gpio.unexportPins(environment);
   process.exit();
 });
 
+gpio.init(environment);
 app.listen(port);
 console.log('GPIO setup completed and server listening on port ' + port);
 

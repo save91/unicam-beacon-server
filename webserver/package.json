@@ -15,6 +15,7 @@
     "express": "^4.13.4",
     "frisby": "^0.8.5",
     "mongoose": "^4.5.2",
-    "morgan": "^1.7.0"
+    "morgan": "^1.7.0",
+    "rpi-gpio": "^0.7.0"
   }
 }

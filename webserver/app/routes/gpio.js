@@ -1,5 +1,6 @@
 var express = require('express');
 var GPIO = require('../models/gpio');
+var pin = require('../services/gpio');
 
 exports.addAPIRoutes = function(app) {
 
@@ -35,6 +36,7 @@ exports.addAPIRoutes = function(app) {
               res.status(500).send({msg: err.errmsg});
             } else {
               res.status(200).send(gpio);
+              pin.setPin(gpio.GPIO, gpio.value);
             }
           });
         } else {
