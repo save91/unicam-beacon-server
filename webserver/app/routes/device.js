@@ -126,6 +126,7 @@ exports.addAPIRouter = function(app) {
 
   router.put('/:id/on', function(req, res) {
     Device.findById(req.params.id)
+      .populate('_GPIO')
       .exec(function(err, device) {
         if(err) {
           res.status(500).send({msg: err.errmsg});
