@@ -55,7 +55,7 @@ exports.addAPIRouter = function(app, mongoose) {
         lastname: req.body.lastname,
         username: req.body.username,
         password: req.body.password,
-        photo: req.body.photo;
+        photo: req.body.photo
       });
       newUser.save(function (err) {
         if(err) {

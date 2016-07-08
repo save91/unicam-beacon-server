@@ -21,8 +21,8 @@ exports.addAPIRouter = function(app, environment) {
         } else {
           res.status(200).send([]);
         }
-      }
-    });
+      });
+    }
  	});
 
   //Only admin can add
@@ -44,8 +44,8 @@ exports.addAPIRouter = function(app, environment) {
         } else {
           res.status(201).send({'msg': 'ok'});
         }
-      }
-    });
+      });
+    }
  	});
 
   //Only admin can bind beacon and device
@@ -72,8 +72,8 @@ exports.addAPIRouter = function(app, environment) {
         } else {
           res.status(404).send([]);
         }
-      }
-    });
+      });
+    }
  	});
 
   router.get('/output', function(req, res) {
@@ -133,7 +133,7 @@ exports.addAPIRouter = function(app, environment) {
         } else if(device) {
           device.name = req.body.name || device.name;
           device.description = req.body.description || device.description;
-          device._GPIO = req.body._GPIO || device.id_GPIO;
+          device._GPIO = req.body._GPIO || device._GPIO;
           device._Beacon = req.body._Beacon || device._Beacon;
           device.properties = req.body.properties || device.properties;
           if(undefined != req.body.automatic) {

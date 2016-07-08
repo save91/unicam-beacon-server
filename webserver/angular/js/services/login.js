@@ -16,17 +16,21 @@ angular.module('beaconApp.services.login',[])
       username: username,
       password: password
     }).then(function(response) {
-      window.localStorage['Authorization'] = 'Basic '+ window.btoa(username + ':' + password);
-      $http.defaults.headers.common.Authorization = window.localStorage['Authorization'] || "";
-      Login.user.username = response.data.username;
-      Login.user.firstname = response.data.firstname;
-      Login.user.lastname = response.data.lastname;
-      Login.user.permission = response.data.permission;
-      Login.user.photo = response.data.photo;
-      Login.user.block = response.data.block;
-      Login.user.theme = response.data.theme;
-      window.localStorage['user'] = JSON.stringify(Login.user);
-      deferred.resolve(response.data);
+      if(response.data.permission === 0) {
+        window.localStorage['Authorization'] = 'Basic '+ window.btoa(username + ':' + password);
+        $http.defaults.headers.common.Authorization = window.localStorage['Authorization'] || "";
+        Login.user.username = response.data.username;
+        Login.user.firstname = response.data.firstname;
+        Login.user.lastname = response.data.lastname;
+        Login.user.permission = response.data.permission;
+        Login.user.photo = response.data.photo;
+        Login.user.block = response.data.block;
+        Login.user.theme = response.data.theme;
+        window.localStorage['user'] = JSON.stringify(Login.user);
+        deferred.resolve(response.data);
+      } else {
+        deferred.reject("Non hai i permessi per accedere");
+      }
     },function(response) {
       deferred.reject(response.data);
     });

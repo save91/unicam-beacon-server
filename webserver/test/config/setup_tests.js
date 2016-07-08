@@ -10,7 +10,13 @@ var GPIO = [
         {"type":"output","GPIO":13,"value":1},
         {"type":"output","GPIO":15,"value":1},
         {"type":"output","GPIO":19,"value":1},
-        {"type":"output","GPIO":21,"value":1}];
+        {"type":"output","GPIO":21,"value":1},
+        {"type":"input","GPIO":33,"value":1},
+        {"type":"input","GPIO":35,"value":1},
+        {"type":"input","GPIO":37,"value":1},
+        {"type":"input","GPIO":36,"value":1},
+        {"type":"input","GPIO":38,"value":1},
+        {"type":"input","GPIO":40,"value":1}];
 
 function connectDB(callback) {
   mongoClient.connect(dbConfig.testDBURL, function(err, db) {
