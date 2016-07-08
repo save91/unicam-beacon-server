@@ -7,21 +7,23 @@ exports.addAPIRoutes = function(app, environment) {
   var router = express.Router();
 
  	router.get('/', function(req, res) {
-    GPIO.find(function(err, GPIOs) {
-      if(err) {
-        res.status(500).send({msg: err.errmsg});
-      } else if(GPIOs) {
-        res.status(200).send(GPIOs);
-      }
-    });
- 	});
-
-  router.put('/', function(req, res) {
-    res.status(200).send({'msg': '/gpio:put'});
+    if(req.user.block || req.user.permission !== 0) {
+      res.status(403).send({'msg':'Forbidden'});
+    } else {
+      GPIO.find(function(err, GPIOs) {
+        if(err) {
+          res.status(500).send({msg: err.errmsg});
+        } else if(GPIOs) {
+          res.status(200).send(GPIOs);
+        }
+      });
+    }
  	});
 
   router.put('/:id/set', function(req, res) {
-    if(req.user.block === false) {
+    if(req.user.block || req.user.permission !== 0) {
+      res.status(403).send({'msg':'Forbidden'});
+    } else {
       GPIO.findOne({
         '_id': req.params.id
       }, function(err, gpio) {
@@ -48,13 +50,7 @@ exports.addAPIRoutes = function(app, environment) {
           res.status(404).send({'msg': 'Not found'});
         }
       });
-    } else {
-      res.status(401).send({msg: 'Authorization required'});
     }
- 	});
-
-  router.get('/:id', function(req, res) {
-    res.status(200).send({'msg': '/gpio/:id:get'});
  	});
 
   app.use('/api/v2.0/gpio', router);

@@ -15,31 +15,31 @@ exports.addAPIRouter = function(app) {
  	});
 
   router.get('/halt', function(req, res) {
-    exec("halt", function (error, stdout, stderr) {
-      if (error !== null) {
-        res.status(403).send({'msg': "permesso negato"});
-      } else {
-        res.status(200).send({'msg': "halt"});
-      }
-    });
+    if(req.user.block || req.user.permission !== 0) {
+      res.status(403).send({'msg':'Forbidden'});
+    } else {
+      exec("halt", function (error, stdout, stderr) {
+        if (error !== null) {
+          res.status(403).send({'msg': "permesso negato"});
+        } else {
+          res.status(200).send({'msg': "halt"});
+        }
+      });
+    }
  	});
 
   router.get('/reboot', function(req, res) {
-    exec("reboot", function (error, stdout, stderr) {
-      if (error !== null) {
-        res.status(403).send({"msg":"permesso negato"});
-      } else {
-        res.status(200).send({"msg":"reboot"});
-      }
-    });
- 	});
-
-  router.get('/exit', function(req, res) {
-    res.status(200).send({'msg': 'exit'});
- 	});
-
-  router.get('/update', function(req, res) {
-    res.status(200).send({'msg': 'update'});
+    if(req.user.block || req.user.permission !== 0) {
+      res.status(403).send({'msg':'Forbidden'});
+    } else {
+      exec("reboot", function (error, stdout, stderr) {
+        if (error !== null) {
+          res.status(403).send({"msg":"permesso negato"});
+        } else {
+          res.status(200).send({"msg":"reboot"});
+        }
+      });
+    }
  	});
 
   app.use('/api/v2.0/setting', router);

@@ -33,7 +33,6 @@ exports.addAPIRouter = function(app, mongoose) {
   var router = express.Router();
 
  	router.get('/', function(req, res) {
-    debugger;
     if(req.user.block === false && req.user.permission === 0) {
       User.find(function(err, users) {
         if(err) {
@@ -56,6 +55,7 @@ exports.addAPIRouter = function(app, mongoose) {
         lastname: req.body.lastname,
         username: req.body.username,
         password: req.body.password,
+        photo: req.body.photo;
       });
       newUser.save(function (err) {
         if(err) {
