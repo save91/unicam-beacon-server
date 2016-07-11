@@ -1,0 +1,73 @@
+<md-toolbar class="colortoolbar">
+  <div class="md-toolbar-tools md-whiteframe-z2" md-scroll-shrink>
+    <md-button  hide-gt-sm ng-click="toggleSidenav('left')" class="md-icon-button" aria-label="Settings">
+      <i class="material-icons grigio">menu</i>
+    </md-button>
+    <h2>
+      <span class="grigio">Gestione Utenti</span>
+    </h2>
+  </div>
+</md-toolbar>
+<md-content>
+  <div class="md-padding sfondo" layout="column">
+    <md-card>
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">Admin</span>
+          <span class="md-subhead">In questa pagina troverai tutti gli utenti, potrai scegliere se bloccarli o modificarne i dati!</span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-actions layout="row" layout-align="end center">
+        <md-button ng-click="updateUser()" class="md-raised md-primary">
+          <span class="bianco">Aggiorna Utenti</span>
+        </md-button>
+      </md-card-actions>
+    </md-card>
+  </div>
+  <div ng-if="users.length" layout="row" class="md-padding sfondo" layout-xs="column" layout-wrap>
+    <md-card flex-xs flex-gt-xs="50" ng-repeat="user in users">
+      <md-toolbar class="md-whiteframe-z2">
+        <div layout="row" layout-align="center center">
+          <p class="bianco">{{user.username}}</p>
+        </div>
+      </md-toolbar>
+      <md-card-title>
+        <md-card-title-media>
+          <div>
+            <img src="{{user.photo}}" class="logo3 md-media-lg card-media" alt="image caption">
+          </div>
+        </md-card-title-media>
+        <md-card-content>
+          <strong class="azzurro">Nome:</strong> {{user.firstname}}<br>
+          <strong class="rosso"> Cognome:</strong> {{user.lastname}}<br>
+          <strong class="arancione"> Permessi:</strong> {{user.permission}}<br>
+            </md-card-content>
+        </md-card-title>
+
+      <md-card-actions layout="row" layout-align="end center">
+        <md-menu>
+          <md-button class="md-raised md-primary" ng-click="$mdOpenMenu()"><span class="bianco">azioni</span></md-button>
+          <md-menu-content>
+            <md-menu-item>
+              <md-button data-ng-if="!user.block" data-ng-click="blockUser(user)">
+                <md-icon class="md-alt-text" md-svg-icon="img/block.svg"></md-icon>
+                Blocca
+              </md-button>
+              <md-button data-ng-if="user.block" data-ng-click="blockUser(user)">
+                <md-icon md-svg-icon="img/person.svg"></md-icon>
+                Sblocca
+              </md-button>
+            </md-menu-item>
+            <md-menu-divider></md-menu-divider>
+            <md-menu-item>
+              <md-button ng-click="showAdd(user)">
+                <md-icon md-svg-icon="img/penna.svg"></md-icon>
+                Modifica
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+      </md-card-actions>
+    </md-card>
+  </div>
+</md-content>
