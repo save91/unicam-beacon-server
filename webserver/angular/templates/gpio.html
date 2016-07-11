@@ -48,11 +48,14 @@
         </md-card-content>
       </md-card-title>
       <md-card-actions layout="row" layout-align="end center">
-        <md-button data-ng-click="setGPIO(GPIO._id, true)" class="md-primary md-raised">
+        <md-button data-ng-if="GPIO.type === 'output'" data-ng-click="setGPIO(GPIO._id, true)" class="md-primary md-raised">
           <span class="white">On</span>
         </md-button>
-        <md-button data-ng-click="setGPIO(GPIO._id, false)" class="md-primary md-raised">
+        <md-button data-ng-if="GPIO.type === 'output'" data-ng-click="setGPIO(GPIO._id, false)" class="md-primary md-raised">
           <span class="white">Off</span>
+        </md-button>
+        <md-button data-ng-if="GPIO.type === 'input'" data-ng-click="getGPIO()" class="md-primary md-raised">
+          <span class="white">Aggiorna stato</span>
         </md-button>
       </md-card-actions>
     </md-card>

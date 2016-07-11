@@ -10,7 +10,7 @@
 </md-toolbar>
 <md-content>
   <div class="background md-padding" layout="row" layout-xs="column" layout-wrap>
-    <div flex-xs flex-gt-xs="50" ng-repeat="device in devices|DeviceOutputFilter">
+    <div flex-xs flex-gt-xs="50" ng-repeat="device in devices|DeviceActionFilter">
       <md-card>
         <md-toolbar class="md-whiteframe-z2">
           <div layout="row" layout-align="center center">
@@ -32,12 +32,12 @@
           <md-input-container>
             <label>Gpio</label>
             <md-select data-ng-model="device._GPIO" data-ng-change="saveDevice(device)">
-              <md-option data-ng-value="gpio._id" ng-repeat="gpio in GPIOs | GPIOFilter:'output':device._id">
+              <md-option data-ng-value="gpio._id" ng-repeat="gpio in GPIOs | GPIOFilter:device.io === 'output' ? 'output' : 'input':device._id">
                 {{gpio.GPIO}}
               </md-option>
             </md-select>
           </md-input-container>
-          <md-input-container>
+          <md-input-container data-ng-if="device.io === 'output'">
             <label>iBeacon</label>
             <md-select data-ng-model="device._Beacon" data-ng-change="saveDevice(device)">
               <md-option data-ng-value="ibeacon._id" data-ng-repeat="ibeacon in devices|BeaconFilter">{{ibeacon.name}}</md-option>

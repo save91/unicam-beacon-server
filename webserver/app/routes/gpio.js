@@ -25,7 +25,8 @@ exports.addAPIRoutes = function(app, environment) {
       res.status(403).send({'msg':'Forbidden'});
     } else {
       GPIO.findOne({
-        '_id': req.params.id
+        '_id': req.params.id,
+        'type':'output'
       }, function(err, gpio) {
         if(err) {
           res.status(500).send({'msg': err.msg});

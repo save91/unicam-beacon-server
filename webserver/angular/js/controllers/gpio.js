@@ -19,6 +19,10 @@ angular.module('beaconApp.controllers.gpio', [])
       });
     });
   };
+  $scope.getGPIO = function() {
+    updateGPIO();
+  }
+
   $scope.setGPIO = function (id, value) {
     GPIO.setOutputGPIO(id, value).then(function(res) {
       updateGPIO();

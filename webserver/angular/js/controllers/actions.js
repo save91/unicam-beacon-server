@@ -18,6 +18,13 @@ angular.module('beaconApp.controllers.actions', [] )
         "_Device":null,
         "value":0
       });
+      $scope.GPIOs.push({
+        "_id":null,
+        "type":"input",
+        "GPIO":"Nessuno",
+        "_Device":null,
+        "value":0
+      });
     },
     function (res) {
       alert = $mdDialog.alert()

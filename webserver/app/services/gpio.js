@@ -34,6 +34,12 @@ gpio.init = function (environment) {
   if(environment !== 'development') {
     RPI_GPIO.on('change', function(channel, value) {
       console.log('Channel ' + channel + ' value is now ' + value);
+        GPIO.findOne({
+          'GPIO': channel
+        }, function(err, result) {
+            result.value = value;
+            result.save();
+        });
     });
   }
   GPIO.find(function(err, GPIOs) {

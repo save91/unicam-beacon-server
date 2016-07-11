@@ -10,11 +10,11 @@ angular.module('beaconApp.filters.devices', [])
   };
 })
 
-.filter('DeviceOutputFilter', function() {
+.filter('DeviceActionFilter', function() {
   return function(input) {
     var out = [];
     for (var i = 0; i < input.length; i++){
-      if(input[i].io === 'output')
+      if(input[i].io === 'output' || input[i].io === 'input')
       out.push(input[i]);
     }
     return out;
