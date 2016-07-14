@@ -66,6 +66,14 @@ gpio.init = function (environment) {
         });
     });
   }
+  GPIO.update({type: 'output'},
+        {value: false},
+        {multi: true},
+      function(err, numAffected) {});
+  GPIO.update({type: 'input'},
+        {value: true},
+        {multi: true},
+      function(err, numAffected) {});
   GPIO.find(function(err, GPIOs) {
     if(err) {
       console.log(err.errmsg);
@@ -78,9 +86,6 @@ gpio.init = function (environment) {
               if (err) {
                 console.log("Error opening pin " + err);
                 return;
-              }
-              if(GPIOs[i] !== undefined) {
-                gpio.setPin(GPIOs[i].GPIO, GPIOs[i].value, function() {}, environment);
               }
             });
           }
