@@ -52,9 +52,11 @@ gpio.init = function (environment) {
                     GPIO.findOne({
                       '_id': devices[i]._Output._GPIO
                     }, function(err, res) {
-                      res.value = !res.value;
-                      res.save();
-                      gpio.setPin(res.GPIO, res.value, function() {}, environment);
+                      if(res && res.length>0) {
+                        res.value = !res.value;
+                        res.save();
+                        gpio.setPin(res.GPIO, res.value, function() {}, environment);
+                      }
                     });
                   }
                 }
