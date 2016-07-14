@@ -9,6 +9,7 @@ var deviceSchema = new mongoose.Schema({
        automatic: { type: Boolean, default: false},
        _GPIO: { type: mongoose.Schema.Types.ObjectId, default: null, ref: 'GPIO' },
        _Beacon: { type: mongoose.Schema.Types.ObjectId, default: null, ref: 'Device'},
+       _Output: { type: mongoose.Schema.Types.ObjectId, default: null, ref: 'Device'},
        properties: { type: mongoose.Schema.Types.Mixed }
     },
     {collection: 'Device'}

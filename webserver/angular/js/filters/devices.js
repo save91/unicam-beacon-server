@@ -14,7 +14,18 @@ angular.module('beaconApp.filters.devices', [])
   return function(input) {
     var out = [];
     for (var i = 0; i < input.length; i++){
-      if(input[i].io === 'output' || input[i].io === 'input')
+      if(input[i]._id !== null && (input[i].io === 'output' || input[i].io === 'input'))
+      out.push(input[i]);
+    }
+    return out;
+  };
+})
+
+.filter('DeviceLampadeFilter', function() {
+  return function(input) {
+    var out = [];
+    for (var i = 0; i < input.length; i++){
+      if(input[i].io === 'output' && input[i].type === "Lampada")
       out.push(input[i]);
     }
     return out;

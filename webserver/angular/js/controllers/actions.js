@@ -48,6 +48,12 @@ angular.module('beaconApp.controllers.actions', [] )
         "io":"null",
         "name":"Nessuno"
       });
+      $scope.devices.push({
+        "_id":null,
+        "type":"Lampada",
+        "io":"output",
+        "name":"Nessuno"
+      });
     },
     function(res){
       alert = $mdDialog.alert()

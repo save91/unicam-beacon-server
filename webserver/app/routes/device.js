@@ -80,7 +80,7 @@ exports.addAPIRouter = function(app, environment) {
     if(req.user.block) {
       res.status(401).send({'msg':'Authentication required'});
     } else {
-      Device.find({_GPIO:{$ne: null}, permission:{$gte: req.user.permission}})
+      Device.find({_GPIO:{$ne: null}, permission:{$gte: req.user.permission}, io:"output"})
         .populate('_Beacon _GPIO')
         .exec(function (err, devices) {
           if(err) {
@@ -98,8 +98,6 @@ exports.addAPIRouter = function(app, environment) {
   router.get('/io', function(req, res) {
     res.status(200).send([
       {"id":"1","type":"input","name":"Pulsante"},
-      {"id":"2","type":"input","name":"Orologio"},
-      {"id":"3","type":"input","name":"Fotocellula"},
       {"id":"4","type":"output","name":"Cancello"},
       {"id":"5","type":"output","name":"Apriporta"},
       {"id":"6","type":"output","name":"Lampada"}]);
@@ -133,8 +131,14 @@ exports.addAPIRouter = function(app, environment) {
         } else if(device) {
           device.name = req.body.name || device.name;
           device.description = req.body.description || device.description;
-          device._GPIO = req.body._GPIO || device._GPIO;
-          device._Beacon = req.body._Beacon || device._Beacon;
+          device._GPIO = req.body._GPIO;
+          device.permission = req.body.permission || device.permission;
+          if(device.io === "output") {
+            device._Beacon = req.body._Beacon;
+          }
+          if(device.io === "input") {
+            device._Output = req.body._Output;
+          }
           device.properties = req.body.properties || device.properties;
           if(undefined != req.body.automatic) {
             device.automatic = req.body.automatic;
