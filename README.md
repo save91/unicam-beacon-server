@@ -10,15 +10,21 @@ npm install
 cd public
 bower install
 ```
-  
+
+## Database
+Assicurarsi che il demone di MongoDB sia in esecuzione e lanciare il seguente comando per popolare il database con i dati iniziali
+
+```
+node test/config/setup_tests.js
+```
+
 ## Esucuzione
 Per eseguire il webserver su PC è necessario settare una variabile d'ambiente per far
 capire a node che si è su un PC e non su un RaspberryPI.
 
 ```
 export NODE_ENV=development
-cd webserver
-node index.js
+node server.js
 ```  
 
 Per far partire il tutto su un RaspberryPI basta il seguente comando
