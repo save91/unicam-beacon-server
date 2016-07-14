@@ -76,7 +76,9 @@ gpio.init = function (environment) {
                 console.log("Error opening pin " + err);
                 return;
               }
-              gpio.setPin(GPIOs[i].GPIO, GPIOs[i].value, function() {}, environment);
+              if(GPIOs[i] !== undefined) {
+                gpio.setPin(GPIOs[i].GPIO, GPIOs[i].value, function() {}, environment);
+              }
             });
           }
         }else if(GPIOs[i].type==="input"){
