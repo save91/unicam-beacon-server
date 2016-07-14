@@ -53,7 +53,7 @@ gpio.init = function (environment) {
                       '_id': devices[i]._Output._GPIO
                     }, function(err, res) {
                       debugger;
-                      if(res && res.length>0) {
+                      if(res) {
                         res.value = !res.value;
                         res.save();
                         gpio.setPin(res.GPIO, res.value, function() {}, environment);
