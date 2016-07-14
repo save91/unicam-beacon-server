@@ -158,10 +158,11 @@ exports.addAPIRouter = function(app, environment) {
     if(req.user.block) {
       res.status(401).send({'msg':'Authentication required'});
     } else {
-      Device.findById(req.params.id, {permission:{$gte: req.user.permission}})
+      Device.findById(req.params.id)
         .populate('_GPIO')
         .exec(function(err, device) {
           if(err) {
+            debugger;
             res.status(500).send({msg: err.errmsg});
           } else if(device) {
             GPIO.update({_id: device._GPIO}, {value: true}, {}, function (err, ok) {
@@ -188,7 +189,7 @@ exports.addAPIRouter = function(app, environment) {
       if(req.user.block) {
         res.status(401).send({'msg':'Authentication required'});
       } else {
-        Device.findById(req.params.id, {permission:{$gte: req.user.permission}})
+        Device.findById(req.params.id)
           .populate('_GPIO')
           .exec(function(err, device) {
             if(err) {

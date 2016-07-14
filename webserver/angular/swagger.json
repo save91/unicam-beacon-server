@@ -2,8 +2,8 @@
     "swagger": "2.0",
     "info": {
         "description": "API REST ",
-        "version": "1.0.0",
-        "title": "Swagger MyNerdOffice",
+        "version": "2.0.0",
+        "title": "Swagger ProximitySystem",
         "contact": {
             "email": "saverio.tosi@studenti.unicam.it"
         },
@@ -12,8 +12,8 @@
             "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
         }
     },
-    "host": "192.168.1.104:8000",
-    "basePath": "/",
+    "host": "localhost:8000",
+    "basePath": "/api/v2.0",
     "tags": [
         {
             "name": "user",
@@ -61,7 +61,7 @@
                     "user"
                 ],
                 "summary": "Get array of user",
-                "description": "",
+                "description": "only the admin can gets this array",
                 "operationId": "getUsers",
                 "produces": [
                     "application/json"
@@ -124,6 +124,9 @@
                 "responses": {
                     "201": {
                         "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "missing data"
                     }
                 }
             }
@@ -134,7 +137,7 @@
                     "user"
                 ],
                 "summary": "Logs user into the system",
-                "description": "",
+                "description": "This method is used for login",
                 "operationId": "loginUser",
                 "produces": [
                     "application/json"
@@ -157,7 +160,10 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "successful operation"
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/UserWithoutPsw"
+                        }
                     },
                     "400": {
                         "description": "Invalid username/password supplied"
@@ -206,7 +212,7 @@
                     "user"
                 ],
                 "summary": "Get user by username",
-                "description": "",
+                "description": "Only the admin can access to user information",
                 "operationId": "getUserByName",
                 "produces": [
                     "application/xml",
@@ -227,6 +233,9 @@
                         "schema": {
                             "$ref": "#/definitions/User"
                         }
+                    },
+                    "401": {
+                        "description": "Authorization required"
                     },
                     "404": {
                         "description": "User not found"
@@ -504,7 +513,7 @@
                 }
             }
         },
-        "/device/ibeacon": {
+        "/device/beacon": {
             "post": {
                 "security": [
                     {
@@ -527,7 +536,7 @@
                     },
                     {
                         "in": "formData",
-                        "name": "id_ibeacon",
+                        "name": "id_beacon",
                         "description": "ID of the beacon",
                         "required": true,
                         "type": "integer"
@@ -991,6 +1000,38 @@
                 },
                 "block": {
                     "type": "boolean"
+                },
+                "photo": {
+                    "type": "string"
+                },
+                "theme": {
+                    "type": "string"
+                }
+            }
+        },
+        "UserWithoutPsw": {
+            "type": "object",
+            "properties": {
+                "username": {
+                    "type": "string"
+                },
+                "firstname": {
+                    "type": "string"
+                },
+                "lastname": {
+                    "type": "string"
+                },
+                "permission": {
+                    "type": "integer"
+                },
+                "block": {
+                    "type": "boolean"
+                },
+                "photo": {
+                    "type": "string"
+                },
+                "theme": {
+                    "type": "string"
                 }
             }
         },
@@ -1038,7 +1079,7 @@
                 "id_GPIO": {
                     "type": "integer"
                 },
-                "id_ibeacon": {
+                "id_beacon": {
                     "type": "integer"
                 },
                 "properties": {
@@ -1088,9 +1129,6 @@
                     "type": "integer"
                 },
                 "id_GPIO": {
-                    "type": "integer"
-                },
-                "id_ibeacon": {
                     "type": "integer"
                 }
             }

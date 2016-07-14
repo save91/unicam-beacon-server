@@ -9,7 +9,7 @@ var tc = require('../config/test_config');
 
 frisby.create('POST missing firstName')
     .post(tc.url + '/user',
-          { 'lastName' : TU1_LN,
+          { 'lastname' : TU1_LN,
             'username' : TU1_UN,
             'password' : TU1_PW })
     .expectStatus(400)

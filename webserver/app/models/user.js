@@ -8,7 +8,7 @@ var userSchema = new mongoose.Schema({
        permission: { type: Number, default: 10},
        created: { type: Date, default: Date.now },
        photo: { type: String, default: "img/account.jpg"},
-       password: String,
+       password: { type: String, required: true},
        theme: { type:String, default: "altTheme"}
     },
     {collection: 'User'}

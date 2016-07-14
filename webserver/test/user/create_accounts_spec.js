@@ -11,7 +11,7 @@ var frisby = require('frisby');
 var tc = require('../config/test_config');
 
 TEST_USERS.forEach(function createUser(user, index, array) {
-    frisby.create('POST enroll user ' + user.un)
+    frisby.create('POST user ' + user.un)
         .post(tc.url + '/user',
               { 'firstname' : user.fn,
                 'lastname' : user.ln,
@@ -22,7 +22,7 @@ TEST_USERS.forEach(function createUser(user, index, array) {
         .toss()
 });
 
-frisby.create('POST enroll duplicate user ')
+frisby.create('POST duplicate user ')
     .post(tc.url + '/user',
           { 'firstname' : TEST_USERS[0].fn,
             'lastname' : TEST_USERS[0].ln,

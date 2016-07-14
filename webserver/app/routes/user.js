@@ -40,7 +40,7 @@ exports.addAPIRouter = function(app, mongoose) {
         } else if(users && users.length>0) {
           res.status(200).send(users);
         } else {
-          res.status(404).send([]);
+          res.status(200).send([]);
         }
       });
     } else {
@@ -55,7 +55,8 @@ exports.addAPIRouter = function(app, mongoose) {
         lastname: req.body.lastname,
         username: req.body.username,
         password: req.body.password,
-        photo: req.body.photo
+        photo: req.body.photo,
+        block: true
       });
       newUser.save(function (err) {
         if(err) {
@@ -66,7 +67,7 @@ exports.addAPIRouter = function(app, mongoose) {
             res.status(500).send({msg: err.errmsg});
           }
         } else {
-          res.status(201).send({'msg': 'ok'});
+          res.status(201).send(newUser);
         }
       });
     } else {
