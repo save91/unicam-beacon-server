@@ -67,7 +67,14 @@ exports.addAPIRouter = function(app, mongoose) {
             res.status(500).send({msg: err.errmsg});
           }
         } else {
-          res.status(201).send(newUser);
+          res.status(201).send({
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            username: req.body.username,
+            permission: 10,
+            photo: req.body.photo,
+            block: true
+          });
         }
       });
     } else {
