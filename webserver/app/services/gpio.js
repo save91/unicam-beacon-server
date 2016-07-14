@@ -52,6 +52,7 @@ gpio.init = function (environment) {
                     GPIO.findOne({
                       '_id': devices[i]._Output._GPIO
                     }, function(err, res) {
+                      debugger;
                       if(res && res.length>0) {
                         res.value = !res.value;
                         res.save();
