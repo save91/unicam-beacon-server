@@ -18,6 +18,7 @@ gpio.readStatus = function(PIN, callback) {
 gpio.setPin = function(pin, value, callback, environment) {
   console.log("Setting pin "+pin+" to " + value);
   if(environment !== 'development') {
+    debugger;
     RPI_GPIO.write(pin, value, function(err) {
       if (err) {
         console.log("error writing " + err);
@@ -75,9 +76,9 @@ gpio.init = function (environment) {
                 console.log("Error opening pin " + err);
                 return;
               }
+              gpio.setPin(GPIOs[i].GPIO, GPIOs[i].value, function() {}, environment);
             });
           }
-          gpio.setPin(GPIOs[i].GPIO, GPIOs[i].value, function() {}, environment);
         }else if(GPIOs[i].type==="input"){
           console.log("GPIO: "+ GPIOs[i].GPIO +" input");
           if(environment !== 'development') {
