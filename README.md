@@ -33,3 +33,11 @@ Per far partire il tutto su un RaspberryPI basta il seguente comando
 ```
 npm start
 ```
+
+## Attenzione
+Il codice funziona soltanto su sistemi operativi basati su Debian.
+Per far girare il programma su altri OS come Windows o Mac rimuovere il modulo rpi-gpio con npm e commentare la prima riga di codice di
+
+```
+/unicam-beacon-server/webserver/app/services/gpio.js
+```

@@ -1,4 +1,4 @@
-//var RPI_GPIO = require('rpi-gpio');
+var RPI_GPIO = require('rpi-gpio');
 var GPIO = require('../models/gpio');
 var Device = require('../models/device');
 var gpio = {};
