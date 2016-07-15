@@ -7,7 +7,7 @@ Per installare ed eseguire proximitySystem sono necessari NodeJS e Bower
 ```
 cd webserver
 npm install
-cd public
+cd angular
 bower install
 ```
 
@@ -15,6 +15,7 @@ bower install
 Assicurarsi che il demone di MongoDB sia in esecuzione e lanciare il seguente comando per popolare il database con i dati iniziali
 
 ```
+cd ..
 node test/config/setup_tests.js
 ```
 
