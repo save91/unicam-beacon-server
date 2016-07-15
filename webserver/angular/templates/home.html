@@ -31,7 +31,7 @@
       </md-card-title-text>
     </md-card-title>
     <md-card-actions layout="row" layout-align="end center">
-      <md-button ng-if="user.username === ''" href="#/login">Login</md-button><i class="material-icons">account_circle</i>
+      <md-button ng-if="user.username === ''" href="#/login">Login</md-button>
       <md-button ng-if="user.username !== ''" href="#/login">Logout</md-button>
     </md-card-actions>
   </div>
@@ -53,9 +53,9 @@ ng-mouseenter="demo.isOpen=true" ng-mouseleave="demo.isOpen=false">
 </md-fab-speed-dial>
 <!-- grafica per cellulare -->
 <div hide-gt-sm>
-  <md-toolbar class="immagine2 md-tall md-whiteframe-z2">
+  <md-toolbar class="image2 md-tall md-whiteframe-z2">
     <md-button  hide-gt-sm ng-click="toggleSidenav('left')" class="md-icon-button" aria-label="Settings">
-      <i class="material-icons white">menu</i>
+      <md-icon class="md-alt-text white" md-svg-icon="img/hamburger.svg"></md-icon>
     </md-button>
   </md-toolbar>
   <div class="height1" layout="row" layout-align="center start">

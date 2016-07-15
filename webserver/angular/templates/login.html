@@ -1,6 +1,6 @@
 <md-toolbar hide-sm hide-xs  class="height-tool">
   <md-button ng-if="user.username !== ''"  hide-gt-sm ng-click="toggleSidenav('left')" class="md-icon-button" aria-label="Settings">
-    <i class="material-icons gray">menu</i>
+    <md-icon class="md-alt-text" md-svg-icon="img/hamburger.svg"></md-icon>
   </md-button>
 </md-toolbar>
 <div hide-sm hide-xs ng-if="user.username === ''" layout="row" layout-align="center start">
@@ -31,7 +31,7 @@
 </div>
 <!-- grafica cellulare -->
 <div hide-gt-sm ng-if="user.username === ''" >
-  <md-toolbar class="immagine2 md-tall md-whiteframe-z2">
+  <md-toolbar class="image2 md-tall md-whiteframe-z2">
   </md-toolbar>
   <div hierachy-display class="height1" layout="row" layout-align="center start">
     <img src="img/icon.png" class="logo move-up-logo md-whiteframe-z4">
@@ -83,9 +83,9 @@
 </div>
 <!-- grafica cellulare -->
 <div hide-gt-sm ng-if="user.username !== ''">
-  <md-toolbar class="immagine2 md-tall md-whiteframe-z2">
+  <md-toolbar class="image2 md-tall md-whiteframe-z2">
     <md-button  hide-gt-sm ng-click="toggleSidenav('left')" class="md-icon-button" aria-label="Settings">
-      <i class="material-icons white">menu</i>
+      <md-icon class="md-alt-text white" md-svg-icon="img/hamburger.svg"></md-icon>
     </md-button>
   </md-toolbar>
   <div class="height1" layout="row" layout-align="center start">
