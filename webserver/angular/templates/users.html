@@ -19,7 +19,7 @@
       </md-card-title>
       <md-card-actions layout="row" layout-align="end center">
         <md-button ng-click="updateUser()" class="md-raised md-primary">
-          <span class="bianco">Aggiorna Utenti</span>
+          <span class="white">Aggiorna Utenti</span>
         </md-button>
       </md-card-actions>
     </md-card>
@@ -28,7 +28,7 @@
     <md-card flex-xs flex-gt-xs="50" ng-repeat="user in users">
       <md-toolbar class="md-whiteframe-z2">
         <div layout="row" layout-align="center center">
-          <p class="bianco">{{user.username}}</p>
+          <p class="white">{{user.username}}</p>
         </div>
       </md-toolbar>
       <md-card-title>
@@ -38,15 +38,15 @@
           </div>
         </md-card-title-media>
         <md-card-content>
-          <strong class="azzurro">Nome:</strong> {{user.firstname}}<br>
-          <strong class="rosso"> Cognome:</strong> {{user.lastname}}<br>
-          <strong class="arancione"> Permessi:</strong> {{user.permission}}<br>
+          <strong class="skyblue">Nome:</strong> {{user.firstname}}<br>
+          <strong class="red"> Cognome:</strong> {{user.lastname}}<br>
+          <strong class="orange"> Permessi:</strong> {{user.permission}}<br>
             </md-card-content>
         </md-card-title>
 
       <md-card-actions layout="row" layout-align="end center">
         <md-menu>
-          <md-button class="md-raised md-primary" ng-click="$mdOpenMenu()"><span class="bianco">azioni</span></md-button>
+          <md-button class="md-raised md-primary" ng-click="$mdOpenMenu()"><span class="white">azioni</span></md-button>
           <md-menu-content>
             <md-menu-item>
               <md-button data-ng-if="!user.block" data-ng-click="blockUser(user)">
