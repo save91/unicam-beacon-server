@@ -219,6 +219,43 @@ exports.addAPIRouter = function(app, environment) {
         }
       });
 
+      router.put('/:id/push', function(req, res) {
+        if(req.user.block) {
+          res.status(401).send({'msg':'Authentication required'});
+        } else {
+          Device.findById(req.params.id)
+            .populate('_GPIO')
+            .exec(function(err, device) {
+              if(err) {
+                res.status(500).send({msg: err.errmsg});
+              } else if(device) {
+                GPIO.update({_id: device._GPIO}, {value: true}, {}, function (err, ok) {
+                  if(err) {
+                    res.status(500).send({msg: err.errmsg});
+                  } else {
+                    pin.setPin(device._GPIO.GPIO, true, function(err) {
+                      if (err) {
+                        res.status(500).send('Oops, Something went wrong! ' + err);
+                      } else {
+                        res.status(200).send({'msg':'ok'});
+                      }
+                    }, environment);
+                  }
+                });
+                setTimeout(function() {
+                  GPIO.update({_id: device._GPIO}, {value: false}, {}, function (err, ok) {
+                    if(!err) {
+                      pin.setPin(device._GPIO.GPIO, false, function(err) {}, environment);
+                    }
+                  });
+                }, 1000);
+              } else {
+                res.status(404).send([]);
+              }
+            });
+          }
+        });
+
   router.delete('/:id', function(req, res) {
     if(req.user.block || req.user.permission !== 0) {
       res.status(403).send({'msg':'Forbidden'});
