@@ -67,7 +67,7 @@ gpio.init = function (environment) {
     });
   }
   GPIO.update({type: 'output'},
-        {value: false},
+        {value: true},
         {multi: true},
       function(err, numAffected) {});
   GPIO.update({type: 'input'},
@@ -87,6 +87,7 @@ gpio.init = function (environment) {
                 console.log("Error opening pin " + err);
                 return;
               }
+              RPI_GPIO.write(GPIOs[i].GPIO, true, function () {});
             });
           }
         }else if(GPIOs[i].type==="input"){
