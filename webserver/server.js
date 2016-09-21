@@ -15,10 +15,16 @@ var gpio = require('./app/services/gpio');
 var db = require('./config/db');
 var security = require('./config/security')
 
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
 var environment = process.env.NODE_ENV;
 console.log("Environment: ", environment);
 
 var app = express();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
 var morgan = require('morgan');
 var accessLogStream = fs.createWriteStream(__dirname + '/access.log', {flags: 'a'})
 
@@ -59,8 +65,13 @@ process.on('SIGINT', function(){
   gpio.unexportPins(environment);
 });
 
+io.on('connection', function(socket){
+  console.log('a user connected');
+});
+
 gpio.init(environment);
-app.listen(port);
-console.log('GPIO setup completed and server listening on port ' + port);
+http.listen(port ,function() {
+  console.log('GPIO setup completed and server listening on port ' + port);
+});
 
 exports = module.exports = app;

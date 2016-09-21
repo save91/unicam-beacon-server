@@ -1,6 +1,6 @@
 angular.module('beaconApp.controllers.gpio', [])
 
-.controller('GPIOCtrl', function($scope, GPIO, $mdDialog) {
+.controller('GPIOCtrl', function($scope, GPIO, $mdDialog, mySocket) {
   $scope.GPIOs = [];
   var updateGPIO = function () {
     GPIO.getAll().then(function(res) {

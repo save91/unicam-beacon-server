@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.css"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href="/img/favicon.ico" rel="icon" type="image/x-icon" />
+    <script src="http://chat.socket.io/socket.io/socket.io.js"></script>
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js" type="text/javascript" ></script>
@@ -17,6 +18,7 @@
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-socket-io/socket.min.js"></script>
     <script src="js/app.js"></script>
     <script src="js/routes.js"></script>
     <script src="js/animations.js"></script>
@@ -46,6 +48,7 @@
     <script src="js/services/navbar.js"></script>
     <script src="js/services/theme.js"></script>
     <script src="js/services/settings.js"></script>
+    <script src="js/services/socket.js"></script>
   </head>
   <body class="backgroud" layout="column" md-theme="{{ theme.color }}" md-theme-watch  ng-controller="NavigationController">
     <section layout="row" flex class="height">

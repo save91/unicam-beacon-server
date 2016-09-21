@@ -3,6 +3,7 @@
 /* App Module */
 
 var beaconApp = angular.module('beaconApp', [
+  'btford.socket-io',
   'ngRoute',
   'ngMaterial',
   'beaconAnimations',
@@ -32,6 +33,7 @@ var beaconApp = angular.module('beaconApp', [
   'beaconApp.services.navbar',
   'beaconApp.services.theme',
   'beaconApp.services.settings',
+  'beaconApp.services.socket'
 ])
 .run(function($http, Login, Theme) {
   $http.defaults.headers.common.Authorization = window.localStorage['Authorization'] || "";
