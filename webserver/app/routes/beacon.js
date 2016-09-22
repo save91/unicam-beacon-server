@@ -1,7 +1,7 @@
 var express = require('express');
 var Beacon = require('../models/beacon');
 
-exports.addAPIRouter = function(app) {
+exports.addAPIRouter = function(app, io) {
 
   var router = express.Router();
 

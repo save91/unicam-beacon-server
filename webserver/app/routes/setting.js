@@ -1,7 +1,7 @@
 var exec = require('child_process').exec;
 var express = require('express');
 
-exports.addAPIRouter = function(app) {
+exports.addAPIRouter = function(app, io) {
 
   var router = express.Router();
 
