@@ -2,26 +2,43 @@ angular.module('beaconApp.controllers.gpio', [])
 
 .controller('GPIOCtrl', function($scope, GPIO, $mdDialog, mySocket) {
   $scope.GPIOs = [];
-
-  $scope.setGPIO = function(id, value) {
-    console.log("setGPIO");
-    mySocket.emit('put:gpio', {"id": id, "value": value});
-    for(var i = 0; i < $scope.GPIOs.length; i++) {
-      if($scope.GPIOs[i]._id === id ) {
-        $scope.GPIOs[i].value = value;
-        i = $scope.GPIOs.length;
-      }
-    }
+  var updateGPIO = function () {
+    GPIO.getAll().then(function(res) {
+      $scope.GPIOs = [];
+      $scope.GPIOs = res.data;
+    },
+    function (res) {
+      alert = $mdDialog.alert()
+      .title('Attenzione')
+      .content(res.data)
+      .ok('Chiudi');
+      $mdDialog
+      .show( alert )
+      .finally(function() {
+        alert = undefined;
+      });
+    });
   };
+  $scope.getGPIO = function() {
+    updateGPIO();
+  }
 
-  var getGPIO = function() {
-    mySocket.emit('get:gpio');
+  $scope.setGPIO = function (id, value) {
+    GPIO.setOutputGPIO(id, value).then(function(res) {
+      updateGPIO();
+    },
+    function(res) {
+      alert = $mdDialog.alert()
+      .title('Attenzione')
+      .content(res.data)
+      .ok('Chiudi');
+      $mdDialog
+      .show( alert )
+      .finally(function() {
+        alert = undefined;
+      });
+    });
   };
-
-  mySocket.on('get:gpio', function(data) {
-    console.log("getGPIO");
-    $scope.GPIOs = data;
-  });
 
   mySocket.on('put:gpio', function(data) {
     for(var i = 0; i < $scope.GPIOs.length; i++) {
@@ -30,7 +47,7 @@ angular.module('beaconApp.controllers.gpio', [])
         i = $scope.GPIOs.length;
       }
     }
-  })
+  });
 
-  getGPIO();
+  updateGPIO();
 })

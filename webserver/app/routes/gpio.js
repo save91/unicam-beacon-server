@@ -2,7 +2,7 @@ var express = require('express');
 var GPIO = require('../models/gpio');
 var pin = require('../services/gpio');
 
-exports.addAPIRoutes = function(app, environment) {
+exports.addAPIRoutes = function(app, io, environment) {
 
   var router = express.Router();
 
@@ -42,6 +42,7 @@ exports.addAPIRoutes = function(app, environment) {
                 if (err) {
                   res.status(500).send('Oops, Something went wrong! ' + err);
                 } else {
+                  io.emit('put:gpio', gpio);
                   res.status(200).send(gpio);
                 }
               }, environment);
