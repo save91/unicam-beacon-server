@@ -1,7 +1,7 @@
 
 angular.module('beaconApp.controllers.users', [])
 
-.controller('UsersCtrl', function($scope, $location, Users, $mdDialog) {
+.controller('UsersCtrl', function($scope, $location, Users, $mdDialog, mySocket) {
   $scope.user = [];
 
   $scope.updateUser = function() {
@@ -56,6 +56,10 @@ $scope.showAdd = function(user, ev) {
     $scope.updateUser();
   });
 };
+
+mySocket.on('update:user', function() {
+  $scope.updateUser();
+});
 
 $scope.updateUser();
 });

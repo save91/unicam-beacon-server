@@ -28,7 +28,7 @@ exports.authentication = function(req, res, next) {
   }
 }
 
-exports.addAPIRouter = function(app, mongoose) {
+exports.addAPIRouter = function(app, io) {
 
   var router = express.Router();
 
@@ -67,6 +67,7 @@ exports.addAPIRouter = function(app, mongoose) {
             res.status(500).send({msg: err.errmsg});
           }
         } else {
+          io.emit('update:user');
           res.status(201).send(newUser);
         }
       });
@@ -151,6 +152,7 @@ exports.addAPIRouter = function(app, mongoose) {
             if(err) {
               res.status(500).send({msg: err.errmsg});
             } else {
+              io.emit('update:user');
               res.status(200).send(user);
             }
           });
