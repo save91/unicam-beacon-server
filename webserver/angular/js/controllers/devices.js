@@ -1,7 +1,7 @@
 
 angular.module('beaconApp.controllers.devices', [])
 
-.controller('DevicesCtrl', function($scope, $mdDialog, Beacons, Devices) {
+.controller('DevicesCtrl', function($scope, $mdDialog, Beacons, Devices, mySocket) {
   $scope.beacons = [];
   $scope.ios = [];
   $scope.device = [];
@@ -124,6 +124,11 @@ $scope.showAdd = function(ev) {
     updateDevices();
   });
 };
+
+mySocket.on('update:device', function() {
+  updateDevices();
+  updateBeacons();
+});
 
 updateDevices();
 updateBeacons();

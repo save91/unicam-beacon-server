@@ -1,7 +1,7 @@
 
 angular.module('beaconApp.controllers.actions', [] )
 
-.controller('ActionsCtrl', function($scope, Devices, GPIO, $mdDialog) {
+.controller('ActionsCtrl', function($scope, Devices, GPIO, $mdDialog, mySocket) {
   $scope.devices = [];
   $scope.GPIOs = [];
   $scope.saveDevice = function(device) {
@@ -67,6 +67,20 @@ angular.module('beaconApp.controllers.actions', [] )
       });
     }
   )};
+
+  mySocket.on('update:device', function() {
+    getAll();
+  });
+
+  mySocket.on('put:gpio', function(data) {
+    for(var i = 0; i < $scope.GPIOs.length; i++) {
+      if($scope.GPIOs[i]._id === data._id ) {
+        $scope.GPIOs[i].value = data.value;
+        i = $scope.GPIOs.length;
+      }
+    }
+  });
+
   getAll();
   getGPIO();
 });

@@ -4,7 +4,7 @@ var Beacon = require('../models/beacon');
 var GPIO = require('../models/gpio')
 var pin = require('../services/gpio');
 
-exports.addAPIRouter = function(app, environment) {
+exports.addAPIRouter = function(app, io, environment) {
 
   var router = express.Router();
 
@@ -42,6 +42,7 @@ exports.addAPIRouter = function(app, environment) {
         if(err) {
           res.status(500).send({msg: err.errmsg});
         } else {
+          io.emit('update:device');
           res.status(201).send({'msg': 'ok'});
         }
       });
@@ -264,6 +265,7 @@ exports.addAPIRouter = function(app, environment) {
         if(err) {
           res.status(500).send({msg: err.errmsg});
         } else if(device) {
+          io.emit('update:device');
           res.status(200).send({msg:'ok'});
         } else {
           res.status(404).send({msg: 'Not Found'});
