@@ -40,13 +40,8 @@ angular.module('beaconApp.controllers.gpio', [])
     });
   };
 
-  mySocket.on('put:gpio', function(data) {
-    for(var i = 0; i < $scope.GPIOs.length; i++) {
-      if($scope.GPIOs[i]._id === data._id ) {
-        $scope.GPIOs[i].value = data.value;
-        i = $scope.GPIOs.length;
-      }
-    }
+  mySocket.on('update:gpio', function(data) {
+    updateGPIO();
   });
 
   updateGPIO();

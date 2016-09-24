@@ -111,7 +111,7 @@ exports.addAPIRouter = function(app, io) {
  	});
 
   router.get('/:username', function(req, res) {
-    if(req.user.block === false && (req.user.permission === 0 || req.user.username === req.params.username )) {
+    if((req.user.block === false && req.user.permission === 0 )|| req.user.username === req.params.username ) {
       User.findOne({
         'username': req.params.username
       }, function(err, user) {

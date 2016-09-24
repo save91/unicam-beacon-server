@@ -65,6 +65,7 @@ exports.addAPIRouter = function(app, io, environment) {
             if(err) {
               res.status(500).send({msg: err.errmsg});
             } else if(numAffected > 0) {
+              io.emit('update:device');
               res.status(200).send({msg: 'ok'});
             } else {
               res.status(404).send([]);
@@ -148,6 +149,7 @@ exports.addAPIRouter = function(app, io, environment) {
             if(err) {
               res.status(500).send({msg: err.errmsg});
             } else {
+              io.emit('update:device');
               res.status(200).send(device);
             }
           });
@@ -178,6 +180,8 @@ exports.addAPIRouter = function(app, io, environment) {
                   if (err) {
                     res.status(500).send('Oops, Something went wrong! ' + err);
                   } else {
+                    io.emit('update:device');
+                    io.emit('update:gpio');
                     res.status(200).send({'msg':'ok'});
                   }
                 }, environment);
@@ -208,6 +212,8 @@ exports.addAPIRouter = function(app, io, environment) {
                     if (err) {
                       res.status(500).send('Oops, Something went wrong! ' + err);
                     } else {
+                      io.emit('update:device');
+                      io.emit('update:gpio');
                       res.status(200).send({'msg':'ok'});
                     }
                   }, environment);
@@ -238,6 +244,7 @@ exports.addAPIRouter = function(app, io, environment) {
                       if (err) {
                         res.status(500).send('Oops, Something went wrong! ' + err);
                       } else {
+                        io.emit('update:gpio');
                         res.status(200).send({'msg':'ok'});
                       }
                     }, environment);
@@ -246,6 +253,7 @@ exports.addAPIRouter = function(app, io, environment) {
                 setTimeout(function() {
                   GPIO.update({_id: device._GPIO}, {value: false}, {}, function (err, ok) {
                     if(!err) {
+                      io.emit('update:gpio');
                       pin.setPin(device._GPIO.GPIO, false, function(err) {}, environment);
                     }
                   });

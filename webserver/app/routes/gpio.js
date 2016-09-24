@@ -42,7 +42,8 @@ exports.addAPIRoutes = function(app, io, environment) {
                 if (err) {
                   res.status(500).send('Oops, Something went wrong! ' + err);
                 } else {
-                  io.emit('put:gpio', gpio);
+                  io.emit('update:gpio');
+                  io.emit('update:device');
                   res.status(200).send(gpio);
                 }
               }, environment);
