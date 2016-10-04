@@ -32,10 +32,6 @@
             "description": "Everything about GPIO"
         },
         {
-            "name": "io",
-            "description": "Everything about IO"
-        },
-        {
             "name": "setting",
             "description": "Everything about Settings"
         }
@@ -396,6 +392,35 @@
                 }
             }
         },
+        "/device/io": {
+            "get": {
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ],
+                "tags": [
+                    "device"
+                ],
+                "summary": "Get one Device",
+                "description": "",
+                "operationId": "ioDevice",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/IO"
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/device/{id}": {
             "get": {
                 "security": [
@@ -503,6 +528,120 @@
                 "responses": {
                     "200": {
                         "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Authorization required"
+                    },
+                    "404": {
+                        "description": "Device not found"
+                    }
+                }
+            }
+        },
+        "/device/{id}/on": {
+            "put": {
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ],
+                "tags": [
+                    "device"
+                ],
+                "summary": "Turn on one device",
+                "description": "",
+                "operationId": "onDevice",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The id of Device that needs to be turn on.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "401": {
+                        "description": "Authorization required"
+                    },
+                    "404": {
+                        "description": "Device not found"
+                    }
+                }
+            }
+        },
+        "/device/{id}/off": {
+            "put": {
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ],
+                "tags": [
+                    "device"
+                ],
+                "summary": "Turn off one device",
+                "description": "",
+                "operationId": "offDevice",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The id of Device that needs to be turn off.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "401": {
+                        "description": "Authorization required"
+                    },
+                    "404": {
+                        "description": "Device not found"
+                    }
+                }
+            }
+        },
+        "/device/{id}/push": {
+            "put": {
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ],
+                "tags": [
+                    "device"
+                ],
+                "summary": "Send a pulse to a device",
+                "description": "",
+                "operationId": "pushDevice",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The id of Device.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
                     },
                     "401": {
                         "description": "Authorization required"
@@ -805,87 +944,6 @@
                         "description": "Authorization required"
                     }
                 }
-            },
-            "put": {
-                "security": [
-                    {
-                        "basicAuth": []
-                    }
-                ],
-                "tags": [
-                    "gpio"
-                ],
-                "summary": "Edit a GPIO",
-                "description": "Bind between GPIO and output device",
-                "operationId": "editGPIO",
-                "parameters": [
-                    {
-                        "name": "id_gpio",
-                        "in": "formData",
-                        "description": "The id of the GPIO.",
-                        "required": true,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "id_device",
-                        "in": "formData",
-                        "description": "The id of the output Device.",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful operation"
-                    },
-                    "401": {
-                        "description": "Authorization required"
-                    }
-                }
-            }
-        },
-        "/gpio/{id}": {
-            "get": {
-                "security": [
-                    {
-                        "basicAuth": []
-                    }
-                ],
-                "tags": [
-                    "gpio"
-                ],
-                "summary": "Get a GPIO",
-                "description": "",
-                "operationId": "getGPIO",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "The id that needs to be fetched.",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/GPIO"
-                        }
-                    },
-                    "401": {
-                        "description": "Authorization required"
-                    },
-                    "404": {
-                        "description": "GPIO not found"
-                    }
-                }
             }
         },
         "/gpio/{id}/set": {
@@ -954,26 +1012,44 @@
                 }
             }
         },
-        "/io": {
+        "/halt": {
             "get": {
                 "tags": [
                     "setting"
                 ],
-                "summary": "Use to get the list of IO type",
+                "summary": "Use to turn off PS",
                 "description": "",
-                "operationId": "io",
+                "operationId": "halt",
                 "produces": [
                     "application/json"
                 ],
                 "responses": {
                     "200": {
-                        "description": "The list of IO type",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/IO"
-                            }
-                        }
+                        "description": "Success"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/reboot": {
+            "get": {
+                "tags": [
+                    "setting"
+                ],
+                "summary": "Use to reboot PS",
+                "description": "",
+                "operationId": "reboot",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "403": {
+                        "description": "Forbidden"
                     }
                 }
             }
@@ -1136,6 +1212,9 @@
         "HelloPacket": {
             "type": "object",
             "properties": {
+                "port": {
+                    "type": "string"
+                },
                 "name": {
                     "type": "string"
                 },
