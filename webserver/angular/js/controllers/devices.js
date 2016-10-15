@@ -127,7 +127,10 @@ $scope.showAdd = function(ev) {
 
 mySocket.on('update:device', function() {
   updateDevices();
-  updateBeacons();
+});
+
+mySocket.on('update:beacon', function() {
+  updateDevices();
 });
 
 updateDevices();

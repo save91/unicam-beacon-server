@@ -32,7 +32,7 @@ gpio.setPin = function(pin, value, callback, environment) {
   }
 };
 
-gpio.init = function (environment) {
+gpio.init = function (environment, io) {
   if(environment !== 'development') {
     RPI_GPIO.on('change', function(channel, value) {
       console.log('Channel ' + channel + ' value is now ' + value);
@@ -52,10 +52,10 @@ gpio.init = function (environment) {
                     GPIO.findOne({
                       '_id': devices[i]._Output._GPIO
                     }, function(err, res) {
-                      debugger;
                       if(res) {
                         res.value = !res.value;
                         res.save();
+                        io.emit("update:device");
                         gpio.setPin(res.GPIO, res.value, function() {}, environment);
                       }
                     });
@@ -64,6 +64,7 @@ gpio.init = function (environment) {
               });
             }
         });
+        io.emit("update:gpio");
     });
   }
   GPIO.update({type: 'output'},

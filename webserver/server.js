@@ -69,7 +69,7 @@ process.on('SIGINT', function(){
   gpio.unexportPins(environment);
 });
 
-gpio.init(environment);
+gpio.init(environment, io);
 http.listen(port ,function() {
   console.log('GPIO setup completed and server listening on port ' + port);
 });

@@ -34,6 +34,7 @@ exports.addAPIRouter = function(app, io) {
         if(err) {
           res.status(500).send({msg: err.errmsg});
         } else {
+          io.emit("update:beacon");
           res.status(201).send({'msg': 'ok'});
         }
       });
@@ -80,6 +81,7 @@ exports.addAPIRouter = function(app, io) {
             if(err) {
               res.status(500).send({msg: err.errmsg});
             } else {
+              io.emit("update:beacon");
               res.status(201).send({'msg': 'ok'});
             }
           });
