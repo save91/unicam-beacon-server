@@ -130,7 +130,7 @@ mySocket.on('update:device', function() {
 });
 
 mySocket.on('update:beacon', function() {
-  updateDevices();
+  updateBeacons();
 });
 
 updateDevices();
