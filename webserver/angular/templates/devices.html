@@ -26,7 +26,7 @@
           <center><p class="white">iBeacons non registrati:</p></center>
         </md-toolbar>
         <md-tabs ng-if="beacons.length" class="tabsdemoDynamicHeight" md-dynamic-height md-border-bottom>
-          <md-tab ng-repeat="beacon in beacons" label="{{$index + 1}}">
+          <md-tab ng-repeat="beacon in beacons|orderBy:'_id'" label="{{$index + 1}}">
             <md-content class="md-padding">
               <strong class="skyblue">Uuid:</strong>{{beacon.uuid}}<br>
               <strong class="red">Major:</strong>{{beacon.major}}<br>
@@ -60,7 +60,7 @@
           <center><p class="white">Elenco Dispositivi:</p></center>
         </md-toolbar>
         <md-tabs class="tabsdemoDynamicHeight" md-dynamic-height md-border-bottom>
-          <md-tab ng-repeat="device in devices" label="{{device.name}}">
+          <md-tab ng-repeat="device in devices|orderBy:'_id'" label="{{device.name}}">
             <md-content class="md-padding">
               <strong class="red">Nome:</strong>{{device.name}}<br>
               <strong class="orange">Io:</strong>{{device.io}}<br>

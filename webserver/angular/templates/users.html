@@ -20,7 +20,7 @@
     </md-card>
   </div>
   <div ng-if="users.length" layout="row" class="md-padding sfondo" layout-xs="column" layout-wrap>
-    <md-card flex-xs flex-gt-xs="50" ng-repeat="user in users">
+    <md-card flex-xs flex-gt-xs="50" ng-repeat="user in users|orderBy:'_id'">
       <md-toolbar class="md-whiteframe-z2">
         <div layout="row" layout-align="center center">
           <p class="white">{{user.username}}</p>

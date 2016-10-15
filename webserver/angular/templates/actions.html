@@ -10,7 +10,7 @@
 </md-toolbar>
 <md-content>
   <div class="background md-padding" layout="row" layout-xs="column" layout-wrap>
-    <div flex-xs flex-gt-xs="50" ng-repeat="device in devices|DeviceActionFilter">
+    <div flex-xs flex-gt-xs="50" ng-repeat="device in devices|DeviceActionFilter|orderBy:'_id'">
       <md-card>
         <md-toolbar class="md-whiteframe-z2">
           <div layout="row" layout-align="center center">
